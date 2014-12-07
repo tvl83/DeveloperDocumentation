@@ -2,32 +2,7 @@
 
 Here you'll find the documentation site for the Sphero.
 
-[![travis](https://travis-ci.org/orbotix/DeveloperResources.svg?branch=initial-site-content)](https://travis-ci.org/orbotix/DeveloperResources)
-
-
-## Developer Resources
-
-In this repo you will also find documents explaining the different Sphero API's and artwork you can use in your app. Download [here](https://github.com/orbotix/DeveloperResources/zipball/master).
-
-## PDF Docs
-
-Can be found in /docs directory
-
-- Low Level API
-- Orb Basic
-- Locator
-- Collision Detection
-- Macros
-- Sphero Whitelist Process
-
-## Art
-
-Can be found in /art directory
-
-- Sphero logo and mark
-- Sphero as a controller assets
-- Icon
-- Vector logo and mark (.ai)
+[![travis](https://travis-ci.org/orbotix/DeveloperDocumentation?branch=initial-site-content)](https://travis-ci.org/orbotix/DeveloperDocumentation)
 
 ### Installation
 
@@ -63,7 +38,7 @@ When updated documentation is pushed to the master branch, it is automatically p
 
 Travis calls `grunt deploy`, which is the same as `grunt build`, except that it also zips up the docs for downloading.
 
-To see the latest build, visit the [Travis CI page](https://travis-ci.org/orbotix/DeveloperResources).
+To see the latest build, visit the [Travis CI page](https://travis-ci.org/orbotix/DeveloperDocumentation).
 
 ### Organization
 
