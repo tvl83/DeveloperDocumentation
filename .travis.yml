@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- '0.11'
+deploy:
+  provider: heroku
+  app: sphero-docs
+  on:
+    branch: master
+  api_key:
+    secure: JZ1z+qzmo4OafPixT+9HKBKEqhDmJ8XiN45XClA1rDcad+t8LlVsTdp6pA+hj4U23OT4Owp3XzCex67/1Ohfo7+Vrf0sz3RYi9qhiY0pduZnhhSOYRq4JXUz8gEH+uLK4NbspMHCkTQziocFw6oKNltPQWuFUKCS6qTPauf2qjI=

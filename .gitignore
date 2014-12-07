@@ -1,0 +1,11 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+docs/Sphero_Shell_Commands_1.2.pdf
+
+# Thumbnails
+._*
+
+build
+node_modules
