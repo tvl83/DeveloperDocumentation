@@ -14,9 +14,7 @@
 ###
 
 module.exports = (grunt) ->
-
   gruntConfig =
-
     config:
       src: 'src'
       dist: 'build'
@@ -24,41 +22,73 @@ module.exports = (grunt) ->
       layouts: 'src/layouts'
 
     assemble:
-      # ASSEMBLE!!!
+      # general options and defaults
       options:
-        flatten: true
         assets: '<%= config.dist %>/assets'
         layoutdir: '<%= config.src %>/layouts'
         layout: 'default.hbs'
-        plugins: ['assemble-contrib-permalinks', 'plugins/verbose/verbose.js',
-          'plugins/toc/toc.js']
+        plugins: [
+          'assemble-contrib-permalinks',
+          'plugins/verbose/verbose.js',
+          'plugins/toc/toc.js'
+        ]
         permalinks:
           structure: ':basename/index:ext'
         toc:
           id: 'toc'
-      docs:
+
+      # build static pages
+      static:
         options:
           ext: '.html'
-          layout: 'docs.hbs'
+          layout: 'static.hbs'
+
         files: [
           {
             expand: true
             cwd: '<%= config.content %>'
-            src: ['*.md']
+            src: ['*.html']
             dest: '<%= config.dist %>'
           }
         ]
 
+      # build Sphero docs
+      sphero_docs:
+        options:
+          platform: 'sphero'
+          ext: '.html'
+          layout: 'docs.hbs'
 
-    # 'gh-pages':
+        files: [
+          {
+            expand: true
+            cwd: '<%= config.content %>/sphero'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/sphero'
+          }
+        ]
+
+      # build Ollie docs
+      # this is currently just cloning the Sphero docs, but can be updated later
+      ollie_docs:
+        options:
+          platform: 'ollie'
+          ext: '.html'
+          layout: 'docs.hbs'
+
+        files: [
+          {
+            expand: true
+            cwd: '<%= config.content %>/sphero'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/ollie'
+          }
+        ]
 
     clean:
       dest: ['<%= config.dist %>/**']
 
     copy:
-      start:
-        dest: '<%= config.dist %>/index.html'
-        src: '<%= config.dist %>/start/index.html'
       assets:
         expand: true
         dest: '<%= config.dist %>/assets/'
@@ -67,17 +97,21 @@ module.exports = (grunt) ->
 
     watch:
       content:
-        files: ['<%= config.content %>/*.md', '<%= config.layouts %>/*.hbs']
+        files: ['<%= config.content %>/**/*.*', '<%= config.layouts %>/*.hbs']
         tasks: ['build']
+
       stylesheets:
         files: ['<%= config.src %>/stylesheets/*.less']
         tasks: ['less']
+
       assets:
         files: ['<%= config.src %>/assets/**']
         tasks: ['copy']
+
       livereload:
         options:
           livereload: '<%= connect.options.livereload %>'
+
         files: [
           '<%= config.dist %>/{,*/}*.html',
           '<%= config.dist %>/assets/{,*/}*.css',
@@ -90,6 +124,7 @@ module.exports = (grunt) ->
         port: 9000
         livereload: 35729
         hostname: 'localhost'
+
       livereload:
         options:
           open: true
@@ -108,6 +143,7 @@ module.exports = (grunt) ->
       main:
         options:
           archive: 'docs.zip'
+
         files: [{
           expand: true
           cwd: '<%= config.dist %>/'
@@ -123,11 +159,10 @@ module.exports = (grunt) ->
       index:
         src: ['<%= config.dist %>/index.html']
         overwrite: true
-        replacements:[{
+        replacements: [{
           from: '../'
           to: ''
         }]
-
 
   grunt.initConfig gruntConfig
 
@@ -143,9 +178,15 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-rename'
   grunt.loadNpmTasks 'grunt-text-replace'
 
+  grunt.registerTask 'build', [
+    'test',
+    'clean',
+    'assemble',
+    'less',
+    'copy',
+    'replace'
+  ]
   grunt.registerTask 'server', ['build', 'connect:livereload', 'watch']
-  grunt.registerTask 'build', ['test', 'clean', 'assemble', 'less',
-    'copy', 'replace']
   grunt.registerTask 'archive', ['compress', 'rename']
   grunt.registerTask 'deploy', ['build', 'archive']
   grunt.registerTask 'test', ['coffeelint']
