@@ -63,7 +63,7 @@ module.exports = (grunt) ->
           {
             expand: true
             cwd: '<%= config.content %>/sphero'
-            src: ['*.md']
+            src: ['*.html', '*.md']
             dest: '<%= config.dist %>/sphero'
           }
         ]
@@ -80,7 +80,7 @@ module.exports = (grunt) ->
           {
             expand: true
             cwd: '<%= config.content %>/sphero'
-            src: ['*.md']
+            src: ['*.html', '*.md']
             dest: '<%= config.dist %>/ollie'
           }
         ]
