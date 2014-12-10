@@ -14,9 +14,7 @@
 ###
 
 module.exports = (grunt) ->
-
   gruntConfig =
-
     config:
       src: 'src'
       dist: 'build'
@@ -24,7 +22,7 @@ module.exports = (grunt) ->
       layouts: 'src/layouts'
 
     assemble:
-      # ASSEMBLE!!!
+      # general options and defaults
       options:
         assets: '<%= config.dist %>/assets'
         layoutdir: '<%= config.src %>/layouts'
@@ -39,10 +37,12 @@ module.exports = (grunt) ->
         toc:
           id: 'toc'
 
+      # build static pages
       static:
         options:
           ext: '.html'
           layout: 'static.hbs'
+
         files: [
           {
             expand: true
@@ -52,6 +52,7 @@ module.exports = (grunt) ->
           }
         ]
 
+      # build Sphero docs
       sphero_docs:
         options:
           platform: 'sphero'
@@ -67,6 +68,8 @@ module.exports = (grunt) ->
           }
         ]
 
+      # build Ollie docs
+      # this is currently just cloning the Sphero docs, but can be updated later
       ollie_docs:
         options:
           platform: 'ollie'
@@ -82,19 +85,10 @@ module.exports = (grunt) ->
           }
         ]
 
-
-    # 'gh-pages':
-
     clean:
       dest: ['<%= config.dist %>/**']
 
     copy:
-      sphero_start:
-        dest: '<%= config.dist %>/sphero/index.html'
-        src: '<%= config.dist %>/sphero/start/index.html'
-      ollie_start:
-        dest: '<%= config.dist %>/ollie/index.html'
-        src: '<%= config.dist %>/ollie/start/index.html'
       assets:
         expand: true
         dest: '<%= config.dist %>/assets/'
@@ -103,17 +97,21 @@ module.exports = (grunt) ->
 
     watch:
       content:
-        files: ['<%= config.content %>/*.md', '<%= config.layouts %>/*.hbs']
+        files: ['<%= config.content %>/**/*.*', '<%= config.layouts %>/*.hbs']
         tasks: ['build']
+
       stylesheets:
         files: ['<%= config.src %>/stylesheets/*.less']
         tasks: ['less']
+
       assets:
         files: ['<%= config.src %>/assets/**']
         tasks: ['copy']
+
       livereload:
         options:
           livereload: '<%= connect.options.livereload %>'
+
         files: [
           '<%= config.dist %>/{,*/}*.html',
           '<%= config.dist %>/assets/{,*/}*.css',
@@ -126,6 +124,7 @@ module.exports = (grunt) ->
         port: 9000
         livereload: 35729
         hostname: 'localhost'
+
       livereload:
         options:
           open: true
@@ -144,6 +143,7 @@ module.exports = (grunt) ->
       main:
         options:
           archive: 'docs.zip'
+
         files: [{
           expand: true
           cwd: '<%= config.dist %>/'
@@ -159,11 +159,10 @@ module.exports = (grunt) ->
       index:
         src: ['<%= config.dist %>/index.html']
         overwrite: true
-        replacements:[{
+        replacements: [{
           from: '../'
           to: ''
         }]
-
 
   grunt.initConfig gruntConfig
 
@@ -179,9 +178,15 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-rename'
   grunt.loadNpmTasks 'grunt-text-replace'
 
+  grunt.registerTask 'build', [
+    'test',
+    'clean',
+    'assemble',
+    'less',
+    'copy',
+    'replace'
+  ]
   grunt.registerTask 'server', ['build', 'connect:livereload', 'watch']
-  grunt.registerTask 'build', ['test', 'clean', 'assemble', 'less',
-    'copy', 'replace']
   grunt.registerTask 'archive', ['compress', 'rename']
   grunt.registerTask 'deploy', ['build', 'archive']
   grunt.registerTask 'test', ['coffeelint']
