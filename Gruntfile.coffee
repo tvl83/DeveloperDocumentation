@@ -26,26 +26,59 @@ module.exports = (grunt) ->
     assemble:
       # ASSEMBLE!!!
       options:
-        flatten: true
         assets: '<%= config.dist %>/assets'
         layoutdir: '<%= config.src %>/layouts'
         layout: 'default.hbs'
-        plugins: ['assemble-contrib-permalinks', 'plugins/verbose/verbose.js',
-          'plugins/toc/toc.js']
+        plugins: [
+          'assemble-contrib-permalinks',
+          'plugins/verbose/verbose.js',
+          'plugins/toc/toc.js'
+        ]
         permalinks:
           structure: ':basename/index:ext'
         toc:
           id: 'toc'
-      docs:
+
+      static:
         options:
           ext: '.html'
-          layout: 'docs.hbs'
+          layout: 'static.hbs'
         files: [
           {
             expand: true
             cwd: '<%= config.content %>'
-            src: ['*.md']
+            src: ['*.html']
             dest: '<%= config.dist %>'
+          }
+        ]
+
+      sphero_docs:
+        options:
+          platform: 'sphero'
+          ext: '.html'
+          layout: 'docs.hbs'
+
+        files: [
+          {
+            expand: true
+            cwd: '<%= config.content %>/sphero'
+            src: ['*.md']
+            dest: '<%= config.dist %>/sphero'
+          }
+        ]
+
+      ollie_docs:
+        options:
+          platform: 'ollie'
+          ext: '.html'
+          layout: 'docs.hbs'
+
+        files: [
+          {
+            expand: true
+            cwd: '<%= config.content %>/sphero'
+            src: ['*.md']
+            dest: '<%= config.dist %>/ollie'
           }
         ]
 
@@ -56,9 +89,12 @@ module.exports = (grunt) ->
       dest: ['<%= config.dist %>/**']
 
     copy:
-      start:
-        dest: '<%= config.dist %>/index.html'
-        src: '<%= config.dist %>/start/index.html'
+      sphero_start:
+        dest: '<%= config.dist %>/sphero/index.html'
+        src: '<%= config.dist %>/sphero/start/index.html'
+      ollie_start:
+        dest: '<%= config.dist %>/ollie/index.html'
+        src: '<%= config.dist %>/ollie/start/index.html'
       assets:
         expand: true
         dest: '<%= config.dist %>/assets/'
