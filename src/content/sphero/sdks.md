@@ -10,14 +10,10 @@ TODO: Update to lastest SDK
 
 ## Overview
 
-This Guide walks you through the basics of creating mobile apps for Android
-that leverage the Orbotix Sphero SDK. The examples in this guide were
-built using Java and although we strive to support **ALL** the various
-Android devices available, but there are a few that are known to cause
-problems. Visit our developer forum for more information. The goal of
-this developer guide along with sample code is to give the developer a
-taste of the wide variety of things Sphero can do, respond to, and keep
-track of.
+This Guide walks you through the basics of creating mobile apps for Android that leverage the Orbotix Sphero SDK.
+The examples in this guide were built using Java and although we strive to support **ALL** the various Android devices available, but there are a few that are known to cause problems.
+Visit our developer forum for more information.
+The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Sphero can do, respond to, and keep track of.
 
 *In general this guide will walk you through:*
 
@@ -27,13 +23,10 @@ track of.
 
 ### Before we begin - Installing Eclipse
 
-Notice: The Sphero Android SDK works with Android 2.2+ and Java Compiler
-Level 6.0(1.6)+
+Notice: The Sphero Android SDK works with Android 2.2+ and Java Compiler Level 6.0(1.6)+
 
-Before you begin to develop applications that interface with Sphero on
-Android, you will need to install the Android developer tools. We often
-use Eclipse but there are many other well written Android IDEs out there
-and these same basic steps are most often still applicable.
+Before you begin to develop applications that interface with Sphero on Android, you will need to install the Android developer tools.
+We often use Eclipse but there are many other well written Android IDEs out there and these same basic steps are most often still applicable.
 
  - Install the [Android SDK](http://developer.android.com/sdk/index.html) and the [Eclipse Plugin](http://developer.android.com/sdk/eclipse-adt.html)
 
@@ -45,57 +38,56 @@ and these same basic steps are most often still applicable.
 
 ## Importing a Sphero Sample Project
 
-To import a sample into Eclipse, right-click in the project explorer,
-or click the File menu and select "**Import…**"
+To import a sample into Eclipse, right-click in the project explorer, or click the File menu and select "**Import…**"
 
    ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image004.png)
 
-Select the 'Existing Project into Workspace' option under the 'General'
-tab.  Then browse to the folder that holds the HelloWorld Sample. It
-will be in the directory where you downloaded the Sphero SDK.
+Select the 'Existing Project into Workspace' option under the 'General' tab.
+Then browse to the folder that holds the HelloWorld Sample.
+It will be in the directory where you downloaded the Sphero SDK.
 
    ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image005.png)
 
-At this point there should be no "red X's" or "red !'s" next to the smaple
-project you just imported. If there aren't any, you are now ready to run
-it on an Android device. Keep in mind that **Sphero projects cannot run
-inside of the emulator and will fail compilation**. If you have problems
-try these fixes.
+At this point there should be no "red X's" or "red !'s" next to the sample project you just imported.
+If there aren't any, you are now ready to run it on an Android device.
+Keep in mind that **Sphero projects cannot run inside of the emulator and will fail compilation**.
+If you have problems try these fixes.
 
-1. Right click the project, and go to Properties.  Under the **Android**
-tab on the left, the check box next to Android 2.2 (or above) should be
-checked.  If you don't see any Android options, you need to download the
-Eclipse ADT plugin.
+1. Right click the project, and go to Properties.
+   Under the **Android** tab on the left, the check box next to Android 2.2 (or above) should be checked.
+   If you don't see any Android options, you need to download the Eclipse ADT plugin.
 
 ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image006.png)
 
-2. Right click the project, and go to Properties.  Under the **Java Compiler**
-tab on the left, the compiler level should be 1.6 or above.
+2. Right click the project, and go to Properties.
+   Under the **Java Compiler** tab on the left, the compiler level should be 1.6 or above.
 
-3. If the problem still persists, try a "Project -> Clean" in the file
-menu. 60% of the time, this works all the time.
+3. If the problem still persists, try a "Project -> Clean" in the file menu.
+   60% of the time, this works all the time.
 
 ## Create a New Android Project <br /> in Eclipse With Sphero
 
-If you are creating a new project it is important to take special notice
-to the Android API Level and the Java compliance level. The Sphero SDK
-currently supports:
+If you are creating a new project it is important to take special notice to the Android API Level and the Java compliance level.
+The Sphero SDK currently supports:
 
  - Android API level 8 (Android 2.2) or greater.
  - Java language compliance level 6.0(1.6) or greater.
 
 ### Integrating the Sphero Libraries Into Your Project
 
-You can start a new Sphero project using the libraries in the library folder or start a project using one of the sample projects from the samples folder. This quick start guide describes how to start a new project.
+You can start a new Sphero project using the libraries in the library folder or start a project using one of the sample projects from the samples folder.
+This quick start guide describes how to start a new project.
 
- To start, create a new Android project in your Eclipse workspace. Then, place the libs folder from the SDK's library folder into your Android project's folder.
+To start, create a new Android project in your Eclipse workspace.
+Then, place the libs folder from the SDK's library folder into your Android project's folder.
 
-   ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image002.png)
-
+![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image002.png)
 
 ### Setting the dependency to RobotLibrary.jar
 
-Eclipse should automatically add RobotLibrary.jar to the Android Dependencies folder.  But, if it does not, set the dependency in the project's properties in the Properties->Java Build Path-> Libraries dialog.  This will allow your project access to all the public method names in RobotLibrary.jar.
+Eclipse should automatically add RobotLibrary.jar to the Android Dependencies folder.
+But, if it does not, set the dependency in the project's properties in the Properties->Java Build Path-> Libraries dialog.
+This will allow your project access to all the public method names in RobotLibrary.jar.
 
  ![QSG-jar-depend.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image003.png)
 
@@ -103,12 +95,10 @@ Eclipse should automatically add RobotLibrary.jar to the Android Dependencies fo
 
 ### Add code to connect to a sphero
 
-The RobotLibrary includes a view called `SpheroConnectionView` which will
-handle connecting to a Sphero. When the view sends an `onRobotConnected`
-event you are ready to send commands.
+The RobotLibrary includes a view called `SpheroConnectionView` which will handle connecting to a Sphero.
+When the view sends an `onRobotConnected` event you are ready to send commands.
 
-- To use the `SpheroConnectionView` add the following code to your Activity's
-xml layout file
+- To use the `SpheroConnectionView` add the following code to your Activity's xml layout file
 
 ```
 <LinearLayout
@@ -177,9 +167,11 @@ mSpheroConnectionView.addConnectionListener(mConnectionListener);
 
 ### Events
 
-  - These events are useful feedback from the user.  For example, you could use the `onConnectionFailed(Robot sphero)` method to prompt the user to check that the Sphero is eligible for connection then retrying the connection.
+- These events are useful feedback from the user.
+  For example, you could use the `onConnectionFailed(Robot sphero)` method to prompt the user to check that the Sphero is eligible for connection then retrying the connection.
 
-  - You must also prepare the bluetooth adapter on each start of the app, so that the app is aware of Sphero's nearby so that it can display them and connect to them. It is best practice to do this inside of the `onResume()` method.
+- You must also prepare the bluetooth adapter on each start of the app, so that the app is aware of Sphero's nearby so that it can display them and connect to them.
+  It is best practice to do this inside of the `onResume()` method.
 
 ```
 @Override
@@ -191,7 +183,9 @@ protected void onResume() {
 }
 ```
 
-  - You must ensure that the robot is cleaned up properly by ensuring discovery is cancelled, and disconnecting the robot. This is best done in the `onPause()` method in your activity. **Do not forget to stop discovery as this consumes a lot of resources on the device!**
+- You must ensure that the robot is cleaned up properly by ensuring discovery is cancelled, and disconnecting the robot.
+  This is best done in the `onPause()` method in your activity.
+  **Do not forget to stop discovery as this consumes a lot of resources on the device!**
 
 ```
 @Override
@@ -203,107 +197,118 @@ protected void onPause() {
     }
 }
 ```
+
 ### Add code to blink the RGB LED.
 
-Now it is time to add code that sends a command to Sphero. In this case we will blink the
-RGB LED blue. As opposed to previous versions of the SDK, commands are now sent via the Sphero object that you cached in the previous step. Commands are now sent using the dot method notation, as all objects in Java. Here is the code for the `blink()` method sends the SetRGBLEDCommand to blink LED.
+Now it is time to add code that sends a command to Sphero.
+In this case we will blink the RGB LED blue.
+As opposed to previous versions of the SDK, commands are now sent via the Sphero object that you cached in the previous step.
+Commands are now sent using the dot method notation, as all objects in Java.
+Here is the code for the `blink()` method sends the SetRGBLEDCommand to blink LED.
 
-    private void blink(final boolean lit){
+```java
+private void blink(final boolean lit){
 
-        if(mSphero != null){
+    if(mSphero != null){
 
-            //If not lit, send command to show blue light, or else, send command to show no light
-            if(lit){
-              mSphero.setColor(0, 0, 0);                               // 1
-            }else{
-              mSphero.setColor(0, 0, 255);                             // 2
-            }
-
-            //Send delayed message on a handler to run blink again
-            final Handler handler = new Handler();                       // 3
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    blink(!lit);
-                }
-            }, 1000);
+        //If not lit, send command to show blue light, or else, send command to show no light
+        if(lit){
+          mSphero.setColor(0, 0, 0);                               // 1
+        }else{
+          mSphero.setColor(0, 0, 255);                             // 2
         }
-    }
 
-1. This line will send a command to turn off the LED. `mSphero` is the Robot object that will receive the
-  command, and last three parameters turn of the red, green, and blue components of the LED. A 0 value
-  for the color component will set the LED components brightness off.
-2. This line will send a command to turn on the blue LED at full brightness. 255 is full brightness, and is
-  only set for the blue component of the LED.
-3.  This line creates a Handler that is used to post a delayed call to the `blink()` method after 1 second
-  with the lit parameter inverted, so the next call toggles the LED on or off.
+        //Send delayed message on a handler to run blink again
+        final Handler handler = new Handler();                       // 3
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                blink(!lit);
+            }
+        }, 1000);
+    }
+}
+```
+
+1. This line will send a command to turn off the LED.
+   `mSphero` is the Robot object that will receive the command, and last three parameters turn of the red, green, and blue components of the LED.
+   A 0 value for the color component will set the LED components brightness off.
+2. This line will send a command to turn on the blue LED at full brightness.
+   255 is full brightness, and is only set for the blue component of the LED.
+3. This line creates a Handler that is used to post a delayed call to the `blink()` method after 1 second with the lit parameter inverted, so the next call toggles the LED on or off.
 
 ### Modify the AndroidManifest.xml file.
 
 Before running the application, you will need to add permissions to use bluetooth,
 
-        <uses-permission android:name="android.permission.BLUETOOTH" />
-        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+```xml
+<uses-permission android:name="android.permission.BLUETOOTH" />
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+```
 
 ### Run on a device.
 
- - Run the Application on a supported Android Device.  **Turn Bluetooth ON**.
+- Run the Application on a supported Android Device.
+  **Turn Bluetooth ON**.
 
- - At this point in time you will want to Pair your Android Device to Sphero from within the settings.
+- At this point in time you will want to Pair your Android Device to Sphero from within the settings.
 
 ### Sendings Roll commands
 
- - Using Roll Commands to **Move** Sphero.
+- Using Roll Commands to **Move** Sphero.
 
- - Using Roll Commands to **Stop** Sphero.
+- Using Roll Commands to **Stop** Sphero.
 
-  So, you got the LED to blink… that's Awesome! But let's also take advantage of the amazing technology inside Sphero and drive the ball around a little bit.
-  In order to move Sphero you will need to send a RollCommand. The RollCommand takes two parameters.
+So, you got the LED to blink… that's Awesome!
+But let's also take advantage of the amazing technology inside Sphero and drive the ball around a little bit.
+In order to move Sphero you will need to send a RollCommand.
+The RollCommand takes two parameters.
 
-   1.  Heading in degrees from 0° to 360°
-   2.  Speed from 0.0 to 1.0.
+1.  Heading in degrees from 0° to 360°
+2.  Speed from 0.0 to 1.0.
 
-For example, a heading of 90° at a speed of 0.5 will tell Sphero to turn clockwise 90° at half speed (1.0 is full speed). Once this command is issued Sphero will continue at this heading and speed until it hits something or runs out of range, so you will need to stop the ball using the RollCommand and `sendStop()`.
+For example, a heading of 90° at a speed of 0.5 will tell Sphero to turn clockwise 90° at half speed (1.0 is full speed).
+Once this command is issued Sphero will continue at this heading and speed until it hits something or runs out of range, so you will need to stop the ball using the RollCommand and `sendStop()`.
 
-Now, it's time to modify the code. Let's send Sphero forward at full speed for 2 seconds. So, add the following method
-to the main activity.
+Now, it's time to modify the code.
+Let's send Sphero forward at full speed for 2 seconds.
+So, add the following method to the main activity.
 
-      private void drive() {
-        if(mRobot != null) {
-          // Send a roll command to Sphero so it goes forward at full speed.
-          mSphero.drive(0.0f, 1.0f);                                           // 1
+```java
+private void drive() {
+  if(mRobot != null) {
+    // Send a roll command to Sphero so it goes forward at full speed.
+    mSphero.drive(0.0f, 1.0f);                                           // 1
 
-          // Send a delayed message on a handler
-          final Handler handler = new Handler();                               // 2
-          handler.postDelayed(new Runnable() {
+    // Send a delayed message on a handler
+    final Handler handler = new Handler();                               // 2
+    handler.postDelayed(new Runnable() {
 
-          @Override
-          public void run() {
-            // Send a stop to Sphero
-            mSphero.stop()                                               // 3
-          }
-        }, 2000);
-
+        @Override
+        public void run() {
+          // Send a stop to Sphero
+          mSphero.stop()                                               // 3
         }
-      }
+
+    }, 2000);
+  }
+}
+```
 
 1. This line sends the heading of 0° and the maximum speed of 1.0 to Sphero.
 2. This line creates the handle that is used to send the delayed stop command.
 3. This line tells the ball to stop
 
-  Next add a call to `drive()` in the `onActivityResult()` below the call to `blink()`.
+Next add a call to `drive()` in the `onActivityResult()` below the call to `blink()`.
 
 **Run the application on an Android Device, if all went well Sphero should have moved forward just a little.**
 
-**Where is Sphero going?**: If you have successfully completed the quick
-start guide then Sphero should have moved after running the modified code.
-What is interesting to note here is that Sphero just went in a *random*
-direction.  The direction was not random at all, Sphero believe it or
-not has a *front* and a *back*.  It is necessary for the application to
-determine what direction forward is for the user from the point of view
-of the ball.  We call this step `Calibration` and it is **required** to
-properly drive Sphero in a predictable direction.  To learn more about
-calibration and using the `BackLED` to set Sphero's orientation please
-check out the `UISampler` Sample project.
+**Where is Sphero going?**:
+If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
+What is interesting to note here is that Sphero just went in a *random* direction.
+The direction was not random at all, Sphero believe it or not has a *front* and a *back*.
+It is necessary for the application to determine what direction forward is for the user from the point of view of the ball.
+We call this step `Calibration` and it is **required** to properly drive Sphero in a predictable direction.
+To learn more about calibration and using the `BackLED` to set Sphero's orientation please check out the `UISampler` Sample project.
 
 # iOS
 
@@ -311,60 +316,47 @@ check out the `UISampler` Sample project.
 
 The class documentation is located in api/ as DocSets for use with Xcode.
 It can be installed by following the Sphero SDK installation steps below.
-If that does not work or you would like to install the DocSets manually
-you can simply copy them into the DocSets directory used by Xcode. It
-is located at
+If that does not work or you would like to install the DocSets manually you can simply copy them into the DocSets directory used by Xcode.
+It is located at
 
         ~/Library/Developer/Shared/Documentation/DocSets/
 
-Once the DocSets have been copied, restart Xcode and they will then appear
-in the Documentation section of the Organizer.
+Once the DocSets have been copied, restart Xcode and they will then appear in the Documentation section of the Organizer.
 
 ## Installing Xcode
 
     Notice: The Sphero iOS SDK works with iOS 5.0+
 
-Before you begin to develop applications that interface with Sphero on
-iOS, you will need to install the iOS developer tools. There is a general
-assumption that you are using the latest version of Mac OSX, our software
-is designed to take advantage of all the most current technologies that
-are offered but it is possible that it will work on older frameworks and
-technologies.
+Before you begin to develop applications that interface with Sphero on iOS, you will need to install the iOS developer tools.
+There is a general assumption that you are using the latest version of Mac OSX, our software is designed to take advantage of all the most current technologies that are offered but it is possible that it will work on older frameworks and technologies.
 
- - Download and Install the current version of [Xcode](http://developer.apple.com/technologies/xcode.html)
+- Download and Install the current version of [Xcode](http://developer.apple.com/technologies/xcode.html)
 
 ## Installing the Sphero iOS SDK
 
-There are two ways to integrate the Sphero SDK into your project. You
-can start a new project that is preconfigured to communicate with Sphero
-or you can add the RobotKit and RobotUIKit to an existing project. Starting
-a new project is the fastest way to begin developing applications that
-utilize and control Sphero.
+There are two ways to integrate the Sphero SDK into your project.
+You can start a new project that is preconfigured to communicate with Sphero or you can add the RobotKit and RobotUIKit to an existing project.
+Starting a new project is the fastest way to begin developing applications that utilize and control Sphero.
 
 ### Integrating into an existing project
 
-There are always those cases where you already developed an awesome game
-or app and want to integrate Sphero functionality or controllability into
-the project. For those cases we have made it possible to integrate our
-libraries into your existing project, including some nifty pre-built user
-interface tools.
+There are always those cases where you already developed an awesome game or app and want to integrate Sphero functionality or controllability into the project.
+For those cases we have made it possible to integrate our libraries into your existing project, including some nifty pre-built user interface tools.
 
- - Download the current [Sphero iOS SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master).
- - Simply Drag `RobotKit.framework` into your project's framework folder.
- - Change your Deployment Target to 6.0
+- Download the current [Sphero iOS SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master).
+- Simply Drag `RobotKit.framework` into your project's framework folder.
+- Change your Deployment Target to 6.0
 
 **!NOTICE: It is important to note that you must also include:** `ExternalAccessory.framework`, `CoreMotion.framework`
 
-**!NOTICE: There are some linker changes that also must be made:**
-Change Build Settings -> Linking -> Other Linker Flags
+**!NOTICE: There are some linker changes that also must be made:** Change Build Settings -> Linking -> Other Linker Flags
 
 - lstdc++
 - all_load
 - ObjC
 - lsqlite3
 
-The HelloWorld sample has all the necessary code needed to create and
-maintain a connection to Sphero, and can be used as a guide in best practices.
+The HelloWorld sample has all the necessary code needed to create and maintain a connection to Sphero, and can be used as a guide in best practices.
 In general you will need to:
 
 ```
@@ -417,61 +409,48 @@ Create a method to handle robot state changes:
 }
 ```
 
-Do not forget to Disconnect from the Robot when the app closes, otherwise
-next time you start a connection it will already be in use.
+Do not forget to Disconnect from the Robot when the app closes, otherwise next time you start a connection it will already be in use.
 
 ```
   [_robot driveWithHeading:0.0 andVelocity:0.5];
 ```
 
-You are now ready to start controlling and receiving information from
-your Sphero, simply add the following to move the sphero forward:
+You are now ready to start controlling and receiving information from your Sphero, simply add the following to move the sphero forward:
 
-**Run the application on an iOS Device, if all went well Sphero should
-have moved forward just a little.**
+**Run the application on an iOS Device, if all went well Sphero should have moved forward just a little.**
 
 #### Where is Sphero going?
 
-If you have successfully completed the quick start guide then Sphero should
-have moved after running the modified code.  What is interesting to note
-here is that Sphero just went in a *random* direction.  The direction
-was not random at all, Sphero believe it or not has a *front* and a *back*.
+If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
+What is interesting to note here is that Sphero just went in a *random* direction.
+The direction was not random at all, Sphero believe it or not has a *front* and a *back*.
 
-It is necessary for the application to determine what direction forward
-is for the user from the point of view of the ball.  We call this step
-`Calibration` and it is **required** to properly drive Sphero in a predictable
-direction.
+It is necessary for the application to determine what direction forward is for the user from the point of view of the ball.
+We call this step `Calibration` and it is **required** to properly drive Sphero in a predictable direction.
 
-To learn more about calibration and using the `BackLED` to
-set Sphero's orientation please check out the `UISampler` Sample project.
+To learn more about calibration and using the `BackLED` to set Sphero's orientation please check out the `UISampler` Sample project.
 
 # PhoneGap
 
 ## Setting up for Android
 
-First, follow the directions in the PhoneGap "Getting Started" guide,
-at http://phonegap.com/start#android to install the Cordova JavaScript
-and Java libraries, and to configure your project for Cordova (aka PhoneGap).
+First, follow the directions in the PhoneGap "Getting Started" guide, at http://phonegap.com/start#android to install the Cordova JavaScript and Java libraries, and to configure your project for Cordova (aka PhoneGap).
 
-Get the Sphero Android SDK at https://github.com/Orbotix/SPHERO-ANDROID-SDK
-and follow the directions in the readme to add RobotLibrary and RobotUILibrary
-to your project.
+Get the Sphero Android SDK at https://github.com/Orbotix/SPHERO-ANDROID-SDK and follow the directions in the readme to add RobotLibrary and RobotUILibrary to your project.
 
-After RobotLibrary and RobotUILibrary are in your project's build path,
-add the line:
+    <activity android:name="orbotix.robot.app.startupactivity" />
 
-    <activity android:name="orbotix.robot.app.StartupActivity" />
-
-to your project manifest. This will allow the StartupActivity to run, which is needed to connect to the Sphero.
+After RobotLibrary and RobotUILibrary are in your project's build path, add this line to your project manifest.
+This will allow the StartupActivity to run, which is needed to connect to the Sphero.
 
 Download the Sphero Cordova plugin for Android at https://github.com/Orbotix/SPHERO-PHONEGAP-SDK
 
 Place the spheroplugin.js file into your assets/www folder, and place the SpheroPlugin.java file into your project's source folder.
 
-If you have followed the PhoneGap "Getting Started" guide, you should
-have an Android Activity in your project that extends the DroidGap class.
+If you have followed the PhoneGap "Getting Started" guide, you should have an Android Activity in your project that extends the DroidGap class.
 
-In this Activity, add the line to your onCreate method. This will initiate the connection to Sphero.
+In this Activity, add the line to your onCreate method.
+This will initiate the connection to Sphero.
 
     startActivity(new Intent(this, StartupActivity.class));
 
@@ -520,39 +499,40 @@ You're now ready to code to Sphero with JavaScript.
 
 ## Sphero PhoneGap Javascript
 
-Most interaction with Sphero in the plugin is done with the mySpehro object. mySphero has the following methods for basic commands
+Most interaction with Sphero in the plugin is done with the mySpehro object.
+mySphero has the following methods for basic commands
 
-*  mySphero
+* mySphero
 
-  * setupRobot -
+* setupRobot -
 
-  * setHeading - heading (int) [0-359]
+* setHeading - heading (int) [0-359]
 
-  * backLED - brightless (float) [0.0 - 1.0]
+* backLED - brightless (float) [0.0 - 1.0]
 
-  * stabilization - state (bool) [0 / 1]
+* stabilization - state (bool) [0 / 1]
 
-  * roll - heading (int) [0-359], speed (float) [0.0 - 1.0]
+* roll - heading (int) [0-359], speed (float) [0.0 - 1.0]
 
-  * rotationRate - rate (float) [ 0.0 - 1.0 ]
+* rotationRate - rate (float) [ 0.0 - 1.0 ]
 
-  * rgb - red (float) [0.0-1.0], green (float) [0.0-1.0], blue (float) [0.0-1.0]
+* rgb - red (float) [0.0-1.0], green (float) [0.0-1.0], blue (float) [0.0-1.0]
 
-  * sleep -
+* sleep -
 
-  * ping -
+* ping -
 
-  * rawMotors -
-    * leftMode (int) [0 = off, 1= forward, 2=reverse, 3=brake, 4=ignore ]
-    * leftPower (float) [0.0 - 1.0]
-    * rightMode  (int) [0 = off, 1= forward, 2=reverse, 3=brake, 4=ignore ]
-    * rightPower (float) [0.0 - 1.0]
+* rawMotors -
+  * leftMode (int) [0 = off, 1= forward, 2=reverse, 3=brake, 4=ignore ]
+  * leftPower (float) [0.0 - 1.0]
+  * rightMode  (int) [0 = off, 1= forward, 2=reverse, 3=brake, 4=ignore ]
+  * rightPower (float) [0.0 - 1.0]
 
-  * stream (explained below)
+* stream (explained below)
 
 For example, to make Sphero drive forward, you would do this:
 
-  mySphero.roll(0, 1);
+    mySphero.roll(0, 1);
 
 Which would tell Sphero to roll at 0 degrees heading (directly forward) at a speed of 1 (full speed).
 
@@ -564,22 +544,19 @@ https://github.com/rossingram/Sphero-Phonegap-SDK
 
 ## Overview
 
-This Guide walks you through the basics of creating Mac apps that leverage
-the Orbotix Sphero SDK. The examples in this guide were built using Objective-C
-and have been tested with the current released OSX and current version
-of Xcode. The goal of this developer guide along with sample code is to
-give the developer a taste of the wide variety of things Sphero can d
-, respond to, and keep track of.
+This Guide walks you through the basics of creating Mac apps that leverage the Orbotix Sphero SDK.
+The examples in this guide were built using Objective-C and have been tested with the current released OSX and current version of Xcode.
+The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Sphero can d , respond to, and keep track of.
 
-The Mac SDK is a direct port from the iOS SDK.  Therefore, we tried to
-keep the syntax identical to it's iOS counterpart.
+The Mac SDK is a direct port from the iOS SDK.
+Therefore, we tried to keep the syntax identical to it's iOS counterpart.
 
 *In general this guide will walk you through:*
 
- - Using our SDK Samples
- - Integrating into an existing project
- - Changing Sphero's Color
- - Using the Roll Command to move Sphero
+- Using our SDK Samples
+- Integrating into an existing project
+- Changing Sphero's Color
+- Using the Roll Command to move Sphero
 
 #### Class Documentation
 
@@ -588,59 +565,45 @@ keep the syntax identical to it's iOS counterpart.
 #### Samples
 
 The first step to using our SDK is to run the samples we have included.
-It is the easiest way to get started.  Simply open the .xcodeproject file
-of any of our samples and run in Xcode to see a few examples of what Sphero
-can do.  Currently, we have these samples:
+It is the easiest way to get started.
+Simply open the .xcodeproject file of any of our samples and run in Xcode to see a few examples of what Sphero can do.
+Currently, we have these samples:
 
-* [HelloWorld](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Sample
-/HelloWorld) - Connect to Sphero and blink the LED.  This is the most
-compact and easy to follow sample for dealing with Sphero.
+* [HelloWorld](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Sample/HelloWorld) - Connect to Sphero and blink the LED.
+  This is the most compact and easy to follow sample for dealing with Sphero.
 
-* [SensorStreaming](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/SensorStreaming) -
-If you want to use the sensor data from Sphero, you should check this sample out.
-Just simply register as an observer to the data, Pay attention to starting
-and stoping streaming during the application life cycle.
+* [SensorStreaming](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/SensorStreaming) - If you want to use the sensor data from Sphero, you should check this sample out.
+  Just simply register as an observer to the data, Pay attention to starting and stoping streaming during the application life cycle.
 
-* [KeyDrive](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/KeyDrive) -
-This sample demonstrates how to use keyboard input to drive Sphero.
-It also demonstrates how to calibrate Sphero.
+* [KeyDrive](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/KeyDrive) - This sample demonstrates how to use keyboard input to drive Sphero.
+  It also demonstrates how to calibrate Sphero.
 
-* [MouseController](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/MouseController) -
-This sample show how you can make sense of the data streaming from Sphero
-to control behavior, like your computer mouse.  It allows you to move
-the mouse with IMU values of roll and pitch, and left click and right
-click with the yaw angle.
-* [MacroSample](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/MacroSample) -
-This sample shows you how to build macros programmatically and send them to Sphero.
+* [MouseController](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/MouseController) - This sample show how you can make sense of the data streaming from Sphero to control behavior, like your computer mouse.
+  It allows you to move the mouse with IMU values of roll and pitch, and left click and right click with the yaw angle.
+
+* [MacroSample](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/MacroSample) - This sample shows you how to build macros programmatically and send them to Sphero.
 
 ### Integrating into an existing project
 
-  Notice: The Sphero Mac SDK should work for OSX 10.6+
+Notice: The Sphero Mac SDK should work for OSX 10.6+
 
-There are always those cases where you already developed an awesome game
-or app and want to integrate Sphero functionality or controllability into
-the project. For those cases we have made it possible to integrate our
-libraries into your existing project, including some nifty pre-built user
-interface tools.
+There are always those cases where you already developed an awesome game or app and want to integrate Sphero functionality or controllability into the project.
+For those cases we have made it possible to integrate our libraries into your existing project, including some nifty pre-built user interface tools.
 
- - Download the current [Sphero Mac SDK](https://github.com/orbotix/Sphero-Mac-SDK/zipball/master).
+- Download the current [Sphero Mac SDK](https://github.com/orbotix/Sphero-Mac-SDK/zipball/master).
 
 ## Build Phases
 
 ### Copy Files
 
-You need to add the build phase "Copy Files" to your Xcode project, if
-it is not already there.  Once you add it, you must move it above "Link
-Binaries With Libraries" build phase.  This is so the dynamic library
-RobotKit.framework gets copied into the executable directory of our project
-before the app tries to find it at runtime.  Without this build phase
-you will get the runtime error "dyld: Library not loaded: RobotKit.framework… Reason: image not found".
+You need to add the build phase "Copy Files" to your Xcode project, if it is not already there.
+Once you add it, you must move it above "Link Binaries With Libraries" build phase.
+This is so the dynamic library RobotKit.framework gets copied into the executable directory of our project before the app tries to find it at runtime.
+Without this build phase you will get the runtime error "dyld: Library not loaded: RobotKit.framework… Reason: image not found".
 
 ### Link Binary With Libraries
 
-To integrate the Sphero SDK into your project, you must add the RobotKit.Framework
-from the framework directory of the SDK into "Link Binary With Librarie
-" and make sure this Build Phase is below "Copy Files" build phase.
+To integrate the Sphero SDK into your project, you must add the RobotKit.Framework from the framework directory of the SDK into "Link Binary With Librarie " and make sure this Build Phase is below "Copy Files" build phase.
 
 Build Phases tab of your project should now look like this:
 
@@ -648,12 +611,10 @@ Build Phases tab of your project should now look like this:
 
 ### Code to Connect to Sphero
 
-The HelloSphero example has all the necessary code needed to create and
-maintain a connection to Sphero, and can be used as a guide in best practices.
+The HelloSphero example has all the necessary code needed to create and maintain a connection to Sphero, and can be used as a guide in best practices.
 In general you will need to:
 
-You should define two methods in your `.h`, One to Setup the connection
-to Sphero and one to maintain the connection.
+You should define two methods in your `.h`, one to Setup the connection to Sphero and one to maintain the connection.
 
 ```
 BOOL robotOnline;
@@ -709,8 +670,7 @@ Overload the `applicationDidFinishLaunching:(NSNotification *)aNotification` met
 }
 ```
 
-Do not forget to Disconnect from the Robot when the app closes, otherwise
-next time you start a connection it will already be in use.
+Do not forget to Disconnect from the Robot when the app closes, otherwise next time you start a connection it will already be in use.
 
 ```
 - (void)appWillTerminate:(NSNotification *)notification {
@@ -728,8 +688,7 @@ next time you start a connection it will already be in use.
 }
 ```
 
-You are now ready to start controlling and receiving information from
-your Sphero, simply add the following to change the LED Color of Sphero to red:
+You are now ready to start controlling and receiving information from your Sphero, simply add the following to change the LED Color of Sphero to red:
 
 ```
 [RKRGBLEDOutputCommand sendCommandWithRed:1.0 green:0.0 blue:0.0];
@@ -741,8 +700,7 @@ your Sphero, simply add the following to change the LED Color of Sphero to red:
 
 ---
 
-This command is described in section 3 in more detail but it is a good
-exercise at this point to change these values and try it out, play around a little bit.
+This command is described in section 3 in more detail but it is a good exercise at this point to change these values and try it out, play around a little bit.
 
 **For example**, try changing the following command in `AppDelegate.m` from
 
@@ -752,8 +710,7 @@ to
 
     [RKRGBLEDOutputCommand sendCommandWithRed:0.0 green :1.0 blue :0.0];
 
-Notice the change from green of 0.0 to a green of 1.0. Run it and you
-should have a Green Sphero!
+Notice the change from green of 0.0 to a green of 1.0. Run it and you should have a Green Sphero!
 
 ### Sending Roll Commands
 
@@ -761,25 +718,22 @@ should have a Green Sphero!
 
  - Using Roll Commands to **Stop** Sphero.
 
-So, you got the LED to blink… thats Awesome! But let's also take advantage
-of the amazing technology inside Sphero and drive the ball around a little bit.
+So, you got the LED to blink… thats Awesome!
+But let's also take advantage of the amazing technology inside Sphero and drive the ball around a little bit.
 
-In order to move Sphero you will need to send a RollCommand. The RollCommand
-takes two parameters.
+In order to move Sphero you will need to send a RollCommand.
+The RollCommand takes two parameters.
 
    1. Heading in degrees from 0° to 360°
-   2.  Speed from 0.0 to 1.0.
+   2. Speed from 0.0 to 1.0.
 
-For example, a heading of 90° at a speed of 0.5 will tell Sphero to turn
-clockwise 90° at half speed (1.0 is full speed). Once this command is
-issued Sphero will continue at this heading and speed until it hits something
-or runs out of range, so you will need to stop the ball using the RollCommand
-and `sendStop()`.
+For example, a heading of 90° at a speed of 0.5 will tell Sphero to turn clockwise 90° at half speed (1.0 is full speed).
+Once this command is issued Sphero will continue at this heading and speed until it hits something or runs out of range, so you will need to stop the ball using the RollCommand and `sendStop()`.
 
-
-Now, it's time to modify the code. Let's send Sphero forward for 2 seconds.
-Next we will create 2 new methods, one to Move Sphero, and Delay. And
-another to Stop Sphero.
+Now, it's time to modify the code.
+Let's send Sphero forward for 2 seconds.
+Next we will create 2 new methods, one to Move Sphero, and Delay.
+And another to Stop Sphero.
 
       - (void)stop {
           [RKRollCommand sendStop];
@@ -790,28 +744,23 @@ another to Stop Sphero.
         [self performSelector:@selector(stop) withDelay:2.0];
       }
 
-
 Next add the following code in place of the RGB command that was sent before.
 
 
         [self driveforward];
 
 
-**Run the application on an Mac, if all went well Sphero should have moved
-forward just a little.**
+**Run the application on an Mac, if all went well Sphero should have moved forward just a little.**
 
 
 ## Where is Sphero going?
 
-If you have successfully completed the quick start guide then Sphero should
-have moved after running the modified code.  What is interesting to note
-here is that Sphero just went in a *random* direction.  The direction
-was not random at all, Sphero believe it or not has a *front* and a *back*.
-It is necessary for the application to determine what direction forward
-is for the user from the point of view of the ball.  We call this step
-`Calibration` and it is **required** to properly drive Sphero in a predictable
-direction.  To learn more about calibration and using the `BackLED` to
-set Sphero's orientation please check out the `KeyDrive` Sample project.
+If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
+What is interesting to note here is that Sphero just went in a *random* direction.
+The direction was not random at all, Sphero believe it or not has a *front* and a *back*.
+It is necessary for the application to determine what direction forward is for the user from the point of view of the ball.
+We call this step `Calibration` and it is **required** to properly drive Sphero in a predictable direction.
+To learn more about calibration and using the `BackLED` to set Sphero's orientation please check out the `KeyDrive` Sample project.
 
 ## Further information
 
@@ -821,26 +770,28 @@ https://github.com/orbotix/Sphero-Mac-SDK
 
 ## Overview
 
-This project shows Windows 8.1 developers how to integrate Sphero into
-their Apps and games!
+This project shows Windows 8.1 developers how to integrate Sphero into their Apps and games!
 
 ## Contents
-  - Adding the RobotKit.dll to your Visual Studio solution
-  - Discovering & Connecting Sphero
-  - Changing Sphero's color
-  - Using the Sphero UI elements
-  - Driving Sphero
-  - Sensor Streaming
+
+- Adding the RobotKit.dll to your Visual Studio solution
+- Discovering & Connecting Sphero
+- Changing Sphero's color
+- Using the Sphero UI elements
+- Driving Sphero
+- Sensor Streaming
 
 ## Adding RobotKit.dll
 
 From within your solution on Visual Studio 2013
+
     <ol>
-    <li>Right click on References and "Add Reference"</li>
-    <li>Choose "Browse" and select the RobotKit.dll</li>
+      <li>Right click on References and "Add Reference"</li>
+      <li>Choose "Browse" and select the RobotKit.dll</li>
     </ol>
 
 ## Update Manifest
+
     <wb:DeviceCapability Name="bluetooth.rfcomm">
       <wb:Device Id="any">
         <wb:Function Type="serviceId:00001101-0000-1000-8000-00805F9B34FB" />
@@ -876,8 +827,8 @@ Handle the Events...
 
 ## Changing Sphero's color
 
-Sphero's main LED colors are controlled by web standard RGB.  Best practice
-is to use hex values to stay within the valid range of 0-255.
+Sphero's main LED colors are controlled by web standard RGB.
+Best practice is to use hex values to stay within the valid range of 0-255.
 
     public void turnSpheroWhite(){
         int red = 0xFF;
@@ -888,16 +839,14 @@ is to use hex values to stay within the valid range of 0-255.
 
 ## Using the Sphero UI Elements
 
-From within the BasicDriveApp sample, copy the RobotKitUI code for the
-Joystick and Calibration controls.  Sphero needs to be calibrated so that
-the 'back LED" is aimed toward the driver.  The easiest way to accomplish
-this is to use the 'CalibrateElement.cs'.
+From within the BasicDriveApp sample, copy the RobotKitUI code for the Joystick and Calibration controls.
+Sphero needs to be calibrated so that the 'back LED" is aimed toward the driver.
+The easiest way to accomplish this is to use the 'CalibrateElement.cs'.
 
 ## Driving Sphero
 
-Driving Sphero is super simple.  Just give it a direction in degrees where
-0 is directly ahead and increases clockwise where 90 degrees is right
-and a velocity between 0.0 and 1.0.
+Driving Sphero is super simple.
+Just give it a direction in degrees where 0 is directly ahead and increases clockwise where 90 degrees is right and a velocity between 0.0 and 1.0.
 
     public void hangRightAtHalfSpeed(){
         int heading = 90; // right
@@ -907,22 +856,19 @@ and a velocity between 0.0 and 1.0.
 
 ## Sensor Streaming
 
-Sphero is capable of being used as a simple game controller or other input
-device using it's embedded sensors.  Sphero has the following sensors.
+Sphero is capable of being used as a simple game controller or other input device using it's embedded sensors.
+Sphero has the following sensors.
 
-<ul>
-<li>Accelerometer</li>
-<li>Gyrometer</li>
-<li>Location in X,Y from a relative starting point</li>
-<li>Velocity</li>
-<li>Attitude in both Quaternions and Euler angles</li>
-</ul>
+- Accelerometer
+- Gyrometer
+- Location in X,Y from a relative starting point
+- Velocity
+- Attitude in both Quaternions and Euler angles
 
 ### Setup
 
-The robot SensorControl manages the listeners for Accelerometer, Gyro,
-Location, Attitude in Eulers and Quaternion Attitude.  The `SensorControl.Hz`
-value is between 1 and 400 and affects all sensors.
+The robot SensorControl manages the listeners for Accelerometer, Gyro, Location, Attitude in Eulers and Quaternion Attitude.
+The `SensorControl.Hz` value is between 1 and 400 and affects all sensors.
 
     {
       m_robot.SensorControl.Hz = 60; // stream at 60Hz for ALL sensors that are enabled
@@ -967,8 +913,8 @@ sphero.on('open', function() {
 sphero.open(spheroPort);
 ```
 
-Run that and your sphero will turn blue. You can pass hex colours such
-as `sphero.setRGB(0xFF00FF)` for `PURPLE`.
+Run that and your sphero will turn blue.
+You can pass hex colours such as `sphero.setRGB(0xFF00FF)` for `PURPLE`.
 
 There are some named colours in `toolbelt.COLORS`.
 
@@ -980,8 +926,8 @@ https://github.com/alchemycs/spheron
 
 ## Quick Start
 
-A ruby gem for controlling your Sphero ball.  Sends commands over the TTY
-provided by the bluetooth connection.
+A ruby gem for controlling your Sphero ball.
+Sends commands over the TTY provided by the bluetooth connection.
 
 REQUIREMENTS:
 
@@ -1022,23 +968,47 @@ This version of the AR SDK is designed to work with Unity version 4.5 and XCode 
 
 ## Overview
 
-The Sphero Augmented Reality (AR) SDK is used to overlay a live view of the real world with virtual content.  For gaming applications in particular, the goal is to render 3D content into the live scene so that it appears to be realistic and authentic. That’s where Sphero rolls in.  Augmented reality gameplay with Sphero is simple and seamless for two reasons – Sphero is a robot, and Sphero is round. This allows us to employ a robotic fiducial, which provides never-before-seen freedom in characterizing the visual environment (since by definition a robot is a reprogrammable machine). With no auxiliary fiducial markers, Sphero can be effectively found and tracked at a distance, at any angle, and when partially obscured. A ball is the same from every angle, after all.
+The Sphero Augmented Reality (AR) SDK is used to overlay a live view of the real world with virtual content.
+For gaming applications in particular, the goal is to render 3D content into the live scene so that it appears to be realistic and authentic.
+That’s where Sphero rolls in.
+Augmented reality gameplay with Sphero is simple and seamless for two reasons – Sphero is a robot, and Sphero is round.
+This allows us to employ a robotic fiducial, which provides never-before-seen freedom in characterizing the visual environment (since by definition a robot is a reprogrammable machine).
+With no auxiliary fiducial markers, Sphero can be effectively found and tracked at a distance, at any angle, and when partially obscured.
+A ball is the same from every angle, after all.
 
-Sphero AR also has the ability to impact the real world, whereas traditional augmented reality is limited to the screen. Not only can we make Sphero interact with virtual objects (collect coins, run over monsters, etc.), but we can also make Sphero respond to these objects (bumping into invisible walls, hitting fictional oil slicks). Just wait till you’re holding Sphero in your hand, looking at an augmented reality character through the screen of your device. It’s pretty awesome.
+Sphero AR also has the ability to impact the real world, whereas traditional augmented reality is limited to the screen.
+Not only can we make Sphero interact with virtual objects (collect coins, run over monsters, etc.), but we can also make Sphero respond to these objects (bumping into invisible walls, hitting fictional oil slicks).
+Just wait till you’re holding Sphero in your hand, looking at an augmented reality character through the screen of your device.
+It’s pretty awesome.
 
-At the end of the day, putting together all the sensor data from Sphero and your mobile device, analyzing the video feed, setting up the lighting, camera, and action takes some heavy-duty math.  Let’s break it down.
+At the end of the day, putting together all the sensor data from Sphero and your mobile device, analyzing the video feed, setting up the lighting, camera, and action takes some heavy-duty math.
+Let’s break it down.
 
-1.  Data starts out in Sphero’s accelerometer and gyroscope (get the low-down on Sphero’s inner robot here) and is piped into a state of the art, sensor-fusion algorithm. This generates Sphero’s sense of orientation. The combination of theses sensors and software behaves very much like Sphero’s “inner ear”.  It allows Sphero to know which way is up (literally) and which way it’s facing. You may get the spins on a merry-go-round, but Sphero can handle hundreds of RPM without getting dizzy.
+1. Data starts out in Sphero’s accelerometer and gyroscope (get the low-down on Sphero’s inner robot here) and is piped into a state of the art, sensor-fusion algorithm.
+   This generates Sphero’s sense of orientation.
+   The combination of theses sensors and software behaves very much like Sphero’s “inner ear”.
+   It allows Sphero to know which way is up (literally) and which way it’s facing.
+   You may get the spins on a merry-go-round, but Sphero can handle hundreds of RPM without getting dizzy.
 
-2.  Next, the camera feed from your mobile device is captured and combined with the device’s own sense of orientation. This gives us a rough understanding of the contents of the picture.  Are we looking at the ground, or at the sky?
+2. Next, the camera feed from your mobile device is captured and combined with the device’s own sense of orientation.
+  This gives us a rough understanding of the contents of the picture.
+  Are we looking at the ground, or at the sky?
 
-3.  Here comes more math. Custom vision algorithms tear the image apart, identifying Sphero, identifying the floor, analyzing the color of the lights, the ground, and any other data that might impact feedback.
+3. Here comes more math.
+Custom vision algorithms tear the image apart, identifying Sphero, identifying the floor, analyzing the color of the lights, the ground, and any other data that might impact feedback.
 
-4.  Data from the motors is then combined with Sphero’s sense of orientation to generate a sense of position. Just like you can navigate parts of your house with your eyes closed, Sphero can combine its sensor data to figure out where it is.  And you might be surprised how good this sense is. You can tell Sphero to drive a twisting path through a large room, and it still knows how to drive back to within inches of its starting location.  I challenge you to try that blindfolded!
+4. Data from the motors is then combined with Sphero’s sense of orientation to generate a sense of position.
+   Just like you can navigate parts of your house with your eyes closed, Sphero can combine its sensor data to figure out where it is.
+   And you might be surprised how good this sense is.
+   You can tell Sphero to drive a twisting path through a large room, and it still knows how to drive back to within inches of its starting location.
+   I challenge you to try that blindfolded!
 
-5.  All of the sensory information is combined using a lot of geometry, statistics, and duct-tape to figure out the real-world location of Sphero, the height of the player, the position of virtual objects, and the direction and color of lights.
+5. All of the sensory information is combined using a lot of geometry, statistics, and duct-tape to figure out the real-world location of Sphero, the height of the player, the position of virtual objects, and the direction and color of lights.
 
-In the end, the fluid, responsive augmented reality experience with Sphero boils down to the accuracy of about a dozen numbers describing the real and virtual scene. Even with carefully optimized code, it takes hundreds of millions of calculations per second to compute these.  If that seems like a lot of effort for a dozen numbers, just imagine what’s going on in the visual cortex of your own brain. A not-so-simple process, resulting in seamless and intuitive gameplay with endless possibility.
+In the end, the fluid, responsive augmented reality experience with Sphero boils down to the accuracy of about a dozen numbers describing the real and virtual scene.
+Even with carefully optimized code, it takes hundreds of millions of calculations per second to compute these.
+If that seems like a lot of effort for a dozen numbers, just imagine what’s going on in the visual cortex of your own brain.
+A not-so-simple process, resulting in seamless and intuitive gameplay with endless possibility.
 
 ## Further information
 
@@ -1046,17 +1016,13 @@ https://github.com/orbotix/Sphero-AR-SDK
 
 # Unity
 
-The Sphero robotic gaming system allows you to quickly add Sphero as an
-external controller in your existing game. In addition to being used as
-a controller Sphero can be driven around through the Unity plugin.
+The Sphero robotic gaming system allows you to quickly add Sphero as an external controller in your existing game.
+In addition to being used as a controller Sphero can be driven around through the Unity plugin.
 
-The Sphero Unity Plugin is a group of C# classes that form a bridge between
-Unity and our native Android™ and iOS™ SDKs. Unity can call down into each
-platform's native code for Sphero commands and receive asynchronous data
-callbacks from native code up into Unity. The easiest way to get going with
-the plugin is by starting with one of the samples we have created. If you
-have an existing project you want to integrate Sphero into, please continue
-reading.
+The Sphero Unity Plugin is a group of C# classes that form a bridge between Unity and our native Android™ and iOS™ SDKs.
+Unity can call down into each platform's native code for Sphero commands and receive asynchronous data callbacks from native code up into Unity.
+The easiest way to get going with the plugin is by starting with one of the samples we have created.
+If you have an existing project you want to integrate Sphero into, please continue reading.
 
 Notice: The Sphero Unity Plugin only works with Android and iOS.
 
@@ -1068,13 +1034,10 @@ https://www.assetstore.unity3d.com/en/#!/content/7015
 
 ## Cylon.js For Sphero
 
-Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and
-physical computing using Node.js
+Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js
 
-This module provides an adaptor and driver for the Sphero robot from Orbotix
-(http://www.gosphero.com/). It uses the Hybrid Group fork of the Spheron
-module (https://github.com/hybridgroup/spheron) originally created by
-[@alchemycs](https://github.com/alchemycs)
+This module provides an adaptor and driver for the Sphero robot from Orbotix (http://www.gosphero.com/).
+It uses the Hybrid Group fork of the Spheron module (https://github.com/hybridgroup/spheron) originally created by [@alchemycs](https://github.com/alchemycs)
 
 Install the module with: `npm install cylon-sphero`
 
