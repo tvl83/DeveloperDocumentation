@@ -24,7 +24,7 @@ A programming language is a list of instructions that tells a computer what to d
 Although MacroLab allowed you to create programs, it was done using a graphic interface, meaning that you tapped buttons on the screen, slid sliders, and filled in boxes.
 Most programming languages use text instead, and this is what OrbBasic does.
 
-### Why do we call it a language?
+### Why Do We Call It a Language?
 
 Usually a language is used for two people to communicate something.
 For a programing language, it’s a person communicating with a computer.

@@ -21,7 +21,7 @@ The goal of this developer guide along with sample code is to give the developer
  - [Changing Sphero's Color](https://github.com/orbotix/Sphero-Android-SDK#add-code-to-blink-the-rgb-led)
  - [Using the Roll Command to move Sphero](https://github.com/orbotix/Sphero-Android-SDK#sendings-roll-commands)
 
-### Before we begin - Installing Eclipse
+### Before We Begin - Installing Eclipse
 
 Notice: The Sphero Android SDK works with Android 2.2+ and Java Compiler Level 6.0(1.6)+
 
@@ -83,7 +83,7 @@ Then, place the libs folder from the SDK's library folder into your Android proj
 
 ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image002.png)
 
-### Setting the dependency to RobotLibrary.jar
+### Setting the Dependency To RobotLibrary.jar
 
 Eclipse should automatically add RobotLibrary.jar to the Android Dependencies folder.
 But, if it does not, set the dependency in the project's properties in the Properties->Java Build Path-> Libraries dialog.
@@ -93,7 +93,7 @@ This will allow your project access to all the public method names in RobotLibra
 
 ## Using the Sphero Android SDK
 
-### Add code to connect to a sphero
+### Add Code to Connect to a Sphero
 
 The RobotLibrary includes a view called `SpheroConnectionView` which will handle connecting to a Sphero.
 When the view sends an `onRobotConnected` event you are ready to send commands.
@@ -198,7 +198,7 @@ protected void onPause() {
 }
 ```
 
-### Add code to blink the RGB LED.
+### Add Code to Blink the RGB LED.
 
 Now it is time to add code that sends a command to Sphero.
 In this case we will blink the RGB LED blue.
@@ -236,7 +236,7 @@ private void blink(final boolean lit){
    255 is full brightness, and is only set for the blue component of the LED.
 3. This line creates a Handler that is used to post a delayed call to the `blink()` method after 1 second with the lit parameter inverted, so the next call toggles the LED on or off.
 
-### Modify the AndroidManifest.xml file.
+### Modify the AndroidManifest.xml File.
 
 Before running the application, you will need to add permissions to use bluetooth,
 
@@ -245,14 +245,14 @@ Before running the application, you will need to add permissions to use bluetoot
 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 ```
 
-### Run on a device.
+### Run On a Device.
 
 - Run the Application on a supported Android Device.
   **Turn Bluetooth ON**.
 
 - At this point in time you will want to Pair your Android Device to Sphero from within the settings.
 
-### Sendings Roll commands
+### Sending Roll Commands
 
 - Using Roll Commands to **Move** Sphero.
 
@@ -338,7 +338,7 @@ There are two ways to integrate the Sphero SDK into your project.
 You can start a new project that is preconfigured to communicate with Sphero or you can add the RobotKit and RobotUIKit to an existing project.
 Starting a new project is the fastest way to begin developing applications that utilize and control Sphero.
 
-### Integrating into an existing project
+### Integrating Into an Existing Project
 
 There are always those cases where you already developed an awesome game or app and want to integrate Sphero functionality or controllability into the project.
 For those cases we have made it possible to integrate our libraries into your existing project, including some nifty pre-built user interface tools.
@@ -419,7 +419,7 @@ You are now ready to start controlling and receiving information from your Spher
 
 **Run the application on an iOS Device, if all went well Sphero should have moved forward just a little.**
 
-#### Where is Sphero going?
+#### Where is Sphero Going?
 
 If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
 What is interesting to note here is that Sphero just went in a *random* direction.
@@ -583,7 +583,7 @@ Currently, we have these samples:
 
 * [MacroSample](https://github.com/orbotix/Sphero-Mac-SDK/tree/master/Samples/MacroSample) - This sample shows you how to build macros programmatically and send them to Sphero.
 
-### Integrating into an existing project
+### Integrating Into an Existing Project
 
 Notice: The Sphero Mac SDK should work for OSX 10.6+
 
