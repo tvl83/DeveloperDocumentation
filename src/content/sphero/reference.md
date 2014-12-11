@@ -121,7 +121,7 @@ val | name￼
 # API Commands
 
 From here forward the redundant fields in both transmit and receive packets will be omitted for clarity.
-We assume the MRSP is 00h (for success), SEQ is echoed and CHK is computed correctly both ways.
+We assume the `MRSP` is `00h` (for success), `SEQ` is echoed and `CHK` is computed correctly both ways.
 
 ## Core
 
@@ -198,7 +198,7 @@ DID | CID | SEQ   | DLEN | FLAG
     Simple Response
 
 This is a factory command that either enables or disables the CPU's UART transmit line so that another physically connected client can configure the Bluetooth module.
-The receive line is always listening, which is how you can re-enable the Tx line later.
+The receive line is always listening, which is how you can re-enable the `Tx` line later.
 Or just reboot as this setting is not persistent.
 
 ### Set Device Name – 10h
@@ -222,7 +222,7 @@ This assigned name is held internally and produced as part of the Get Bluetooth 
 Names are clipped at 48 characters in length to support UTF-8 sequences; you can send something longer but the extra will be discarded.
 This field defaults to the Bluetooth advertising name.
 
-To alter the Bluetooth advertising name from the standard Sphero-RGB pattern you will need to $$$ into the RN-42 within 60 seconds after power up, issue the command SN,mynewname and finish with r,1 to reboot the module.
+To alter the Bluetooth advertising name from the standard Sphero-RGB pattern you will need to $$$ into the RN-42 within 60 seconds after power up, issue the command `SN,mynewname` and finish with `r,1` to reboot the module.
 
 ### Get Bluetooth Info – 11h
 
@@ -271,8 +271,8 @@ DID | CID | SEQ   | DLEN | data 0 | data 1
 
 This configures the control of the Bluetooth module in its attempt to automatically reconnect with the last mobile Apple device.
 This is a courtesy behavior since the Apple Bluetooth stack doesn't initiate automatic reconnection on its own.
-The two parameters are simple: flag is 00h to disable or 01h to enable, and time is the number of seconds after power-up in which to enable auto reconnect mode.
-For example, if time = 30 then the module will be attempt reconnecting 30 seconds after waking up.
+The two parameters are simple: `flag` is `00h` to disable or `01h` to enable, and `time` is the number of seconds after power-up in which to enable auto reconnect mode.
+For example, if `time` = `30` then the module will be attempt reconnecting 30 seconds after waking up.
 (refer to RN-APL-EVAL pg. 7 for more info)
 
 ### Get Auto Reconnect – 13h
@@ -344,7 +344,7 @@ DID | CID | SEQ   | DLEN | data
 
 This enables Sphero to asynchronously notify the Client periodically with the power state or immediately when the power manager detects a state change.
 Timed notifications arrive every 10 seconds until they're explicitly disabled or Sphero is unpaired.
-The flag is as you would expect, 00h to disable and 01h to enable.
+The flag is as you would expect, `00h` to disable and `01h` to enable.
 This setting is volatile and therefore not retained across sleep cycles.
 
 The complete power notification message is of the form:
@@ -353,7 +353,12 @@ SOP1 | SOP2 | CODE | DLEN-MSB | DLEN-LSB | data  | CHK
 -----|------|------|----------|----------|-------|-----
 Fh   | FEh  | 01h  | 00h      | 02h      | state | <cmp>
 
-The power state byte mimics that of CID 20h above: 01h = Battery Charging, 02h = Battery OK, 03h = Battery Low, 04h = Battery Critical
+The power state byte mimics that of `CID` `20h` above:
+
+- `01h` = Battery Charging
+- `02h` = Battery OK
+- `03h` = Battery Low
+- `04h` = Battery Critical
 
 ### Sleep – 22h
 
@@ -420,8 +425,8 @@ DID | CID | SEQ   | DLEN | <Vlow>       | <Vcrit>
 This assigns the voltage trip points for Low and Critical battery voltages.
 The values are specified in 100ths of a volt and the limitations on adjusting these away from their defaults are:
 
-* Vlow must be in the range 675 to 725 (±25)
-* Vcrit must be in the range 625 to 675 (±25)
+* `Vlow` must be in the range 675 to 725 (±25)
+* `Vcrit` must be in the range 625 to 675 (±25)
 * There must be 0.25V of separation between the two values
 
 Shifting these values too low could result in very little warning before Sphero forces himself to sleep, depending on the age and history of the battery pack.
@@ -447,7 +452,7 @@ To save battery power, Sphero normally goes to sleep after a period of inactivit
 From the factory this value is set to 600 seconds (10 minutes) but this API command can alter it to any value of 60 seconds or greater.
 
 The inactivity timer is reset every time an API command is received over Bluetooth or a shell command is executed in User Hack mode.
-In addition, the timer is continually reset when a macro is running unless the MF_STEALTH flag is set, and the same for orbBasic unless the BF_STEALTH flag is set.
+In addition, the timer is continually reset when a macro is running unless the `MF_STEALTH` flag is set, and the same for orbBasic unless the `BF_STEALTH` flag is set.
 
 ### Jump To Bootloader – 30h
 
@@ -695,10 +700,10 @@ This command helps the Client application profile the transmission and processin
 This technique is based upon the scheme in the Network Time Protocol (RFC 5905) and allows the Client to reconcile time stamped messages from Sphero to its own time stamped events.
 In the following discussion, each 32-bit value is a count of milliseconds from some reference within the device.
 
-The scheme is as follows: the Client sends the command with the Client Tx time (T1) filled in.
-Upon receipt of the packet, the command processor in Sphero copies that time into the response packet and places the current value of the millisecond counter into the Sphero Rx time field (T2).
-Just before the transmit engine streams it into the Bluetooth module, the Sphero Tx time value (T3) is filled in.
-If the Client then records the time at which the response is received (T4) the relevant time segments can be computed from the four time stamps T1-T4:
+The scheme is as follows: the Client sends the command with the Client Tx time (`T1`) filled in.
+Upon receipt of the packet, the command processor in Sphero copies that time into the response packet and places the current value of the millisecond counter into the Sphero Rx time field (`T2`).
+Just before the transmit engine streams it into the Bluetooth module, the Sphero Tx time value (`T3`) is filled in.
+If the Client then records the time at which the response is received (`T4`) the relevant time segments can be computed from the four time stamps `T1-T4`:
 
 * The value offset represents the maximum-likelihood time offset of the Client clock to Sphero's system clock.
 
@@ -710,7 +715,7 @@ If the Client then records the time at which the response is received (T4) the r
 
 ## Bootloader
 
-Note that the "Jump To Bootloader" command is specified in DID 00h, the Core.
+Note that the "Jump To Bootloader" command is specified in `DID` `00h`, the Core.
 
 ## Sphero
 
@@ -776,13 +781,13 @@ DID | CID | SEQ   | DLEN | RATE
 
     Simple Response
 
-This allows you to control the rotation rate that Sphero will use to meet new heading commands (DID 02h, CID 01h).
+This allows you to control the rotation rate that Sphero will use to meet new heading commands (`DID` `02h`, `CID` `01h`).
 A lower value offers better control but with a larger turning radius.
 A higher value will yield quick turns but Sphero may roll over on itself and lose control.
 
 The commanded value is in units of 0.784 degrees/sec.
-So, setting a value of C8h will set the rotation rate to 157 degrees/sec.
-A value of 255 jumps to the maximum (currently 400 degrees/sec).
+So, setting a value of `C8h` will set the rotation rate to 157 degrees/sec.
+A value of `255` jumps to the maximum (currently 400 degrees/sec).
 A value of zero doesn't make much sense so it's interpreted as 1, the minimum.
 
 ### Set Application Configuration Block – 04h
@@ -907,12 +912,12 @@ True Time      | 0        | Use the default value
 True Time      | 1 to 255 | Set the required “test for levelness” time to 10*True Time (in milliseconds)
 
 Default values are:
-- Angle = 3
-- Timeout = 15
-- True Time = 30 (300 milliseconds)
+- `Angle` = 3
+- `Timeout` = 15
+- `True Time` = 30 (300 milliseconds)
 
-`True Time * 10` specifies the number of milliseconds that the pitch and roll angles must remain below the Angle Limit after the routine completes.
-If one of the values exceeds the Angle Limit, the ball will self level again and the accuracy timer will start again from 0.
+`True Time * 10` specifies the number of milliseconds that the pitch and roll angles must remain below the `Angle Limit` after the routine completes.
+If one of the values exceeds the `Angle Limit`, the ball will self level again and the accuracy timer will start again from 0.
 
 ### Result byte
 
@@ -931,8 +936,8 @@ The result byte can be:
 
 We have found that the real angle lags a bit behind the measured angle.
 Also, the angles may shift some after “level” is achieved as the motors stop and the system comes to a rest.
-A True Time value of 30 (300 milliseconds) is generally good enough to keep the angles within a degree or two of the specified Angle Limit.
-If greater accuracy is required the True Time value can be increased up to 255 (2.55 seconds).
+A `True Time` value of 30 (300 milliseconds) is generally good enough to keep the angles within a degree or two of the specified `Angle Limit`.
+If greater accuracy is required the `True Time` value can be increased up to 255 (2.55 seconds).
 
 ### Control System On/Off
 
@@ -958,7 +963,7 @@ This could be desired behavior for some programs.
 
 ### System Options Flag
 
-Refer to DID 02h, CID 35h for details.
+Refer to `DID 02h`, `CID 35h` for details.
 Sleep requests made using this self level API call while the disable flag is asserted will still cause the ball to go to sleep.
 
 ### Set Data Streaming – 11h
@@ -988,22 +993,22 @@ MASK  | Bitwise selector of data sources to stream
 PCNT  | Packet count 1-255 (or 0 for unlimited streaming)
 MASK2 | Bitwise selector of more data sources to stream (optional)
 
-MASK and PCNT are pretty obvious but the N, M terms bear a little more explanation.
-Currently the control system runs at 400Hz and because it's pretty unlikely you will want to see data at that rate, N allows you to divide that down.
-N = 2 yields data samples at 200Hz, N = 10, 40Hz, etc.
-Every data sample consists of a "frame" made up of the individual sensor values as defined by the MASK.
-The M value defines how many frames to collect in memory before the packet is emitted.
+`MASK` and `PCNT` are pretty obvious but the `N`, `M` terms bear a little more explanation.
+Currently the control system runs at 400Hz and because it's pretty unlikely you will want to see data at that rate, `N` allows you to divide that down.
+`N` = 2 yields data samples at 200Hz, `N` = 10, 40Hz, etc.
+Every data sample consists of a "frame" made up of the individual sensor values as defined by the `MASK`.
+The `M` value defines how many frames to collect in memory before the packet is emitted.
 In this sense, it controls the latency of the data you receive.
-Increasing N and the number of bits set in MASK drive the required throughput.
-You should experiment with different values of N, M and MASK to see what works best for you.
+Increasing `N` and the number of bits set in `MASK` drive the required throughput.
+You should experiment with different values of `N`, `M` and `MASK` to see what works best for you.
 
-The MASK2 bitfield was added to extend MASK when we developed more than 32 data sources.
+The `MASK2` bitfield was added to extend `MASK` when we developed more than 32 data sources.
 The API processor is implemented so that this value is optional; if it isn't included then all of its bits are set to zero.
 (Added in FW 1.15)
 
 Each parameter is returned as a 16-bit signed integer.
-The table below defines the bits in MASK to those parameters with the indicated ranges and units.
-If the command is issued with a MASK of zero, then data streaming is disabled.
+The table below defines the bits in `MASK` to those parameters with the indicated ranges and units.
+If the command is issued with a `MASK` of zero, then data streaming is disabled.
 
 ### MASK
 
@@ -1106,7 +1111,7 @@ Timestamp  | The millisecond timer value at the time of impact; refer to the doc
 
 ### Additional information
 
-For additional information, refer to SPAN01, "Sphero Collision Detection Feature."
+For additional information, refer to `SPAN01`, "Sphero Collision Detection Feature."
 Note also that this feature relies on the accelerometer range being set to ±8Gs; if altered with the next command then don't count on it working in a useful way.
 
 ### Configure Locator – 13h
@@ -1212,7 +1217,7 @@ DID | CID | SEQ   | DLEN |  RED    | GREEN   | BLUE    | FLAG
 
 This allows you to set the RGB LED color.
 The composite value is stored as the "application LED color" and immediately driven to the LED (if not overridden by a macro or orbBasic operation).
-If FLAG is true, the value is also saved as the "user LED color" which persists across power cycles and is rendered in the gap between an application connecting and sending this command.
+If `FLAG` is true, the value is also saved as the "user LED color" which persists across power cycles and is rendered in the gap between an application connecting and sending this command.
 
 ### Set Back LED Output – 21h
 
@@ -1296,7 +1301,7 @@ DID  | CID   | SEQ     | DLEN   | TIME    | HEADING
     Simple Response
 
 This commands Sphero to meet the provided heading, disable stabilization and ramp the motors up to full-speed for a period of time.
-The Time parameter is the duration in tenths of a second.
+The `Time` parameter is the duration in tenths of a second.
 Setting it to zero enables constant boost until a Set Stabilization command is received.
 
 ### Set Raw Motor Values – 33h
@@ -1317,7 +1322,7 @@ DID  | CID   | SEQ     | DLEN   | L-MODE       | L-POWER    | R-MODE   | R-POWER
 
 This allows you to take over one or both of the motor output values, instead of having the stabilization system control them.
 Each motor (left and right requires a mode (see below) and a power value from 0- 255.
-This command will disable stabilization if both modes aren't "ignore" so you'll need to re-enable it via CID 02h once you're done.
+This command will disable stabilization if both modes aren't "ignore" so you'll need to re-enable it via `CID 02h` once you're done.
 
 MODE | Description
 ---- | -----------
@@ -1344,10 +1349,10 @@ DID | CID | SEQ   | DLEN | TIME
     Simple Response
 
 This sets the ultimate timeout for the last motion command to keep Sphero from rolling away in the case of a crashed (or paused) client app.
-The TIME parameter is expressed in milliseconds and defaults to 2000 upon wake-up.
+The `TIME` parameter is expressed in milliseconds and defaults to `2000` upon wake-up.
 
-If the control system is enabled, the timeout triggers a stop otherwise it commands zero PWM to both motors.
-This "termination behavior" is inhibited if a macro is running with the flag MFEXCLUSIVEDRV set, or an orbBasic program is executing with a similar flag, BFEXCLUSIVEDRV.
+If the control system is enabled, the timeout triggers a stop otherwise it commands zero `PWM` to both motors.
+This "termination behavior" is inhibited if a macro is running with the flag `MFEXCLUSIVEDRV` set, or an orbBasic program is executing with a similar flag, `BFEXCLUSIVEDRV`.
 
 Note that you must enable this action by setting System Option Flag #4.
 
@@ -1463,12 +1468,12 @@ DID | CID | SEQ   | DLEN |  ID
     Simple Response
 
 This command retrieves one of the configuration blocks.
-The response is a simple one; an error code of 08h is returned when the resources are currently unavailable to send the requested block back.
-The actual configuration block data returns in an asynchronous message of type 04h due to its length (if there is no error).
+The response is a simple one; an error code of `08h` is returned when the resources are currently unavailable to send the requested block back.
+The actual configuration block data returns in an asynchronous message of type `04h` due to its length (if there is no error).
 
-Value = 00h requests the factory configuration block.
+`Value` = `00h` requests the factory configuration block.
 
-Value = 01h requests the user configuration block, which is updated with current values first.
+`Value` = `01h` requests the user configuration block, which is updated with current values first.
 
 ### Set Device Mode – 42h
 
@@ -1533,7 +1538,7 @@ DLEN  | Mode
 ------|-----
 02h   | val
 
-This returns the current device mode, 00h for Normal mode or 01h for User Hack mode.
+This returns the current device mode, `00h` for Normal mode or `01h` for User Hack mode.
 
 ### Run Macro – 50h
 
@@ -1554,12 +1559,12 @@ DID | CID | SEQ   | DLEN |  ID
 This attempts to execute the specified macro.
 Macro IDs are organized into groups:
 
-- 01 – 31 are System Macros, that is, they are compiled into the Main Application.
-  As such they are always available to be run and cannot be deleted.
-- 32 – 253 are User Macros that are downloaded and persistently stored.
-  They can be deleted in total.
-- 255 is a special user macro called the Temporary Macro as it is held in RAM for execution.
-- 254 is also a special user macro called the Stream Macro that doesn't require this call to begin execution.
+IDs    | Description
+---    | -----------
+01-31  | System Macros. Compiled into the Main Application. Always available to run, cannot be deleted.
+32-253 | User Macros. Downloaded and permanently stored, can be deleted in total.
+254    | Stream Macro, a special user macro that doesn't require this call to begin execution
+255    | Temporary Macro, a special user macro that's held in RAM for execution
 
 This command will fail if there is currently an executing macro or the specified ID Code isn't found.
 In the case of the former, send an abort command first.
@@ -1581,9 +1586,9 @@ DID | CID | SEQ   | DLEN      | MACRO
     Simple Response
 
 This stores the attached macro definition into the temporary RAM buffer for later execution.
-Any existing macro ID can be sent through this command and it is then renamed to ID FFh.
+Any existing macro ID can be sent through this command and it is then renamed to `ID FFh`.
 If this command is sent while a Temporary or Stream Macro is executing it will be terminated so that its storage space can be overwritten.
-As with all macros, the longest definition that can be sent is 254 bytes (thus requiring DLEN to be FFh).
+As with all macros, the longest definition that can be sent is 254 bytes (thus requiring `DLEN` to be `FFh`).
 
 You must follow this with a Run Macro command to begin execution.
 
@@ -1605,13 +1610,13 @@ DID | CID | SEQ   | DLEN      |  MACRO
 
 This stores the attached macro definition into the persistent store for later execution.
 This command can be sent even if other macros are executing.
-You will receive a failure response if you attempt to send an ID number in the System Macro range, 255 for the Temp Macro and ID of an existing user macro in the storage block.
-As with all macros, the longest definition that can be sent is 254 bytes (thus requiring DLEN to be FFh).
+You will receive a failure response if you attempt to send an ID number in the System Macro range, `255` for the Temp Macro and ID of an existing user macro in the storage block.
+As with all macros, the longest definition that can be sent is `254` bytes (thus requiring `DLEN` to be `FFh`).
 
-A special case of this command is to start and continue execution of the Stream Macro, ID 254.
+A special case of this command is to start and continue execution of the Stream Macro, ID `254`.
 If a Temporary Macro is running it will be terminated and the Stream Macro will begin.
 If a Stream Macro is already running, this chunk will be appended (if there is room).
-Stream Macros terminate via Abort or with a special END code.
+Stream Macros terminate via Abort or with a special `END` code.
 Refer to the Sphero Macro documentation for more detail.
 
 ### Reinit Macro Executive – 54h
@@ -1652,9 +1657,9 @@ DLEN |  ID   |  Cmd Num | Cmd Num
 04h  | <any> | <msb>    | <lsb>
 
 This command aborts any executing macro and returns both its ID code and the command number currently in process.
-An exception is a System Macro that is executing with the UNKILLABLE flag set.
+An exception is a System Macro that is executing with the `UNKILLABLE` flag set.
 A normal return code indicates the ID Code of the aborted macro as well as the command number at which execution was stopped.
-A return ID code of 00h indicates that no macro was running and an ID code with FFFFh as the CmdNum that the macro was unkillable.
+A return ID code of `00h` indicates that no macro was running and an ID code with `FFFFh` as the `CmdNum` that the macro was unkillable.
 
 ### Get Macro Status – 56h
 
@@ -1675,7 +1680,7 @@ DLEN |  ID   | Cmd Num | Cmd Num
 04h  | <any> | <msb>   | <lsb>
 
 This command returns the ID code and command number of the currently executing macro.
-If no macro is currently running, 00h is returned for the ID code while the command number is left over from the last macro.
+If no macro is currently running, `00h` is returned for the ID code while the command number is left over from the last macro.
 
 ### Set Macro Parameter – 57h
 
@@ -1694,7 +1699,7 @@ DID | CID | SEQ   | DLEN |  Param | Val1  | Val2
     Simple Response
 
 This command allows system globals that influence certain macro commands to be selectively altered from outside of the macro system itself.
-The values of Val1 and Val2 depend on the parameter index.
+The values of `Val1` and `Val2` depend on the parameter index.
 
 Index | Description
 ------|------------
@@ -1704,8 +1709,7 @@ Index | Description
 03h   | Assign System Speed 2: Val1 = speed, Val2 = 0 (ignored)
 04h   | Assign System Loops: Val1 = loop count, Val2 = 0 (ignored)
 
-Details of what these system variables change are presented in the Sphero
-Macro document.
+Details of what these system variables change are presented in the Sphero Macro document.
 
 ### Append Macro Chunk – 58h
 
@@ -1726,11 +1730,11 @@ DID | CID | SEQ   | DLEN      | MACRO Chunk
 This stores the attached macro definition into the temporary RAM buffer for later execution.
 It is similar to the Save Temporary Macro call but allows you to build up longer temporary macros.
 
-Any existing macro ID can be sent through this command and executed through the Run Macro call using ID FFh.
+Any existing macro ID can be sent through this command and executed through the Run Macro call using ID `FFh`.
 If this command is sent while a Temporary or Stream Macro is executing it will be terminated so that its storage space can be overwritten.
-As with all macros, the longest chunk that can be sent is 254 bytes (thus requiring DLEN to be FFh).
+As with all macros, the longest chunk that can be sent is `254` bytes (thus requiring `DLEN` to be `FFh`).
 
-You must follow this with a Run Macro command (ID FFh) to actually get it to go and it is best to prefix this command with an Abort call to make certain the larger buffer is completely initialized.
+You must follow this with a Run Macro command (ID `FFh`) to actually get it to go and it is best to prefix this command with an Abort call to make certain the larger buffer is completely initialized.
 
 ### Erase orbBasic Storage – 60h
 
@@ -1749,7 +1753,7 @@ DID | CID | SEQ   | DLEN | Area
     Simple Response
 
 This erases any existing program in the specified storage area.
-Specify 00h for the temporary RAM buffer or 01h for the persistent storage area.
+Specify `00h` for the temporary RAM buffer or `01h` for the persistent storage area.
 
 ### Append orbBasic Fragment – 61h
 
@@ -1767,12 +1771,12 @@ DID | CID | SEQ   | DLEN  |  Area | Program Code
 
     Simple Response
 
-Sending an orbBasic program to Sphero involves appending blocks of text to existing ones in the specified storage area (00h for RAM, 01h for persistent.
+Sending an orbBasic program to Sphero involves appending blocks of text to existing ones in the specified storage area (`00h` for RAM, `01h` for persistent.
 Complete lines are not required.
 A line begins with a decimal line number followed by a space and is terminated with a .
 See the orbBasic Interpreter document for complete information.
 
-Possible error responses would be ORBOTIXRSPCODEEPARAM if an illegal storage area is specified or ORBOTIXRSPCODEEEXEC if the specified storage area is full.
+Possible error responses would be `ORBOTIXRSPCODEEPARAM` if an illegal storage area is specified or `ORBOTIXRSPCODEEEXEC` if the specified storage area is full.
 
 ### Execute orbBasic Program – 62h
 
@@ -1831,7 +1835,6 @@ This takes the place of the typical user console in orbBasic and allows a user t
 If there is no pending input request when this API command is sent, the supplied value is ignored without error.
 Refer to the orbBasic language document for further information.
 
-
 # Macro Commands
 
 ## Set Stabilization
@@ -1843,7 +1846,7 @@ Cmd | Flag   |  PCD
 This turns on and off the control system which actively stabilizes Sphero.
 If you intend to drive around, you should make sure the system that allows you to do it is enabled.
 Note that sending raw motor commands implicitly disables the stabilization system.
-Flag is 00h for OFF, 01h for ON with control system reset and 02h for ON without a reset.
+Flag is `00h` for OFF, `01h` for ON with control system reset and `02h` for ON without a reset.
 
 ## Set Stabilization
 
@@ -1864,7 +1867,7 @@ Cmd | Rate
 
 Sphero's control system implements an intermediate rate limiter for the yaw axis, feeding smoothed transitions to that servo loop.
 This sets the maximum increment.
-As of firmware version 0.92 the formula for converting the rate parameter R to degrees/second is 40 + R/2, which yields a smoothed range from 40 to 167 deg/s.
+As of firmware version 0.92 the formula for converting the rate parameter R to degrees/second is `40 + R/2`, which yields a smoothed range from 40 to 167 deg/s.
 This only applies to Roll commands; if you use the macro command Rotate Over Time this setting is bypassed.
 
 ## Delay
@@ -1873,8 +1876,7 @@ Cmd | Time  | Time
 ----|-------|-------
 0Bh | <msb> | <lsb>
 
-This causes an immediate delay in the execution of additional macro commands
- while allowing the background ones to keep running.
+This causes an immediate delay in the execution of additional macro commands while allowing the background ones to keep running.
 
 ## Set SD1, SD2
 
@@ -1910,7 +1912,7 @@ Cmd | Speed | Heading | Heading | PCD
 
 This command gets Sphero to start rolling along the commanded speed and heading.
 If the stabilization system is off, this command will do nothing.
-A speed of 00h also engages ramped down braking of roll speed.
+A speed of `00h` also engages ramped down braking of roll speed.
 
 ## Roll2
 
@@ -1949,7 +1951,7 @@ Cmd | Heading | Heading
 
 This is the ultimate in roll commands: the speed comes from one of the system speed values and the post command delay from SD1.
 All you need to provide is a heading.
-Use command code 11h to select SPD1 and 12h for SPD2.
+Use command code `11h` to select SPD1 and `12h` for SPD2.
 
 ## Send Raw Motor Commands
 
@@ -1958,7 +1960,7 @@ Cmd | Left Mode   | Left Power | Right Mode  | Right Power | PCD
 0Ah | <see table> | <any>      | <see table> | <any>       | <any>
 
 This allows you to take over one or both of the motor output values, instead of having the stabilization system control them.
-Each motor (left and right requires a mode (see below) and a power value from 0- FFh.
+Each motor (left and right requires a mode (see below) and a power value from `0` - `FFh`.
 This command will disable stabilization if both modes aren't "ignore" so you'll need to re-enable it once you're done.
 
 Mode  |  Description
@@ -1977,8 +1979,8 @@ Cmd | Angle | Angle | Time  |  Time
 
 This command drives the yaw control system directly to effect an angular change over time.
 The angle parameter is a signed number of degrees and time is of course in milliseconds.
-For example, Sphero will spin around clockwise twice in four seconds if your parameters are 720 and 4000 (the byte sequence would be 02h, D0h, 0Fh, A0h).
-Counterclockwise in five seconds would be -720, 5000 (bytes FDh, 30h, 13h, 88h).
+For example, Sphero will spin around clockwise twice in four seconds if your parameters are `720` and `4000` (the byte sequence would be `02h`, `D0h`, `0Fh`, `A0h`).
+Counterclockwise in five seconds would be `-720`, `5000` (bytes `FDh`, `30h`, `13h`, `88h`).
 
 NOTE: This command runs in the background.
 Any roll commands executed before it is finished will be ignored.
@@ -1990,8 +1992,8 @@ Cmd | Angle | Angle
 ----|-------|-------
 21h | <msb> | <lsb>
 
-This is the same as Rotate Over Time but instead of requiring an immediate value, command code 21h inherits this value from System Delay 1.
-Likewise use code 22h to inherit from SD2.
+This is the same as Rotate Over Time but instead of requiring an immediate value, command code `21h` inherits this value from System Delay 1.
+Likewise use code `22h` to inherit from SD2.
 
 ## Wait Until Stopped
 
@@ -2011,7 +2013,7 @@ Cmd  | Count
 Begins a looping block, repeating the commands between this one and Loop End the specified number of times.
 A count of 0 is treated as 1, neither of which do anything additional.
 A second Loop Start before a Loop End replaces the previous Loop Start.
-You can use Goto and Gosub from within loop blocks.
+You can use `Goto` and `Gosub` from within loop blocks.
 
 ## Loop Start System
 
@@ -2138,7 +2140,7 @@ Cmd | Time  |  Time
 This puts Sphero to sleep, able to be awaken from a double-shake.
 The time parameter is optional and is the number of milliseconds for him to automatically reawaken.
 If set to zero, he goes to sleep forever.
-If set to FFFFh the actual time is inherited from the API command (DID 00h, CID 22h).
+If set to `FFFFh` the actual time is inherited from the API command (`DID 00h`, `CID 22h`).
 Which just proves that the API command calls a system macro which implements this.
 
 ## End
@@ -2176,7 +2178,7 @@ Marker |  Macro ID |  Command # | Command #
 -------|-----------|------------|----------
 <val>  | <lsb>     | <msb>      | <lsb>
 
-Async ID code 06h is reserved for macro notifications, the Marker field comes from the command and the last two bytes are the command number of this marker within the current macro.
+Async ID code `06h` is reserved for macro notifications, the Marker field comes from the command and the last two bytes are the command number of this marker within the current macro.
 You can read more about async messages in the Sphero API document.
 
 # Macro Codes Quick Reference
@@ -2234,7 +2236,7 @@ val | name
 * Z is in the index variable and when accessed, the Yth index is dereferenced, implying Z(Y).
   There are no zero indices in Basic so the valid range of Y when accessing Z is 1..25
 
-All variables are 32-bit signed integers yielding a range of -2,147,483,647 to +2,147,483,647.
+All variables are 32-bit signed integers yielding a range of `-2,147,483,647` to `+2,147,483,647`.
 
 If you want to use fractions then you will need to learn how to use fixed point math.
 
@@ -2295,7 +2297,7 @@ Example:
 ￼
 Returns the approximate speed of the robot in real time.
 This value is the filtered average speed of both motors so there is some delay between what you see and what this returns.
-It is read-only and ranges from 0..255.
+It is read-only and ranges from `0..255`.
 
 #### yaw
 
@@ -2304,7 +2306,7 @@ It is read-only and ranges from 0..255.
 * Available: ver 0.9
 
 Returns the current heading of the robot as reported by the IMU.
-It is read-only and ranges from 0..359 in the usual convention of how Sphero manages headings.
+It is read-only and ranges from `0..359` in the usual convention of how Sphero manages headings.
 This program turns the back LED on and off in 45 degree sectors; download it and spin Sphero like a top.
 
     10 ctrl = 0
@@ -2320,7 +2322,7 @@ This program turns the back LED on and off in 45 degree sectors; download it and
 * Available: ver 0.9
 
 Returns the current pitch angle of the robot as reported by the IMU.
-It is read-only and ranges from -90 when the front of Sphero is pointing straight down to +90 when it is pointing straight up.
+It is read-only and ranges from `-90` when the front of Sphero is pointing straight down to `+90` when it is pointing straight up.
 
 #### roll
 
@@ -2329,7 +2331,7 @@ It is read-only and ranges from -90 when the front of Sphero is pointing straigh
 * Available: ver 0.9
 
 Returns the current roll angle of the robot as reported by the IMU.
-It is read-only and ranges from -180 as Sphero rolls to the left and +180 when it rolls completely over to the right.
+It is read-only and ranges from `-180` as Sphero rolls to the left and `+180` when it rolls completely over to the right.
 
 Here is a good program to display the relationship of all three of the above variables.
 
@@ -2345,7 +2347,7 @@ Here is a good program to display the relationship of all three of the above var
 * Available: ver 0.9
 
 Returns the current filtered reading from the accelerometer.
-The range is -32768 to +32767 for full- scale, which defaults to ±8Gs.
+The range is `-32768` to `+32767` for full-scale, which defaults to ±8Gs.
 The convention is that X is the pitch axis, Y is roll and Z is yaw.
 
 #### gyroX, gyroY, gyroZ
@@ -2355,7 +2357,7 @@ The convention is that X is the pitch axis, Y is roll and Z is yaw.
 * Available: ver 0.9
 
 Returns the current filtered reading from the rate gyro in units of 0.1 degrees/second.
-The range is - 20000 to +20000 for full-scale.
+The range is `-20000` to `+20000` for full-scale.
 The convention is that X is the pitch axis, Y is roll and Z is yaw.
 
 #### Vbatt
@@ -2389,7 +2391,7 @@ Returns a value of 1 when a new roll command has been sent by a Bluetooth client
 Reading this system variable automatically sets it to zero.
 
 Roll commands usually don't arrive faster than 10Hz so there isn’t much use in checking this flag faster than every 100ms.
-When this variable reads as one, the other two system variables spdval and hdgval will have fresh values in them.
+When this variable reads as one, the other two system variables `spdval` and `hdgval` will have fresh values in them.
 
 Older versions of orbBasic prior to 1.6 named this cmdval.
 
@@ -2498,26 +2500,26 @@ Run this program in the background while using the Drive App to move Sphero in a
 * Available: ver 0.9
 
 Sphero's IMU is quaternion based and these variables access the elements of that vector.
-Each value ranges from -10,000 to +10,000 which corresponds to the normalized internal value of -1.0 to +1.0.
+Each value ranges from `-10,000` to `+10,000` which corresponds to the normalized internal value of -1.0 to +1.0.
 Reading these system variables faster than 400 Hz is not useful and will return duplicate data.
 
 ## Expressions
 
 Simple mathematical operators are supported up to a reasonable expression depth.
 ￼
-Operator | Description | Example | Precedence
----------|-------------|---------|------------|￼
-( | Begin a new subexpression | 2 + 3 * 5 yields 17 | high
-) | End a subexpression | (2 + 3) *5 yields 25 | high
-* | *Integer multiplication | 2 *3 yields 6 | medium
-/ | Integer division | 10 / 3 yields 3 | medium
-% | Integer remainder | 10 % 3 yields 1 | medium
-{ | Binary left shift | 3 { 2 yields 12 | medium
-} | Binary right shift | 20 } 2 yields 5 | medium
-+ | +Addition | 1 + 2 yields 3 | low
-- | -Subtraction | 1 - 2 yields -1 | low
-& | Bitwise AND | 45 & 85 yields 5 | low
-| | Bitwise OR | 45 | 85 yields 125 | low
+Operator  | Description               | Example              | Precedence
+--------- | -------------             | ---------            | ------------  | ￼
+(         | Begin a new subexpression | 2 + 3 * 5 yields 17  | high
+)         | End a subexpression       | (2 + 3) *5 yields 25 | high
+*         | *Integer multiplication   | 2 *3 yields 6        | medium
+/         | Integer division          | 10 / 3 yields 3      | medium
+%         | Integer remainder         | 10 % 3 yields 1      | medium
+{         | Binary left shift         | 3 { 2 yields 12      | medium
+}         | Binary right shift        | 20 } 2 yields 5      | medium
++         | +Addition                 | 1 + 2 yields 3       | low
+-         | -Subtraction              | 1 - 2 yields -1      | low
+&         | Bitwise AND               | 45 & 85 yields 5     | low
+\|         | Bitwise OR                | 45                   | 85 yields 125 | low
 
 The goal was to allow an expression anywhere a variable or a numeric literal was permitted, offering the most flexibility.
 But this may not always be the case (testing will reveal!)
@@ -2534,12 +2536,12 @@ A negative number halts on error.
 
 Since orbBasic only supports integer math you need to understand the following identity to really use this for smaller numbers:
 
-√a * b = √a *  √b where a is the number you want to take the square root of and b is a multiplier to increase the precision.
+`√a * b = √a * √b` where a is the number you want to take the square root of and b is a multiplier to increase the precision.
 Since the maximum positive value of any expression in orbBasic is around 2.1 million, choosing b as 1002 or 10,000 is a good choice.
 Consider the following example where you want to take the square root of 42:
 
-Let a = 42 and b = 10000, so sqrt 420000 yields 648.
-Since √10000 equals 100, this answer is 100 times too large.
+Let `a = 42` and `b = 10000`, so sqrt 420000 yields 648.
+Since `√10000 == 100`, this answer is 100 times too large.
 Which lines up with the real answer of √42 which is about 6.48
 
     10 for X = 10 to 100 step 10
@@ -2714,7 +2716,7 @@ The first form is the traditional blocking type you've seen before:
     40 print " and half of that is " X/2
 
 In this form the input statement will wait forever until the API command to deliver a number is sent to Sphero.
-(Note that the API command is DID 02h, CID 64h) The only other way out is by sending an abort command to the orbBasic interpreter.
+(Note that the API command is `DID 02h`, `CID 64h`) The only other way out is by sending an abort command to the orbBasic interpreter.
 
 The second form helps manage the infinite wait:
 
@@ -2770,17 +2772,17 @@ You can override this precedence with an orbBasic flag, however.
 This is like the RGB command but sets the LED to one of eight predefined colors, without requiring you to know the three component values.
 
 
-Value | Color
-------|------
-0 |￼<off>
-1 |￼red
-2 |￼green
-3 |￼blue
-4 | orange
-5 |￼purple
-6 |￼white
-7 |￼yellow
-8 |￼<off>
+Value  | Color
+------ | ------
+0      | <off>
+1      | red
+2      | green
+3      | blue
+4      | orange
+5      | purple
+6      | white
+7      | yellow
+8      | <off>
 
 Example:
 
