@@ -64,9 +64,9 @@ Next, you're going to be using Sphero to learn about some important concepts for
 
 ### Making the Sphero Roll and Stop
 
-To make Sphero roll or stop, you use the `goroll` command followed by three numbers:
+![goroll]({{assets}}/images/roll-and-stop.png)
 
-![goroll](http://new.tinygrab.com/089df54f8f055ac720ab43212de4ba3f0a5dd2b029.png)
+To make Sphero roll or stop, you use the `goroll` command followed by three numbers:
 
 * First number: `heading`.
   From 0 to 359, it is the number of degrees from straight ahead (see diagram).

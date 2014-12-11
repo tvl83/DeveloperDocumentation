@@ -64,8 +64,8 @@ At the most basic level he's electronically a collection of raw inputs and outpu
 
 ## Raw Inputs
 
-![axis](http://essentialscrap.com/sphere/mechanisms.png)
-![accelerometer](http://i.stack.imgur.com/esnbd.jpg)
+![axis]({{assets}}/images/motor-axis.png)
+![accelerometer]({{assets}}/images/accelerometer.png)
 
 * Three axis rotation rate gyro
 * Three axis accelerometer
