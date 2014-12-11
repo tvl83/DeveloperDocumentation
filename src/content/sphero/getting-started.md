@@ -24,7 +24,7 @@ For more information, watch the [Sphero Guided Tour](https://www.youtube.com/wat
 One of the things that makes Sphero so unique is that its heading is relative to the user, not relative to the ball.
 This makes it much easier to get Sphero rolling in the direction you want.
 
-![Heading and Aiming](http://new.tinygrab.com/089df54f8f96221073cb3f47916559a72b05372151.png)
+![Heading and Aiming]({{assets}}/images/heading-aiming.png)
 
 The diagram shows how the heading works.
 
