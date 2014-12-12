@@ -69,7 +69,6 @@ module.exports = (grunt) ->
         ]
 
       # build Ollie docs
-      # this is currently just cloning the Sphero docs, but can be updated later
       ollie_docs:
         options:
           platform: 'ollie'
@@ -79,7 +78,7 @@ module.exports = (grunt) ->
         files: [
           {
             expand: true
-            cwd: '<%= config.content %>/sphero'
+            cwd: '<%= config.content %>/ollie'
             src: ['*.html', '*.md']
             dest: '<%= config.dist %>/ollie'
           }
