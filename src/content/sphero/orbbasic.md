@@ -189,6 +189,7 @@ So far, that program would have been easier to write in MacroLab.
 But now let’s do something that we couldn’t do in MacroLab.
 Let’s make Sphero roll back and forth, over and over.
 To do this, add a goto command at the end to jump back to the beginning.
+
 Change line `50` to be:
 
     50 goto 10
@@ -199,7 +200,7 @@ Your new code should look like this:
     20 delay 2000
     30 goroll 180,50,2
     40 delay 2000
-    50 goroll 0,0,0
+    50 goto 10
 
 * Now we should see the ball rolling back and forth.
   Tap the Play button to see it work.
@@ -239,6 +240,7 @@ The Sphero will roll the same way as before.
 **So what’s the use of that?**
 Well, having something stored in memory can be very powerful.
 Let’s say we wanted to change it to roll 3 seconds instead of 2.
+
 Instead of changing all the `2000`s to `3000`s in the delay command, we just need to change our first line:
 
     5 d = 3000
@@ -252,6 +254,7 @@ Then each time, it will roll a little longer and a little farther.
 
 First, set the value back to `2000` in the first step.
 Then add a new line between `40` and `50`, that will add `500` milliseconds (half a second) to `d` each time.
+
 Using a step number of `45` lets us put it between `40` and `50`.
 
     45 d = d + 500
