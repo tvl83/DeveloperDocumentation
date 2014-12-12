@@ -119,7 +119,7 @@ And if you use Android, you can find it on the [Google Play store](https://play.
 
 With orbBasic, you can create more complex programs with a Basic-based text programming language.
 
-Run basic programs, create and prototype autonomous behaviour, and explore the inner workings of Sphero and Ollie.
+Run basic programs, create and prototype autonomous behaviour, and explore the inner workings of Sphero.
 
 If you have an iOS device, you can find orbBasic on the [App Store](https://itunes.apple.com/us/app/orbbasic-for-sphero/id647306205?mt=8).
 
@@ -181,7 +181,7 @@ properties.
 }
 ```
 
-When the app recieves the `appDidBecomeActive` event, it tells RobotKit to start looking for Spheros and Ollies.
+When the app recieves the `appDidBecomeActive` event, it tells RobotKit to start looking for Spheros.
 
 ```
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
@@ -225,12 +225,11 @@ Two methods then tell the robot to drive or stop the sphero when buttons are pre
 ```
 -(void)appWillResignActive:(NSNotification*)notification {
   [RKRobotDiscoveryAgent stopDiscovery];
-  [_robot disconnect]; // will sleep Ollie as well
+  [_robot disconnect];
 }
 ```
 
 Finally, when the app is closed, it will stop looking for new robots.
-It will also tell a connected Ollie to sleep.
 
 ## Stream Data with PhoneGap App
 

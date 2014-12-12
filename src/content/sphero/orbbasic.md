@@ -10,7 +10,7 @@ order: 1
 
 With OrbBasic you can create more complex programs using a text-based programming language.
 
-Run basic programs, create and prototype autonomous behaviour, and explore the inner workings of Sphero and Ollie.
+Run basic programs, create and prototype autonomous behaviour, and explore the inner workings of Sphero.
 
 Sphero MacroLab is a really cool app to give the Sphero commands, but it’s limited in what it can do.
 You give it a list of commands and it starts at the top and goes to the bottom, but it can’t do anything fancier than that.

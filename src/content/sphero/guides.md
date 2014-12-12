@@ -8,7 +8,7 @@ order: 2
 
 ## Introduction
 
-![Bluetooth](https://s3.amazonaws.com/images1.vat19.com/ollie/ollie-instant-connect-ios-android.jpg)
+![Bluetooth diagram](https://s3.amazonaws.com/ksr/assets/000/813/645/c74cae08dca728aac50b621eb363baf0_large.jpg?1375950346)
 
 Welcome to the wide world of robot control over Bluetooth.
 What follows is a description of our lightweight command and control protocol which you can use to build up applications offering a higher level of functionality.
@@ -23,8 +23,6 @@ It also expects you to be able to move between decimal and hexadecimal numbering
 
 You've heard about this for years (mostly with hands-free headsets) but what is it?
 In short, it's a low- cost, easily configurable data radio link that smartphones natively support (along with some desktops).
-
-![Bluetooth diagram](https://s3.amazonaws.com/ksr/assets/000/813/645/c74cae08dca728aac50b621eb363baf0_large.jpg?1375950346)
 
 Bluetooth implements what is called a stream interface – that is, data is sent and received in a constant stream of bytes.
 This is in contrast to a packetized data format which Ethernet, Wi-Fi and other communications protocols implement.
@@ -46,8 +44,6 @@ In 95% of all cases your app is the initiator (the client) and Sphero acts on th
 This is also known as synchronous communication and other than for a special mode Sphero can be placed in, he never asynchronously sends data back to the client (that is, without being specifically asked).
 
 ## Virtual Devices
-
-![ollie inside](http://cdn.slashgear.com/wp-content/uploads/2014/09/insides2.jpg)
 
 Sphero is an actual device (obviously) but in his core software, many virtual devices are implemented.
 This makes the separation of tasks more clear:

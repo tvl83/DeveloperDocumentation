@@ -405,7 +405,7 @@ Create a method to handle robot state changes:
 ```
 -(void)appWillResignActive:(NSNotification*)notification {
   [RKRobotDiscoveryAgent stopDiscovery];
-  [_robot disconnect]; // will sleep Ollie as well
+  [_robot disconnect];
 }
 ```
 
