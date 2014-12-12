@@ -6,8 +6,6 @@ order: 0
 
 ## Welcome!
 
-![Welcome](http://new.tinygrab.com/089df54f8fceac64c03b2800443221ab2a761b0f95.jpg)
-
 Here, you will find alll the information you need applications or games with Sphero.
 
 ## Feedback
