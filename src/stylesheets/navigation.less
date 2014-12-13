@@ -10,7 +10,7 @@ header.navigation {
   height: 100px;
   padding: 1.75em 1em 1em !important;
   position: relative;
-  z-index: 100;
+  z-index: 1;
 
   a {
     display: inline-block;
@@ -19,16 +19,21 @@ header.navigation {
     vertical-align: middle;
   }
 
-  .left {
+  .left-side {
     position: relative;
     top: -1.25em;
 
-    a {
-      margin-top: 0.3em;
-    }
+    a {margin-top: 0.3em}
+
+    @media (max-width: 480px) {text-align: center}
   }
 
-  .right {
+  .right-side {
+    position: relative;
+    top: -70px;
+
+    @media (max-width: 540px) {display: none}
+
     .home-button {
       background: #ffffff;
       border-radius: 0.25em;
@@ -45,8 +50,6 @@ header.navigation {
       }
     }
 
-    .edit-button {
-      float: right;
-    }
+    .edit-button {float: right}
   }
 }

@@ -19,18 +19,27 @@ body.static {.geometric-background}
       text-align: center;
       width: 100%;
 
-      .sphero-logo {
-        background: url("../images/sphero-product-logo.png") no-repeat center center;
-        height: 34px;
-        margin: 0 auto 2em;
-        width: 113px;
+      .sphero-selector {
+        float: left;
+        clear: both;
+
+        &:before {
+          background: url("../images/sphero-product-logo.png") no-repeat center center;
+          content: "";
+          padding: 4em;
+        }
       }
 
-      .ollie-logo {
-        background: url("../images/ollie-product-logo.png") no-repeat center center;
-        height: 38px;
-        margin: 0 auto 2em;
-        width: 80px;
+      .ollie-selector {
+        float: right;
+
+        @media (max-width: 480px) {padding-top: 5em}
+
+        &:before {
+          background: url("../images/ollie-product-logo.png") no-repeat center center;
+          content: "";
+          padding: 3em;
+        }
       }
 
       a {display: inline-block}
@@ -43,7 +52,7 @@ body.static {.geometric-background}
 
       a.ollie {
         background: url("../images/ollie.png") no-repeat center center;
-        height: 203px;
+        height: 215px;
         width: 287px;
       }
     }
