@@ -14,7 +14,7 @@ header.navigation {
 
   a {
     display: inline-block;
-    font-size: 1.125em;
+    font-size: 1.25em;
     margin-right: 1em;
     vertical-align: middle;
   }
@@ -50,6 +50,18 @@ header.navigation {
       }
     }
 
-    .edit-button {float: right}
+    .edit-button {
+      float: right;
+
+      .button {
+        background: @sphero-blue;
+        border:0;
+        padding: 5px 25px 7px;
+
+        &:hover {
+          background: @sphero-blue - 30;
+        }
+      }
+    }
   }
 }
