@@ -1,31 +1,144 @@
-.geometric-background {background: #bbb url("../images/texture-bg.png") repeat center center fixed}
+/* ----------------------------------------------------------------------------
+* Fonts
+*/
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,300);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:700,400,300);
 
-a,
-.menu a,
-.menu a:visited {
-  color: @sphero-blue;
+@font-face {
+  font-family: "Inconsolata";
+  src: url("../fonts/Inconsolata.otf") format("opentype");
 }
-
-a:hover,
-.menu a:hover {
-  color: #006d9f;
-}
-
-.menu a.active:after {
-  background: @sphero-blue;
-}
-
-.button, .button:visited {
-  background: @sphero-blue;
-  border:0;
-  padding: 5px 25px 7px;
-}
-
-.button:hover {
-  background: #007daf;
-}
-
-
+/* ----------------------------------------------------------------------------
+* Colors
+*/
 @sphero-blue: #00adef;
 @monokai-gray: #272822;
 @transparent-monokai: rgba(39,40,34,0);
+/* ----------------------------------------------------------------------------
+* Backgrounds
+*/
+.geometric-background {background: #bbb url("../images/texture-bg.png") repeat center center fixed}
+/* ----------------------------------------------------------------------------
+* Base
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+html,
+body {
+  height: 100%;
+}
+html {
+  overflow-x: hidden;
+}
+body,
+td,
+textarea,
+input {
+  font-family: Open Sans, sans-serif;
+  line-height: 1.6;
+  font-size: 14px;
+  color: #505050;
+}
+pre code {
+  color: #fff;
+}
+@media (max-width: 480px) {
+  body,
+  td,
+  textarea,
+  input {
+    font-size: 14px;
+  }
+}
+a {
+  text-decoration: none;
+}
