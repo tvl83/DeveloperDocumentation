@@ -3,6 +3,7 @@ word: Guides
 title: Guides
 order: 2
 ---
+# Guides
 
 # Bluetooth API
 

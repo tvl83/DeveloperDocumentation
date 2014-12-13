@@ -3,10 +3,11 @@ word: Home
 title: Home
 order: 0
 ---
+# Home
 
 ## Welcome!
 
-Here, you will find alll the information you need applications or games with Sphero.
+Here, you will find all the information you need applications or games with Sphero.
 
 ## Feedback
 

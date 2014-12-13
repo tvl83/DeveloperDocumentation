@@ -4,9 +4,9 @@ title: SDK's
 order: 1
 ---
 
-# Android
+# SDK's
 
-TODO: Update to lastest SDK
+# Android
 
 ## Overview
 
