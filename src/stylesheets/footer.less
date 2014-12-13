@@ -24,10 +24,11 @@ footer.site-footer {
   .footer-menu {
     font-size: 12px;
     font-weight: 700;
+    padding-top: 1em;
     text-transform: uppercase;
 
     .social {
-      margin: 0 0 1em !important;
+      margin: 0.35em 0 1em !important;
       padding: 10px 0 30px 0 !important;
 
       li {
@@ -96,6 +97,46 @@ footer.site-footer {
       }
     }
 
+    &.support-contact {
+      .footer-button {
+        background-color: #f7f7f7;
+        border: solid 1px #cccccc;
+        border-radius: 2px;
+        color: #009fdd;
+        display: block;
+        font-weight: 600;
+        font-size: 1.25em;
+        margin: 0 auto 5px;
+        padding: 0.25em;
+        text-align: center;
+        text-transform: uppercase;
+        width: 85%;
+      }
+
+      .vcard {
+        color: #666666;
+        display: block;
+        line-height: 2em;
+        margin-top: 1em;
+
+        span {
+          display: block;
+          text-align: center;
+
+          a {
+            font-size: 1.25em;
+            font-weight: 500;
+            text-transform: uppercase;
+          }
+        }
+
+        .hours {
+          font-size: 0.95em;
+          font-weight: 100
+        }
+      }
+    }
+
     .sub-menu {
       border-top: solid 1px #cccccc;
       list-style: none;
@@ -110,68 +151,24 @@ footer.site-footer {
     }
   }
 
-  .support-contact {
-    .footer-button {
-      background-color: #f7f7f7;
-      border: solid 1px #cccccc;
-      border-radius: 2px;
-      color: #009fdd;
-      display: block;
-      font-weight: 600;
-      font-size: 1em;
-      margin: 0 auto 5px;
-      padding: 0.25em;
-      text-align: center;
-      text-transform: uppercase;
-      width: 85%;
-    }
-
-    .vcard {
-      color: #666666;
-      display: block;
-      line-height: 1.7em;
-      margin-top: 1em;
-
-      span {
-        display: block;
-        text-align: center;
-
-        a {
-          font-weight: 500;
-          text-transform: uppercase;
-        }
-      }
-
-      .hours {
-        font-size: 0.75em;
-        font-weight: 100
-      }
-    }
-  }
-
   .site-info {
     border-top: solid 1px #cccccc;
     clear: both;
     color: #666666;
     font-size: 12px;
     font-weight: 100;
-    margin: 9em 2em 0;
+    margin-top: 9em;
     padding: 1.5em 0 3em;
     text-align: left;
 
     span {margin-right: 0.9em}
 
-    .footer_language_list {
-      select {display: none}
-    }
-
     .current {
-      float: right;
       display: inline-block;
     }
 
     .right {
-      span {font-weight: 500}
+      span {font-weight: 500; float: right;}
     }
   }
 }
