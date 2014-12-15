@@ -4,7 +4,7 @@ title: Getting Started
 order: 1
 ---
 
-# Overview
+# Getting Started
 
 ## What is Sphero?
 

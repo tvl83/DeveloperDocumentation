@@ -1,18 +1,3 @@
-###
-#
-# The Gruntfile for the Spark documentation
-# Created by Zach Supalla
-# https://www.spark.io/
-#
-# Use this gruntfile to:
-# - Assemble the static site (grunt build)
-# - Deploy locally for development (grunt server)
-#
-# Copyright (c) 2013 Spark Labs, Inc.
-# Licensed under a Creative Commons Attribution-Sharealike 3.0 License.
-#
-###
-
 module.exports = (grunt) ->
   gruntConfig =
     config:
@@ -42,6 +27,7 @@ module.exports = (grunt) ->
         options:
           ext: '.html'
           layout: 'static.hbs'
+          partials: ['src/content/partials/*.html']
 
         files: [
           {
@@ -58,6 +44,7 @@ module.exports = (grunt) ->
           platform: 'sphero'
           ext: '.html'
           layout: 'docs.hbs'
+          partials: ['src/content/partials/*.html']
 
         files: [
           {

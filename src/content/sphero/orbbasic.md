@@ -3,6 +3,7 @@ word: OrbBasic
 title: OrbBasic
 order: 1
 ---
+# orBasic
 
 ## Hello, OrBasic!
 
@@ -276,4 +277,3 @@ Tap the Play button.
 **The Sphero will roll back and forth, slightly farther each time.**
 
 Check out the [SPRK lessons](http://www.gosphero.com/education/) for further exercises with OrbBasic.
-

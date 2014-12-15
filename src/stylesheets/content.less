@@ -1,4 +1,19 @@
 /* ----------------------------------------------------------------------------
+* Main heading styles
+*/
+h1#home,
+h1#getting-started,
+h1#macrolab,
+h1#orbasic,
+h1#sdk-s,
+h1#guides,
+h1#reference,
+h1#showcase {
+  color: @sphero-blue;
+  font-size: 34px;
+}
+
+/* ----------------------------------------------------------------------------
  * Content styling
  */
 .content p,
@@ -339,6 +354,7 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
     padding-left: 0;
     padding-right: 0;
     width: 930px;
+    min-height: 59em; // set min-height to match static page by default
     max-width: none;
   }
   body:not(.no-literate) .content > p,
@@ -365,6 +381,9 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
     clear: both;
     width: 100%;
   }
+  body:not(.no-literate) .content > h1 {
+    margin: 0.75em auto 0;
+  }
   body:not(.no-literate) .content > pre,
   body:not(.no-literate) .content > blockquote {
     width: 380px;
@@ -372,6 +391,7 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
     padding-right: 20px;
     float: right;
     clear: right;
+    overflow: visible;
   }
   body:not(.no-literate) .content > pre + p,
   body:not(.no-literate) .content > blockquote + p,
@@ -519,6 +539,8 @@ code .comment {
   font-family: Menlo, monospace;
   font-size: 11px;
   color: #ffffff;
+
+  @media (max-width: 768px) {color: #000000}
 }
 
 .content table th {

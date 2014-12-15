@@ -1,10 +1,12 @@
-body.static {background: #bbb url("../images/texture-bg.png") repeat center center fixed}
+body.static {.geometric-background}
 
 .static {
   font-family: 'Raleway', sans-serif;
   padding: 0;
 
   section {
+    min-height: 54em; // set min-height on static pages so content is always above the fold
+
     .hero-text {
       text-align: center;
 
@@ -17,19 +19,104 @@ body.static {background: #bbb url("../images/texture-bg.png") repeat center cent
       text-align: center;
       width: 100%;
 
-      .sphero-logo {
-        background: url("../images/sphero-product-logo.png") no-repeat center center;
-        height: 34px;
-        margin: 0 auto 2em;
-        width: 113px;
+      .sphero-selector {
+        clear: both;
+        float: left;
+        width: 325px;
+
+        &:before {
+          background: url("../images/sphero-product-logo.png") no-repeat center center;
+          content: "";
+          padding: 4em;
+        }
       }
 
-      .ollie-logo {
-        background: url("../images/ollie-product-logo.png") no-repeat center center;
-        height: 38px;
-        margin: 0 auto 2em;
-        width: 80px;
+      .ollie-selector {
+        float: right;
+        width: 370px;
+
+        @media (max-width: 480px) {padding-top: 5em; padding-left: 6em;}
+
+        &:before {
+          background: url("../images/ollie-product-logo.png") no-repeat center center;
+          content: "";
+          padding: 3em;
+        }
       }
+
+      .oval-container {
+        left: 28px;
+        position: relative;
+        top: -15px;
+        -moz-transform: rotate(149deg);
+        -webkit-transform: rotate(149deg);
+        transform: rotate(149deg);
+        z-index: -1;
+
+        @media (max-width: 720px) {display: none}
+
+        .oval1 {
+          background: #5a5a5a;
+          -moz-border-radius: 100px;
+          -webkit-border-radius: 100px;
+          border-radius: 100px;
+          height: 105px;
+          left: 20px;
+          position: relative;
+          top: 395px;
+          -moz-transform: skew(50deg);
+          -webkit-transform: skew(50deg);
+          transform: skew(50deg);
+          transition: background 0.5s ease;
+          width: 105px;
+          z-index: 0;
+        }
+        .oval1.active {
+          background: #1f84bb !important;
+        }
+
+        .oval2 {
+          background: #a7a7a8;
+          -moz-border-radius: 100px;
+          -webkit-border-radius: 100px;
+          border-radius: 100px;
+          height: 155px;
+          left: 0px;
+          position: relative;
+          top: 260px;
+          -moz-transform: skew(50deg);
+          -webkit-transform: skew(50deg);
+          transform: skew(50deg);
+          transition: background 0.5s ease;
+          width: 155px;
+          z-index: -1;
+        }
+        .oval2.active {
+          background: #3eaad3 !important;
+        }
+
+        .oval3 {
+          background: #d0d0d0;
+          -moz-border-radius: 100px;
+          -webkit-border-radius: 100px;
+          border-radius: 100px;
+          height: 205px;
+          left: -20px;
+          position: relative;
+          top: 70px;
+          -moz-transform: skew(50deg);
+          -webkit-transform: skew(50deg);
+          transform: skew(50deg);
+          transition: background 0.5s ease;
+          width: 205px;
+          z-index: -2;
+        }
+        .oval3.active {
+          background: #77bfdb !important;
+        }
+      }
+
+      #ollie-ovals {top: -5px;left: 15px;}
 
       a {display: inline-block}
 
@@ -41,7 +128,7 @@ body.static {background: #bbb url("../images/texture-bg.png") repeat center cent
 
       a.ollie {
         background: url("../images/ollie.png") no-repeat center center;
-        height: 203px;
+        height: 215px;
         width: 287px;
       }
     }

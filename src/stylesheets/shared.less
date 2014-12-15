@@ -1,16 +1,26 @@
 /* ----------------------------------------------------------------------------
- * Fonts
- */
-@import url("http://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:700,400,300");
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600,700,300);
+* Fonts
+*/
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,300);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:700,400,300);
 
 @font-face {
-font-family: "Inconsolata";
-src: url("../fonts/Inconsolata.otf") format("opentype");
+  font-family: "Inconsolata";
+  src: url("../fonts/Inconsolata.otf") format("opentype");
 }
 /* ----------------------------------------------------------------------------
- * Base
- */
+* Colors
+*/
+@sphero-blue: #00adef;
+@monokai-gray: #272822;
+@transparent-monokai: rgba(39,40,34,0);
+/* ----------------------------------------------------------------------------
+* Backgrounds
+*/
+.geometric-background {background: #bbb url("../images/texture-bg.png") repeat center center fixed}
+/* ----------------------------------------------------------------------------
+* Base
+*/
 html,
 body,
 div,
@@ -130,9 +140,5 @@ pre code {
   }
 }
 a {
-  color: #2badad;
   text-decoration: none;
-}
-a:hover {
-  color: #228a8a;
 }

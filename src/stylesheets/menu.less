@@ -1,4 +1,5 @@
 .menubar {
+  .geometric-background;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -33,7 +34,7 @@
   .menubar {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 100px;
     bottom: 0;
     width: 230px;
     border-right: solid 1px #dfe2e7;
@@ -41,6 +42,7 @@
   .menubar.fixed {
     position: fixed;
     overflow-y: auto;
+    top: 0;
   }
   .menubar.fixed {
     -webkit-overflow-scrolling: touch;
@@ -68,6 +70,12 @@
 
 .menu ul.level-1 > li + li {
   margin-top: 20px;
+}
+
+.menu.section {
+  ul {
+    @media (max-width: 480px) {margin-top: 5em}
+  }
 }
 
 .menu a {
@@ -106,9 +114,11 @@
 }
 
 .menu a.level-0.active {
-  background: #eeeeee;
-  margin-left: -30px;
-  padding-left: 30px;
+  background: @sphero-blue;
+  border-radius: 3px;
+  margin-left: -10px;
+  padding-left: 10px;
+  width: 155px;
 }
 
 .menu a.level-1 {
@@ -160,4 +170,16 @@
   -webkit-border-radius: 2px;
   border-radius: 2px;
   background: #2badad;
+}
+.menu a.active:after {
+  background: @sphero-blue;
+}
+a,
+.menu a,
+.menu a:visited {
+  color: @sphero-blue;
+}
+a:hover,
+.menu a:hover {
+  color: @sphero-blue - 30;
 }

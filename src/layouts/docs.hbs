@@ -19,11 +19,9 @@
   <!-- Vendor theme mods -->
   <script src="{{assets}}/js/jquery-styling.js"></script>
   <script src="{{assets}}/js/prettify.js"></script>
-  <!-- <script src="{{assets}}/js/scrollspy.js"></script> -->
 
   <!-- Sphero theme mods -->
   <link href="{{assets}}/css/style.css" rel="stylesheet">
-  <script src="{{assets}}/js/animated-core.js"></script>
 
   <!-- Meta -->
   <meta content="Sphero" property="og:title">
@@ -33,17 +31,26 @@
 <body role="flatdoc">
 
   <div id="docs">
-    <div class="header">
-      <div class="left">
-        <a href="/">
-          <img src="{{assets}}/images/spheromark.png" id="logo">
-        </a>
+    <header class="large-12 columns navigation">
+      <div class="left-side">
+        <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
+          <a class="{{#compare platform "===" "sphero"}}active{{/compare}}" href="/sphero/start">Sphero</a>
+          <a class="{{#compare platform "===" "ollie"}}active{{/compare}}" href="/ollie/start">Ollie</a>
       </div>
-      <div class="right">
-        <a href="https://github.com/orbotix/DeveloperResources/tree/initial-site-content" class="icon"><i class="icon ion-social-github"></i></a>
-        <a href="https://github.com/orbotix/DeveloperResources/edit/initial-site-content/src/content/{{basename}}.md" class="button">Edit this page</a>
+      <div class="right-side">
+        <div class="edit-button">
+          <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{basename}}.md" class="button">Edit this page</a>
+        </div>
+        <div class="home-button">
+          <div class="ion-ios7-cart-outline"></div>
+          <a href="http://gosphero.com">Shop</a>
+        </div>
+        <div class="home-button">
+          <div class="ion-arrow-left-c"></div>
+          <a href="http://gosphero.com">gosphero.com</a>
+        </div>
       </div>
-    </div>
+    </header>
 
     <div class="content-root" data-spy="scroll" data-target="#toc">
       <div class="menubar">
@@ -66,6 +73,8 @@
       </div>
     </div>
   </div>
+
+  {{> footer}}
 
   <!-- Custom -->
   <script src="{{assets}}/js/docs.js"></script>

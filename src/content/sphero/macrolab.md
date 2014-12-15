@@ -3,6 +3,7 @@ word: MacroLab
 title: MacroLab
 order: 1
 ---
+#MacroLab
 
 ## Playing with Sphero and MacroLab
 
