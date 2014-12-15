@@ -35,7 +35,7 @@ body.static {.geometric-background}
         float: right;
         width: 370px;
 
-        @media (max-width: 480px) {padding-top: 5em}
+        @media (max-width: 480px) {padding-top: 5em; padding-left: 6em;}
 
         &:before {
           background: url("../images/ollie-product-logo.png") no-repeat center center;
@@ -43,6 +43,72 @@ body.static {.geometric-background}
           padding: 3em;
         }
       }
+
+      .oval-container {
+        left: 28px;
+        position: relative;
+        top: -15px;
+        transform: rotate(149deg);
+        z-index: -1;
+
+        @media (max-width: 720px) {display: none}
+
+        .oval1 {
+          background: #5a5a5a;
+          -moz-border-radius: 100px;
+          -webkit-border-radius: 100px;
+          border-radius: 100px;
+          height: 105px;
+          left: 20px;
+          position: relative;
+          top: 395px;
+          transform: skew(50deg);
+          transition: background 0.5s ease;
+          width: 105px;
+          z-index: 0;
+        }
+        .oval1.active {
+          background: #1f84bb !important;
+        }
+
+        .oval2 {
+          background: #a7a7a8;
+          -moz-border-radius: 100px;
+          -webkit-border-radius: 100px;
+          border-radius: 100px;
+          height: 155px;
+          left: 0px;
+          position: relative;
+          top: 260px;
+          transform: skew(50deg);
+          transition: background 0.5s ease;
+          width: 155px;
+          z-index: -1;
+        }
+        .oval2.active {
+          background: #3eaad3 !important;
+        }
+
+        .oval3 {
+          background: #d0d0d0;
+          -moz-border-radius: 100px;
+          -webkit-border-radius: 100px;
+          border-radius: 100px;
+          height: 205px;
+          left: -20px;
+          position: relative;
+          top: 70px;
+          transform: skew(50deg);
+          transition: background 0.5s ease;
+          width: 205px;
+          z-index: -2;
+        }
+        .oval3.active {
+          background: #77bfdb !important;
+        }
+      }
+
+      #ollie-ovals {top: -5px;left: 15px;}
 
       a {display: inline-block}
 
