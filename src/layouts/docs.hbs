@@ -29,55 +29,57 @@
 
 </head>
 <body role="flatdoc">
-
-  <div id="docs">
-    <header class="large-12 columns navigation">
-      <div class="left-side">
-        <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
-          <a class="{{#compare platform "===" "sphero"}}active{{/compare}}" href="/sphero/start">Sphero</a>
-          <a class="{{#compare platform "===" "ollie"}}active{{/compare}}" href="/ollie/start">Ollie</a>
+  <div id="site-wrapper">
+    <div id="site-canvas">
+      <div id="docs">
+        {{> mobile-nav}}
+        <header class="large-12 columns navigation always-show">
+          <div class="left-side">
+            <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
+            <a class="{{#compare platform "===" "sphero"}}active{{/compare}}" href="/sphero/start">Sphero</a>
+            <a class="{{#compare platform "===" "ollie"}}active{{/compare}}" href="/ollie/start">Ollie</a>
+          </div>
+          <div class="right-side">
+            <div class="edit-button">
+              <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{basename}}.md" class="button">Edit this page</a>
+            </div>
+            <div class="home-button">
+              <div class="ion-ios7-cart-outline"></div>
+              <a href="http://gosphero.com">Shop</a>
+            </div>
+            <div class="home-button">
+              <div class="ion-arrow-left-c"></div>
+              <a href="http://gosphero.com">gosphero.com</a>
+            </div>
+          </div>
+        </header>
+        <div class="content-root" data-spy="scroll" data-target="#toc">
+          <div class="menubar">
+            <div class="menu section" role="flatdoc-menu">
+              <ul>
+                {{#withSort pages "data.order"}}
+                <li><a href="/{{../platform}}/{{basename}}" class="level-0 {{#compare basename "===" ../basename}}active{{/compare}}">{{data.title}}</a></li>
+                {{/withSort}}
+              </ul>
+            </div>
+            <div class="menu section" role="flatdoc-menu">
+              <ul id="toc">
+              </ul>
+            </div>
+          </div>
+          <div role="flatdoc-content" class="content">
+            {{#markdown}}
+            {{> body}}
+            {{/markdown}}
+          </div>
+        </div>
       </div>
-      <div class="right-side">
-        <div class="edit-button">
-          <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{basename}}.md" class="button">Edit this page</a>
-        </div>
-        <div class="home-button">
-          <div class="ion-ios7-cart-outline"></div>
-          <a href="http://gosphero.com">Shop</a>
-        </div>
-        <div class="home-button">
-          <div class="ion-arrow-left-c"></div>
-          <a href="http://gosphero.com">gosphero.com</a>
-        </div>
-      </div>
-    </header>
-
-    <div class="content-root" data-spy="scroll" data-target="#toc">
-      <div class="menubar">
-        <div class="menu section" role="flatdoc-menu">
-          <ul>
-            {{#withSort pages "data.order"}}
-              <li><a href="/{{../platform}}/{{basename}}" class="level-0 {{#compare basename "===" ../basename}}active{{/compare}}">{{data.title}}</a></li>
-            {{/withSort}}
-          </ul>
-        </div>
-        <div class="menu section" role="flatdoc-menu">
-          <ul id="toc">
-          </ul>
-        </div>
-      </div>
-      <div role="flatdoc-content" class="content">
-        {{#markdown}}
-          {{> body}}
-        {{/markdown}}
-      </div>
+      {{> footer}}
     </div>
   </div>
 
-  {{> footer}}
-
   <!-- Custom -->
   <script src="{{assets}}/js/docs.js"></script>
-
+  <script src="{{assets}}/js/mobile-nav.js"></script>
 </body>
 </html>

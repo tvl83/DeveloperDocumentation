@@ -32,15 +32,11 @@ header.navigation {
     top: -1.25em;
 
     a {margin-top: 0.3em}
-
-    @media (max-width: 480px) {text-align: center}
   }
 
   .right-side {
     position: relative;
     top: -70px;
-
-    @media (max-width: 540px) {display: none}
 
     .home-button {
       background: #ffffff;
@@ -71,5 +67,11 @@ header.navigation {
         }
       }
     }
+  }
+}
+
+@media (max-width: 480px) {
+  header.navigation {
+    display: none;
   }
 }

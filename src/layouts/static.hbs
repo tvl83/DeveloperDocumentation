@@ -30,31 +30,33 @@
 </head>
 <body role="static" class="static">
 
-  <div id="static">
-    <header class="large-12 columns navigation">
-      <div class="left-side">
-        <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
-        <a href="/sphero/start">Sphero</a>
-        <a href="/ollie/start">Ollie</a>
-      </div>
-      <div class="right-side">
-        <div class="home-button">
-          <div class="ion-ios7-cart-outline"></div>
-          <a href="http://shop.gosphero.com">Shop</a>
+  <div id="site-wrapper">
+    <div id="site-canvas">
+      {{> mobile-nav}}
+      <header class="large-12 columns navigation">
+        <div class="left-side">
+          <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
+          <a href="/sphero/start">Sphero</a>
+          <a href="/ollie/start">Ollie</a>
         </div>
-        <div class="home-button">
-          <div class="ion-arrow-left-c"></div>
-          <a href="http://gosphero.com">gosphero.com</a>
+        <div class="right-side">
+          <div class="home-button">
+            <div class="ion-ios7-cart-outline"></div>
+            <a href="http://shop.gosphero.com">Shop</a>
+          </div>
+          <div class="home-button">
+            <div class="ion-arrow-left-c"></div>
+            <a href="http://gosphero.com">gosphero.com</a>
+          </div>
         </div>
-      </div>
-    </header>
-
-    {{> body}}
-
-    {{> footer}}
-
+      </header>
+      {{> body}}
+      {{> footer}}
+    </div>
   </div>
 
+  <!-- Custom -->
   <script src="{{assets}}/js/static.js"></script>
+  <script src="{{assets}}/js/mobile-nav.js"></script>
 </body>
 </html>
