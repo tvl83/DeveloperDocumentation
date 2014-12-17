@@ -74,8 +74,13 @@
 }
 
 .menu.section {
-  ul {
-    @media (max-width: 480px) {margin-top: 5em}
+  @media (max-width: 480px) {
+    ul {
+      margin-top: 5em;
+    }
+    ul#toc {
+      margin-top: 0;
+    }
   }
 }
 
@@ -83,6 +88,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  cursor: pointer;
   position: relative;
   display: block;
   padding-top: 1px;
@@ -117,9 +123,11 @@
 .menu a.level-0.active {
   background: @sphero-blue;
   border-radius: 3px;
+  color: #ffffff;
   margin-left: -10px;
+  margin-right: -10px;
   padding-left: 10px;
-  width: 155px;
+  width: auto;
 }
 
 .menu a.level-1 {
