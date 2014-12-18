@@ -12,31 +12,30 @@ header.navigation {
   position: relative;
   z-index: 1;
 
-  a {
-    display: inline-block;
-    font-size: 1.25em;
-    margin-right: 1em;
-    vertical-align: middle;
-
-    &.active {
-      background-color: @sphero-blue;
-      border-radius: 10px;
-      color: #ffffff;
-      font-weight: 600;
-      padding: 0.5em;
-    }
-  }
-
   .left-side {
     position: relative;
     top: -1.25em;
 
-    a {margin-top: 0.3em}
+    a {
+      display: inline-block;
+      font-size: 1.25em;
+      margin-right: 1em;
+      margin-top: 0.3em;
+      vertical-align: middle;
+
+      &.active {
+        background-color: @sphero-blue;
+        border-radius: 10px;
+        color: #ffffff;
+        font-weight: 600;
+        padding: 0.5em;
+      }
+    }
   }
 
   .right-side {
     position: relative;
-    top: -70px;
+    top: -66px;
 
     .home-button {
       background: #ffffff;
@@ -44,8 +43,8 @@ header.navigation {
       display: inline-block;
       float: right;
       margin-right: 0.45em;
-      padding: 0.15em 0.15em 0.15em 1.15em;
-      margin-top: 3px;
+      padding: 0.35em 1.15em;
+      font-size: 1.1em;
 
       .ion-arrow-left-c, .ion-ios7-cart-outline {
         color: #0693c9;
