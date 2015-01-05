@@ -417,16 +417,14 @@ You are now ready to start controlling and receiving information from your Spher
 
 **Run the application on an iOS Device, if all went well Sphero should have moved forward just a little.**
 
-#### Where is Sphero Going?
+#### Where is Ollie Going?
 
-If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
-What is interesting to note here is that Sphero just went in a *random* direction.
-The direction was not random at all, Sphero believe it or not has a *front* and a *back*.
+If you have successfully completed the quick start guide then Ollie should have moved after running the modified code.
 
-It is necessary for the application to determine what direction forward is for the user from the point of view of the ball.
-We call this step `Calibration` and it is **required** to properly drive Sphero in a predictable direction.
+It is necessary for the application to determine what direction forward is for the user from the point of view of the robot.
+We call this step `Calibration` and it is **required** to properly drive Ollie in a predictable direction.
 
-To learn more about calibration and using the `BackLED` to set Sphero's orientation please check out the `UISampler` Sample project.
+To learn more about calibration please check out the `RobotUISample` Sample project.
 
 # PhoneGap
 
