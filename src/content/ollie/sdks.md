@@ -356,13 +356,7 @@ For those cases we have made it possible to integrate our libraries into your ex
 The HelloWorld sample has all the necessary code needed to create and maintain a connection to Sphero, and can be used as a guide in best practices.
 In general you will need to:
 
-```
--(void)appDidBecomeActive:(NSNotification*)notification {
-  [RKRobotDiscoveryAgent startDiscovery];
-}
-```
-
-Call `startDiscovery` to look for connections:
+Make sure to import RobotKit.h and define required properties:
 
 ```
 #import <RobotKit/RobotKit.h>
@@ -370,7 +364,16 @@ Call `startDiscovery` to look for connections:
 @property (strong, nonatomic) RKConvenienceRobot* robot;
 ```
 
-Make sure to import RobotKit.h and define required properties:
+
+
+
+```
+-(void)appDidBecomeActive:(NSNotification*)notification {
+  [RKRobotDiscoveryAgent startDiscovery];
+}
+```
+
+Call `startDiscovery` to look for connections:
 
 ```
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
