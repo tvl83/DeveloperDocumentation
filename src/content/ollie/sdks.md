@@ -347,14 +347,11 @@ For those cases we have made it possible to integrate our libraries into your ex
 - Simply Drag `RobotKit.framework` into your project's framework folder.
 - Change your Deployment Target to 7.0
 
-**!NOTICE: It is important to note that you must also include:** `ExternalAccessory.framework`, `CoreMotion.framework`
-
 **!NOTICE: There are some linker changes that also must be made:** Change Build Settings -> Linking -> Other Linker Flags
 
 - lstdc++
 - all_load
 - ObjC
-- lsqlite3
 
 The HelloWorld sample has all the necessary code needed to create and maintain a connection to Sphero, and can be used as a guide in best practices.
 In general you will need to:
@@ -388,13 +385,11 @@ Listen for robot state changes:
       break;
     case RKRobotConnected:
       _robot = [[RKConvenienceRobot alloc] initWithRobot:n.robot ];
-      [_calibrateHandler setRobot:n.robot];
       break;
     case RKRobotFailedConnect:
       break;
     case RKRobotDisconnected:
       _robot = nil;
-      [_calibrateHandler setRobot:nil];
       break;
   }
 }
