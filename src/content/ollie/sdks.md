@@ -334,15 +334,6 @@ There is a general assumption that you are using the latest version of Mac OSX, 
 
 ## Installing the Sphero iOS SDK
 
-There are two ways to integrate the Sphero SDK into your project.
-You can start a new project that is preconfigured to communicate with Sphero or you can add the RobotKit and RobotUIKit to an existing project.
-Starting a new project is the fastest way to begin developing applications that utilize and control Sphero.
-
-### Integrating Into an Existing Project
-
-There are always those cases where you already developed an awesome game or app and want to integrate Sphero functionality or controllability into the project.
-For those cases we have made it possible to integrate our libraries into your existing project, including some nifty pre-built user interface tools.
-
 - Download the current [Sphero iOS SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master).
 - Simply Drag `RobotKit.framework` into your project's framework folder.
 - Change your Deployment Target to 7.0
