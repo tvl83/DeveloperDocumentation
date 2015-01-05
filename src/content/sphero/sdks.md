@@ -8,7 +8,7 @@ order: 1
 
 # Android
 
-This Guide walks you through the basics of creating mobile apps for Android that leverage the Orbotix Sphero SDK.
+This guide walks you through the basics of creating mobile apps for Android that leverage the Orbotix Sphero SDK.
 The examples in this guide were built using Java and although we strive to support **ALL** the various Android devices available, but there are a few that are known to cause problems.
 Visit our developer forum for more information.
 The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Sphero can do, respond to, and keep track of.
@@ -542,7 +542,7 @@ https://github.com/rossingram/Sphero-Phonegap-SDK
 
 ## Overview
 
-This Guide walks you through the basics of creating Mac apps that leverage the Orbotix Sphero SDK.
+This guide walks you through the basics of creating Mac apps that leverage the Orbotix Sphero SDK.
 The examples in this guide were built using Objective-C and have been tested with the current released OSX and current version of Xcode.
 The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Sphero can d , respond to, and keep track of.
 
