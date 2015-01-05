@@ -323,7 +323,7 @@ Once the DocSets have been copied, restart Xcode and they will then appear in th
 
 ## Installing Xcode
 
-    Notice: The Sphero iOS SDK works with iOS 5.0+
+    Notice: The Sphero iOS SDK works with iOS 7.0+
 
 Before you begin to develop applications that interface with Sphero on iOS, you will need to install the iOS developer tools.
 There is a general assumption that you are using the latest version of Mac OSX, our software is designed to take advantage of all the most current technologies that are offered but it is possible that it will work on older frameworks and technologies.
@@ -343,7 +343,7 @@ For those cases we have made it possible to integrate our libraries into your ex
 
 - Download the current [Sphero iOS SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master).
 - Simply Drag `RobotKit.framework` into your project's framework folder.
-- Change your Deployment Target to 6.0
+- Change your Deployment Target to 7.0
 
 **!NOTICE: It is important to note that you must also include:** `ExternalAccessory.framework`, `CoreMotion.framework`
 
