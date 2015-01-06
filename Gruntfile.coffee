@@ -44,7 +44,6 @@ module.exports = (grunt) ->
           platform: 'sphero'
           ext: '.html'
           layout: 'docs.hbs'
-          data: '<%= config.content %>/ollie/objectivec.json'
           partials: ['src/content/partials/*.html']
 
         files: [
@@ -61,7 +60,6 @@ module.exports = (grunt) ->
         options:
           platform: 'ollie'
           ext: '.html'
-          data: '<%= config.content %>/ollie/objectivec.json'
           layout: 'docs.hbs'
 
         files: [
@@ -73,16 +71,19 @@ module.exports = (grunt) ->
           }
         ]
 
-      # build getting started guide
+      # build getting started docs
       getting_started:
         options:
-          ext: '.ejs'
+          platform: 'getting_started'
+          ext: '.html'
           layout: 'docs.hbs'
 
         files: [
           {
-            src: 'src/content/getting-started/getting-started-ios.md'
-            dest: 'views/getting-started-ios.ejs'
+            expand: true
+            cwd: '<%= config.content %>/getting-started'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/getting-started'
           }
         ]
 

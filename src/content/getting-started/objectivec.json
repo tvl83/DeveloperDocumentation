@@ -1,0 +1,5 @@
+{
+	"import": "#import <RobotKit/RobotKit.h>",
+	"robot_property": "@property (nonatomic, strong) RKConvenienceRobot robot;",
+	"start_discovery": "[RKRobotDiscoveryAgent startDiscovery];"
+}
