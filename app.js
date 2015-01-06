@@ -34,12 +34,12 @@ app.get('/session_test', function(req, res) {
 	console.log(req.session.something);
 });
 
-app.use('/build', function(req, res, next) {
-	res.writeHead(301,
-	  {Location: 'http://'+req.headers.host+req.path}
-	);
-	res.end();
-});
+// app.use('/build', function(req, res, next) {
+// 	res.writeHead(301,
+// 	  {Location: 'http://'+req.headers.host+req.path}
+// 	);
+// 	res.end();
+// });
 
 function queryParserForSession(request) {
 	if (request.query.language != undefined) {
