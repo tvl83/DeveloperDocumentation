@@ -44,6 +44,7 @@ module.exports = (grunt) ->
           platform: 'sphero'
           ext: '.html'
           layout: 'docs.hbs'
+          data: '<%= config.content %>/ollie/objectivec.json'
           partials: ['src/content/partials/*.html']
 
         files: [
@@ -60,6 +61,7 @@ module.exports = (grunt) ->
         options:
           platform: 'ollie'
           ext: '.html'
+          data: '<%= config.content %>/ollie/objectivec.json'
           layout: 'docs.hbs'
 
         files: [
