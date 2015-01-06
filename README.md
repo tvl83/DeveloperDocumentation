@@ -28,9 +28,9 @@ This documentation uses Grunt and Assemble to build and push documentation updat
 
 The documentation will be located in the `build` directory. If you would like to host this documentation locally, try:
 
-`grunt server`
+`node app`
 
-This will set up a Connect server and load the local documentation in a web browser. If you make changes, the browser should automatically refresh.
+Point your browswer to [http://localhost:3000](http://localhost:3000)
 
 ### Deployment
 
