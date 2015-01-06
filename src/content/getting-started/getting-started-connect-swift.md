@@ -1,7 +1,6 @@
 
 ## Resources - Class Documentation
 
-<%= something %>
 The class documentation is located in api/ as DocSets for use with Xcode.
 It can be installed by following the Sphero SDK installation steps below.
 If that does not work or you would like to install the DocSets manually you can simply copy them into the DocSets directory used by Xcode.

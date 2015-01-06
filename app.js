@@ -19,12 +19,31 @@ app.set('view engine', 'ejs');
 
 app.use('/', function(req, res, next) {
 	session = req.session;
-	console.log(session.language);
 	queryParserForSession(req);
 	next();
 });
 
 app.get('/getting-started', function (req, res) {
+	handleGettingStarted("getting-started-connect", req, res);
+});
+
+app.get('/getting-started-ide', function(req, res) {
+	handleGettingStarted("getting-started-ide", req, res);
+});
+
+app.get('/getting-started-connection', function(req, res) {
+	handleGettingStarted("getting-started-connect", req, res);
+});
+
+app.get('/getting-started-project', function(req, res) {
+	handleGettingStarted("getting-started-project", req, res);
+});
+
+app.get('/getting-started-basiccommands', function(req, res) {
+	handleGettingStarted("getting-started-basiccommands", req, res);
+});
+
+function handleGettingStarted(path, req, res) {
 	var pageString = "getting-started-connect-objc";
 
 	//Prevent browser caching causing language switching to break
@@ -34,7 +53,7 @@ app.get('/getting-started', function (req, res) {
 
 	if (session.language != undefined) {
 		console.log("Serving page for language " + session.language);
-		pageString = "getting-started-connect-" + session.language;
+		pageString = path + "-" + session.language;
 	}
 
 	if (req.query.language != undefined) {
@@ -46,18 +65,7 @@ app.get('/getting-started', function (req, res) {
 	} else {
 		res.sendfile('build/getting-started/' + pageString + '/index.html');
 	}
-});
-
-app.get('/session_test', function(req, res) {
-	console.log(req.session.something);
-});
-
-// app.use('/build', function(req, res, next) {
-// 	res.writeHead(301,
-// 	  {Location: 'http://'+req.headers.host+req.path}
-// 	);
-// 	res.end();
-// });
+}
 
 function queryParserForSession(request) {
 	if (request.query.language != undefined) {
@@ -66,8 +74,6 @@ function queryParserForSession(request) {
 			console.log("Setting language to " + session.language);
 		}
 	}
-
-	console.log(request.query.language + " " + session.language);
 }
 
 function isLanguageValid(request) {
