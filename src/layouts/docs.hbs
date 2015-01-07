@@ -23,6 +23,10 @@
   <!-- Sphero theme mods -->
   <link href="{{assets}}/css/style.css" rel="stylesheet">
 
+  <!-- Bootstrap -->
+  <link href="{{assets}}/css/bootstrap.css" rel="stylesheet">
+  <script src="{{assets}}/js/bootstrap.min.js"></script>
+
   <!-- Meta -->
   <meta content="Sphero" property="og:title">
   <meta content="Documentation for Sphero" name="description">
@@ -68,8 +72,8 @@
               </ul>
             </div>
           </div>
-          <div role="flatdoc-content" class="content">
           {{> header}}
+          <div role="flatdoc-content" class="content">
             {{#markdown}}
             {{> body}}
             {{/markdown}}
