@@ -1,11 +1,11 @@
 <ul class="nav nav-pills" style="list-style-type: none; margin-left: 10px;">
-  <li role="presentation" class="active"><a onclick="$('#content').load('/getting-started/getting-started-ide-android/index.html')">IDE Setup</a></li>
-  <li role="presentation"><a onclick="$('#content').load('/getting-started/getting-started-project-android/index.html')">Project Setup</a></li>
-  <li role="presentation"><a onclick="$('#content').load('/getting-started/getting-started-connect-android/index.html')">Connection</a></li>
-  <li role="presentation"><a onclick="$('#content').load('/getting-started/getting-started-basiccommands-android/index.html')">Basic Commands</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentDocument('ide');">IDE Setup</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentDocument('project');">Project Setup</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentDocument('connect');">Connection</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentDocument('basiccommands');">Basic Commands</a></li>
 </ul>
 <ul class="nav nav-pills" style="list-style-type: none; margin-left: 10px; margin-top: 10px">
-  <li role="presentation" class="active"><a onclick="$('#content').load('/getting-started/getting-started-connect-objc/index.html')">Objective-C</a></li>
-  <li role="presentation"><a onclick="$('#content').load('/getting-started/getting-started-connect-swift/index.html')">Swift</a></li>
-  <li role="presentation"><a onclick="$('#content').load('/getting-started/getting-started-connect-android/index.html')">Android</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentLanguage('objc')">Objective-C</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentLanguage('swift')">Swift</a></li>
+  <li role="presentation"><a data-toggle="tab" onclick="setCurrentLanguage('android')">Android</a></li>
 </ul>
