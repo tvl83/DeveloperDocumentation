@@ -103,7 +103,7 @@ module.exports = (grunt) ->
           {
             expand: true
             cwd: '<%= config.content %>/getting-started'
-            src: ['getting-started.html']
+            src: ['getting-started.md']
             dest: '<%= config.dist %>/'
           }
         ]
