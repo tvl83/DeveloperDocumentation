@@ -63,3 +63,8 @@ Derived from Flatdoc (http://ricostacruz.com/flatdoc)
   prettyPrint();
 
 })(jQuery);
+
+function bodyLoad() {
+  var d = document.getElementById(document.title.split("|")[1].trim());
+  d.className = d.className + " active";
+}
