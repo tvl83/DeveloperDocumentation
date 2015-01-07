@@ -23,6 +23,10 @@
   <!-- Sphero theme mods -->
   <link href="{{assets}}/css/style.css" rel="stylesheet">
 
+  <!-- Bootstrap -->
+  <link href="{{assets}}/css/bootstrap.css" rel="stylesheet">
+  <script src="{{assets}}/js/bootstrap.min.js"></script>
+
   <!-- Meta -->
   <meta content="Sphero" property="og:title">
   <meta content="Documentation for Sphero" name="description">
@@ -36,6 +40,7 @@
         <header class="large-12 columns navigation always-show">
           <div class="left-side">
             <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
+            <a href="/getting-started">Getting Started</a>
             <a class="{{#compare platform "===" "sphero"}}active{{/compare}}" href="/sphero/start">Sphero</a>
             <a class="{{#compare platform "===" "ollie"}}active{{/compare}}" href="/ollie/start">Ollie</a>
           </div>
@@ -67,6 +72,7 @@
               </ul>
             </div>
           </div>
+          {{> header}}
           <div role="flatdoc-content" class="content">
             {{#markdown}}
             {{> body}}

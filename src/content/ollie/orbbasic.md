@@ -1,7 +1,7 @@
 ---
 word: OrbBasic
 title: OrbBasic
-order: 1
+order: 3
 ---
 # OrBasic
 
@@ -17,6 +17,11 @@ Sphero MacroLab is a really cool app to give the Sphero commands, but it’s lim
 You give it a list of commands and it starts at the top and goes to the bottom, but it can’t do anything fancier than that.
 To make programs that can do more, you need an app called OrbBasic.
 OrbBasic uses a text-based programming language and really increases what you can do with a Sphero.
+
+### Install OrbBasic
+
+* [iOS](https://itunes.apple.com/us/app/orbbasic-for-sphero/id647306205?mt=8)
+* [Android](https://play.google.com/store/apps/details?id=com.orbotix.orbbasic&hl=en)
 
 ### What is OrbBasic?
 

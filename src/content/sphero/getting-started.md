@@ -133,7 +133,7 @@ You can can read more about orbBasic [here](/orbbasic).
 
 ### Install Xcode
 
-**Notice**: The Sphero iOS SDK works with iOS 5.0+.
+**Notice**: The Sphero iOS SDK works with iOS 7.0+.
 
 Before you begin developing applications to interface with Sphero on iOS, you'll need to install the iOS developer tools.
 This guide assumes you're using the latest version of OS X.
@@ -155,7 +155,7 @@ Open the `ButtonDrive.xcodeproj` Xcode project.
 
 Once it's open, drag `RobotKit.framework` into your project's framework folder.
 
-If it isn't already, change the Deployment Target to 6.0.
+If it isn't already, change the Deployment Target to 7.0.
 
 Click **Run** to build and run the application.
 If your Sphero is paired with your phone, you'll be able to control it with the on-screen d-pad buttons.

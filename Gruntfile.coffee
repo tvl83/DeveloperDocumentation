@@ -71,6 +71,22 @@ module.exports = (grunt) ->
           }
         ]
 
+      # build getting started docs
+      getting_started:
+        options:
+          platform: 'getting_started'
+          ext: '.html'
+          layout: 'docs.hbs'
+
+        files: [
+          {
+            expand: true
+            cwd: '<%= config.content %>/getting-started'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/getting-started'
+          }
+        ]
+
     clean:
       dest: ['<%= config.dist %>/**']
 
@@ -148,6 +164,16 @@ module.exports = (grunt) ->
         replacements: [{
           from: '../'
           to: ''
+        }]
+      tags:
+        src: 'views/getting-started-ios/index.ejs'
+        overwrite: true
+        replacements: [{
+          from: '&lt;%=',
+          to: '<%='
+        },{
+          from: '%&gt;',
+          to: '%>'
         }]
 
   grunt.initConfig gruntConfig

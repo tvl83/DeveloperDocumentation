@@ -1,7 +1,7 @@
 ---
 word: SDK's
 title: SDK's
-order: 1
+order: 2
 ---
 
 # SDK's
@@ -321,7 +321,7 @@ Once the DocSets have been copied, restart Xcode and they will then appear in th
 
 ## Installing Xcode
 
-    Notice: The Sphero iOS SDK works with iOS 5.0+
+    Notice: The Sphero iOS SDK works with iOS 7.0+
 
 Before you begin to develop applications that interface with Sphero on iOS, you will need to install the iOS developer tools.
 There is a general assumption that you are using the latest version of Mac OSX, our software is designed to take advantage of all the most current technologies that are offered but it is possible that it will work on older frameworks and technologies.
@@ -330,30 +330,29 @@ There is a general assumption that you are using the latest version of Mac OSX, 
 
 ## Installing the Sphero iOS SDK
 
-There are two ways to integrate the Sphero SDK into your project.
-You can start a new project that is preconfigured to communicate with Sphero or you can add the RobotKit and RobotUIKit to an existing project.
-Starting a new project is the fastest way to begin developing applications that utilize and control Sphero.
-
-### Integrating Into an Existing Project
-
-There are always those cases where you already developed an awesome game or app and want to integrate Sphero functionality or controllability into the project.
-For those cases we have made it possible to integrate our libraries into your existing project, including some nifty pre-built user interface tools.
-
 - Download the current [Sphero iOS SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master).
 - Simply Drag `RobotKit.framework` into your project's framework folder.
-- Change your Deployment Target to 6.0
-
-**!NOTICE: It is important to note that you must also include:** `ExternalAccessory.framework`, `CoreMotion.framework`
+- Change your Deployment Target to 7.0
 
 **!NOTICE: There are some linker changes that also must be made:** Change Build Settings -> Linking -> Other Linker Flags
 
 - lstdc++
 - all_load
 - ObjC
-- lsqlite3
 
 The HelloWorld sample has all the necessary code needed to create and maintain a connection to Sphero, and can be used as a guide in best practices.
 In general you will need to:
+
+Make sure to import RobotKit.h and define required properties:
+
+```
+#import <RobotKit/RobotKit.h>
+
+@property (strong, nonatomic) RKConvenienceRobot* robot;
+```
+
+
+
 
 ```
 -(void)appDidBecomeActive:(NSNotification*)notification {
@@ -362,14 +361,6 @@ In general you will need to:
 ```
 
 Call `startDiscovery` to look for connections:
-
-```
-#import <RobotKit/RobotKit.h>
-
-@property (strong, nonatomic) RKConvenienceRobot* robot;
-```
-
-Make sure to import RobotKit.h and define required properties:
 
 ```
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
@@ -384,13 +375,11 @@ Listen for robot state changes:
       break;
     case RKRobotConnected:
       _robot = [[RKConvenienceRobot alloc] initWithRobot:n.robot ];
-      [_calibrateHandler setRobot:n.robot];
       break;
     case RKRobotFailedConnect:
       break;
     case RKRobotDisconnected:
       _robot = nil;
-      [_calibrateHandler setRobot:nil];
       break;
   }
 }
@@ -415,16 +404,14 @@ You are now ready to start controlling and receiving information from your Spher
 
 **Run the application on an iOS Device, if all went well Sphero should have moved forward just a little.**
 
-#### Where is Sphero Going?
+#### Where is Ollie Going?
 
-If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
-What is interesting to note here is that Sphero just went in a *random* direction.
-The direction was not random at all, Sphero believe it or not has a *front* and a *back*.
+If you have successfully completed the quick start guide then Ollie should have moved after running the modified code.
 
-It is necessary for the application to determine what direction forward is for the user from the point of view of the ball.
-We call this step `Calibration` and it is **required** to properly drive Sphero in a predictable direction.
+It is necessary for the application to determine what direction forward is for the user from the point of view of the robot.
+We call this step `Calibration` and it is **required** to properly drive Ollie in a predictable direction.
 
-To learn more about calibration and using the `BackLED` to set Sphero's orientation please check out the `UISampler` Sample project.
+To learn more about calibration please check out the `RobotUISample` Sample project.
 
 # PhoneGap
 

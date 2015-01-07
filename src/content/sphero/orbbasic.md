@@ -18,6 +18,11 @@ You give it a list of commands and it starts at the top and goes to the bottom, 
 To make programs that can do more, you need an app called OrbBasic.
 OrbBasic uses a text-based programming language and really increases what you can do with a Sphero.
 
+### Install OrbBasic
+
+* [iOS](https://itunes.apple.com/us/app/orbbasic-for-sphero/id647306205?mt=8)
+* [Android](https://play.google.com/store/apps/details?id=com.orbotix.orbbasic&hl=en)
+
 ### What is OrbBasic?
 
 OrbBasic is a programming language.
