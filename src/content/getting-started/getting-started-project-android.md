@@ -2,14 +2,11 @@
 # Project Setup
 
 ## Importing the Sample Project
-### Download the Sample Project
-
-Download and unzip the [Sample]({{assets}}/bin/Android-DriveSample.zip)
 
 ### Open the Sample Project
  - Open android studio 
  - Select the "**Open an existing Android Studio project**" option on the main menu
- - Navigate to the "**DriveSample**" directory that was unzipped
+ - Navigate to the "**DriveSample**" directory that was unzipped when you downloaded the Robot SDK
 
 ### Installing Android API 12 and Android API 18
 *Note: You may skip this step if you already have Android API 12 and Android API 18 installed*
