@@ -83,6 +83,15 @@ If you use a custom gradle build script or do not have all libs included as depe
  - Navigate to the **libs** folder in the Android Studio Project view
  - Right click (or option click on Mac) the **RobotLibrary.jar** and select "**Add as Library**"
 
+### Modify the AndroidManifest.xml File.
+
+Before running the application, you will need to add permissions to use Bluetooth,
+
+```xml
+<uses-permission android:name="android.permission.BLUETOOTH" />
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+```
+
 You are now ready to use the Ollie SDK!
 
 
@@ -91,75 +100,39 @@ You are now ready to use the Ollie SDK!
 
 ### Connect to an Ollie
 
-The RobotLibrary includes a view called `SpheroConnectionView` which will handle connecting to a Sphero.
-When the view sends an `onRobotConnected` event you are ready to send commands.
+ - Implement the `RobotChangedStateListener` interface. This will have you implement the `RobotChangedStateListener#changedState(Robot robot, RobotChangedStateNotificationType type)` method
 
-- To use the `SpheroConnectionView` add the following code to your Activity's xml layout file
-
-```
-<LinearLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:background="#ff888888" >
-
-      <orbotix.view.connection.SpheroConnectionView
-          android:id="@+id/sphero_connection_view"
-          android:layout_width="fill_parent"
-          android:layout_height="fill_parent"
-          android:background="#FFF" />
-
-</LinearLayout>
+```java
+@Override
+public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+    switch (type) {
+        case Connecting:
+            break;
+        case FailedConnect:
+            break;
+        case Connected:
+            break;
+        case Disconnected:
+            break;
+    }
+}
 ```
 
-- This will show the `SpheroConnectionView` when the Activity starts.
-- It is important to put the view last in a frame layout, so when you hide the rest of your layout will be visible.
-- Also, you must create the listener for the `SpheroConnectionView`.
-- This will fire events to let you know the user's interaction with the `SpheroConnectionView` and then you can do what you please.
+ - With Ollie, all that you have to do is start discovery with the `DiscoveryAgentLE#startDiscovery()` method. A good place to do this is the `Activity#onStart()` method, but there may be other places in your application where starting discovery is better suited
 
-This code snippet shows how to create the listener and how to hide the connection view when a Sphero is connected.
-
+```java
+@Override
+protected void onStart() {
+    super.onStart();
+    DiscoveryAgentLE.getInstance().startDiscovery();
+}
 ```
-// Find Sphero Connection View from layout file
-mSpheroConnectionView = (SpheroConnectionView) findViewById(R.id.sphero_connection_view);
 
-// This event listener will notify you when these events occur, it is up to you what you want to do during them
-ConnectionListener mConnectionListener = new ConnectionListener() {
+ - When you are close enough, the robot will send the connecting and then connected message to your `RobotChangedStateListener#changedState(Robot robot, RobotChangedStateNotificationType type)` method. When you receive the connected message, you are now connected to an Ollie!
 
-  @Override
-  // The method to run when a Sphero is connected
-  public void onConnected(Robot sphero) {
+ *Note: Discovery in most cases will stop automatically after connecting to one robot. If you have changed the max connected robots value via `DiscoveryAgent#setMaxConnectedRobots(int maxConnectedRobots)` method, you will manually need to stop discovery using `DiscoveryAgent#stopDiscovery()`.*
 
-    // Hides the Sphero Connection View
-    mSpheroConnectionView.setVisibility(View.INVISIBLE);
-
-    // Cache the Sphero so we can send commands to it later
-    mSphero = (Sphero) sphero;
-
-    // You can add commands to set up the ball here, these are some examples
-    // Set the back LED brightness to full
-    mSphero.setBackLEDBrightness(1.0f);
-    // Set the main LED color to blue at full brightness
-    mSphero.setColor(0, 0, 255);
-  }
-
-  // The method to run when a connection fails
-  @Override
-  public void onConnectionFailed(Robot sphero) {
-  // let the SpheroConnectionView handle or hide it and do something here...
-  }
-
-  // Ran when a Sphero connection drops, such as when the battery runs out or Sphero sleeps
-  @Override
-  public void onDisconnected(Robot sphero) {
-    // Starts looking for robots
-    mSpheroConnectionView.startDiscovery();
-  }
-};
-
-// Add the listener to the Sphero Connection View
-mSpheroConnectionView.addConnectionListener(mConnectionListener);
-```
+ *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
 
 ### Events
 
