@@ -94,8 +94,6 @@ Before running the application, you will need to add permissions to use Bluetoot
 
 You are now ready to use the Ollie SDK!
 
-
-
 ## Using the Ollie Android SDK
 
 ### Connect to an Ollie
@@ -134,150 +132,117 @@ protected void onStart() {
 
  *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
 
-### Events
+### Caching a Convenience Robot
+When Ollie connects, you will get the Java object `RobotLE`. This class encompasses the basics of a Bluetooth LE robot, but does not do much "Ollie-specific" functionality. To get some neat built-in functionality, we will create an `Ollie` object when we receive the connected notification.
 
-- These events are useful feedback from the user.
-  For example, you could use the `onConnectionFailed(Robot sphero)` method to prompt the user to check that the Sphero is eligible for connection then retrying the connection.
+```java
 
-- You must also prepare the bluetooth adapter on each start of the app, so that the app is aware of Sphero's nearby so that it can display them and connect to them.
-  It is best practice to do this inside of the `onResume()` method.
+private Ollie _ollie;
 
-```
+{...}
+
 @Override
-protected void onResume() {
-  // Required by android, this line must come first
-    super.onResume();
-    // This line starts the discovery process which finds Sphero's which can be connected to
-    mSpheroConnectionView.startDiscovery();
-}
-```
-
-- You must ensure that the robot is cleaned up properly by ensuring discovery is cancelled, and disconnecting the robot.
-  This is best done in the `onPause()` method in your activity.
-  **Do not forget to stop discovery as this consumes a lot of resources on the device!**
-
-```
-@Override
-protected void onPause() {
-    super.onPause();
-    BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
-    if (mSphero != null) {
-        mSphero.disconnect(); // Disconnect Robot properly
+public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+    switch (type) {
+        case Connecting:
+            break;
+        case FailedConnect:
+            break;
+        case Connected:
+            _ollie = new Ollie(robot);
+            break;
+        case Disconnected:
+            break;
     }
 }
 ```
 
 ### Add Code to Blink the RGB LED.
 
-Now it is time to add code that sends a command to Sphero.
-In this case we will blink the RGB LED blue.
-As opposed to previous versions of the SDK, commands are now sent via the Sphero object that you cached in the previous step.
-Commands are now sent using the dot method notation, as all objects in Java.
-Here is the code for the `blink()` method sends the SetRGBLEDCommand to blink LED.
+Now it's time to actually do something with Ollie! For this example, we will blink the RGB LED blue. As opposed to previous versions of the Android SDK, commands are now sent through one of three ways:
+
+#### Convenience Robot Function
+
+The `Ollie` class contains the method `Ollie#setLed(float red, float green, float blue)`. We can set the RGB LED with this method. The valid values here are 0.0f to 1.0f.
 
 ```java
-private void blink(final boolean lit){
 
-    if(mSphero != null){
+private Handler _handler = new Handler(Looper.getMainLooper());
 
-        //If not lit, send command to show blue light, or else, send command to show no light
-        if(lit){
-          mSphero.setColor(0, 0, 0);                               // 1
-        }else{
-          mSphero.setColor(0, 0, 255);                             // 2
-        }
+{...}
 
-        //Send delayed message on a handler to run blink again
-        final Handler handler = new Handler();                       // 3
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                blink(!lit);
-            }
-        }, 1000);
+private void blink(final boolean lit) {
+    if(lit) {
+      _ollie.setLed(0.0f, 0.0f, 0.0f);                              
+    } 
+    else {
+      _ollie.setLed(0.0f, 0.0f, 1.0f);                             
     }
+
+    _handler.postDelayed(new Runnable() {
+        public void run() {
+            blink(!lit);
+        }
+    }, 1000);
 }
 ```
 
-1. This line will send a command to turn off the LED.
-   `mSphero` is the Robot object that will receive the command, and last three parameters turn of the red, green, and blue components of the LED.
-   A 0 value for the color component will set the LED components brightness off.
-2. This line will send a command to turn on the blue LED at full brightness.
-   255 is full brightness, and is only set for the blue component of the LED.
-3. This line creates a Handler that is used to post a delayed call to the `blink()` method after 1 second with the lit parameter inverted, so the next call toggles the LED on or off.
+#### Convenience Robot Send Command
 
-### Modify the AndroidManifest.xml File.
-
-Before running the application, you will need to add permissions to use bluetooth,
-
-```xml
-<uses-permission android:name="android.permission.BLUETOOTH" />
-<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-```
-
-### Run On a Device.
-
-- Run the Application on a supported Android Device.
-  **Turn Bluetooth ON**.
-
-- At this point in time you will want to Pair your Android Device to Sphero from within the settings.
-
-### Sending Roll Commands
-
-- Using Roll Commands to **Move** Sphero.
-
-- Using Roll Commands to **Stop** Sphero.
-
-So, you got the LED to blink… that's Awesome!
-But let's also take advantage of the amazing technology inside Sphero and drive the ball around a little bit.
-In order to move Sphero you will need to send a RollCommand.
-The RollCommand takes two parameters.
-
-1.  Heading in degrees from 0° to 360°
-2.  Speed from 0.0 to 1.0.
-
-For example, a heading of 90° at a speed of 0.5 will tell Sphero to turn clockwise 90° at half speed (1.0 is full speed).
-Once this command is issued Sphero will continue at this heading and speed until it hits something or runs out of range, so you will need to stop the ball using the RollCommand and `sendStop()`.
-
-Now, it's time to modify the code.
-Let's send Sphero forward at full speed for 2 seconds.
-So, add the following method to the main activity.
+The `Ollie` class contains the method `Ollie#sendCommand(DeviceCommand command)`. We can make a `RGBLEDOutputCommand` and send it with this method.
 
 ```java
-private void drive() {
-  if(mRobot != null) {
-    // Send a roll command to Sphero so it goes forward at full speed.
-    mSphero.drive(0.0f, 1.0f);                                           // 1
 
-    // Send a delayed message on a handler
-    final Handler handler = new Handler();                               // 2
-    handler.postDelayed(new Runnable() {
+private Handler _handler = new Handler(Looper.getMainLooper());
 
-        @Override
+{...}
+
+private void blink(final boolean lit) {
+    if(lit) {
+      _ollie.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 0.0f));                              
+    } 
+    else {
+      _ollie.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 1.0f));                             
+    }
+
+    _handler.postDelayed(new Runnable() {
         public void run() {
-          // Send a stop to Sphero
-          mSphero.stop()                                               // 3
+            blink(!lit);
         }
-
-    }, 2000);
-  }
+    }, 1000);
 }
 ```
 
-1. This line sends the heading of 0° and the maximum speed of 1.0 to Sphero.
-2. This line creates the handle that is used to send the delayed stop command.
-3. This line tells the ball to stop
+#### Robot Send Command
 
-Next add a call to `drive()` in the `onActivityResult()` below the call to `blink()`.
+The `Robot` class (the object we get from the `RobotChangedStateListener#changedState(Robot robot, RobotChangedStateNotificationType type)` method or by using `Ollie#getRobot()`) contains the method `Robot#sendCommand(DeviceCommand command)`. We can make a `RGBLEDOutputCommand` and send it with this method.
 
-**Run the application on an Android Device, if all went well Sphero should have moved forward just a little.**
+```java
 
-**Where is Sphero going?**:
-If you have successfully completed the quick start guide then Sphero should have moved after running the modified code.
-What is interesting to note here is that Sphero just went in a *random* direction.
-The direction was not random at all, Sphero believe it or not has a *front* and a *back*.
-It is necessary for the application to determine what direction forward is for the user from the point of view of the ball.
-We call this step `Calibration` and it is **required** to properly drive Sphero in a predictable direction.
-To learn more about calibration and using the `BackLED` to set Sphero's orientation please check out the `UISampler` Sample project.
+private Handler _handler = new Handler(Looper.getMainLooper());
+private Robot _robot; // Assume this is set when the robot is connected
+
+{...}
+
+private void blink(final boolean lit) {
+    if(lit) {
+      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 0.0f));                              
+    } 
+    else {
+      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 1.0f));                             
+    }
+
+    _handler.postDelayed(new Runnable() {
+        public void run() {
+            blink(!lit);
+        }
+    }, 1000);
+}
+```
+
+### What's next?
+
+Well, that's up to you. You can explore what the `Ollie` object can do for you, or you can dive right in and start using `Robot#sendCommand(DeviceCommand command)`. If you ever get stuck, don't hesitate to post a question on our [StackOverflow Tag](http://stackoverflow.com/questions/tagged/sphero-api) 
 
 # iOS
 
