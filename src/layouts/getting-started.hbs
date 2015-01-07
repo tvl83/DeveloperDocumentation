@@ -9,7 +9,7 @@
 
   <!-- jQuery -->
   <script src="{{assets}}/js/jquery-1.11.1.min.js"></script>
-<link href="{{assets}}/css/style.css" rel="stylesheet">
+
   <!-- Let me embed vines -->
   <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
 
@@ -21,7 +21,7 @@
   <script src="{{assets}}/js/prettify.js"></script>
 
   <!-- Sphero theme mods -->
-  
+  <link href="{{assets}}/css/style.css" rel="stylesheet">
 
   <!-- Bootstrap -->
   <link href="{{assets}}/css/bootstrap.css" rel="stylesheet">
@@ -72,10 +72,11 @@
               </ul>
             </div>
           </div>
+          {{> header}}
           <div role="flatdoc-content" class="content" id="content">
-            {{#markdown}}
-            {{> body}}
-            {{/markdown}}
+          {{#markdown}}
+          {{> body}}
+          {{/markdown}}
           </div>
         </div>
       </div>
