@@ -2,11 +2,11 @@
 # Project Setup
 
 ## Importing the Sample Project
-### Download the Ollie Sample Project
+### Download the Sample Project
 
-Download and unzip the [Sample]({{assets}}/bin/Android-OllieDriveSample.zip)
+Download and unzip the [Sample]({{assets}}/bin/Android-DriveSample.zip)
 
-### Open the Ollie Sample Project
+### Open the Sample Project
  - Open android studio 
  - Select the "**Open an existing Android Studio project**" option on the main menu
  - Navigate to the "**DriveSample**" directory that was unzipped
@@ -17,25 +17,25 @@ Download and unzip the [Sample]({{assets}}/bin/Android-OllieDriveSample.zip)
 
 ![QSG-libs.png]({{assets}}/images/android-studio-setup-1.png)
 
- - If Android Studio did not prompt you to install the extra APIs and the project does not build, ensure that the "**SDK Platform**" is installed in the Android SDK Manager for API 12 and API 18. You can reach this by going to Tools > Android > SDK Manager inside of Android Studio
+ - If Android Studio did not prompt you to install the extra APIs and the project does not build, ensure that the "**SDK Platform**" is installed in the Android SDK Manager for API 12 and API 18. You can reach this by going to *Tools > Android > SDK Manager* inside of Android Studio
 
 ### Build the project
  - Press the play button on the top bar just to the right of the current build configuration button
 
- *Note: Sphero and Ollie applications will not work in the emulator due to the dependency on Bluetooth*
+ *Note: Robot applications will not work in the emulator due to the dependency on Bluetooth*
 
-## Create a New Project in <br /> Android Studio for Ollie
+## Create a New Project in <br /> Android Studio
 
 If you are creating a new project it is important to take special notice to the Android API Level and the Java compliance level.
-The Ollie SDK currently supports:
+The Robot SDK currently supports:
 
  - Android API level 18 (Android 4.3.1) or greater.
  - Java language compliance level 6.0(1.6) or greater.
 
 ### Making a new project
- - Creating a new Ollie project is the same as creating a new Android application but also with the **RobotLibrary.jar** included in the project.
+ - Creating a new project is the same as creating a new Android application but also with the **RobotLibrary.jar** included in the project.
 
-### Integrating the Ollie SDK Into Your Project
+### Integrating the Robot SDK Into Your Project
 
 You can get a copy of the **RobotLibrary.jar** from the [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK) or by using the copy inside of the libs folder in the Drive Sample project.
 
@@ -57,4 +57,4 @@ Before running the application, you will need to add permissions to use Bluetoot
 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 ```
 
-You are now ready to use the Ollie SDK!
+You are now ready to use the Robot SDK!
