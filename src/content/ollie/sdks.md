@@ -10,160 +10,129 @@ order: 2
 
 ## Overview
 
-This Guide walks you through the basics of creating mobile apps for Android that leverage the Orbotix Sphero SDK.
-The examples in this guide were built using Java and although we strive to support **ALL** the various Android devices available, but there are a few that are known to cause problems.
+This guide walks you through the basics of creating mobile apps for Android that leverage the Sphero Ollie SDK.
+We strive to support **ALL** the various Android devices available, but there are a few that are known to cause problems.
 Visit our developer forum for more information.
-The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Sphero can do, respond to, and keep track of.
+The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Ollie can do.
 
 *In general this guide will walk you through:*
 
- - [Installing the SDK](https://github.com/orbotix/Sphero-Android-SDK#installing-the-sphero-android-sdk)
- - [Changing Sphero's Color](https://github.com/orbotix/Sphero-Android-SDK#add-code-to-blink-the-rgb-led)
- - [Using the Roll Command to move Sphero](https://github.com/orbotix/Sphero-Android-SDK#sendings-roll-commands)
+ - [Installing the SDK](#android-installing-the-sdk)
+ - [Connecting to Ollie](#using-the-ollie-android-sdk-connect-to-an-ollie)
+ - [Changing Sphero's Color](#using-the-ollie-android-sdk-add-code-to-blink-the-rgb-led)
+ - [Using the Roll Command to move Sphero](#using-the-ollie-android-sdk-sending-roll-commands)
 
-### Before We Begin - Installing Eclipse
+### Before We Begin - Installing Android Studio
 
-Notice: The Sphero Android SDK works with Android 2.2+ and Java Compiler Level 6.0(1.6)+
+Notice: The Ollie Android SDK works with Android 4.3+ and Java Compiler Level 7.0(1.7)+
 
-Before you begin to develop applications that interface with Sphero on Android, you will need to install the Android developer tools.
-We often use Eclipse but there are many other well written Android IDEs out there and these same basic steps are most often still applicable.
+Before you begin to develop applications that interface with Ollie on Android, you will need to install the Android developer tools and
+an IDE. In this guide we will use Android Studio since Eclipse is no longer supported for Android development. There are many other well written Android IDEs out there and these configuration steps are most often still applicable.
 
- - Install the [Android SDK](http://developer.android.com/sdk/index.html) and the [Eclipse Plugin](http://developer.android.com/sdk/eclipse-adt.html)
+ - Install [JDK 1.7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+ - Install [Android Studio and Android SDK](http://developer.android.com/sdk/index.html)
 
-## Installing the Sphero Android SDK
+## Installing the SDK
 
- - Download the latest version of the [Sphero Android SDK](https://github.com/orbotix/Sphero-Android-SDK/zipball/master)
+ - Download the latest version of the [Ollie Android SDK](https://github.com/orbotix/Sphero-Android-SDK/zipball/master)
 
 **You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK)**
 
-## Importing a Sphero Sample Project
+## Importing the Sample Project
+### Download the Ollie Sample Project
 
-To import a sample into Eclipse, right-click in the project explorer, or click the File menu and select "**Import…**"
+Download and unzip the [Sample]({{assets}}/bin/Android-OllieDriveSample.zip)
 
-   ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image004.png)
+### Open the Ollie Sample Project
+ - Open android studio 
+ - Select the "**Open an existing Android Studio project**" option on the main menu
+ - Navigate to the "**DriveSample**" directory that was unzipped
 
-Select the 'Existing Project into Workspace' option under the 'General' tab.
-Then browse to the folder that holds the HelloWorld Sample.
-It will be in the directory where you downloaded the Sphero SDK.
+### Installing Android API 12 and Android API 18
+*Note: You may skip this step if you already have Android API 12 and Android API 18 installed*
+ - If you have not already installed Android API 12 and Android API 18, then the bottom box of Android Studio will tell you "**failed to find target**" and will provide you a link to install the missing frameworks. You will need to follow this step for both "**android-18**" and "**android-12**"
 
-   ![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image005.png)
+![QSG-libs.png]({{assets}}/images/android-studio-setup-1.png)
 
-At this point there should be no "red X's" or "red !'s" next to the sample project you just imported.
-If there aren't any, you are now ready to run it on an Android device.
-Keep in mind that **Sphero projects cannot run inside of the emulator and will fail compilation**.
-If you have problems try these fixes.
+ - If Android Studio did not prompt you to install the extra APIs and the project does not build, ensure that the "**SDK Platform**" is installed in the Android SDK Manager for API 12 and API 18. You can reach this by going to Tools > Android > SDK Manager inside of Android Studio
 
-1. Right click the project, and go to Properties.
-   Under the **Android** tab on the left, the check box next to Android 2.2 (or above) should be checked.
-   If you don't see any Android options, you need to download the Eclipse ADT plugin.
+### Build the project
+ - Press the play button on the top bar just to the right of the current build configuration button
 
-![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image006.png)
-
-2. Right click the project, and go to Properties.
-   Under the **Java Compiler** tab on the left, the compiler level should be 1.6 or above.
-
-3. If the problem still persists, try a "Project -> Clean" in the file menu.
-   60% of the time, this works all the time.
-
-## Create a New Android Project <br /> in Eclipse With Sphero
+## Create a New Project in <br /> Android Studio for Ollie
 
 If you are creating a new project it is important to take special notice to the Android API Level and the Java compliance level.
-The Sphero SDK currently supports:
+The Ollie SDK currently supports:
 
- - Android API level 8 (Android 2.2) or greater.
+ - Android API level 18 (Android 4.3.1) or greater.
  - Java language compliance level 6.0(1.6) or greater.
 
-### Integrating the Sphero Libraries Into Your Project
+### Making a new project
+ - Creating a new Ollie project is the same as creating a new Android application but also with the **RobotLibrary.jar** included in the project.
 
-You can start a new Sphero project using the libraries in the library folder or start a project using one of the sample projects from the samples folder.
-This quick start guide describes how to start a new project.
+### Integrating the Ollie SDK Into Your Project
 
-To start, create a new Android project in your Eclipse workspace.
-Then, place the libs folder from the SDK's library folder into your Android project's folder.
+You can get a copy of the **RobotLibrary.jar** from the [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK) or by using the copy inside of the libs folder in the Drive Sample project.
 
-![QSG-libs.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image002.png)
+If you made a project from scratch with Android Studio or are using the default gradle configuration:
+ - Place the **RobotLibrary.jar** inside of the **libs** folder of your project. It is safe to make the folder if it does not exist
 
-### Setting the Dependency To RobotLibrary.jar
+If you use a custom gradle build script or do not have all libs included as dependencies:
+ - Place the **RobotLibrary.jar** inside of the **libs** folder of your project. It is safe to make the folder if it does not exist
+ - In Android Studio, using the project explorer, change the explorer tab to Project if it is not so already
+ - Navigate to the **libs** folder in the Android Studio Project view
+ - Right click (or option click on Mac) the **RobotLibrary.jar** and select "**Add as Library**"
 
-Eclipse should automatically add RobotLibrary.jar to the Android Dependencies folder.
-But, if it does not, set the dependency in the project's properties in the Properties->Java Build Path-> Libraries dialog.
-This will allow your project access to all the public method names in RobotLibrary.jar.
+### Modify the AndroidManifest.xml File.
 
- ![QSG-jar-depend.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image003.png)
+Before running the application, you will need to add permissions to use Bluetooth,
 
-## Using the Sphero Android SDK
-
-### Add Code to Connect to a Sphero
-
-The RobotLibrary includes a view called `SpheroConnectionView` which will handle connecting to a Sphero.
-When the view sends an `onRobotConnected` event you are ready to send commands.
-
-- To use the `SpheroConnectionView` add the following code to your Activity's xml layout file
-
-```
-<LinearLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:background="#ff888888" >
-
-      <orbotix.view.connection.SpheroConnectionView
-          android:id="@+id/sphero_connection_view"
-          android:layout_width="fill_parent"
-          android:layout_height="fill_parent"
-          android:background="#FFF" />
-
-</LinearLayout>
+```xml
+<uses-permission android:name="android.permission.BLUETOOTH" />
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 ```
 
-- This will show the `SpheroConnectionView` when the Activity starts.
-- It is important to put the view last in a frame layout, so when you hide the rest of your layout will be visible.
-- Also, you must create the listener for the `SpheroConnectionView`.
-- This will fire events to let you know the user's interaction with the `SpheroConnectionView` and then you can do what you please.
+You are now ready to use the Ollie SDK!
 
-This code snippet shows how to create the listener and how to hide the connection view when a Sphero is connected.
 
+
+## Using the Ollie Android SDK
+
+### Connect to an Ollie
+
+ - Implement the `RobotChangedStateListener` interface. This will have you implement the `RobotChangedStateListener#changedState(Robot robot, RobotChangedStateNotificationType type)` method
+
+```java
+@Override
+public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+    switch (type) {
+        case Connecting:
+            break;
+        case FailedConnect:
+            break;
+        case Connected:
+            break;
+        case Disconnected:
+            break;
+    }
+}
 ```
-// Find Sphero Connection View from layout file
-mSpheroConnectionView = (SpheroConnectionView) findViewById(R.id.sphero_connection_view);
 
-// This event listener will notify you when these events occur, it is up to you what you want to do during them
-ConnectionListener mConnectionListener = new ConnectionListener() {
+ - With Ollie, all that you have to do is start discovery with the `DiscoveryAgentLE#startDiscovery()` method. A good place to do this is the `Activity#onStart()` method, but there may be other places in your application where starting discovery is better suited
 
-  @Override
-  // The method to run when a Sphero is connected
-  public void onConnected(Robot sphero) {
-
-    // Hides the Sphero Connection View
-    mSpheroConnectionView.setVisibility(View.INVISIBLE);
-
-    // Cache the Sphero so we can send commands to it later
-    mSphero = (Sphero) sphero;
-
-    // You can add commands to set up the ball here, these are some examples
-    // Set the back LED brightness to full
-    mSphero.setBackLEDBrightness(1.0f);
-    // Set the main LED color to blue at full brightness
-    mSphero.setColor(0, 0, 255);
-  }
-
-  // The method to run when a connection fails
-  @Override
-  public void onConnectionFailed(Robot sphero) {
-  // let the SpheroConnectionView handle or hide it and do something here...
-  }
-
-  // Ran when a Sphero connection drops, such as when the battery runs out or Sphero sleeps
-  @Override
-  public void onDisconnected(Robot sphero) {
-    // Starts looking for robots
-    mSpheroConnectionView.startDiscovery();
-  }
-};
-
-// Add the listener to the Sphero Connection View
-mSpheroConnectionView.addConnectionListener(mConnectionListener);
+```java
+@Override
+protected void onStart() {
+    super.onStart();
+    DiscoveryAgentLE.getInstance().startDiscovery();
+}
 ```
+
+ - When you are close enough, the robot will send the connecting and then connected message to your `RobotChangedStateListener#changedState(Robot robot, RobotChangedStateNotificationType type)` method. When you receive the connected message, you are now connected to an Ollie!
+
+ *Note: Discovery in most cases will stop automatically after connecting to one robot. If you have changed the max connected robots value via `DiscoveryAgent#setMaxConnectedRobots(int maxConnectedRobots)` method, you will manually need to stop discovery using `DiscoveryAgent#stopDiscovery()`.*
+
+ *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
 
 ### Events
 
@@ -531,7 +500,7 @@ https://github.com/rossingram/Sphero-Phonegap-SDK
 
 ## Overview
 
-This Guide walks you through the basics of creating Mac apps that leverage the Orbotix Sphero SDK.
+This guide walks you through the basics of creating Mac apps that leverage the Orbotix Sphero SDK.
 The examples in this guide were built using Objective-C and have been tested with the current released OSX and current version of Xcode.
 The goal of this developer guide along with sample code is to give the developer a taste of the wide variety of things Sphero can d , respond to, and keep track of.
 
