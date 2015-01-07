@@ -1,6 +1,8 @@
 var currentLanguage = "objc";
 var currentDocument = "ide";
 
+var hasUpdatedContent = false;
+
 function setCurrentLanguage(_language) {
   currentLanguage = _language;
   updateContent();
@@ -13,5 +15,16 @@ function setCurrentDocument(_currentDocument) {
 }
 
 function updateContent() {
-  $('#content').load('/getting-started/getting-started-' + currentDocument + '-' + currentLanguage + '/index.html');
+	if (!hasUpdatedContent) {
+		var documentLink = document.getElementById("default_document");
+		documentLink.className = documentLink.className + " active";
+
+		var languageLink = document.getElementById("default_language");
+		languageLink.className = languageLink.className + " active";
+		hasUpdatedContent = true;
+
+		console.log("setting default seelctions... " + languageLink.className);
+	}
+
+	$('#content').load('/getting-started/getting-started-' + currentDocument + '-' + currentLanguage + '/index.html');
 }
