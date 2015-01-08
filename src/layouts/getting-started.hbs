@@ -36,7 +36,11 @@
   <div id="site-wrapper">
     <div id="site-canvas">
       <div id="docs">
-        {{> mobile-nav}}
+        <div class="menu-button ion-navicon"></div>
+          <header id="site-menu">
+            {{> site-nav}}
+          </header>
+        </div>
         <header class="large-12 columns navigation always-show">
           <div class="left-side">
             <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
