@@ -36,7 +36,11 @@
   <div id="site-wrapper">
     <div id="site-canvas">
       <div id="docs">
-        {{> mobile-nav}}
+        <div class="menu-button ion-navicon"></div>
+          <header id="site-menu">
+            {{> site-nav}}
+          </header>
+        </div>
         <header class="large-12 columns navigation always-show">
           <div class="left-side">
             <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
@@ -58,13 +62,7 @@
         <div class="content-root" data-spy="scroll" data-target="#toc">
           <div class="menubar" id="left_nav">
             <div class="menu section" role="flatdoc-menu">
-              <ul class="nav nav-pils nav-stacked">
-                <li><a href="/getting-started" class="level-0" id="Getting-Started">getting started</a></li>
-                <li><a href="/macrolab" class="level-0" id="MacroLab">macrolab</a></li>
-                <li><a href="/orbbasic" class="level-0" id="OrbBasic">orbbasic</a></li>
-                <li><a href="/reference" class="level-0" id="Reference">reference</a></li>
-                <li><a href="/showcase" class="level-0" id="Showcase">showcase</a></li>
-              </ul>
+              {{> site-nav}}
             </div>
           </div>
           {{> header}}
