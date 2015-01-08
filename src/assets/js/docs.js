@@ -64,19 +64,16 @@ Derived from Flatdoc (http://ricostacruz.com/flatdoc)
 
 })(jQuery);
 
-function bodyLoad() {
-  console.log(document.title);
-  var d = document.getElementById(document.title.split("|")[1].trim());
-  d.className = d.className + " active";
-
-  // d = document.getElementById("getting-started-control");
-  // d.parentNode.removeChild(d);
-
-  console.log("Body load");
-}
+// function bodyLoad() {
+//   console.log(document.title);
+//   var d = document.getElementById(document.title.split("|")[1].trim());
+//   d.className = d.className + " active";
+// }
 
 $(document).ready(function(){    
-  if (document.title.split("|")[1].trim() === 'Getting Started') {
+  var title = document.title.split("|")[1].trim().split(" ").join("-");
+  if (title === 'Getting-Started') {
     $("#getting-started-control").removeClass("hidden");
   }
+  $("#"+title).addClass("active");
 });

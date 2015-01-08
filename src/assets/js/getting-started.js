@@ -22,8 +22,6 @@ function updateContent() {
 		var languageLink = document.getElementById("default_language");
 		languageLink.className = languageLink.className + " active";
 		hasUpdatedContent = true;
-
-		console.log("setting default seelctions... " + languageLink.className);
 	}
 
 	$('#content').load('/getting-started/getting-started-' + currentDocument + '-' + currentLanguage + '/index.html');
