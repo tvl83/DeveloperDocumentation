@@ -1,105 +1,105 @@
 
-## Resources - Class Documentation
+# Connecting to Robots
 
-The class documentation is located in api/ as DocSets for use with Xcode.
-It can be installed by following the Sphero SDK installation steps below.
-If that does not work or you would like to install the DocSets manually you can simply copy them into the DocSets directory used by Xcode.
-It is located at
-
-        ~/Library/Developer/Shared/Documentation/DocSets/
-
-Once the DocSets have been copied, restart Xcode and they will then appear in the Documentation section of the Organizer.
-
-## Installing Xcode
-
-    Notice: The Sphero iOS SDK works with iOS 7.0+
-
-Before you begin to develop applications that interface with Sphero on iOS, you will need to install the iOS developer tools.
-There is a general assumption that you are using the latest version of Mac OSX, our software is designed to take advantage of all the most current technologies that are offered but it is possible that it will work on older frameworks and technologies.
-
-- Download and Install the current version of [Xcode](http://developer.apple.com/technologies/xcode.html)
-
-## Installing the Sphero iOS SDK
-
-- Download the current [Sphero iOS SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master).
-- Simply Drag `RobotKit.framework` into your project's framework folder.
-- Change your Deployment Target to 7.0
-
-**!NOTICE: There are some linker changes that also must be made:** Change Build Settings -> Linking -> Other Linker Flags
-
-- lstdc++
-- all_load
-- ObjC
-
-The HelloWorld sample has all the necessary code needed to create and maintain a connection to Sphero, and can be used as a guide in best practices.
-In general you will need to:
-
-Make sure to import RobotKit.h and define required properties:
+## Implement the Listener
+Implement the method `handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification)` to be able to handle robot state change events.
 
 ```
-@import RobotKit
-
-var robot
-```
-
-
-
-
-```
--(void)appDidBecomeActive:(NSNotification*)notification {
-  [RKRobotDiscoveryAgent startDiscovery];
+func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
+    switch (notification.type) {
+    case .Connecting:
+        break
+    case .Connected:
+        break
+    case .Disconnected:
+        break
+    default:
+    }
 }
 ```
 
-Call `startDiscovery` to look for connections:
+## Register with the Discovery Agent
+Register with the `RKRobotDiscoveryAgent` to get robot state events
 
 ```
-[[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
+RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "handleRobotStateChangeNotification:")
 ```
 
-Listen for robot state changes:
+## Start Discovery
+All that you have to do now is start discovery with the `RKRobotDiscoveryAgent.startDiscovery()` method. 
+*Note: Due to limitation in the Apple Bluetooth stack, you cannot start discovery in `override func viewDidLoad()`
 
 ```
--(void) handleRobotStateChangeNotification:(RKRobotChangedStateNotification *) n{
-  switch(n.type){
-    case RKRobotConnecting:
-      break;
-    case RKRobotConnected:
-      _robot = [[RKConvenienceRobot alloc] initWithRobot:n.robot ];
-      break;
-    case RKRobotFailedConnect:
-      break;
-    case RKRobotDisconnected:
-      _robot = nil;
-      break;
+func appDidBecomeActive(note: NSNotification) {
+    RKRobotDiscoveryAgent.startDiscovery()
+}
+```
+
+ - When you are close enough, the robot will send the connecting and then connected message to your `handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification)` method. When you receive the connected message, you are now connected to a robot!
+
+ *Note: Discovery in most cases will stop automatically after connecting to one robot. If you have changed the max connected robots value via `RKRobotDiscoveryAgent.sharedAgent().maxConnectedRobots` method, you will manually need to stop discovery using `RKRobotDiscoveryAgent.stopDiscovery()`.*
+
+ *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
+
+## Caching a Convenience Robot
+When robot connects, you will get an object with the type `RKRobotBase`. This object encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
+
+```
+
+var robot: RKConvenienceRobot!
+
+{...}
+
+func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
+    let noteRobot = notification.robot
+    
+    switch (notification.type) {
+    case .Connecting:
+        break
+    case .Connected:
+        if (noteRobot.isKindOfClass(RKRobotLE)) {
+          self.robot = RKOllie(robot: noteRobot)
+        } else if (noteRobot.isKindOfClass(RKRobotClassic)) {
+          self.robot = RKSphero(robot: noteRobot)
+        }
+        break
+    case .Disconnected:
+        break
+    default:
+    }
+}
+```
+
+## Disconnecting a Robot
+When you are done with the robot, it is important to disconnect it so that the next application can use it. There are two methods to accomplish this:
+
+### Convenience Robot Method
+If you have an `RKConvenienceRobot`, disconnection is accomplished by calling the method `disconnect()` and the robot will take care of the rest for you.
+
+```
+var robot: RKConvenienceRobot!  // Assume that this is set when the robot connects
+
+{...}
+
+func disconnectRobot() {
+  self.robot.disconnet()
+}
+```
+
+### Robot Method
+
+If you have a `RKRobotBase`, disconnection is a bit more manual. `RKRobotLE` objects need to have `sleep()` called on them as to avoid leaving the processor awake while the robot is not connected. Disconnection will be automatic from the sleep. `RKRobotClassic` objects can just have `disconnect()` called on them.
+
+```
+var robot: RKRobotBase! // Assume this is set when the robot connects
+
+{...}
+
+func disconnectRobot() {
+  if (robot.isKindOfClass(RKRobotLE)) {
+    robot.sleep()
+  } else if (robot.isKindOfClass(RKRobotClass)) {
+    robot.disconnect()
   }
 }
 ```
-
-Create a method to handle robot state changes:
-
-```
--(void)appWillResignActive:(NSNotification*)notification {
-  [RKRobotDiscoveryAgent stopDiscovery];
-  [_robot disconnect]; // will sleep Ollie as well
-}
-```
-
-Do not forget to Disconnect from the Robot when the app closes, otherwise next time you start a connection it will already be in use.
-
-```
-  [_robot driveWithHeading:0.0 andVelocity:0.5];
-```
-
-You are now ready to start controlling and receiving information from your Sphero, simply add the following to move the sphero forward:
-
-**Run the application on an iOS Device, if all went well Sphero should have moved forward just a little.**
-
-#### Where is Ollie Going?
-
-If you have successfully completed the quick start guide then Ollie should have moved after running the modified code.
-
-It is necessary for the application to determine what direction forward is for the user from the point of view of the robot.
-We call this step `Calibration` and it is **required** to properly drive Ollie in a predictable direction.
-
-To learn more about calibration please check out the `RobotUISample` Sample project.

@@ -2,7 +2,7 @@
 
 *Note: The Robot SDK works with iOS 7.0+*
 
-## Installing an IDE and the Android SDK
+## Installing Xcode
 
 Before you begin to develop applications that interface with robots on iOS, you will need to install Xcode. As of writing this, there are no other supported IDEs for iOS developement.
 
