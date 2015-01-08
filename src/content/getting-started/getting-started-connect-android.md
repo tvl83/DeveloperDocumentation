@@ -4,7 +4,7 @@
 ## Implement the Listener
 Implement the `RobotChangedStateListener` interface. This will have you implement the `RobotChangedStateListener#changedState(Robot robot, RobotChangedStateNotificationType type)` method
 
-```java
+```
 @Override
 public void changedState(Robot robot, RobotChangedStateNotificationType type) {
     switch (type) {
@@ -23,7 +23,7 @@ public void changedState(Robot robot, RobotChangedStateNotificationType type) {
 ## Register with the Discovery Agent
 Register with the `DiscoveryAgent` to get robot state events
 
-```java
+```
 // Bluetooth Classic (Sphero)
 DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
 
@@ -34,7 +34,7 @@ DiscoveryAgentLE.getInstance().addRobotStateChangeListener(this);
 ## Start Discovery
 All that you have to do now is start discovery with the `DiscoveryAgent#startDiscovery()` method. A good place to do this is the `Activity#onStart()` method, but there may be other places in your application where starting discovery is better suited
 
-```java
+```
 @Override
 protected void onStart() {
     super.onStart();
@@ -54,7 +54,7 @@ protected void onStart() {
 ## Caching a Convenience Robot
 When robot connects, you will get the Java object `Robot`. This class encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `ConvenienceRobot` object when we receive the connected notification. The classes `Ollie` and `Sphero` provide even more functionality specific to each of the robots and are subclasses of `ConvenienceRobot`.
 
-```java
+```
 
 private ConvenienceRobot _robot;
 
@@ -89,7 +89,7 @@ When you are done with the robot, it is important to disconnect it so that the n
 ### Convenience Robot Method
 If you have a `ConvenienceRobot`, disconnection is accomplished by calling the method `ConvenienceRobot#disconnect()` and the robot will take care of the rest for you.
 
-```java
+```
 private ConvenienceRobot _robot; // Assume that this is set when the robot connects
 
 {...}
@@ -105,7 +105,7 @@ public void onStop() {
 
 If you have a `Robot`, disconnection is a bit more manual. `RobotLE` objects need to have `Robot#sleep()` called on them as to avoid leaving the processor awake while the robot is not connected. Disconnection will be automatic from the sleep. `RobotClassic` objects can just have disconnect called on them.
 
-```java
+```
 private Robot _robot;
 
 {...}

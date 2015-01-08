@@ -34,8 +34,6 @@ The Robot SDK currently supports:
 
 ### Integrating the Robot SDK Into Your Project
 
-You can get a copy of the **RobotLibrary.jar** from the [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK) or by using the copy inside of the libs folder in the Drive Sample project.
-
 If you made a project from scratch with Android Studio or are using the default gradle configuration:
  - Place the **RobotLibrary.jar** inside of the **libs** folder of your project. It is safe to make the folder if it does not exist
 
@@ -49,7 +47,7 @@ If you use a custom gradle build script or do not have all libs included as depe
 
 Before running the application, you will need to add permissions to use Bluetooth,
 
-```xml
+```
 <uses-permission android:name="android.permission.BLUETOOTH" />
 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 ```
