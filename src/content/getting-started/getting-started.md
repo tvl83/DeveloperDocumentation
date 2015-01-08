@@ -1,4 +1,6 @@
-
+---
+title: "Getting Started"
+---
 # Overview
 
 This guide walks you through the basics of creating mobile apps that leverage the Sphero Ollie SDK.

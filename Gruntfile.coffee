@@ -43,7 +43,7 @@ module.exports = (grunt) ->
         options:
           platform: 'sphero'
           ext: '.html'
-          layout: 'docs.hbs'
+          layout: 'getting-started.hbs'
           partials: ['src/content/partials/*.html']
 
         files: [
