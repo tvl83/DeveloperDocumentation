@@ -47,49 +47,13 @@ _robot = new ConvenienceRobot(robotBase);
 #### Robot
 Each Convenience Robot implementation has the Robot base that is given to you when the Robot connects.
 
-##### iOS
-
-```
-id<RKRobotBase> robotBase = [_robot robot];
-```
-
-##### Android
-
-```
-Robot robotBase = _robot.getRobot();
-```
-
 #### Sensor Control
 Sensor Control is a subsystem of the Robot that controlls things like data streaming, collisions, locator etc.
-
-##### iOS
-
-```
-RKSensorControl *sensorControl = [_robot sensorControl];
-```
-
-##### Android
-
-```
-SensorControl sensorControl = _robot.getSensorControl();
-```
 
 #### Last Versioning
 The last versioning of the Robot. 
 
 *Warning: This value will be null if you have not queried the versioning yet!*
-
-##### iOS
-
-```
-RKVersioningResponse *versioning = [_robot lastVersioning];
-```
-
-##### Android
-
-```
-RobotVersion versioning = _robot.getLastVersioning();
-```
 
 ## Methods
 
@@ -97,18 +61,6 @@ RobotVersion versioning = _robot.getLastVersioning();
 
 ### Send Command
 This method is for sending commands of any type to the underlying Robot object. You would use this when you want to use a bit of functionality that is not included in the Convenience Robot.
-
-##### iOS
-
-```
-[_robot sendCommand:[RKVersioningCommand command]];
-```
-
-##### Android
-
-```
-_robot.sendCommand(new VersioningCommand());
-```
 
 ### Add / Remove Response Observer
 Response observers are how you are able to react to responses from the Robot in your Application. To register a response observer, you need to implement the appropriate interface, then use the add method. Similarly, to remove a response observer, you use the remove method.
@@ -186,49 +138,13 @@ Powers off the robot's command processor. In the case of Sphero, this will also 
 
 *Note: It is usually a good idea to sleep the robot when you are done using it so that it uses less power in standby.*
 
-##### iOS
-
-```
-[_robot sleep];
-```
-
-##### Android
-
-```
-_robot.sleep();
-```
-
 ### Disconnect
 Disconnects the robot's Bluetooth connection. There are a few things to consider when using this method:
  - Ollie that are disconnected before sleeping will shine a purple light, indicating that there is no Bluetooth connection, but the command processor is on
  - Disconnecting a Sphero in iOS will only disconnect the internal `EAAccessory`. There is no way to disconnect Sphero from the operating system from your application without using sleep
 
-##### iOS
-
-```
-[_robot disconnect];
-```
-
-##### Android
-
-```
-_robot.disconnect();
-```
-
 ### Is Connected
 Returns true if the robot is connected, false if the Robot is in any other state. In the case of Convenience Robots, "connected" means that the robot is connected with Bluetooth, it's command processor is enabled, and had been initialized by the Robot SDK.
-
-##### iOS
-
-```
-[_robot isConnected];
-```
-
-##### Android
-
-```
-_robot.isConnected();
-```
 
 #### Driving
 
@@ -240,72 +156,16 @@ This causes the Robot to begin driving in a direction set by the `heading` param
 
 ##### iOS
 
-```
-float heading = 90.0f;
-float speed = 0.8f;
-[_robot driveWithHeading:heading andVelocity:speed];
-```
-
-##### Android
-
-```
-float heading = 90.0f;
-float speed = 0.9f;
-_robot.drive(heading, speed);
-```
-
 ### Drive With Reverse Option
 This is the same as the regular **Drive** command, but with the option to reverse the face in which the Robot believes is the front. To drive in reverse, pass `true` as the `reverse` parameter.
-
-##### iOS
-
-```
-float heading = 90.0f;
-float speed = 0.8f;
-BOOL reverse = YES;
-[_robot driveWithHeading:heading andVelocity:speed andReverse:reverse];
-```
-
-##### Android
-
-```
-float heading = 90.0f;
-float speed = 0.8f;
-boolean reverse = true;
-_robot.drive(heading, speed, reverse);
-```
 
 ### Stop
 Cancels the current driving command on the Robot, causing it to attempt a stop. This command will attempt to keep the previous heading that was sent as to not turn while stopping.
 
 *Warning: A stop command only stops the *current* drive command on the robot. Another drive command will override the stop if sent after.*
 
-##### iOS
-
-```
-[_robot stop];
-```
-
-##### Android
-
-```
-_robot.stop();
-```
-
 ### Set Zero Heading
 This method teaches the robot what "forward" is. By setting zero heading, you are saying that if you were to send a drive command with a heading of zero, the Robot should go straight forward. Rotating the robot then setting the zero heading is how "calibration" is performed in Sphero applications.
-
-##### iOS
-
-```
-[_robot setZeroHeading];
-```
-
-##### Android
-
-```
-_robot.setZeroHeading();
-```
 
 ### Set Raw Motors
 Allows you to set the mode and power output of each of the motors.
@@ -314,50 +174,8 @@ Allows you to set the mode and power output of each of the motors.
 *Note: This command will have no effect with stabilization turned on.*
 *Warning: Since this requires stabilization to be turned off, the robot will not attempt to keep itself level. This will result in the robot flipping over on itself at higher power values.*
 
-##### iOS
-
-```
-RKRawMotorMode leftMode = RKRawMotorModeForward;
-uint8_t leftPower = 255;
-RKRawMotorMode rightMode = RKRawMotorModeReverse;
-uint8_t rightPower = 255;
-
-// Spin like crazy!
-[_robot setRawMotorsLeftMode:leftMode leftPower:leftPower rightMode:rightMode rightPower:rightPower];
-```
-
-##### Android
-
-```
-RawMotorCommand.MotorMode leftMode = RawMotorCommand.MotorMode.MOTOR_MODE_FORWARD;
-int leftPower = 255;
-RawMotorCommand.MotorMode rightMode = RawMotorCommand.MotorMode.MOTOR_MODE_REVERSE;
-int rightPower = 255;
-
-// Spin like crazy!
-_robot.setRawMotors(leftMode, leftPower, rightMode, rightPower);
-```
-
 #### Stabilization
 Enables and disables the control system of the robot. This keeps the robot from tumbling over itself from the motors as well as allowing you to drive with drive commands. You will need to disable stabilization if you want to use raw motor commands or if you want to use sensor output to make a Robot behave as a controller.
-
-##### iOS
-
-```
-// Enables stabilization
-[_robot enableStabilization:YES];
-// Disables stabilization
-[_robot enableStabilization:NO];
-```
-
-##### Android
-
-```
-// Enables stabilization
-_robot.enableStabilization(true);
-// Disables stabilization
-_robot.enableStabilization(false);
-```
 
 #### LED Output
 Controls the LED lights on the Robot. The "RGB LED" or sometimes referred to as "the LED" is the multi color LED located on the top of the Robot. The "Back LED" or "Tail Light" is the blue light on the back of the Robot, which is used in calibrating a Robot's heading.
@@ -367,51 +185,15 @@ Sets the RGB LED on the Robot to the specified color. The LED has 3, independent
 
 *Note: Color values are clamped to 0.0f and 1.0f.*
 
-##### iOS
-
-```
-[_robot setLedWithRed:1.0f green:1.0f blue:1.0f];
-```
-
-##### Android
-
-```
-_robot.setLed(1.0f, 1.0f, 1.0f);
-```
-
 ### Set LED Default
 This method also sets the LED of the Robot but also notifies the Robot that this should be the new "default color". In Sphero, the default color is the color you see when the robot is paired, but not connected. In Ollie, the default color is the color you see when the command processor comes awake during the connection process. The factory-set vaule for the default color is an off-white color.
 
 *Note: Color values are clamped to 0.0f and 1.0f.*
 
-##### iOS
-
-```
-[_robot setLedDefaultWithRed:1.0f green:1.0f blue:1.0f];
-```
-
-##### Android
-
-```
-_robot.setLedDefault(1.0f, 1.0f, 1.0f);
-```
-
 ### Set Back LED
 Sets the brightness of the blue back LED or tail light of the Robot. This LED is one channel, and it's brightness is controlled by a single float from 0.0f to 1.0f.
 
 *Note: The brightness value is clamped to 0.0f and 1.0f.*
-
-##### iOS
-
-```
-[_robot setBackLedBrightness:1.0f];
-```
-
-##### Android
-
-```
-_robot.setBackLedBrightness(1.0f);
-```
 
 #### Sensors
 These methods simplify controlling the various sensor systems on Robots.
@@ -541,69 +323,19 @@ public void handleAsyncMessage(final AsyncMessage asyncMessage, final Robot robo
 ### Disable Sensors
 This will disable all sensor streaming on the Robot. This is equivalent of enabling the sensors with no mask.
 
-##### iOS
-
-```
-[_robot disableSensors];
-```
-
-##### Android
-
-```
-_robot.disableSensors();
-```
-
 #### Macros
 Macros are a series of instructions for the Robot to follow. The methods on a Convenience Robot are for interfacing with the macro executor. To learn more about macros, see the [MacroLab Tutorial](/MacroLab). See the iOS Object `RKMacroObject` or the Android object `MacroObject` to learn more about how to contruct macro objects for use in the Convenience Robot.
 
 ### Run Macro At ID
 Runs an already loaded macro on the Robot
 
-##### iOS
-
-```
-[_robot runMacroAtId:0];
-```
-
-##### Android
-
-```
-_robot.runMacroAtId(0);
-```
-
 ### Macro Abort
 Aborts the currently executing macro, or does nothing if one is not running.
-
-##### iOS
-
-```
-[_robot abortMacro];
-```
-
-##### Android
-
-```
-_robot.abortMacro();
-```
 
 ### Macro Save Temporary
 Saves a temporary macro to the temporary slot on the Robot.
 
-##### iOS
-
-```
-RKMacroObject *macroObject = [[RKMacroObject alloc] init];
-macroObject addCommand:[RKMCRoll commandWithSpeed:1.0f heading:0 delay:100];
-[_robot macroSaveTemporary:[macroObject generateMacroData]];
-```
-
-##### Android
-
-```
-MacroObject macroObject = new MacroObject();
-macroObject.addCommand(new Roll(1.0f, 0, 100));
-_robot.macroSaveTemporary(macroObject.generateMacroData());
-```
+*Note: This method takes the byte data from the macro. Make sure to use the `generateMacroData` method to get the appropriate macro data.*
 
 #### Orb Basic
 Orb Basic is a BASIC interpreter for Robots. These methods interface with the Orb Basic executor on the Robot. To learn more about Orb Basic, see the [Orb Basic Tutorial](/OrbBasic).
@@ -611,63 +343,15 @@ Orb Basic is a BASIC interpreter for Robots. These methods interface with the Or
 ### Reset Orb Basic Memory
 Deletes all Orb Basic programs from the Robot.
 
-##### iOS
-
-```
-[_robot resetOrbBasicMemory];
-```
-
-##### Android
-
-```
-_robot.resetOrbBasicMemory();
-```
-
 ### Append Orb Basic Program
 Adds a new Orb Basic program to the Robot's memory.
 
 *Note: If the final size of your Orb Basic program is greater than 254 you need to split it into chunks and send the chunks with this command.*
 
-##### iOS
-
-```
-NSData *orbBasicBytes = {...}; // Some orb basic program in bytes
-[_robot appendOrbBasicProgram:orbBasicBytes];
-```
-
-##### Android
-
-```
-byte[] orbBasicBytes = {...}; // Some orb basic program in bytes
-_robot.appendOrbBasicProgram(orbBasicBytes);
-```
+*Note: This method takes the bytes from the string of your Orb Basic program*
 
 ### Execute Orb Basic Program
 Starts executing an Orb Basic program. The `line` parameter is used to specify the entry point of the execution. In most cases this will be the first line number written in the program.
 
-##### iOS
-
-```
-[_robot executeOrbBasicProgramAtLine:0];
-```
-
-##### Android
-
-```
-_robot.executeOrbBasicProgramAtLine(0);
-```
-
 ### Abort Orb Basic Program
 Stops execution of the currently executing Orb Basic Program.
-
-##### iOS
-
-```
-[_robot abortOrbBasicProgram];
-```
-
-##### Android
-
-```
-_robot.abortOrbBasicProgram();
-```
