@@ -14,7 +14,6 @@ order: 3
 val | name￼
 ----|-----
 00h | DID_CORE
-01h | DID_BOOTLOADER
 02h | DID_SPHERO
 ￼
 ## Core Commands, DID = 00h
@@ -25,7 +24,6 @@ val | name￼
 ----|-----
 01h | CMD_PING
 02h | CMD_VERSION
-03h | CMD_CONTROL_UART_TX
 10h | CMD_SET_BT_NAME
 11h | CMD_GET_BT_NAME
 12h | CMD_SET_AUTO_RECONNECT
@@ -33,27 +31,10 @@ val | name￼
 20h | CMD_GET_PWR_STATE
 21h | CMD_SET_PWR_NOTIFY
 22h | CMD_SLEEP
-23h | GET_POWER_TRIPS
-24h | SET_POWER_TRIPS
 25h | SET_INACTIVE_TIMER
 30h | CMD_GOTO_BL
 40h | CMD_RUN_L1_DIAGS
 41h | CMD_RUN_L2_DIAGS
-42h | CMD_CLEAR_COUNTERS
-50h | CMD_ASSIGN_TIME
-51h | CMD_POLL_TIMES
-￼
-## Bootloader Commands, DID = 01h
-
-(defined in OrbotixMsgSet.h)
-
-val | name￼
-----|-----
-02h | BEGIN_REFLASH
-03h | HERE_IS_PAGE
-04h | LEAVE_BOOTLOADER
-05h | IS_PAGE_BLANK
-06h | CMD_ERASE_USER_CONFIG
 
 ## Sphero Commands, DID = 02h
 
@@ -64,13 +45,8 @@ val | name￼
 01h | CMD_SET_CAL
 02h | CMD_SET_STABILIZ
 03h | CMD_SET_ROTATION_RATE
-04h | CMD_SET_CREATION_DATE
-05h | CMD_GET_BALL_REG_WEBSITE
 06h | CMD_REENABLE_DEMO
-07h | CMD_GET_CHASSIS_ID
-08h | CMD_SET_CHASSIS_ID
 09h | CMD_SELF_LEVEL
-0Ah | CMD_SET_VDL
 11h | CMD_SET_DATA_STREAMING
 12h | CMD_SET_COLLISION_DET
 13h | CMD_LOCATOR
@@ -88,21 +64,6 @@ val | name￼
 36h | CMD_GET_OPTIONS_FLAG
 37h | CMD_SET_TEMP_OPTIONS_FLAG
 38h | CMD_GET_TEMP_OPTIONS_FLAG
-40h | CMD_GET_CONFIG_BLK
-41h | CMD_SET_SSB_PARAMS
-42h | CMD_SET_DEVICE_MODE
-43h | CMD_SET_CFG_BLOCK
-44h | CMD_GET_DEVICE_MODE
-46h | CMD_GET_SSB
-47h | CMD_SET_SSB
-48h | CMD_SSB_REFILL
-49h | CMD_SSB_BUY
-4Ah | CMD_SSB_USE_CONSUMEABLE
-4Bh | CMD_SSB_GRANT_CORES
-4Ch | CMD_SSB_ADD_XP
-4Dh | CMD_SSB_LEVEL_UP_ATTR
-4Eh | CMD_GET_PW_SEED
-4Fh | CMD_SSB_ENABLE_ASYNC
 50h | CMD_RUN_MACRO
 51h | CMD_SAVE_TEMP_MACRO
 52h | CMD_SAVE_MACRO
@@ -116,8 +77,6 @@ val | name￼
 62h | CMD_EXEC_ORBBAS
 63h | CMD_ABORT_ORBBAS
 64h | CMD_ANSWER_INPUT
-65h | CMD_COMMIT_TO_FLASH
-70h | CMD_COMMIT_TO_FLASH
 
 # API Commands
 
@@ -181,26 +140,6 @@ BAS     | 6            | orbBasic version in packed nibble format (i.e. 4.4)
 MACRO   | 7            | Macro executive version in packed nibble format (4.4)
 API-maj | 8            | major revision code this firmware implements
 API-min | 9            | API minor revision code this firmware implements
-
-### Control UART Tx Line – 03h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN | FLAG
-----|-----|-------|------|-------
-00h | 03h | <any> | 02h  | 0 or 1
-
-#### Response
-
->
-
-    Simple Response
-
-This is a factory command that either enables or disables the CPU's UART transmit line so that another physically connected client can configure the Bluetooth module.
-The receive line is always listening, which is how you can re-enable the `Tx` line later.
-Or just reboot as this setting is not persistent.
 
 ### Set Device Name – 10h
 
@@ -385,53 +324,6 @@ name     | description
 Wakeup   | The number of seconds for Sphero to sleep for and then automatically reawaken. Zero does not program a wakeup interval, so he sleeps forever. FFFFh attempts to put him into deep sleep (if supported in hardware) and returns an error if the hardware does not support it.
 Macro    | If non-zero, Sphero will attempt to run this macro ID upon wakeup.
 orbBasic | If non-zero, Sphero will attempt to run an orbBasic program in Flash from this line number.
-
-### Get Voltage Trip Points – 23h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN
-----|-----|-------|----
-00h | 23h | <any> | 01h
-
-#### Response
-
->
-
-DLEN  | <Vlow>         | <Vcrit>
------ | -------------- | -------------
-05h   | 16-bit val     | 16-bit val
-
-This returns the voltage trip points for what Sphero considers Low battery and Critical battery.
-The values are expressed in 100ths of a volt, so the defaults of 7.00V and 6.50V respectively are returned as 700 and 650.
-
-### Set Voltage Trip Points – 24h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN | <Vlow>       | <Vcrit>
-----|-----|-------|------|--------------|-----------
-00h | 24h | <any> | 05h  | 16-bit val | 16-bit val
-
-#### Response
-
->
-
-    Simple Response
-
-This assigns the voltage trip points for Low and Critical battery voltages.
-The values are specified in 100ths of a volt and the limitations on adjusting these away from their defaults are:
-
-* `Vlow` must be in the range 675 to 725 (±25)
-* `Vcrit` must be in the range 625 to 675 (±25)
-* There must be 0.25V of separation between the two values
-
-Shifting these values too low could result in very little warning before Sphero forces himself to sleep, depending on the age and history of the battery pack.
-So be careful.
 
 ### Set Inactivity Timeout – 25h
 
@@ -639,85 +531,6 @@ offset  | name               | description
 52h     | Sensor Failures    | Count of I2C bus failures (unsigned 16-bit value)
 54h     | Gyro Adjust Count  | Lifetime count of automatic GACs (unsigned 32-bit value)
 
-### Clear Counters – 42h
-
-#### Command
-
->
-
-DID | CID
-----|----
-00h |￼42h
-
-#### Response
-
->
-
-    Simple Response
-
-This is a developers-only command to clear the various system counters described in command 41h.
-It is denied when Sphero is in Normal mode.
-
-### Assign Time Value – 50h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN | data
-----|-----|-------|------|------
-00h | 50h | <any> | 05h  | 32-bit value
-
-#### Response
-
->
-
-    Simple Response
-
-Sphero contains a 32-bit counter that increments every millisecond.
-It has no absolute temporal meaning, just a relative one.
-This command assigns the counter a specific value for subsequent sampling.
-Though it starts at zero when Sphero wakes up, assigning it too high of a value with this command could cause it to roll over.
-
-### Poll Packet Times – 51h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN | Client Tx time
-----|-----|-------|------|---------------
-00h | 51h | <any> | 05h  | 32-bit value
-￼
-#### Response
-
->
-
-DLEN | Client Tx time, T1    | Sphero Rx time, T2 | Sphero Tx time, T3
------|-----------------------|--------------------|-------------------
-0Dh  | 32-bit value (echoed) | 32-bit value       | 32-bit value
-
-This command helps the Client application profile the transmission and processing latencies in Sphero so that a relative synchronization of timebases can be performed.
-This technique is based upon the scheme in the Network Time Protocol (RFC 5905) and allows the Client to reconcile time stamped messages from Sphero to its own time stamped events.
-In the following discussion, each 32-bit value is a count of milliseconds from some reference within the device.
-
-The scheme is as follows: the Client sends the command with the Client Tx time (`T1`) filled in.
-Upon receipt of the packet, the command processor in Sphero copies that time into the response packet and places the current value of the millisecond counter into the Sphero Rx time field (`T2`).
-Just before the transmit engine streams it into the Bluetooth module, the Sphero Tx time value (`T3`) is filled in.
-If the Client then records the time at which the response is received (`T4`) the relevant time segments can be computed from the four time stamps `T1-T4`:
-
-* The value offset represents the maximum-likelihood time offset of the Client clock to Sphero's system clock.
-
-    offset = 1/2 * [(T2 - T1) + (T3 - T4)]
-
-* The value delay represents the round-trip delay between the Client and Sphero:
-
-    delay = (T4 - T1) - (T3 - T2)
-
-## Bootloader
-
-Note that the "Jump To Bootloader" command is specified in `DID` `00h`, the Core.
-
 ## Sphero
 
 These commands are specific to the features that Sphero offers.
@@ -827,45 +640,6 @@ DID | CID | SEQ   | DLEN
     Simple Response
 
 This allows you to retrieve the application configuration block that is set aside for exclusive use by applications.
-
-### Get Chassis ID – 07h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN
-----|-----|-------|-----
-02h | 07h | <any> | 01h
-
-#### Response
-
->
-
-DLEN |  CHASSIS ID
------|-------------
-03h  | 16-bit val
-
-Returns the Chassis ID, a 16-bit value, which was set at the factory.
-
-### Set Chassis ID – 08h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN |  CHASSIS ID
-----|-----|-------|------|------------
-02h | 08h | <any> | 03h  | 16-bit val
-
-#### Response
-
->
-
-    Simple Response
-
-Assigns the Chassis ID, a 16-bit value.
-This command only works if you're at the factory.
 
 ### Self Level – 09h
 
@@ -1285,26 +1059,6 @@ Please refer to Appendix C for detailed information.
 The client convention for heading follows the 360 degrees on a circle, relative to the ball: 0 is straight ahead, 90 is to the right, 180 is back and 270 is to the left.
 The valid range is 0..359.
 
-### Set Boost With Time – 31h (Not Currently Supported)
-
-#### Command
-
->
-
-DID  | CID   | SEQ     | DLEN   | TIME    | HEADING
----- | ----- | ------- | ------ | ------- | -----------
-02h  | 31h   | <any>   | 04h    | val     | 16-bit val
-
-#### Response
-
->
-
-    Simple Response
-
-This commands Sphero to meet the provided heading, disable stabilization and ramp the motors up to full-speed for a period of time.
-The `Time` parameter is the duration in tenths of a second.
-Setting it to zero enables constant boost until a Set Stabilization command is received.
-
 ### Set Raw Motor Values – 33h
 
 #### Command
@@ -1451,95 +1205,6 @@ bit # | Description
 ----- | -----------
 0     | Enable Stop On Disconnect behavior: when the Bluetooth link transitions from connected to disconnected, Sphero is commanded to stop rolling. This is ignored if a macro or orbBasic program is running though both have option flags to allow this during their execution. This flag is cleared after it is obeyed, thus it is a one-shot.
 1-31  | Unassigned, return zero
-
-### Get Configuration Block – 40h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN |  ID
-----|-----|-------|------|------
-02h | 40h | <any> | 02h  | value
-
-#### Response
-
->
-
-    Simple Response
-
-This command retrieves one of the configuration blocks.
-The response is a simple one; an error code of `08h` is returned when the resources are currently unavailable to send the requested block back.
-The actual configuration block data returns in an asynchronous message of type `04h` due to its length (if there is no error).
-
-`Value` = `00h` requests the factory configuration block.
-
-`Value` = `01h` requests the user configuration block, which is updated with current values first.
-
-### Set Device Mode – 42h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN |  MODE
-----|-----|-------|------|--------
-02h | 42h | <any> | 02h  | value
-
-#### Response
-
->
-
-    Simple Response
-
-Assigns the operation mode of Sphero based on the supplied mode value:
-
-MODE  | Description
-------|------------
-00h   | Normal mode
-01h   | User Hack mode (see below)
-
-User Hack mode enables ASCII shell commands; refer to the associated document for a detailed list of operations.
-
-### Set Configuration Block – 43h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN | data
-----|-----|-------|------|--------
-02h | 43h | <any> | FFh  | <block>
-
-#### Response
-
->
-
-    Simple Response
-
-This command accepts an exact copy of the configuration block and loads it into the RAM copy of the configuration block.
-Then the RAM copy is saved to flash.
-The configuration block can be obtained by using the Get Configuration Block command.
-
-### Get Device Mode – 44h
-
-#### Command
-
->
-
-DID | CID | SEQ   | DLEN
-----|-----|-------|-----
-02h | 44h | <any> | 01h
-
-#### Response
-
->
-
-DLEN  | Mode
-------|-----
-02h   | val
-
-This returns the current device mode, `00h` for Normal mode or `01h` for User Hack mode.
 
 ### Run Macro – 50h
 
