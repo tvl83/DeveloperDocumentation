@@ -12,7 +12,7 @@ public void changedState(Robot robot, RobotChangedStateNotificationType type) {
             break;
         case FailedConnect:
             break;
-        case Connected:
+        case Online:
             break;
         case Disconnected:
             break;
@@ -67,7 +67,7 @@ public void changedState(Robot robot, RobotChangedStateNotificationType type) {
             break;
         case FailedConnect:
             break;
-        case Connected:
+        case Online:
         	// Bluetooth Classic (Sphero)
         	if (robot instanceof RobotClassic) {
         		_robot = new Sphero(robot);
