@@ -9,7 +9,7 @@ Implement the method `- (void)handleRobotStateChangeNotification:(RKRobotChanged
     switch(n.type) {
         case RKRobotConnecting:
             break;
-        case RKRobotConnected:
+        case RKRobotOnline:
             break;
         case RKRobotDisconnected:
             break;
@@ -28,7 +28,7 @@ Register with the `RKRobotDiscoveryAgent` to get robot state events
 
 ## Start Discovery
 All that you have to do now is start discovery with the `+ [RKRobotDiscoveryAgent startDiscovery]` method. 
-*Note: Due to limitation in the Apple Bluetooth stack, you cannot start discovery in `- [UIViewController viewDidLoad:(BOOL)animated]`
+*Note: Due to limitation in the Apple Bluetooth stack, you cannot start discovery in `- [UIViewController viewDidLoad]`
 
 ```
 - (void)appDidBecomeActive:(NSNotification *)n {
@@ -55,7 +55,7 @@ When robot connects, you will get an object with the type `id<RKRobotBase>`. Thi
     switch(n.type) {
         case RKRobotConnecting:
             break;
-        case RKRobotConnected:
+        case RKRobotOnline:
             // Bluetooth Classic (Sphero)
             if ([n.robot isKindOfClass:[RKRobotClassic class]]) {
                 self.robot = [[RKSphero alloc] initWithRobot:n.robot]
