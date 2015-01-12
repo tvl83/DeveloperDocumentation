@@ -9,7 +9,7 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
     switch (notification.type) {
     case .Connecting:
         break
-    case .Connected:
+    case .Online:
         break
     case .Disconnected:
         break
@@ -56,7 +56,7 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
     switch (notification.type) {
     case .Connecting:
         break
-    case .Connected:
+    case .Online:
         if (noteRobot.isKindOfClass(RKRobotLE)) {
           self.robot = RKOllie(robot: noteRobot)
         } else if (noteRobot.isKindOfClass(RKRobotClassic)) {
