@@ -6,6 +6,8 @@ Here you'll find the documentation site for the Sphero.
 
 ### Installation
 
+Install Brew from:  http://brew.sh/
+
 To host this documentation locally, you'll need Node.js and npm:
 
     brew install nodejs
