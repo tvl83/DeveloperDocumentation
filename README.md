@@ -36,7 +36,7 @@ Point your browswer to [http://localhost:3000](http://localhost:3000)
 
 ### Deployment
 
-When updated documentation is pushed to the master branch, it is automatically pushed to Amazon S3 by Travis CI.
+When updated documentation is pushed to the master branch, it is automatically pushed to Heroku by Travis CI.
 
 Travis calls `grunt deploy`, which is the same as `grunt build`, except that it also zips up the docs for downloading.
 
