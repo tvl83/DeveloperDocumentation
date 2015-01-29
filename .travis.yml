@@ -1,4 +1,6 @@
-script: grunt build
+script: 
+  - npm install
+  - grunt build
 deploy:
   provider: divshot
   environment:
