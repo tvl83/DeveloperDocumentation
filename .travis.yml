@@ -1,10 +1,10 @@
-language: node_js
-node_js:
-- '0.11'
+script: grunt build
 deploy:
-  provider: heroku
-  app: sphero-docs
-  on:
-    branch: master
+  provider: divshot
+  environment:
+    master: development
+    staging: staging
+    production: production
+  skip_cleanup: true
   api_key:
-    secure: JZ1z+qzmo4OafPixT+9HKBKEqhDmJ8XiN45XClA1rDcad+t8LlVsTdp6pA+hj4U23OT4Owp3XzCex67/1Ohfo7+Vrf0sz3RYi9qhiY0pduZnhhSOYRq4JXUz8gEH+uLK4NbspMHCkTQziocFw6oKNltPQWuFUKCS6qTPauf2qjI=
+    secure: ZuSTe6BxH1jTviyQ7+xvskV21OgjS9vMbVHpE8b5epSlaCQv521qIlC52zz22SapTPRAz8gX7l0LEcZ5p8e3izLWNWnTXo9co89YVvlqexWb8bZEtpACXHX9GVuzp/8KDBNOJybGmV9ZUQ2J9AKU8mE31f9elZEcnrGrapIqet0=
