@@ -1,5 +1,7 @@
 ---
+word: Convenience-Robot
 title: Convenience-Robot
+order: 2
 ---
 
 # Convenience Robot

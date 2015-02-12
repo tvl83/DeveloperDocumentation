@@ -1,7 +1,7 @@
 ---
 word: Showcase
 title: Showcase
-order: 4
+order: 7
 ---
 
 # Showcase
