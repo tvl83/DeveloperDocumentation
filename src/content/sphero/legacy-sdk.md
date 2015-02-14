@@ -2,8 +2,7 @@
 word: Legacy SDKs
 title: Legacy SDKs
 order: 8
-display: false
-show: false
+published: false
 ---
 
 # SDK's
