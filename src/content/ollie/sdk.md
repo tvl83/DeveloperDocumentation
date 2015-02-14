@@ -4,7 +4,8 @@ title: SDK
 order: 2
 ---
 
-# Convenience Robot
+# SDK
+## Convenience Robot
 
 This is a detailed view of the Convenience Robot. The motivation behind using a Convenience Robot is to abstract away all the commonplace things that you do with a robot once it's connected. View the **Connection** guide in the **Getting Started** section to see how to connect and construct a Convenience Robot.
 
