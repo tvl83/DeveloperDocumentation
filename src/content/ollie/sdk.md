@@ -1,7 +1,7 @@
 ---
 word: SDK
 title: SDK
-order: 2
+order: 3
 ---
 
 # SDK

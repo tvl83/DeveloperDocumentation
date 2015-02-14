@@ -7,7 +7,7 @@ order: 0
 
 ## Welcome!
 
-Here, you will find alll the information you need applications or games with Sphero.
+Here, you will find all the information you need applications or games with Ollie.
 
 ## Feedback
 
@@ -20,6 +20,6 @@ Let us know how we can improve it by [creating an issue][issue].
 Alternatively, you can click on the "Edit this page" button in the top right corner.
 This will let you fork [DeveloperResources][repo], edit the content, and submit a pull request.
 
-[StackOverflow]: http://stackoverflow.com/questions/tagged/sphero-api?sort=newest
+[StackOverflow]: http://stackoverflow.com/questions/tagged/ollie-api?sort=newest
 [repo]: https://github.com/orbotix/DeveloperResources
 [issue]: https://github.com/orbotix/DeveloperResources/issues/new

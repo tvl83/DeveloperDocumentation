@@ -16,10 +16,10 @@ private Handler _handler = new Handler(Looper.getMainLooper());
 
 private void blink(final boolean lit) {
     if(lit) {
-      _robot.setLed(0.0f, 0.0f, 0.0f);                              
-    } 
+      _robot.setLed(0.0f, 0.0f, 0.0f);
+    }
     else {
-      _robot.setLed(0.0f, 0.0f, 1.0f);                             
+      _robot.setLed(0.0f, 0.0f, 1.0f);
     }
 
     _handler.postDelayed(new Runnable() {
@@ -43,10 +43,10 @@ private Handler _handler = new Handler(Looper.getMainLooper());
 
 private void blink(final boolean lit) {
     if(lit) {
-      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 0.0f));                              
-    } 
+      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 0.0f));
+    }
     else {
-      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 1.0f));                             
+      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 1.0f));
     }
 
     _handler.postDelayed(new Runnable() {
@@ -69,10 +69,10 @@ private Robot _robot; // Assume this is set when the robot is connected
 
 private void blink(final boolean lit) {
     if(lit) {
-      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 0.0f));                              
-    } 
+      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 0.0f));
+    }
     else {
-      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 1.0f));                             
+      _robot.sendCommand(new RGBLEDOutputCommand(0.0f, 0.0f, 1.0f));
     }
 
     _handler.postDelayed(new Runnable() {
