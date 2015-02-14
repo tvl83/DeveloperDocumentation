@@ -1,7 +1,7 @@
 ---
-word: SDK's
-title: SDK's
-order: 2
+word: Legacy SDKs
+title: Legacy SDKs
+order: 8
 ---
 
 # SDK's

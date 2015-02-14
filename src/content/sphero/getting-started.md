@@ -4,7 +4,7 @@ title: Getting Started
 order: 1
 ---
 
-# Getting Started
+# Intro to Sphero by Orbotix
 
 ## What is Sphero?
 

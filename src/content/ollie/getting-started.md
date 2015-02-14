@@ -4,6 +4,6 @@ title: Getting Started
 order: 1
 ---
 
-# Getting Started
+# Intro to Ollie by Orbotix
 
 ## What is Ollie?

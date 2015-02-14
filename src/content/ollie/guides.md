@@ -1,7 +1,7 @@
 ---
 word: Guides
 title: Guides
-order: 2
+order: 5
 ---
 # Guides
 

@@ -1,6 +1,6 @@
 ---
-word: Convenience-Robot
-title: Convenience-Robot
+word: SDK
+title: SDK
 order: 2
 ---
 
