@@ -3,9 +3,9 @@ word: OrbBasic
 title: OrbBasic
 order: 4
 ---
-# OrBasic
+# OrbBasic
 
-## Hello, OrBasic!
+## Hello, OrbBasic!
 
 ![orbBasic App](http://a5.mzstatic.com/us/r30/Purple3/v4/25/75/78/25757812-83f2-62db-e538-9d5e21f7e96b/screen568x568.jpeg)
 
