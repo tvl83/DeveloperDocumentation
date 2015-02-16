@@ -4,19 +4,29 @@
   width: 100%;
 }
 
+.static {
+  #site-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 300ms ease all;
+    transition: 300ms ease all;
+  }
+}
+
 #site-canvas {
   width: 100%;
   height: 100%;
   position: relative;
-
-  // Disabling these transforms fixes a scrolling bug in the docs
-  // side menu nav, however it breaks the mobile off-canvas menu.
-
-  // -webkit-transform: translateX(0);
-  // transform: translateX(0);
-  //
-  // -webkit-transform: translate3d(0, 0, 0);
-  // transform: translate3d(0, 0, 0);
 
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
