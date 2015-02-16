@@ -7,7 +7,7 @@ order: 0
 
 ## Welcome!
 
-Here, you will find all the information you need applications or games with Sphero.
+Here you will find all the information you need applications or games with Sphero.
 
 ## Feedback
 
