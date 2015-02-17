@@ -18,7 +18,10 @@ order: 2.2
 *Note: You may skip this step if you already have Android API 12 and Android API 18 installed*
  - If you have not already installed Android API 12 and Android API 18, then the bottom box of Android Studio will tell you "**failed to find target**" and will provide you a link to install the missing frameworks. You will need to follow this step for both "**android-18**" and "**android-12**"
 
-![QSG-libs.png]({{assets}}/images/android-studio-setup-1.png)
+<a class="img-popup" href="{{assets}}/images/android-studio-setup-2.png">
+  Click to zoom on image:
+  ![QSG-libs.png]({{assets}}/images/android-studio-setup-2.png)
+</a>
 
  - If Android Studio did not prompt you to install the extra APIs and the project does not build, ensure that the "**SDK Platform**" is installed in the Android SDK Manager for API 12 and API 18. You can reach this by going to *Tools > Android > SDK Manager* inside of Android Studio
 

@@ -18,7 +18,9 @@ order: 7
 
 ### AR.Drone x Sphero
 
-![ardrone-sphero](http://new.tinygrab.com/089df54f8f409a2006a76c6b9853daa2a31100930a.png)
+<a class="img-popup" href="http://new.tinygrab.com/089df54f8f409a2006a76c6b9853daa2a31100930a.png">
+  ![ardrone-sphero](http://new.tinygrab.com/089df54f8f409a2006a76c6b9853daa2a31100930a.png)
+</a>
 
 The Android AR.FreeFlight 2.0 application, with the option to connect one or two Spheros.
 
@@ -27,7 +29,9 @@ The Android AR.FreeFlight 2.0 application, with the option to connect one or two
 
 ### Artoo
 
-![artoo-web](http://hybridgroup.com/images/projects-01.png)
+<a class="img-popup" href="http://hybridgroup.com/images/projects-01.png">
+  ![artoo-web](http://hybridgroup.com/images/projects-01.png)
+</a>
 
 A next-generation robotics framework, written in Ruby.
 
@@ -36,7 +40,10 @@ A next-generation robotics framework, written in Ruby.
 
 ### BallControl
 
-![ball-control](https://camo.githubusercontent.com/1564882c0f3fdcb8556411f1aaa36cb3ec0d60c4/68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f42616c6c436f6e74726f6c2f6d61737465722f776964652e706e67)
+<a class="img-popup" href="https://camo.githubusercontent.com/1564882c0f3fdcb8556411f1aaa36cb3ec0d60c4/68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f42616c6c436f6e74726f6c2f6d61737465722f776964652e706e67">
+  ![ball-control](https://camo.githubusercontent.com/1564882c0f3fdcb8556411f1aaa36cb3ec0d60c4/68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f42616c6c436f6e74726f6c2f6d61737465722f776964652e706e67)
+</a>
+
 
 A Bluetooth/Accelerometer/Camera/VoiceControl app.
 
@@ -45,7 +52,9 @@ A Bluetooth/Accelerometer/Camera/VoiceControl app.
 
 ### Cylon.JS
 
-![cylon-site](http://hybridgroup.com/images/projects-02.png)
+<a class="img-popup" href="http://hybridgroup.com/images/projects-02.png">
+  ![cylon-site](http://hybridgroup.com/images/projects-02.png)
+</a>
 
 A next-generation robotics framework, written in JavaScript.
 
@@ -60,7 +69,9 @@ SDKs and Applications built to support the 2012 AT&T DevLab event.
 
 ### Gobot
 
-![gobot-web](http://hybridgroup.com/images/projects-04.png)
+<a class="img-popup" href="http://hybridgroup.com/images/projects-04.png">
+  ![gobot-web](http://hybridgroup.com/images/projects-04.png)
+</a>
 
 A next-generation robotics framework, written in Go.
 
@@ -69,7 +80,9 @@ A next-generation robotics framework, written in Go.
 
 ### spheron-leap
 
-![spheron-leap](https://camo.githubusercontent.com/69d9539388b5d23ed3301d7f4a22b8a8d0655cfd/687474703a2f2f696d672e796f75747562652e636f6d2f76692f33726174543179436e6f772f302e6a7067)
+<a class="img-popup" href="https://camo.githubusercontent.com/69d9539388b5d23ed3301d7f4a22b8a8d0655cfd/687474703a2f2f696d672e796f75747562652e636f6d2f76692f33726174543179436e6f772f302e6a7067">
+  ![spheron-leap](https://camo.githubusercontent.com/69d9539388b5d23ed3301d7f4a22b8a8d0655cfd/687474703a2f2f696d672e796f75747562652e636f6d2f76692f33726174543179436e6f772f302e6a7067)
+</a>
 
 Interface to control a Sphero with a Leap Motion controller.
 
@@ -92,7 +105,9 @@ Control Sphero using an Xbox 360 Controller.
 
 ### Exile
 
-![exile](http://orbotix.wpengine.netdna-cdn.com/wp-content/uploads/2012/10/exile1-300x300.png)
+<a class="img-popup" href="http://orbotix.wpengine.netdna-cdn.com/wp-content/uploads/2012/10/exile1-300x300.png">
+  ![exile](http://orbotix.wpengine.netdna-cdn.com/wp-content/uploads/2012/10/exile1-300x300.png)
+</a>
 
 Exile is a totally new take on arcade-style space fighter games.
 Sphero has been exiled from his home planet and must fight his way back to save all Robot kind.

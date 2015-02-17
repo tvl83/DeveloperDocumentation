@@ -246,7 +246,9 @@ Add `RobotLibrary` and `RobotUILibrary` to your project.
 
 ### Setting Dependencies
 
-![QSG-jar-depend.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image003.png)
+<a class="img-popup" href="https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image003.png">
+  ![QSG-jar-depend.png](https://github.com/orbotix/Sphero-Android-SDK/raw/master/assets/image003.png)
+</a>
 
 Inside your project's properties, set the dependencies.
 This panel is found in **Properties** -> **Java Build Path** -> **Libraries**.
