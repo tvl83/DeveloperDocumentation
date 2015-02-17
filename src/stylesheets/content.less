@@ -656,3 +656,28 @@ div.hidden {
 .nav-pills > li.active > a:focus {
   background-color: #00adef;
 }
+
+/* ----------------------------------------------------------------------------
+ * Breakpoints for code formatting on larger screens
+ */
+@media (min-width: 1224px) {
+  body:not(.no-literate) .content {
+    width: 1024px;
+  }
+
+  body:not(.no-literate) .content > pre,
+  body:not(.no-literate) .content > blockquote {
+    width: 470px;
+  }
+}
+
+@media (min-width: 1320px) {
+  body:not(.no-literate) .content {
+    width: 1099px; /* maximum acceptable width of this section */
+  }
+
+  body:not(.no-literate) .content > pre,
+  body:not(.no-literate) .content > blockquote {
+    width: 545px;
+  }
+}
