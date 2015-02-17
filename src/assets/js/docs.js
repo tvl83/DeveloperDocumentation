@@ -70,10 +70,24 @@ Derived from Flatdoc (http://ricostacruz.com/flatdoc)
 //   d.className = d.className + " active";
 // }
 
-$(document).ready(function(){    
+$(document).ready(function(){
   var title = document.title.split("|")[1].trim().split(" ").join("-");
   if (title === 'Getting-Started') {
     $("#getting-started-control").removeClass("hidden");
   }
   $("#"+title).addClass("active");
+
+  $('.img > a.img-popup').magnificPopup({
+    type:'image',
+    closeOnContentClick: true,
+    closeBtnInside: false,
+    mainClass: 'mfp-no-margins mfp-with-zoom',
+    image: {
+      verticalFit: true
+    },
+    zoom: {
+      enabled: true,
+      duration: 300
+    }
+  });
 });

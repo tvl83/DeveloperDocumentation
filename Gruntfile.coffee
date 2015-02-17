@@ -71,43 +71,6 @@ module.exports = (grunt) ->
           }
         ]
 
-      # build getting started docs
-      getting_started:
-        options:
-          platform: 'getting_started'
-          ext: '.html'
-          layout: 'getting-started-content.hbs'
-
-        files: [
-          {
-            expand: true
-            cwd: '<%= config.content %>/getting-started'
-            src: ['*.md']
-            dest: '<%= config.dist %>/getting-started'
-          },{
-            expand: true
-            cwd: '<%= config.content %>/getting-started'
-            src: ['getting-started.html']
-            dest: '<%= config.dist %>/'
-          }
-        ]
-
-      # build getting started index
-      getting_started_index:
-        options:
-          platform: 'getting_started'
-          ext: '.html'
-          layout: 'getting-started.hbs'
-
-        files: [
-          {
-            expand: true
-            cwd: '<%= config.content %>/getting-started'
-            src: ['getting-started.md']
-            dest: '<%= config.dist %>/'
-          }
-        ]
-
     clean:
       dest: ['<%= config.dist %>/**']
 
