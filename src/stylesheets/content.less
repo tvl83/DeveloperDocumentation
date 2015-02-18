@@ -610,7 +610,6 @@ hr {
   body:not(.no-literate) .content > h5,
   body:not(.no-literate) .content > h6 {
     float: left;
-    clear: none;
   }
 
   body:not(.no-literate) .content > pre + p,
@@ -680,4 +679,19 @@ div.hidden {
   body:not(.no-literate) .content > blockquote {
     width: 545px;
   }
+}
+
+@media (min-width: 1400px) {
+  body:not(.no-literate) .content {
+    width: 1435px;
+  }
+
+  body:not(.no-literate) .content > pre,
+  body:not(.no-literate) .content > blockquote {
+    width: 930px;
+  }
+
+  body:not(.no-literate) .content p.img {
+  margin-right: 370px;
+}
 }
