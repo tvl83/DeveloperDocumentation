@@ -2,6 +2,7 @@
 title: "IDE Setup"
 word: "IDE Setup"
 order: 2.1
+published: false
 ---
 
 # IDE Setup

@@ -2,6 +2,7 @@
 title: "Basic Commands"
 word: "Basic Commands"
 order: 2.4
+published: false
 ---
 
 # Basic Commands

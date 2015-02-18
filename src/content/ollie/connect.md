@@ -2,6 +2,7 @@
 title: Connect
 word: Connect
 order: 2.3
+published: false
 ---
 
 # Connecting to Robots
