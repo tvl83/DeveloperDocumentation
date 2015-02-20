@@ -2,7 +2,7 @@
 
 Here you'll find the documentation site for the Sphero.
 
-[![travis](https://travis-ci.org/orbotix/DeveloperDocumentation?branch=initial-site-content)](https://travis-ci.org/orbotix/DeveloperDocumentation)
+[![Build Status](https://magnum.travis-ci.com/orbotix/DeveloperDocumentation.svg?token=pj2qPhW5DfTSgqqC5AzD&branch=v1-to-v2)](https://magnum.travis-ci.com/orbotix/DeveloperDocumentation)
 
 ### Installation
 
