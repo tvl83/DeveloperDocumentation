@@ -83,7 +83,7 @@ navigation menu. The third one, as the name describes, defines the position it w
 menu.
 
 There is a fourth commonly used primitive `published`, this is true by default and describes whether you want that file
-to be included in the menus or not. So if you wish to only remove a section from the navigation menu instead of deleting
+to be included in the menus or not. So if you wish to only remove a section from the navigation menu instead of deleting it,
 you can pass it false and it would be removed and no longer appear in the menu, but it will still exist in the docs folder.
 
 ### Content Navigation Sub-Menu
