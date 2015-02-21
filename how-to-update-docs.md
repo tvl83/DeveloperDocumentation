@@ -97,3 +97,48 @@ How this works is that all headers, up to `h3`, defined inside the file with the
 and this sub-menu generated. What this means is that if we want to add a new section to this sub-menu it is as easy as
 just adding that section in the contents file with a header, the header would be detected and automatically added.
 
+Let's check and example of this in action, we'll be using a fragment of the `Getting Started` contents file
+(`src/content/sphero/getting-started.md`) shown in the screenshoot above.
+
+```markdown
+# IDE Setup
+
+## Android
+
+*Note: The Sphero Android SDK works with Android 3.1+ and Java Compiler Level 6.0(1.6)+*
+
+### Installing an IDE and the Android SDK
+
+Before you begin to develop applications that interface with robots on Android, you will need to install the Android developer tools and an IDE. In this guide we will use Android Studio since Eclipse is no longer supported for Android development. There are many other well written Android IDEs out there and these configuration steps are most often still applicable.
+
+*Note: You must have JDK 1.7 for Android Studio to work, even though the Robot SDK supports down to 1.6*
+
+ - Install [JDK 1.7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+ - Install [Android Studio and Android SDK](http://developer.android.com/sdk/index.html)
+
+### Installing the Robot SDK
+
+ - Download the latest version of the [Robot SDK](https://github.com/orbotix/Sphero-Android-SDK/zipball/master)
+
+**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK)** 
+
+## Objective-C
+
+*Note: The Robot SDK works with iOS 7.0+*
+
+### Installing Xcode
+
+Before you begin to develop applications that interface with robots on iOS, you will need to install Xcode. As of writing this, there are no other supported IDEs for iOS developement.
+
+ - Install [Xcode](https://macappsto.re/us/Bk9QD.m)
+
+### Installing the Robot SDK
+
+ - Download the latest version of the [Robot SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master)
+
+**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)** 
+```
+
+As we can see in the example above there is nothing special about the contents of the `.md` file, it is just the contents
+of each sub-section with their respective titles(headers). In the screenshoot above the submenu is automatically generated
+and we have an `IDE Setup` item with three levels in the hierarchy of the navigation.
