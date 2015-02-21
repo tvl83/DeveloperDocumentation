@@ -37,13 +37,13 @@ or go to specific part inside the content of a docs section.
 
 ### Main Navigation Menu
 
-This menu is the one on the top left and is our main navigation to move between sections like 'Getting Started', 'SDK',
+This menu is the one on the top left and is our main way of getting around between sections like 'Getting Started', 'SDK',
 or 'Macrolab'. It is auto-generated based in the contents of the folder `src/content/sphero`, in the case of the sphero platform
 , `src/content/ollie` for the ollie, it loos like this:
 
 ![Main Navigation Menu](src/assets/images/main-menu.png?raw=true "Main Navigation Menu")
 
-#### Add a new section to the Main Navigation Menu
+#### Adding a new section to the Main Navigation Menu
 
 All `.md` files inside the content folders for each platform will be parsed and added to the menu based on a few
 config lines at the top of each `.md` file. What this means is that if you wish to add a new section you need only
@@ -78,10 +78,22 @@ This will let you fork [DeveloperDocumentation][repo], edit the content, and sub
 [issue]: https://github.com/orbotix/DeveloperDocumentation/issues/new
 ```
 
-The first `word` and `title` primitives define the title of the page and the wording the for the
-navigation menu, the third one as the name describes defines the position it would have in the afore mentioned
+The first `word` and `title` primitives define the title of the page and the wording for the
+navigation menu. The third one, as the name describes, defines the position it would have in the afore mentioned
 menu.
 
-There is a fourth commonly used primitive `published`, this is true by default but if you wish to only remove
-a section from the navigation menu instead of deleting you can pass it false and it would be removed and no longer
-appear in the menu, but it will still exist in the docs folder.
+There is a fourth commonly used primitive `published`, this is true by default and describes whether you want that file
+to be included in the menus or not. So if you wish to only remove a section from the navigation menu instead of deleting
+you can pass it false and it would be removed and no longer appear in the menu, but it will still exist in the docs folder.
+
+### Content Navigation Sub-Menu
+
+This sub-menu contains links to the headers defined in the `.md` files for each platform. The Content Navigation
+Sub-Menu looks as follows:
+
+![Content Menu](src/assets/images/content-menu.png?raw=true "Content Navigation Menu")
+
+How this works is that all headers, up to `h3`, defined inside the file with the contents for each section are parsed
+and this sub-menu generated. What this means is that if we want to add a new section to this sub-menu it is as easy as
+just adding that section in the contents file with a header, the header would be detected and automatically added.
+
