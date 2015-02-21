@@ -40,7 +40,7 @@ When updated documentation is pushed to the master branch, it is automatically p
 
 Travis calls `grunt deploy`, which is the same as `grunt build`, except that it also zips up the docs for downloading.
 
-To see the latest build, visit the [Travis CI page](https://travis-ci.org/orbotix/DeveloperDocumentation).
+To see the latest build, visit the [Travis CI page](https://magnum.travis-ci.com/orbotix/DeveloperDocumentation).
 
 ### Organization
 
