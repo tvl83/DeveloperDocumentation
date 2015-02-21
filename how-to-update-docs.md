@@ -139,6 +139,6 @@ Before you begin to develop applications that interface with robots on iOS, you 
 **You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)** 
 ```
 
-As we can see in the example above there is nothing special about the contents of the `.md` file, it is just the contents
-of each sub-section with their respective titles(headers). In the screenshoot above the submenu is automatically generated
+As we can see in the example there is nothing special about the contents of the `.md` file, it is just the contents
+of each sub-section with their respective titles (headers). In the screenshoot above the submenu is automatically generated
 and we have an `IDE Setup` item with three levels in the hierarchy of the navigation.
