@@ -46,6 +46,8 @@ To see the latest build, visit the [Travis CI page](https://magnum.travis-ci.com
 
 The majority of the content herein is stored in the `src/content` directory as a set of Markdown files. Assets such as images and javascript are stored in the `src/assets` directory.
 
+For a more detailed guide on how to modify the content and layout of the docs site, please refer to this guide on [how to update the docs site](/how-to-update-docs.md).
+
 ### Attributions
 
 This documentation is based on [Spark Docs](https://github.com/spark/docs/), with influence from [FlatDoc](http://ricostacruz.com/flatdoc/).
