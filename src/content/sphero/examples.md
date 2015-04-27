@@ -1,9 +1,9 @@
 ---
 word: Code Examples
 title: Code Examples
-order: 5.0
+order: 2.3
+published: false
 ---
-
 # Code Examples
 
 ## iOS ButtonDriver Sample App
@@ -379,4 +379,4 @@ With that done, run the program with the `node` command:
 Sphero will start moving on a random direction and will change color and direction.
 
 * [More examples](https://github.com/hybridgroup/cylon-sphero/tree/master/examples)
-* [Package information](http://cylonjs.com/) 
+* [Package information](http://cylonjs.com/)

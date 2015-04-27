@@ -4,7 +4,6 @@ word: "Project Setup"
 order: 2.2
 published: false
 ---
-
 # Project Setup
 
 ## Android

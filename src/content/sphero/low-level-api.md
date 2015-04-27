@@ -1,10 +1,9 @@
 ---
-word: Guides
-title: Guides
-order: 5.1
+word: Low-Level API
+title: Low-Level API
+order: 4
 ---
-
-# Guides
+# Low-Level API
 
 # Bluetooth API
 

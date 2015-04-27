@@ -4,7 +4,6 @@ word: "IDE Setup"
 order: 2.1
 published: false
 ---
-
 # IDE Setup
 
 ## Android
@@ -24,7 +23,7 @@ Before you begin to develop applications that interface with robots on Android, 
 
  - Download the latest version of the [Robot SDK](https://github.com/orbotix/Sphero-Android-SDK/zipball/master)
 
-**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK)** 
+**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-Android-SDK)**
 
 ## Objective-C
 
@@ -40,7 +39,7 @@ Before you begin to develop applications that interface with robots on iOS, you 
 
  - Download the latest version of the [Robot SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master)
 
-**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)** 
+**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)**
 
 ## Swift
 
@@ -56,4 +55,4 @@ Before you begin to develop applications that interface with robots on iOS, you 
 
  - Download the latest version of the [Robot SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master)
 
-**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)** 
+**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)**

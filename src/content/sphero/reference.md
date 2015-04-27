@@ -1,10 +1,8 @@
 ---
-word: Reference
-title: Reference
-order: 6
+word: API Reference
+title: API Reference
+order: 4.1
 ---
-# Reference
-
 # API Quick Reference
 
 ## Device IDs
