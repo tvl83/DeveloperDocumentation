@@ -1,9 +1,9 @@
 ---
-word: Desktop SDKs
-title: Desktop SDKs
+word: Desktop SDK
+title: Desktop SDK
 order: 3
 ---
-# Desktop SDKs
+# Desktop SDK
 
 # JavaScript
 
