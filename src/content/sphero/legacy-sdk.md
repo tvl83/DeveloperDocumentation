@@ -1,11 +1,9 @@
 ---
-word: Legacy V1 SDKs
-title: Legacy V1 SDKs
-order: 8
-published: true
+word: Legacy V1 SDK
+title: Legacy V1 SDK
+order: 5
 ---
-
-# SDK's
+# Legacy V1 SDK
 
 # Android
 
