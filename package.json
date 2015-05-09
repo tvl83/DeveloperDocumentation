@@ -30,6 +30,7 @@
     "grunt-rename": "~0.1.3",
     "grunt-text-replace": "~0.3.11",
     "dox": "0.7.1",
+    "bluebird": "2.9.25",
     "glob": "5.0.5",
     "fs-extra": "0.18.2"
   }

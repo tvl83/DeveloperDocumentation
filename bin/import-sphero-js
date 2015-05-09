@@ -1,14 +1,19 @@
 #!/usr/bin/env node
+
+/* eslint-env node */
+/* eslint no-mixed-requires: 0, no-use-before-define: 0 */
+/* globals Promise: true */
+
 "use strict";
 
-// dependencies
-var exec = require("child_process").exec,
+var Promise = require("bluebird");
+
+var exec = Promise.promisify(require("child_process").exec),
     path = require("path");
 
-// external dependencies
-var glob = require("glob").sync,
+var glob = Promise.promisify(require("glob")),
     dox = require("dox"),
-    fs = require("fs-extra");
+    fs = Promise.promisifyAll(require("fs-extra"));
 
 // constants
 var REPO_URL = "git@github.com:orbotix/sphero.js.git",
@@ -16,109 +21,133 @@ var REPO_URL = "git@github.com:orbotix/sphero.js.git",
     TMP_DIR = path.join(__dirname, "/.sphero");
 
 function main() {
-  fs.removeSync(TMP_DIR);
+  var repo = removeDir().then(clone);
 
-  clone(function() {
-    fs.removeSync(TMP_DIR);
-  });
-}
-
-// dox helper methods
-function getParams(doc) {
-  return doc.tags.filter(function(tag) { return tag.type === "param"; });
-}
-
-var helpers = {
-  params: function(doc) {
-    var params = getParams(doc);
-
-    return [
-      "**Params:**",
-      "",
-      params.map(function(p) {
-        return "- " + "`" + p.name + "`" + " (" + p.types.join("|") + ") " + p.description
-      }).join("\n")
-    ].join("\n")
-  },
-
-  title: function(doc) {
-    var params = getParams(doc);
-
-    var title = [
-      doc.ctx.name + "(",
-      params.map(function(param) {
-        return param.name + " : " + param.types.join("|");
-      }).join(", "),
-      ")"
-    ].join("");
-
-    return "## " + title + "\n";
-  },
-
-  description: function(doc) {
-    return doc.description.full
-      .replace(/\<br\s*\/\>/gi, " ");
-  }
-};
-
-function extract(callback) {
-  var docs = {};
-
-  // extract docs
-  glob(TMP_DIR + "/lib/**/*.js").forEach(function(file) {
-    var filename = file.replace(TMP_DIR + "/lib/", ""),
-        code = fs.readFileSync(file, "utf8"),
-        opts = { raw: true, skipSingleStar: true };
-
-    docs[filename] = dox.parseComments(code, opts);
+  repo.catch(function(err) {
+    console.error(err);
   });
 
-  for (var f in docs) {
-    if (/devices/.test(f)) {
-      parse(f, docs[f]);
-    }
-  }
+  Promise.all([
+    // extract examples
+    repo.then(findExamples).then(addExamples),
 
-  callback();
+    // extract device docs
+    repo.then(findDevices).then(addDevices)
+  ]).then(removeDir);
 }
 
-function parse(file, docs) {
-  log("parsing :", file);
-
-  var body = [];
-
-  docs.forEach(function(doc) {
-    body.push([
-      helpers.title(doc),
-      helpers.description(doc),
-      helpers.params(doc),
-      ""
-    ].join("\n"));
-  });
-
-  write(file.replace(/js$/, "md"), body.join("\n").trim());
+function removeDir() {
+  return fs.removeAsync(TMP_DIR);
 }
 
-function write(file, contents) {
-  var dest = path.join(DEST_DIR, path.basename(file));
-  fs.outputFileSync(dest, contents);
-}
-
-function clone(callback) {
+function clone() {
   console.log("cloning repo");
-  exec("git clone " + REPO_URL + " " + TMP_DIR, function(err) {
-    if (err) {
-      console.error(err);
-      throw new Error("an error occured while cloning repo");
-    }
-
-    extract(callback);
-  });
+  return exec("git clone " + REPO_URL + " " + TMP_DIR);
 }
 
-function log() {
-  var args = [].slice.call(arguments);
-  console.log.apply(null, ["  "].concat(args));
+function findExamples() {
+  console.log("extracting examples");
+
+  function extract(paths) {
+    var examples = {};
+
+    paths.forEach(function(file) {
+      var name = file.replace(TMP_DIR + "/examples/", "").replace(".js", "");
+      examples[name] = fs.readFileAsync(file, "utf-8");
+    });
+
+    return examples;
+  }
+
+  return glob(TMP_DIR + "/examples/**/*.js").then(extract);
+}
+
+function addExamples(examples) {
+  function decorate(code) {
+    return code
+      .replace(/^/mg, "    ")
+      .replace(/^\s+$/mg, "");
+  }
+
+  function write(name) {
+    var dest = path.join(DEST_DIR, "examples", name + ".md");
+    return function(example) { return fs.outputFileAsync(dest, example); };
+  }
+
+  var files = Object.keys(examples).map(function(name) {
+    var example = examples[name];
+    return example.then(decorate).then(write(name));
+  });
+
+  return Promise.all(files);
+}
+
+function findDevices() {
+  console.log("extracting docs");
+  function extract(paths) {
+    var docs = {};
+
+    paths.forEach(function(file) {
+      var name = file.replace(TMP_DIR + "/lib/devices/", "").replace(".js", "");
+      docs[name] = fs.readFileAsync(file, "utf-8").then(function(code) {
+        return dox.parseComments(code, { raw: true, skipSingleStar: true });
+      });
+    });
+
+    return docs;
+  }
+
+  return glob(TMP_DIR + "/lib/devices/*.js").then(extract);
+}
+
+function addDevices(docs) {
+  function generate(blocks) {
+    function isPublic(block) { return !block.isPrivate; }
+
+    function title(doc) {
+      return [
+        "## ",
+        doc.ctx.name + "(",
+        doc.params.map(function(p) {
+          return p.name + " : " + p.types.join("|");
+        }).join(", "),
+        ")"
+      ].join("");
+    }
+
+    function description(doc) {
+      return doc.description.full.replace(/\<br\s*\/\>/gi, " ").trim();
+    }
+
+    function params(doc) {
+      return [
+        "**Params:**",
+        "",
+        doc.params.map(function(p) {
+          return [
+            "- `", p.name, "` (", p.types.join("|"), ") ", p.description
+          ].join("");
+        }).join("\n")
+      ].join("\n");
+    }
+
+    return blocks.filter(isPublic).map(function(doc) {
+      doc.params = doc.tags.filter(function(t) { return t.type === "param"; });
+      return [ title(doc), description(doc), params(doc) ].join("\n\n");
+    }).join("\n\n");
+  }
+
+  function write(name) {
+    var dest = path.join(DEST_DIR, "devices", name + ".md");
+    return function(contents) { return fs.outputFileAsync(dest, contents); };
+  }
+
+  var files = Object.keys(docs).map(function(name) {
+    var page = docs[name];
+    return page.then(generate).then(write(name));
+  });
+
+  return Promise.all(files);
 }
 
 main();
