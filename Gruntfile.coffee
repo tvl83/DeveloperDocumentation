@@ -44,7 +44,11 @@ module.exports = (grunt) ->
           platform: 'sphero'
           ext: '.html'
           layout: 'docs.hbs'
-          partials: ['src/content/partials/*.html']
+          partials: [
+            'src/content/partials/*.html',
+            'src/content/partials/sphero-js/*.md',
+            'src/content/partials/mobile-sdk/*.md'
+          ]
 
         files: [
           {
