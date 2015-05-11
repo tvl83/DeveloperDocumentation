@@ -17,7 +17,7 @@ var glob = Promise.promisify(require("glob")),
 
 // constants
 var REPO_URL = "git@github.com:orbotix/sphero.js.git",
-    DEST_DIR = path.join(__dirname, "/../", "/src/content/imports/sphero-js"),
+    DEST_DIR = path.join(__dirname, "/../", "/src/content/partials/sphero-js"),
     TMP_DIR = path.join(__dirname, "/.sphero");
 
 function main() {
@@ -44,6 +44,39 @@ function clone() {
   console.log("cloning repo");
   return exec("git clone " + REPO_URL + " " + TMP_DIR);
 }
+
+var helpers = {
+  params: function(doc) {
+    var params = getParams(doc);
+
+    return [
+      "**Params:**",
+      "",
+      params.map(function(p) {
+        return "- " + "`" + p.name + "`" + " (" + p.types.join("|") + ") " + p.description
+      }).join("\n")
+    ].join("\n")
+  },
+
+  title: function(doc) {
+    var params = getParams(doc);
+
+    var title = [
+      doc.ctx.name + "(",
+      params.map(function(param) {
+        return param.name + " : " + param.types.join("|");
+      }).join(", "),
+      ")"
+    ].join("");
+
+    return "### " + title + "\n";
+  },
+
+  description: function(doc) {
+    return doc.description.full
+      .replace(/\<br\s*\/\>/gi, " ");
+  }
+};
 
 function findExamples() {
   console.log("extracting examples");
