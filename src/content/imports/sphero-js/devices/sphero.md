@@ -154,12 +154,10 @@ You may wish to change this, perhaps to resolve finer accelerations.
 
 This command takes an index for the supported range, as explained below:
 
-IDX | Range
---- | -----
-0   | ±2Gs
-1   | ±4Gs
-2   | ±8Gs (default)
-3   | ±16Gs
+- `0`: ±2Gs
+- `1`: ±4Gs
+- `2`: ±8Gs (default)
+- `3`: ±16Gs
 
 **Params:**
 
@@ -252,13 +250,13 @@ Each motor (left and right requires a mode and a power value from 0-255.
 This command will disable stabilization is both mode's aren't "ignore", so
 you'll need to re-enable it once you're done.
 
-Mode | Description
----- | -----------
-0x00 | Off (motor is open circuit)
-0x01 | Forward
-0x02 | Reverse
-0x03 | Brake (motor is shorted)
-0x04 | Ignore (motor mode and power is left unchanged
+Possible modes:
+
+- `0x00`: Off (motor is open circuit)
+- `0x01`: Forward
+- `0x02`: Reverse
+- `0x03`: Brake (motor is shorted)
+- `0x04`: Ignore (motor mode and power is left unchanged
 
 **Params:**
 
@@ -294,25 +292,23 @@ See below for the bit definitions.
 ### getPermOptionFlags(callback)
 
 The Get Permanent Option Flags command returns Sphero's permanent option
-flags, as a bit field:
+flags, as a bit field.
 
-Bit # | Description
------ | -----------
-0     | Set to prevent Sphero from immediately going to sleep when placed
-        in the charger and connected over Bluetooth.
-1     | Set to enable Vector Drive, that is, when Sphero is stopped and a
-        new roll command is issued it achieves the heading before moving
-        along it.
-2     | Set to disable self-leveling when Sphero is inserted into the
-        charger.
-3     | Set to force the tail LED always on.
-4     | Set to enable motion timeouts (see DID 02h, CID 34h)
-5     | Set to enable retail Demo Mode (when placed in the charger, ball
-        runs a slow rainbow macro for 60 minutes and then goes to sleep).
-6     | Set double tap awake sensitivity to Light
-7     | Set double tap awake sensitivity to Heavy
-8     | Enable gyro max async message (NOT SUPPORTED IN VERSION 1.47)
-6-31  | Unassigned
+Here's possible bit fields, and their descriptions:
+
+- `0`: Set to prevent Sphero from immediately going to sleep when placed in
+     the charger and connected over Bluetooth.
+- `1`: Set to enable Vector Drive, that is, when Sphero is stopped and a new
+     roll command is issued it achieves the heading before moving along it.
+- `2`: Set to disable self-leveling when Sphero is inserted into the charger.
+- `3`: Set to force the tail LED always on.
+- `4`: Set to enable motion timeouts (see DID 02h, CID 34h)
+- `5`: Set to enable retail Demo Mode (when placed in the charger, ball runs
+     a slow rainbow macro for 60 minutes and then goes to sleep).
+- `6`: Set double tap awake sensitivity to Light
+- `7`: Set double tap awake sensitivity to Heavy
+- `8`: Enable gyro max async message (NOT SUPPORTED IN VERSION 1.47)
+- `6-31`: Unassigned
 
 **Params:**
 
@@ -335,10 +331,8 @@ See below for the bit definitions.
 The Get Temporary Option Flags command returns Sphero's temporary option
 flags, as a bit field:
 
-Bit # | Description
------ | -----------
-0     | Enable Stop On Disconnect behavior
-1-31  | Unassigned
+- `0`: Enable Stop On Disconnect behavior
+- `1-31`: Unassigned
 
 **Params:**
 
@@ -354,8 +348,8 @@ resources are currently unavailable to send the requested block back. The
 actual configuration block data returns in an asynchronous message of type
 0x04 due to its length (if there is no error).
 
-ID = 0x00 requests the factory configuration block
-ID = 0x01 requests the user configuration block, which is updated with
+ID = `0x00` requests the factory configuration block
+ID = `0x01` requests the user configuration block, which is updated with
 current values first
 
 **Params:**
