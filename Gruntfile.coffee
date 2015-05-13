@@ -6,6 +6,12 @@ module.exports = (grunt) ->
       content: 'src/content'
       layouts: 'src/layouts'
 
+    # import Sphero.js docs
+    execute:
+      target: {
+        src: ['bin/import-sphero-js']
+      }
+
     assemble:
       # general options and defaults
       options:
@@ -167,6 +173,7 @@ module.exports = (grunt) ->
   grunt.initConfig gruntConfig
 
   grunt.loadNpmTasks 'assemble'
+  grunt.loadNpmTasks 'grunt-execute'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -179,6 +186,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-text-replace'
 
   grunt.registerTask 'build', [
+    'execute',
     'test',
     'clean',
     'assemble',
