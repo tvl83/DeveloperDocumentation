@@ -1,4 +1,4 @@
-## ping(callback : Function)
+### ping(callback)
 
 The Ping command verifies the Sphero is awake and receiving commands.
 
@@ -6,7 +6,7 @@ The Ping command verifies the Sphero is awake and receiving commands.
 
 - `callback` (Function) triggered when Sphero has been pinged
 
-## version(callback : Function)
+### version(callback)
 
 The Version command returns a batch of software and hardware information
 about Sphero.
@@ -15,7 +15,7 @@ about Sphero.
 
 - `callback` (Function) triggered with version information
 
-## controlUARTTx(callback : Function)
+### controlUARTTx(callback)
 
 The Control UART Tx command enables or disables the CPU's UART transmit
 line so another client can configure the Bluetooth module.
@@ -24,7 +24,7 @@ line so another client can configure the Bluetooth module.
 
 - `callback` (Function) function to be triggered after write
 
-## setDeviceName(name : String, callback : Function)
+### setDeviceName(name, callback)
 
 The Set Device Name command assigns Sphero an internal name. This value is
 then produced as part of the Get Bluetooth Info command.
@@ -39,7 +39,7 @@ This field defaults to the Bluetooth advertising name of Sphero.
 - `name` (String) what name to give to the Sphero
 - `callback` (Function) function to be triggered when the name is set
 
-## getBluetoothInfo(callback : Function)
+### getBluetoothInfo(callback)
 
 Triggers the callback with a structure containing
 
@@ -51,7 +51,7 @@ Triggers the callback with a structure containing
 
 - `callback` (Function) function to be triggered with Bluetooth info
 
-## setAutoReconnect(flag : Number, time : Number, callback : Function)
+### setAutoReconnect(flag, time, callback)
 
 The Set Auto Reconnect command tells Sphero's BT module whether or not it
 should automatically reconnect to the previously-connected Apple mobile
@@ -63,7 +63,7 @@ device.
 - `time` (Number) how many seconds after start to enable auto reconnect
 - `callback` (Function) function to be triggered after write
 
-## getAutoReconnect(callback : Function)
+### getAutoReconnect(callback)
 
 The Get Auto Reconnect command returns the Bluetooth auto reconnect values
 as defined above in the Set Auto Reconnect command.
@@ -72,7 +72,7 @@ as defined above in the Set Auto Reconnect command.
 
 - `callback` (Function) function to be triggered with reconnect data
 
-## getPowerState(callback : Function)
+### getPowerState(callback)
 
 The Get Power State command returns Sphero's current power state, and some
 additional parameters:
@@ -95,7 +95,7 @@ Possible power states:
 
 - `callback` (Function) function to be triggered with power state data
 
-## setPowerNotification(flag : Number, callback : Function)
+### setPowerNotification(flag, callback)
 
 The Set Power Notification command enables sphero to asynchronously notify
 the user of power state periodically (or immediately, when a change occurs)
@@ -108,7 +108,7 @@ Sphero is unpaired.
 - `flag` (Number) whether or not to send notifications (0 - no, 1 - yes)
 - `callback` (Function) function to be triggered when done writing
 
-## sleep(wakeup : Number, macro : Number, orbBasic : Number, callback : Function)
+### sleep(wakeup, macro, orbBasic, callback)
 
 The Sleep command puts Sphero to sleep immediately.
 
@@ -120,7 +120,7 @@ sleep.
 - `orbBasic` (Number) if non-zero, Sphero will attempt to run an orbBasic program from this line number
 - `callback` (Function) function to be triggered when done writing
 
-## getVoltageTripPoints(callback : Function)
+### getVoltageTripPoints(callback)
 
 The Get Voltage Trip Points command returns the trip points Sphero uses to
 determine Low battery and Critical battery.
@@ -132,7 +132,7 @@ respectively are returned as 700 and 650.
 
 - `callback` (Function) function to be triggered with trip point data
 
-## setVoltageTripPoints(vLow : Number, vCrit : Number, callback : Function)
+### setVoltageTripPoints(vLow, vCrit, callback)
 
 The Set Voltage Trip Points command assigns the voltage trip points for Low
 and Critical battery voltages.
@@ -152,7 +152,7 @@ Sphero forces itself to sleep, depending on the battery pack. Be careful.
 - `vCrit` (Number) new voltage trigger for Crit battery
 - `callback` (Function) function to be triggered when done writing
 
-## setInactivityTimeout(time : Number, callback : Function)
+### setInactivityTimeout(time, callback)
 
 The Set Inactivity Timeout command sets the timeout delay before Sphero
 goes to sleep automatically.
@@ -165,7 +165,7 @@ alter it to any value of 60 seconds or greater.
 - `time` (Number) new delay before sleeping
 - `callback` (Function) function to be triggered when done writing
 
-## jumpToBootloader(callback : Function)
+### jumpToBootloader(callback)
 
 The Jump To Bootloader command requests a jump into the Bootloader to
 prepare for a firmware download.
@@ -177,7 +177,7 @@ Specification.
 
 - `callback` (Function) function to be triggered when done writing
 
-## runL1Diags(callback : Function)
+### runL1Diags(callback)
 
 The Perform Level 1 Diagnostics command is a developer-level command to
 help diagnose aberrant behaviour in Sphero.
@@ -191,7 +191,7 @@ For more details, see the Sphero API documentation.
 
 - `callback` (Function) function to be triggered with diagnostic data
 
-## runL2Diags(callback : Function)
+### runL2Diags(callback)
 
 The Perform Level 2 Diagnostics command is a developer-level command to
 help diagnose aberrant behaviour in Sphero.
@@ -205,7 +205,7 @@ For more details, see the Sphero API documentation.
 
 - `callback` (Function) function to be triggered with diagnostic data
 
-## clearCounters(callback : Function)
+### clearCounters(callback)
 
 The Clear Counters command is a developer-only command to clear the various
 system counters created by the L2 diagnostics.
@@ -216,7 +216,7 @@ It is denied when the Sphero is in Normal mode.
 
 - `callback` (Function) function to be triggered when done writing
 
-## assignTime(time : Number, callback : Function)
+### assignTime(time, callback)
 
 The Assign Time command sets a specific value to Sphero's internal 32-bit
 relative time counter.
@@ -226,7 +226,7 @@ relative time counter.
 - `time` (Number) the new value to set
 - `callback` (Function) function to be triggered when done writing
 
-## pollPacketTimes(time : Number, callback : Function)
+### pollPacketTimes(time, callback)
 
 The Poll Packet Times command helps users profile the transmission and
 processing latencies in Sphero.

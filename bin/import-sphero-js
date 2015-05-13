@@ -139,10 +139,10 @@ function addDevices(docs) {
 
     function title(doc) {
       return [
-        "## ",
+        "### ",
         doc.ctx.name + "(",
         doc.params.map(function(p) {
-          return p.name + " : " + p.types.join("|");
+          return p.name;
         }).join(", "),
         ")"
       ].join("");

@@ -1,4 +1,4 @@
-## setHeading(heading : Number, callback : Function)
+### setHeading(heading, callback)
 
 The Set Heading command tells Sphero to adjust it's orientation, by
 commanding a new reference heading (in degrees).
@@ -10,7 +10,7 @@ If stabilization is enabled, Sphero will respond immediately to this.
 - `heading` (Number) Sphero's new reference heading, in degrees (0-359)
 - `callback` (Function) function to be triggered after writing
 
-## setStabilization(flag : Number, callback : Function)
+### setStabilization(flag, callback)
 
 The Set Stabilization command turns Sphero's internal stabilization on or
 off, depending on the flag provided.
@@ -20,7 +20,7 @@ off, depending on the flag provided.
 - `flag` (Number) stabilization setting flag (0 - off, 1 - on)
 - `callback` (Function) function to be triggered after writing
 
-## setRotationRate(rotation : Number, callback : Function)
+### setRotationRate(rotation, callback)
 
 The Set Rotation Rate command allows control of the rotation rate Sphero
 uses to meet new heading commands.
@@ -36,7 +36,7 @@ The provided value is in units of 0.784 degrees/sec.
 - `rotation` (Number) new rotation rate (0-255)
 - `callback` (Function) function to be triggered after writing
 
-## getChassisId(callback : Function)
+### getChassisId(callback)
 
 The Get Chassis ID command returns the 16-bit chassis ID Sphero was
 assigned at the factory.
@@ -45,7 +45,7 @@ assigned at the factory.
 
 - `callback` (Function) function to be triggered with a response
 
-## setChassisId(chassisId : Number, callback : Function)
+### setChassisId(chassisId, callback)
 
 The Set Chassis ID command assigns Sphero's chassis ID, a 16-bit value.
 
@@ -56,7 +56,7 @@ This command only works if you're at the factory.
 - `chassisId` (Number) new chassis ID
 - `callback` (Function) function to be triggered after writing
 
-## selfLevel(opts : Object, callback : Function)
+### selfLevel(opts, callback)
 
 The Self Level command controls Sphero's self-level routine.
 
@@ -75,7 +75,7 @@ For more detail on options, see the Sphero API documentation.
 - `opts` (Object) self-level routine options
 - `callback` (Function) function to be triggered after writing
 
-## setDataStreaming(opts : Object, callback : Function)
+### setDataStreaming(opts, callback)
 
 The Set Data Streaming command configures Sphero's built-in support for
 asynchronously streaming certain system and sensor data.
@@ -99,7 +99,7 @@ documentation.
 - `opts` (Object) object containing streaming data options
 - `callback` (Function) function to be triggered after writing
 
-## configureCollisions(opts : Object, cb : Function)
+### configureCollisions(opts, cb)
 
 The Configure Collisions command configures Sphero's collision detection
 with the provided parameters.
@@ -123,7 +123,7 @@ These include:
 - `opts` (Object) object containing collision configuration opts
 - `cb` (Function) function to be triggered after writing
 
-## configureLocator(opts : Object, callback : Function)
+### configureLocator(opts, callback)
 
 The Configure Locator command configures Sphero's streaming location data
 service.
@@ -144,7 +144,7 @@ The following options must be provided:
 - `opts` (Object) object containing locator service configuration
 - `callback` (Function) function to be triggered after writing
 
-## setAccelRange(idx : Number, callback : Function)
+### setAccelRange(idx, callback)
 
 The Set Accelerometer Range command tells Sphero what accelerometer range
 to use.
@@ -166,7 +166,7 @@ IDX | Range
 - `idx` (Number) what accelerometer range to use
 - `callback` (Function) function to be triggered after writing
 
-## readLocator(callback : Function)
+### readLocator(callback)
 
 The Read Locator command gets Sphero's current position (X,Y), component
 velocities, and speed-over-ground (SOG).
@@ -178,7 +178,7 @@ signed cm/sec, and the SOG is unsigned cm/sec.
 
 - `callback` (Function) function to be triggered with data
 
-## setRGBLed(opts : Object, callback : Function)
+### setRGBLed(opts, callback)
 
 The Set RGB LED command sets the colors of Sphero's RGB LED.
 
@@ -192,7 +192,7 @@ cycles.
 - `opts` (Object) object containing RGB values for Sphero's LED
 - `callback` (Function) function to be triggered after writing
 
-## setBackLed(brightness : Number, callback : Function)
+### setBackLed(brightness, callback)
 
 The Set Back LED command allows brightness adjustment of Sphero's tail
 light.
@@ -204,7 +204,7 @@ This value does not persist across power cycles.
 - `brightness` (Number) brightness to set to Sphero's tail light
 - `callback` (Function) function to be triggered after writing
 
-## getRGBLed(callback : Function)
+### getRGBLed(callback)
 
 The Get RGB LED command fetches the current "user LED color" value, stored
 in Sphero's configuration.
@@ -215,7 +215,7 @@ This value may or may not be what's currently displayed by Sphero's LEDs.
 
 - `callback` (Function) function to be triggered after writing
 
-## roll(speed : Number, heading : Number, [state] : Number, callback : Function)
+### roll(speed, heading, [state], callback)
 
 The Roll command tells Sphero to roll along the provided vector.
 
@@ -231,7 +231,7 @@ Permissible heading values are 0 to 359 inclusive.
 - `[state]` (Number) optional state parameter
 - `callback` (Function) function to be triggered after writing
 
-## boost(boost : Number, callback : Function)
+### boost(boost, callback)
 
 The Boost command executes Sphero's boost macro.
 
@@ -242,7 +242,7 @@ It takes a 1-byte parameter, 0x01 to start boosting, or 0x00 to stop.
 - `boost` (Number) whether or not to boost (1 - yes, 0 - no)
 - `callback` (Function) function to be triggered after writing
 
-## setRawMotors(opts : Object, callback : Function)
+### setRawMotors(opts, callback)
 
 The Set Raw Motors command allows manual control over one or both of
 Sphero's motor output values.
@@ -265,7 +265,7 @@ Mode | Description
 - `opts` (Object) object with mode/power values (e.g. lmode, lpower)
 - `callback` (Function) function to be triggered after writing
 
-## setMotionTimeout(time : Number, callback : Function)
+### setMotionTimeout(time, callback)
 
 The Set Motion Timeout command gives Sphero an ultimate timeout for the
 last motion command to keep Sphero from rolling away in the case of
@@ -278,7 +278,7 @@ This defaults to 2000ms (2 seconds) upon wakeup.
 - `time` (Number) timeout length in milliseconds
 - `callback` (Function) function to be triggered when done writing
 
-## setPermOptionFlags(flags : Array, callback : Function)
+### setPermOptionFlags(flags, callback)
 
 The Set Permanent Option Flags command assigns Sphero's permanent option
 flags to the provided values, and writes them immediately to the config
@@ -291,7 +291,7 @@ See below for the bit definitions.
 - `flags` (Array) permanent option flags
 - `callback` (Function) function to be triggered when done writing
 
-## getPermOptionFlags(callback : Function)
+### getPermOptionFlags(callback)
 
 The Get Permanent Option Flags command returns Sphero's permanent option
 flags, as a bit field:
@@ -318,7 +318,7 @@ Bit # | Description
 
 - `callback` (Function) function triggered with option flags data
 
-## setTempOptionFlags(flags : Array, callback : Function)
+### setTempOptionFlags(flags, callback)
 
 The Set Temporary Option Flags command assigns Sphero's temporary option
 flags to the provided values. These do not persist across power cycles.
@@ -330,7 +330,7 @@ See below for the bit definitions.
 - `flags` (Array) permanent option flags
 - `callback` (Function) function to be triggered when done writing
 
-## getTempOptionFlags(callback : Function)
+### getTempOptionFlags(callback)
 
 The Get Temporary Option Flags command returns Sphero's temporary option
 flags, as a bit field:
@@ -344,7 +344,7 @@ Bit # | Description
 
 - `callback` (Function) function triggered with option flags data
 
-## getConfigBlock(id : Number, callback : Function)
+### getConfigBlock(id, callback)
 
 The Get Configuration Block command retrieves one of Sphero's configuration
 blocks.
@@ -363,7 +363,7 @@ current values first
 - `id` (Number) which configuration block to fetch
 - `callback` (Function) function to be triggered after writing
 
-## setSSBModBlock(pwd : Number, block : Array, callback : Function)
+### setSSBModBlock(pwd, block, callback)
 
 The Set SSB Modifier Block command allows the SSB to be patched with a new
 modifier block - including the Boost macro.
@@ -376,7 +376,7 @@ The changes take effect immediately.
 - `block` (Array) array of bytes with the data to be written
 - `callback` (Function) a function to be triggered after writing
 
-## setDeviceMode(mode : Number, callback : Function)
+### setDeviceMode(mode, callback)
 
 The Set Device Mode command assigns the operation mode of Sphero based on
 the supplied mode value.
@@ -390,7 +390,7 @@ the supplied mode value.
 - `mode` (Number) which mode to set Sphero to
 - `callback` (Function) function to be called after writing
 
-## setConfigBlock(block : Array, callback : Function)
+### setConfigBlock(block, callback)
 
 The Set Config Block command accepts an exact copy of the configuration
 block, and loads it into the RAM copy of the configuration block.
@@ -405,7 +405,7 @@ Block command.
 - `block` (Array) - An array of bytes with the data to be written
 - `callback` (Function) - To be triggered when done
 
-## getDeviceMode(callback : Function)
+### getDeviceMode(callback)
 
 The Get Device Mode command gets the current device mode of Sphero.
 
@@ -418,7 +418,7 @@ Possible values:
 
 - `callback` (Function) function to be called with response
 
-## getSSB(callback : Function)
+### getSSB(callback)
 
 The Get SSB command retrieves Sphero's Soul Block.
 
@@ -429,7 +429,7 @@ in an asynchronous message of type 0x0D, due to it's 0x440 byte length
 
 - `callback` (Function) function to be called with response
 
-## setSSB(pwd : Number, block : Array, callback : Function)
+### setSSB(pwd, block, callback)
 
 The Set SSB command sets Sphero's Soul Block.
 
@@ -444,7 +444,7 @@ You need to supply the password in order for it to work.
 - `block` (Array) array of bytes with the data to be written
 - `callback` (Function) a function to be triggered after writing
 
-## refillBank(type : Number, callback : Function)
+### refillBank(type, callback)
 
 The Refill Bank command attempts to refill either the Boost bank (0x00) or
 the Shield bank (0x01) by attempting to deduct the respective refill cost
@@ -462,7 +462,7 @@ EEXEC error (0x08)
 - `type` (Number) what bank to refill (0 - Boost, 1 - Shield)
 - `callback` (Function) function to be called with response
 
-## buyConsumable(id : Number, qty : Number, callback : Function)
+### buyConsumable(id, qty, callback)
 
 The Buy Consumable command attempts to spend cores on consumables.
 
@@ -483,7 +483,7 @@ error (0x08)
 - `qty` (Number) how many consumables to buy
 - `callback` (Function) function to be called with response
 
-## useConsumable(id : Number, callback : Function)
+### useConsumable(id, callback)
 
 The Use Consumable command attempts to use a consumable if the quantity
 remaining is non-zero.
@@ -499,7 +499,7 @@ zero, this returns an EEXEC error (0x08).
 - `id` (Number) what consumable to use
 - `callback` (Function) function to be called with response
 
-## grantCores(pw : Number, qty : Number, flags : Number, callback : Function)
+### grantCores(pw, qty, flags, callback)
 
 The Grant Cores command adds the supplied number of cores.
 
@@ -517,7 +517,7 @@ If the password is not accepted, this command fails without consequence.
 - `flags` (Number) 8-bit flags byte
 - `callback` (Function) function to be triggered with response
 
-## addXp(pw : Number, qty : Number, callback : Function)
+### addXp(pw, qty, callback)
 
 The Grant XP command increases XP by adding the supplied number of minutes
 of drive time, and immediately commits the SSB to flash.
@@ -530,7 +530,7 @@ If the password is not accepted, this command fails without consequence.
 - `qty` (Number) 8-bit number of minutes of drive time to add
 - `callback` (Function) function to be triggered with response
 
-## levelUpAttr(pw : Number, id : Number, callback : Function)
+### levelUpAttr(pw, id, callback)
 
 The Level Up Attribute command attempts to increase the level of the
 specified attribute by spending attribute points.
@@ -558,7 +558,7 @@ If the password is not accepted, this command fails without consequence.
 - `id` (Number) which attribute to level up
 - `callback` (Function) function to be triggered with response
 
-## getPasswordSeed(callback : Function)
+### getPasswordSeed(callback)
 
 The Get Password Seed command returns Sphero's password seed.
 
@@ -570,7 +570,7 @@ Refer to the Sphero API documentation, Appendix D for more information.
 
 - `callback` (Function) function to be triggered with response
 
-## enableSSBAsyncMsg(flag : Number, callback : Function)
+### enableSSBAsyncMsg(flag, callback)
 
 The Enable SSB Async Messages command turns on/off soul block related
 asynchronous messages.
@@ -585,7 +585,7 @@ This feature defaults to off.
 - `flag` (Number) whether or not to enable async messages
 - `callback` (Function) function to be triggered after write
 
-## runMacro(id : Number, callback : Function)
+### runMacro(id, callback)
 
 The Run Macro command attempts to execute the specified macro.
 
@@ -611,7 +611,7 @@ specified ID code can't be found.
 - `id` (Number) 8-bit Macro ID to run
 - `callback` (Function) function to be triggered with response
 
-## saveTempMacro(macro : Array, callback : Function)
+### saveTempMacro(macro, callback)
 
 The Save Temporary Macro stores the attached macro definition into the
 temporary RAM buffer for later execution.
@@ -625,7 +625,7 @@ all macros, the longest definition that can be sent is 254 bytes.
 - `macro` (Array) array of bytes with the data to be written
 - `callback` (Function) function to be triggered with response
 
-## saveMacro(macro : Array, callback : Function)
+### saveMacro(macro, callback)
 
 Save macro
 
@@ -644,7 +644,7 @@ As with all macros, the longest definition that can be sent is 254 bytes.
 - `macro` (Array) array of bytes with the data to be written
 - `callback` (Function) function to be triggered with response
 
-## reInitMacroExec(callback : Function)
+### reInitMacroExec(callback)
 
 The Reinit Macro Executive command terminates any running macro, and
 reinitializes the macro system.
@@ -655,7 +655,7 @@ The table of any persistent user macros is cleared.
 
 - `callback` (Function) function to be triggered with response
 
-## abortMacro(callback : Function)
+### abortMacro(callback)
 
 The Abort Macro command aborts any executing macro, and returns both it's
 ID code and the command number currently in progress.
@@ -669,7 +669,7 @@ of 0xFFFF as the CmdNum indicates the macro was unkillable.
 
 - `callback` (Function) function to be triggered with response
 
-## getMacroStatus(callback : Function)
+### getMacroStatus(callback)
 
 The Get Macro Status command returns the ID code and command number of the
 currently executing macro.
@@ -681,7 +681,7 @@ command number is left over from the previous macro.
 
 - `callback` (Function) function to be triggered with response
 
-## setMacroParam(index : Number, val1 : Number, val2 : Number, callback : Function)
+### setMacroParam(index, val1, val2, callback)
 
 The Set Macro Parameter command allows system globals that influence
 certain macro commands to be selectively altered from outside of the macro
@@ -706,7 +706,7 @@ For more details, please refer to the Sphero Macro document.
 - `val2` (Number) value 2 to set
 - `callback` (Function) function to be triggered with response
 
-## appendMacroChunk(chunk : Array, callback : Function)
+### appendMacroChunk(chunk, callback)
 
 The Append Macro Chunk project stores the attached macro definition into
 the temporary RAM buffer for later execution.
@@ -730,7 +730,7 @@ certain the larger buffer is completely initialized.
 - `chunk` (Array) macro chunk to write
 - `callback` (Function) function to be triggered with response
 
-## eraseOrbBasicStorage(area : Number, callback : Function)
+### eraseOrbBasicStorage(area, callback)
 
 The Erase orbBasic Storage command erases any existing program in the
 specified storage area.
@@ -743,7 +743,7 @@ storage area.
 - `area` (Number) which area to erase
 - `callback` (Function) function to be triggered with response
 
-## appendOrbBasicFragment(area : Number, code : String, callback : Function)
+### appendOrbBasicFragment(area, code, callback)
 
 The Append orbBasic Fragment command appends a patch of orbBasic code to
 existing ones in the specified storage area (0x00 for RAM, 0x01 for
@@ -764,7 +764,7 @@ storage area is full.
 - `code` (String) orbBasic code to append
 - `callback` (Function) function to be triggered with response
 
-## executeOrbBasicProgram(area : Number, slMSB : Number, slLSB : Number, callback : Function)
+### executeOrbBasicProgram(area, slMSB, slLSB, callback)
 
 The Execute orbBasic Program command attempts to run a program in the
 specified storage area, beginning at the specified line number.
@@ -778,7 +778,7 @@ This command will fail if there is already an orbBasic program running.
 - `slLSB` (Number) start line
 - `callback` (Function) function to be triggered with response
 
-## abortOrbBasicProgram(callback : Function)
+### abortOrbBasicProgram(callback)
 
 The Abort orbBasic Program command aborts execution of any currently
 running orbBasic program.
@@ -787,7 +787,7 @@ running orbBasic program.
 
 - `callback` (Function) function to be triggered with response
 
-## submitValueToInput(val : Number, callback : Function)
+### submitValueToInput(val, callback)
 
 The Submit value To Input command takes the place of the typical user
 console in orbBasic and allows a user to answer an input request.
@@ -802,7 +802,7 @@ Refer to the orbBasic language document for further information.
 - `val` (Number) value to respond with
 - `callback` (Function) function to be triggered with response
 
-## commitToFlash(callback : Function)
+### commitToFlash(callback)
 
 The Commit To Flash command copies the current orbBasic RAM program to
 persistent flash storage.

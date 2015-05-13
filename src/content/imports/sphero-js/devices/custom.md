@@ -1,4 +1,4 @@
-## color(color : Number|String|Object, callback : Function)
+### color(color, callback)
 
 The Color command wraps Sphero's built-in setRGB command, allowing for
 a greater range of possible inputs.
@@ -8,7 +8,7 @@ a greater range of possible inputs.
 - `color` (Number|String|Object) what color to change Sphero to
 - `callback` (Function) function to be triggered with response
 
-## randomColor(callback : Function)
+### randomColor(callback)
 
 The Random Color command sets Sphero to a randomly-generated color.
 
@@ -16,7 +16,7 @@ The Random Color command sets Sphero to a randomly-generated color.
 
 - `callback` (Function) function to be triggered with response
 
-## getColor(callback : Function)
+### getColor(callback)
 
 Passes the color of the sphero RGB LED to the callback (err, data)
 
@@ -24,7 +24,7 @@ Passes the color of the sphero RGB LED to the callback (err, data)
 
 - `callback` (Function) function to be triggered with response
 
-## detectCollisions(callback : Function)
+### detectCollisions(callback)
 
 The Detect Collisions command sets up Sphero's collision detection system,
 and automatically parses asynchronous packets to re-emit collision events
@@ -34,7 +34,7 @@ to 'collision' event listeners.
 
 - `callback` (Function) function to be triggered with response
 
-## startCalibration(callback : Function)
+### startCalibration(callback)
 
 The Start Calibration command sets up Sphero for manual heading
 calibration.
@@ -49,7 +49,7 @@ stabilization.
 
 - `callback` (Function) function to be triggered with response
 
-## finishCalibration(callback : Function)
+### finishCalibration(callback)
 
 The Finish Calibration command ends Sphero's calibration mode, by setting
 the new heading as current, turning off the back LED, and re-enabling
