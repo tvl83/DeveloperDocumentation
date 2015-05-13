@@ -24,7 +24,7 @@ Passes the color of the sphero RGB LED to the callback (err, data)
 
 - `callback` (Function) function to be triggered with response
 
-## detectCollisions()
+## detectCollisions(callback : Function)
 
 The Detect Collisions command sets up Sphero's collision detection system,
 and automatically parses asynchronous packets to re-emit collision events
@@ -32,9 +32,9 @@ to 'collision' event listeners.
 
 **Params:**
 
+- `callback` (Function) function to be triggered with response
 
-
-## startCalibration()
+## startCalibration(callback : Function)
 
 The Start Calibration command sets up Sphero for manual heading
 calibration.
@@ -47,9 +47,9 @@ stabilization.
 
 **Params:**
 
+- `callback` (Function) function to be triggered with response
 
-
-## finishCalibration()
+## finishCalibration(callback : Function)
 
 The Finish Calibration command ends Sphero's calibration mode, by setting
 the new heading as current, turning off the back LED, and re-enabling
@@ -57,3 +57,4 @@ stabilization.
 
 **Params:**
 
+- `callback` (Function) function to be triggered with response

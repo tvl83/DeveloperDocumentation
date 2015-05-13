@@ -30,3 +30,17 @@ Download and install the text editor of your choice:
 
 # Custom Commands
   {{>custom}}
+
+# Examples
+## Bluetooth Info
+  {{>bluetooth-info}}
+## Calibration
+  {{>calibration}}
+## Collision Detection
+  {{>collision-detection}}
+## Color
+  {{>color}}
+## Data Streaming
+  {{>data-streaming}}
+## Roll
+  {{>roll}}

@@ -17,7 +17,7 @@ var glob = Promise.promisify(require("glob")),
 
 // constants
 var REPO_URL = "git@github.com:orbotix/sphero.js.git",
-    DEST_DIR = path.join(__dirname, "/../", "/src/content/partials/sphero-js"),
+    DEST_DIR = path.join(__dirname, "/../", "/src/content/imports/sphero-js"),
     TMP_DIR = path.join(__dirname, "/.sphero");
 
 function main() {
