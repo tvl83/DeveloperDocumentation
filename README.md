@@ -1,14 +1,10 @@
 # Developer Docs Site
 
-Here you'll find the documentation site for the Sphero.
-
 [![Build Status](https://magnum.travis-ci.com/orbotix/DeveloperDocumentation.svg?token=pj2qPhW5DfTSgqqC5AzD&branch=v1-to-v2)](https://magnum.travis-ci.com/orbotix/DeveloperDocumentation)
 
 ### Installation
 
-Install Brew from:  http://brew.sh/
-
-To host this documentation locally, you'll need Node.js and npm:
+To host this documentation locally you'll need Node.js and npm on your workstation. You can install these tools using your preferred package manager for your OS. The following example uses [Brew](http://brew.sh) for OS X:
 
     brew install nodejs
 
@@ -16,23 +12,23 @@ If you don't already have Grunt installed, you'll need that too:
 
     npm install -g grunt-cli
 
-Once you have the dependencies, navigate to this repository's directory on your machine, and then:
+Once you have these installed, navigate to this repository's directory on your machine and run:
 
     npm install
 
-to install any other necessary dependencies:
+This will install any other necessary dependencies needed for this application to run on your workstation.
 
-### Hosting locally
+### Hosting Locally
 
-This documentation uses Grunt and Assemble to build and push documentation updates. Once everything's installed, to build the documentation, type:
+This documentation uses [Grunt](http://gruntjs.com/) and [Assemble](http://assemble.io/) to build and push documentation updates. Once everything's installed, run the following command to build the documentation:
 
-`grunt build`
+    grunt build
 
-The documentation will be located in the `build` directory. If you would like to host this documentation locally, try:
+The generated documentation will be located in the `build` directory. If you would like to host this documentation locally, run:
 
-`node app`
+    grunt server
 
-Point your browswer to [http://localhost:3000](http://localhost:3000)
+This should open your default web browser to the docs homepage [http://localhost:9000](http://localhost:9000)
 
 ### Deployment
 
@@ -67,5 +63,3 @@ Making a contribution is as simple as forking this repository, making edits to y
 ### License
 
 These files have been made available online through a [Creative Commons Attribution-ShareAlike 3.0 license](http://creativecommons.org/licenses/by-sa/3.0/us/).
-
-You are welcome to distribute, remix, and use these files for commercial purposes. If you do so, please attribute the original design to Spark Labs, Inc. both on the website and on the physical packaging of the product or in the instruction manual. All derivative works must be published under the same or a similar license.
