@@ -1,62 +1,65 @@
+---
+date: <%= new Date() %>
+---
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
 
-  <title>Sphero Docs | {{title}}</title>
+    <title>Sphero Docs | {{title}}</title>
 
-  <!-- jQuery -->
-  <script src="{{assets}}/js/jquery-1.11.1.min.js"></script>
+    <!-- jQuery -->
+    <script src="{{assets}}/js/jquery-1.11.1.min.js"></script>
 
-  <!-- Let me embed vines -->
-  <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
+    <!-- Let me embed vines -->
+    <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{{assets}}/sphero.ico" type="image/x-icon" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{assets}}/sphero.ico" type="image/x-icon" />
 
-  <!-- Vendor theme mods -->
-  <script src="{{assets}}/js/jquery-styling.js"></script>
-  <script src="{{assets}}/js/prettify.js"></script>
+    <!-- Vendor theme mods -->
+    <script src="{{assets}}/js/jquery-styling.js"></script>
+    <script src="{{assets}}/js/prettify.js"></script>
 
-  <!-- Sphero theme mods -->
-  <link href="{{assets}}/css/style.css" rel="stylesheet">
+    <!-- Sphero theme mods -->
+    <link href="{{assets}}/css/style.css" rel="stylesheet">
 
-  <!-- Meta -->
-  <meta content="Sphero" property="og:title">
-  <meta content="Documentation for Sphero" name="description">
+    <!-- Meta -->
+    <meta content="Sphero" property="og:title">
+    <meta content="Documentation for Sphero" name="description">
 
-</head>
-<body role="static" class="static">
+  </head>
+  <body role="static" class="static">
 
-  <div id="site-wrapper">
-    <div id="site-canvas">
-      {{> mobile-nav}}
-      <header class="large-12 columns navigation">
-        <div class="left-side">
-          <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
-          <a href="/sphero/start">Sphero</a>
-          <!--<a href="/ollie/start">Ollie</a>-->
-        </div>
-        <div class="right-side">
-          <div class="home-button">
-            <div class="ion-ios7-cart-outline"></div>
-            <a href="http://store.gosphero.com">Shop</a>
+    <div id="site-wrapper">
+      <div id="site-canvas">
+        {{> mobile-nav}}
+        <header class="large-12 columns navigation">
+          <div class="left-side">
+            <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
+            <a href="/sphero/start">Sphero</a>
+            <!--<a href="/ollie/start">Ollie</a>-->
           </div>
-          <div class="home-button">
-            <div class="ion-arrow-left-c"></div>
-            <a href="http://gosphero.com">gosphero.com</a>
+          <div class="right-side">
+            <div class="home-button">
+              <div class="ion-ios7-cart-outline"></div>
+              <a href="http://store.gosphero.com">Shop</a>
+            </div>
+            <div class="home-button">
+              <div class="ion-arrow-left-c"></div>
+              <a href="http://gosphero.com">gosphero.com</a>
+            </div>
           </div>
-        </div>
-      </header>
-      {{> body}}
-      {{> footer}}
+        </header>
+        {{> body}}
+        {{> footer}}
+      </div>
     </div>
-  </div>
 
-  <!-- Custom -->
-  <script src="{{assets}}/js/static.js"></script>
-  <script src="{{assets}}/js/mobile-nav.js"></script>
-</body>
+    <!-- Custom -->
+    <script src="{{assets}}/js/static.js"></script>
+    <script src="{{assets}}/js/mobile-nav.js"></script>
+  </body>
 </html>

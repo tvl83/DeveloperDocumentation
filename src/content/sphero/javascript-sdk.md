@@ -23,24 +23,25 @@ Download and install the text editor of your choice:
   - [Visual Studio Code](https://code.visualstudio.com/)
 
 # Core Sphero Commands
-  {{>core}}
+  {{> core}}
 
 # Sphero Commands
-  {{>sphero}}
+  {{> sphero}}
 
 # Custom Commands
-  {{>custom}}
+  {{> custom}}
 
 # Examples
+
 ## Bluetooth Info
-  {{>bluetooth-info}}
+  {{> bluetooth-info}}
 ## Calibration
-  {{>calibration}}
+  {{> calibration}}
 ## Collision Detection
-  {{>collision-detection}}
+  {{> collision-detection}}
 ## Color
-  {{>color}}
+  {{> color}}
 ## Data Streaming
-  {{>data-streaming}}
+  {{> data-streaming}}
 ## Roll
-  {{>roll}}
+  {{> roll}}
