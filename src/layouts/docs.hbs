@@ -32,10 +32,6 @@ date: <%= new Date() %>
     <link rel="stylesheet" href="{{assets}}/css/magnific-popup.css">
     <script src="{{assets}}/js/jquery.magnific-popup.min.js"></script>
 
-    <!-- Bootstrap -->
-    <!-- <link href="{{assets}}/css/bootstrap.css" rel="stylesheet"> -->
-    <!-- <script src="{{assets}}/js/bootstrap.min.js"></script> -->
-
     <!-- Meta -->
     <meta content="Sphero" property="og:title">
     <meta content="Documentation for Sphero" name="description">
@@ -44,10 +40,8 @@ date: <%= new Date() %>
   <body role="flatdoc">
     <div id="site-wrapper">
       <div id="site-canvas">
+        {{> mobile-nav}}
         <div id="docs">
-          <header id="site-menu">
-            {{> mobile-nav}}
-          </header>
           <header class="large-12 columns navigation always-show">
             <div class="left-side">
               <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
