@@ -6,11 +6,11 @@
     orb.connect(function() {
       // options for streaming data
       var opts = {
-        n: 400,
+        n: 200,
         m: 1,
-        mask1: 0x00000060,
+        mask1: 0x00000000,
         pcnt: 0,
-        mask2: 0xFF800000
+        mask2: 0x01800000
       };
 
       orb.setDataStreaming(opts);
@@ -20,5 +20,5 @@
         console.log("  data:", data);
       });
 
-      orb.roll(255, 0);
+      orb.roll(150, 0);
     });

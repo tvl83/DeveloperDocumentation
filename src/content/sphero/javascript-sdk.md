@@ -41,7 +41,25 @@ Download and install the text editor of your choice:
   {{> collision-detection}}
 ## Color
   {{> color}}
+## Conway's Game
+  {{> conway}}
 ## Data Streaming
   {{> data-streaming}}
+## Keyboard
+  {{> roll}}
 ## Roll
   {{> roll}}
+## Shakeometer
+  {{> shakeometer}}
+## Stream Accel-one
+  {{> stream-accel-one}}
+## Stream Accelerometer
+  {{> stream-accelerometer}}
+## Stream Gyroscope
+  {{> stream-gyroscope}}
+## Stream IMU-Angles
+  {{> stream-imu-angles}}
+## Stream Odometer
+  {{> stream-imu-angles}}
+## Stream Velocity
+  {{> stream-velocity}}

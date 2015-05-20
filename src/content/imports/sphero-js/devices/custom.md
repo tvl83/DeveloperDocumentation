@@ -58,3 +58,87 @@ stabilization.
 **Params:**
 
 - `callback` (Function) function to be triggered with response
+
+### streamOdometer([sps=5], [remove=false])
+
+Starts streaming of odometer data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `odometer` event to get the data.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
+
+### streamVelocity([sps=5], [remove=false])
+
+Starts streaming of velocity data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `velocity` event to get the velocity values.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
+
+### streamAccelOne([sps=5], [remove=false])
+
+Starts streaming of accelOne data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `accelOne` event to get the data.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
+
+### streamIMUAngles([sps=5], [remove=false])
+
+Starts streaming of IMU angles data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `imuAngles` event to get the data.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
+
+### streamAccelerometer([sps=5], [remove=false])
+
+Starts streaming of accelerometer data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `accelerometer` event to get the data.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
+
+### streamGyroscope([sps=5], [remove=false])
+
+Starts streaming of gyroscope data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `gyroscope` event to get the data.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
+
+### streamMotorsBackEmf([sps=5], [remove=false])
+
+Starts streaming of motor back EMF data
+
+It uses sphero's data streaming command. User needs to listen
+for the `dataStreaming` or `motorsBackEmf` event to get the data.
+
+**Params:**
+
+- `[sps=5]` (Number) samples per second
+- `[remove=false]` (Boolean) forces velocity streaming to stop
