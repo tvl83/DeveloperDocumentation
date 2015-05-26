@@ -131,9 +131,13 @@ function addDevices(docs) {
       ].join("\n");
     }
 
+    function code(doc) {
+      return [ "```" + "\n" + doc.code + "\n" + "```" ];
+    }
+
     return blocks.filter(isPublic).map(function(doc) {
       doc.params = doc.tags.filter(function(t) { return t.type === "param"; });
-      return [ title(doc), description(doc), params(doc) ].join("\n\n");
+      return [ title(doc), description(doc), params(doc), code(doc) ].join("\n\n");
     }).join("\n\n");
   }
 
