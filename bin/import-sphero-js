@@ -132,12 +132,23 @@ function addDevices(docs) {
     }
 
     function code(doc) {
-      return [ "```" + "\n" + doc.code + "\n" + "```" ];
+      var examples = doc.tags.filter(function(t) {
+        return t.type === "example";
+      }).map(function(t) { return t.string; });
+
+      if (examples.length) {
+        return [ "```", examples.join("\n\n"), "```" ].join("\n");
+      }
     }
 
     return blocks.filter(isPublic).map(function(doc) {
       doc.params = doc.tags.filter(function(t) { return t.type === "param"; });
-      return [ title(doc), description(doc), params(doc), code(doc) ].join("\n\n");
+      return [
+        title(doc),
+        description(doc),
+        params(doc),
+        code(doc)
+      ].join("\n\n");
     }).join("\n\n");
   }
 
