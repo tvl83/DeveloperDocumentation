@@ -10,12 +10,7 @@ If stabilization is enabled, Sphero will respond immediately to this.
 - `heading` (Number) Sphero's new reference heading, in degrees (0-359)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setHeading = function(heading, callback) {
-  heading = utils.intToHexArray(heading, 2);
-  command(commands.setHeading, heading, callback);
-};
-```
+
 
 ### setStabilization(flag, callback)
 
@@ -27,12 +22,7 @@ off, depending on the flag provided.
 - `flag` (Number) stabilization setting flag (0 - off, 1 - on)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setStabilization = function(flag, callback) {
-  flag &= 0x01;
-  command(commands.setStabilization, [flag], callback);
-};
-```
+
 
 ### setRotationRate(rotation, callback)
 
@@ -50,12 +40,7 @@ The provided value is in units of 0.784 degrees/sec.
 - `rotation` (Number) new rotation rate (0-255)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setRotationRate = function(rotation, callback) {
-  rotation &= 0xFF;
-  command(commands.setRotationRate, [rotation], callback);
-};
-```
+
 
 ### getChassisId(callback)
 
@@ -66,11 +51,7 @@ assigned at the factory.
 
 - `callback` (Function) function to be triggered with a response
 
-```
-device.getChassisId = function(callback) {
-  command(commands.getChassisId, null, callback);
-};
-```
+
 
 ### setChassisId(chassisId, callback)
 
@@ -83,12 +64,7 @@ This command only works if you're at the factory.
 - `chassisId` (Number) new chassis ID
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setChassisId = function(chassisId, callback) {
-  chassisId = utils.intToHexArray(chassisId, 2);
-  command(commands.getChassisId, chassisId, callback);
-};
-```
+
 
 ### selfLevel(opts, callback)
 
@@ -109,17 +85,7 @@ For more detail on options, see the Sphero API documentation.
 - `opts` (Object) self-level routine options
 - `callback` (Function) function to be triggered after writing
 
-```
-device.selfLevel = function(opts, callback) {
-  var data = [
-    opts.options,
-    opts.angleLimit,
-    opts.timeout,
-    opts.trueTime
-  ];
-  command(commands.selfLevel, data, callback);
-};
-```
+
 
 ### setDataStreaming(opts, callback)
 
@@ -145,24 +111,7 @@ documentation.
 - `opts` (Object) object containing streaming data options
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setDataStreaming = function(opts, callback) {
-  var n = utils.intToHexArray(opts.n, 2),
-      m = utils.intToHexArray(opts.m, 2),
-      mask1 = utils.intToHexArray(opts.mask1, 4),
-      pcnt = opts.pcnt &= 0xff,
-      mask2 = utils.intToHexArray(opts.mask2, 4);
 
-  device.ds = {
-    mask1: opts.mask1,
-    mask2: opts.mask2
-  };
-
-  var data = [].concat(n, m, mask1, pcnt, mask2);
-
-  command(commands.setDataStreaming, data, callback);
-};
-```
 
 ### configureCollisions(opts, cb)
 
@@ -188,19 +137,7 @@ These include:
 - `opts` (Object) object containing collision configuration opts
 - `cb` (Function) function to be triggered after writing
 
-```
-device.configureCollisions = function(opts, cb) {
-  var data = [
-    opts.meth,
-    opts.xt,
-    opts.xs,
-    opts.yt,
-    opts.ys,
-    opts.dead
-  ];
-  command(commands.setCollisionDetection, data, cb);
-};
-```
+
 
 ### configureLocator(opts, callback)
 
@@ -223,18 +160,7 @@ The following options must be provided:
 - `opts` (Object) object containing locator service configuration
 - `callback` (Function) function to be triggered after writing
 
-```
-device.configureLocator = function(opts, callback) {
-  var flags = opts.flags & 0xFF,
-      x = utils.intToHexArray(opts.x, 2),
-      y = utils.intToHexArray(opts.y, 2),
-      yawTare = utils.intToHexArray(opts.yawTare, 2);
 
-  var data = [].concat(flags, x, y, yawTare);
-
-  command(commands.locator, data, callback);
-};
-```
 
 ### setAccelRange(idx, callback)
 
@@ -256,12 +182,7 @@ This command takes an index for the supported range, as explained below:
 - `idx` (Number) what accelerometer range to use
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setAccelRange = function(idx, callback) {
-  idx &= idx;
-  command(commands.setAccelerometer, [idx], callback);
-};
-```
+
 
 ### readLocator(callback)
 
@@ -275,11 +196,7 @@ signed cm/sec, and the SOG is unsigned cm/sec.
 
 - `callback` (Function) function to be triggered with data
 
-```
-device.readLocator = function(callback) {
-  command(commands.readLocator, null, callback);
-};
-```
+
 
 ### setRGBLed(opts, callback)
 
@@ -295,17 +212,7 @@ cycles.
 - `opts` (Object) object containing RGB values for Sphero's LED
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setRGBLed = function(opts, callback) {
-  var data = [opts.red, opts.green, opts.blue, opts.flag || 0x01];
 
-  for (var i = 0; i < data.length; i++) {
-    data[i] &= 0xFF;
-  }
-
-  command(commands.setRGBLed, data, callback);
-};
-```
 
 ### setBackLed(brightness, callback)
 
@@ -319,11 +226,7 @@ This value does not persist across power cycles.
 - `brightness` (Number) brightness to set to Sphero's tail light
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setBackLed = function(brightness, callback) {
-  command(commands.setBackLed, [brightness], callback);
-};
-```
+
 
 ### getRGBLed(callback)
 
@@ -336,11 +239,7 @@ This value may or may not be what's currently displayed by Sphero's LEDs.
 
 - `callback` (Function) function to be triggered after writing
 
-```
-device.getRGBLed = function(callback) {
-  command(commands.getRGBLed, null, callback);
-};
-```
+
 
 ### roll(speed, heading, [state], callback)
 
@@ -358,22 +257,7 @@ Permissible heading values are 0 to 359 inclusive.
 - `[state]` (Number) optional state parameter
 - `callback` (Function) function to be triggered after writing
 
-```
-device.roll = function(speed, heading, state, callback) {
-  if (typeof state === "function" || typeof state === "undefined") {
-    callback = state;
-    state = 0x01;
-  }
 
-  speed &= 0xFF;
-  heading = utils.intToHexArray(heading, 2);
-  state &= 0x03;
-
-  var data = [].concat(speed, heading, state);
-
-  command(commands.roll, data, callback);
-};
-```
 
 ### boost(boost, callback)
 
@@ -386,12 +270,7 @@ It takes a 1-byte parameter, 0x01 to start boosting, or 0x00 to stop.
 - `boost` (Number) whether or not to boost (1 - yes, 0 - no)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.boost = function(boost, callback) {
-  boost &= 0x01;
-  command(commands.boost, [boost], callback);
-};
-```
+
 
 ### setRawMotors(opts, callback)
 
@@ -416,18 +295,7 @@ Possible modes:
 - `opts` (Object) object with mode/power values (e.g. lmode, lpower)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setRawMotors = function(opts, callback) {
-  var lmode = opts.lmode & 0x07,
-      lpower = opts.lpower & 0xFF,
-      rmode = opts.rmode & 0x07,
-      rpower = opts.rpower & 0xFF;
 
-  var data = [lmode, lpower, rmode, rpower];
-
-  command(commands.setRawMotors, data, callback);
-};
-```
 
 ### setMotionTimeout(time, callback)
 
@@ -442,12 +310,7 @@ This defaults to 2000ms (2 seconds) upon wakeup.
 - `time` (Number) timeout length in milliseconds
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setMotionTimeout = function(time, callback) {
-  time = utils.intToHexArray(time, 2);
-  command(commands.setMotionTimeout, time, callback);
-};
-```
+
 
 ### setPermOptionFlags(flags, callback)
 
@@ -462,12 +325,7 @@ See below for the bit definitions.
 - `flags` (Array) permanent option flags
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setPermOptionFlags = function(flags, callback) {
-  flags = utils.intToHexArray(flags, 4);
-  command(commands.setOptionsFlag, flags, callback);
-};
-```
+
 
 ### getPermOptionFlags(callback)
 
@@ -496,11 +354,7 @@ Here's possible bit fields, and their descriptions:
 
 - `callback` (Function) function triggered with option flags data
 
-```
-device.getPermOptionFlags = function(callback) {
-  command(commands.getOptionsFlag, null, callback);
-};
-```
+
 
 ### setTempOptionFlags(flags, callback)
 
@@ -514,12 +368,7 @@ See below for the bit definitions.
 - `flags` (Array) permanent option flags
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setTempOptionFlags = function(flags, callback) {
-  flags = utils.intToHexArray(flags, 4);
-  command(commands.setTempOptFlags, flags, callback);
-};
-```
+
 
 ### getTempOptionFlags(callback)
 
@@ -533,11 +382,7 @@ flags, as a bit field:
 
 - `callback` (Function) function triggered with option flags data
 
-```
-device.getTempOptionFlags = function(callback) {
-  command(commands.getTempOptFlags, null, callback);
-};
-```
+
 
 ### getConfigBlock(id, callback)
 
@@ -558,18 +403,7 @@ current values first
 - `id` (Number) which configuration block to fetch
 - `callback` (Function) function to be triggered after writing
 
-```
-device.getConfigBlock = function(id, callback) {
-  id &= 0xFF;
-  command(commands.getConfigBlock, [id], callback);
-};
 
-device._setSSBBlock = function(cmd, pwd, block, callback) {
-  pwd = utils.intToHexArray(pwd, 4);
-  var data = [].concat(pwd, block);
-  command(cmd, data, callback);
-};
-```
 
 ### setSSBModBlock(pwd, block, callback)
 
@@ -584,11 +418,7 @@ The changes take effect immediately.
 - `block` (Array) array of bytes with the data to be written
 - `callback` (Function) a function to be triggered after writing
 
-```
-device.setSSBModBlock = function(pwd, block, callback) {
-  device._setSSBBlock(commands.setSSBParams, pwd, block, callback);
-};
-```
+
 
 ### setDeviceMode(mode, callback)
 
@@ -604,12 +434,7 @@ the supplied mode value.
 - `mode` (Number) which mode to set Sphero to
 - `callback` (Function) function to be called after writing
 
-```
-device.setDeviceMode = function(mode, callback) {
-  mode &= 0x01;
-  command(commands.setDeviceMode, [mode], callback);
-};
-```
+
 
 ### setConfigBlock(block, callback)
 
@@ -626,11 +451,7 @@ Block command.
 - `block` (Array) - An array of bytes with the data to be written
 - `callback` (Function) - To be triggered when done
 
-```
-device.setConfigBlock = function(block, callback) {
-  command(commands.setConfigBlock, block, callback);
-};
-```
+
 
 ### getDeviceMode(callback)
 
@@ -645,11 +466,7 @@ Possible values:
 
 - `callback` (Function) function to be called with response
 
-```
-device.getDeviceMode = function(callback) {
-  command(commands.getDeviceMode, null, callback);
-};
-```
+
 
 ### getSSB(callback)
 
@@ -662,11 +479,7 @@ in an asynchronous message of type 0x0D, due to it's 0x440 byte length
 
 - `callback` (Function) function to be called with response
 
-```
-device.getSSB = function(callback) {
-  command(commands.getSSB, null, callback);
-};
-```
+
 
 ### setSSB(pwd, block, callback)
 
@@ -683,11 +496,7 @@ You need to supply the password in order for it to work.
 - `block` (Array) array of bytes with the data to be written
 - `callback` (Function) a function to be triggered after writing
 
-```
-device.setSSB = function(pwd, block, callback) {
-  device._setSSBBlock(commands.setSSB, pwd, block, callback);
-};
-```
+
 
 ### refillBank(type, callback)
 
@@ -707,12 +516,7 @@ EEXEC error (0x08)
 - `type` (Number) what bank to refill (0 - Boost, 1 - Shield)
 - `callback` (Function) function to be called with response
 
-```
-device.refillBank = function(type, callback) {
-  type &= 0xFF;
-  command(commands.ssbRefill, [type], callback);
-};
-```
+
 
 ### buyConsumable(id, qty, callback)
 
@@ -735,13 +539,7 @@ error (0x08)
 - `qty` (Number) how many consumables to buy
 - `callback` (Function) function to be called with response
 
-```
-device.buyConsumable = function(id, qty, callback) {
-  id &= 0xFF;
-  qty &= 0xFF;
-  command(commands.ssbBuy, [id, qty], callback);
-};
-```
+
 
 ### useConsumable(id, callback)
 
@@ -759,12 +557,7 @@ zero, this returns an EEXEC error (0x08).
 - `id` (Number) what consumable to use
 - `callback` (Function) function to be called with response
 
-```
-device.useConsumable = function(id, callback) {
-  id &= 0xFF;
-  command(commands.ssbUseConsumeable, [id], callback);
-};
-```
+
 
 ### grantCores(pw, qty, flags, callback)
 
@@ -784,24 +577,7 @@ If the password is not accepted, this command fails without consequence.
 - `flags` (Number) 8-bit flags byte
 - `callback` (Function) function to be triggered with response
 
-```
-device.grantCores = function(pw, qty, flags, callback) {
-  pw = utils.intToHexArray(pw, 4);
-  qty = utils.intToHexArray(qty, 4);
-  flags &= 0xFF;
 
-  var data = [].concat(pw, qty, flags);
-
-  command(commands.ssbGrantCores, data, callback);
-};
-
-device._xpOrLevelUp = function(cmd, pw, gen, cb) {
-  pw = utils.intToHexArray(pw, 4);
-  gen &= 0xFF;
-
-  command(cmd, [].concat(pw, gen), cb);
-};
-```
 
 ### addXp(pw, qty, callback)
 
@@ -816,11 +592,7 @@ If the password is not accepted, this command fails without consequence.
 - `qty` (Number) 8-bit number of minutes of drive time to add
 - `callback` (Function) function to be triggered with response
 
-```
-device.addXp = function(pw, qty, callback) {
-  device._xpOrLevelUp(commands.ssbAddXp, pw, qty, callback);
-};
-```
+
 
 ### levelUpAttr(pw, id, callback)
 
@@ -850,11 +622,7 @@ If the password is not accepted, this command fails without consequence.
 - `id` (Number) which attribute to level up
 - `callback` (Function) function to be triggered with response
 
-```
-device.levelUpAttr = function(pw, id, callback) {
-  device._xpOrLevelUp(commands.ssbLevelUpAttr, pw, id, callback);
-};
-```
+
 
 ### getPasswordSeed(callback)
 
@@ -868,11 +636,7 @@ Refer to the Sphero API documentation, Appendix D for more information.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.getPasswordSeed = function(callback) {
-  command(commands.getPwSeed, null, callback);
-};
-```
+
 
 ### enableSSBAsyncMsg(flag, callback)
 
@@ -889,12 +653,7 @@ This feature defaults to off.
 - `flag` (Number) whether or not to enable async messages
 - `callback` (Function) function to be triggered after write
 
-```
-device.enableSSBAsyncMsg = function(flag, callback) {
-  flag &= 0x01;
-  command(commands.ssbEnableAsync, [flag], callback);
-};
-```
+
 
 ### runMacro(id, callback)
 
@@ -922,12 +681,7 @@ specified ID code can't be found.
 - `id` (Number) 8-bit Macro ID to run
 - `callback` (Function) function to be triggered with response
 
-```
-device.runMacro = function(id, callback) {
-  id &= 0xFF;
-  command(commands.runMacro, [id], callback);
-};
-```
+
 
 ### saveTempMacro(macro, callback)
 
@@ -943,11 +697,7 @@ all macros, the longest definition that can be sent is 254 bytes.
 - `macro` (Array) array of bytes with the data to be written
 - `callback` (Function) function to be triggered with response
 
-```
-device.saveTempMacro = function(macro, callback) {
-  command(commands.saveTempMacro, macro, callback);
-};
-```
+
 
 ### saveMacro(macro, callback)
 
@@ -968,11 +718,7 @@ As with all macros, the longest definition that can be sent is 254 bytes.
 - `macro` (Array) array of bytes with the data to be written
 - `callback` (Function) function to be triggered with response
 
-```
-device.saveMacro = function(macro, callback) {
-  command(commands.saveMacro, macro, callback);
-};
-```
+
 
 ### reInitMacroExec(callback)
 
@@ -985,11 +731,7 @@ The table of any persistent user macros is cleared.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.reInitMacroExec = function(callback) {
-  command(commands.initMacroExecutive, null, callback);
-};
-```
+
 
 ### abortMacro(callback)
 
@@ -1005,11 +747,7 @@ of 0xFFFF as the CmdNum indicates the macro was unkillable.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.abortMacro = function(callback) {
-  command(commands.abortMacro, null, callback);
-};
-```
+
 
 ### getMacroStatus(callback)
 
@@ -1023,11 +761,7 @@ command number is left over from the previous macro.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.getMacroStatus = function(callback) {
-  command(commands.macroStatus, null, callback);
-};
-```
+
 
 ### setMacroParam(index, val1, val2, callback)
 
@@ -1054,15 +788,7 @@ For more details, please refer to the Sphero Macro document.
 - `val2` (Number) value 2 to set
 - `callback` (Function) function to be triggered with response
 
-```
-device.setMacroParam = function(index, val1, val2, callback) {
-  command(
-    commands.setMacroParam,
-    utils.argsToHexArray(index, val1, val2),
-    callback
-  );
-};
-```
+
 
 ### appendMacroChunk(chunk, callback)
 
@@ -1088,11 +814,7 @@ certain the larger buffer is completely initialized.
 - `chunk` (Array) macro chunk to write
 - `callback` (Function) function to be triggered with response
 
-```
-device.appendMacroChunk = function(chunk, callback) {
-  command(commands.appendTempMacroChunk, chunk, callback);
-};
-```
+
 
 ### eraseOrbBasicStorage(area, callback)
 
@@ -1107,12 +829,7 @@ storage area.
 - `area` (Number) which area to erase
 - `callback` (Function) function to be triggered with response
 
-```
-device.eraseOrbBasicStorage = function(area, callback) {
-  area &= 0xFF;
-  command(commands.eraseOBStorage, [area], callback);
-};
-```
+
 
 ### appendOrbBasicFragment(area, code, callback)
 
@@ -1135,13 +852,7 @@ storage area is full.
 - `code` (String) orbBasic code to append
 - `callback` (Function) function to be triggered with response
 
-```
-device.appendOrbBasicFragment = function(area, code, callback) {
-  area &= 0xFF;
-  var data = [].concat(area, code);
-  command(commands.appendOBFragment, data, callback);
-};
-```
+
 
 ### executeOrbBasicProgram(area, slMSB, slLSB, callback)
 
@@ -1157,15 +868,7 @@ This command will fail if there is already an orbBasic program running.
 - `slLSB` (Number) start line
 - `callback` (Function) function to be triggered with response
 
-```
-device.executeOrbBasicProgram = function(area, slMSB, slLSB, callback) {
-  command(
-    commands.execOBProgram,
-    utils.argsToHexArray(area, slMSB, slLSB),
-    callback
-  );
-};
-```
+
 
 ### abortOrbBasicProgram(callback)
 
@@ -1176,11 +879,7 @@ running orbBasic program.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.abortOrbBasicProgram = function(callback) {
-  command(commands.abortOBProgram, null, callback);
-};
-```
+
 
 ### submitValueToInput(val, callback)
 
@@ -1197,12 +896,7 @@ Refer to the orbBasic language document for further information.
 - `val` (Number) value to respond with
 - `callback` (Function) function to be triggered with response
 
-```
-device.submitValueToInput = function(val, callback) {
-  val = utils.intToHexArray(val, 4);
-  command(commands.answerInput, val, callback);
-};
-```
+
 
 ### commitToFlash(callback)
 
@@ -1215,13 +909,3 @@ It will fail if a program is currently executing out of flash.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.commitToFlash = function(callback) {
-  command(commands.commitToFlash, null, callback);
-};
-
-device._commitToFlashAlias = function(callback) {
-  command(commands.commitToFlashAlias, null, callback);
-};
-};
-```
