@@ -33,7 +33,7 @@ Before you begin to develop applications that interface with robots on iOS, you 
 
  *Note: Robot applications will not work in the emulator due to the dependency on Bluetooth*
 
-### Create a New Project in <br /> Xcode
+### Create a New Project in Xcode
 
 #### Making a new project
 
@@ -262,6 +262,9 @@ If your Sphero is paired with your phone, you'll be able to control it with the 
 
 ### How It Works
 
+The `ButtonDriverViewController` imports dependencies, and defines required
+properties.
+
 ```
 #import "ButtonDriveViewController.h"
 #import <RobotKit/RobotKit.h>
@@ -272,8 +275,7 @@ If your Sphero is paired with your phone, you'll be able to control it with the 
 @property (strong, nonatomic) RKConvenienceRobot* robot;
 ```
 
-The `ButtonDriverViewController` imports dependencies, and defines required
-properties.
+When the app receives the `appDidBecomeActive` event, it tells RobotKit to start looking for a Sphero.
 
 ```
 -(void)appDidBecomeActive:(NSNotification*)notification {
@@ -281,13 +283,13 @@ properties.
 }
 ```
 
-When the app recieves the `appDidBecomeActive` event, it tells RobotKit to start looking for Spheros.
+The RobotKit discovery agent is then told to add an observer to trigger event when a robot's state changes.
 
 ```
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
 ```
 
-The RobotKit discovery agent is then told to add an observer to trigger event when a robot's state changes.
+Then, inside the handler, specific actions are defined for different possible robot states.
 
 ```
 -(void) handleRobotStateChangeNotification:(RKRobotChangedStateNotification *) n{
@@ -308,7 +310,7 @@ The RobotKit discovery agent is then told to add an observer to trigger event wh
 }
 ```
 
-Then, inside the handler, specific actions are defined for different possible robot states.
+Two methods then tell the robot to drive or stop the Sphero when buttons are pressed.
 
 ```
 -(IBAction)twoSeventyPressed:(id)sender {
@@ -320,7 +322,7 @@ Then, inside the handler, specific actions are defined for different possible ro
 }
 ```
 
-Two methods then tell the robot to drive or stop the Sphero when buttons are pressed.
+Finally, when the app is closed, it will stop looking for new robots.
 
 ```
 -(void)appWillResignActive:(NSNotification*)notification {
@@ -328,5 +330,3 @@ Two methods then tell the robot to drive or stop the Sphero when buttons are pre
   [_robot disconnect];
 }
 ```
-
-Finally, when the app is closed, it will stop looking for new robots.
