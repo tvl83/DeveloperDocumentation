@@ -401,10 +401,16 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
     float: right;
     clear: right;
   }
-  // Switch clearing of certain <pre> elements in MobileSDK: Convenience Robot
+  // Adj. clearing of certain elements in MobileSDK: Convenience Robot section
   body:not(.no-literate) .content > #ios + pre,
   body:not(.no-literate) .content > #android + pre {
+    float: right;
     clear: left;
+  }
+  body:not(.no-literate) .content > h5#ios,
+  body:not(.no-literate) .content > h5#android {
+    float: left;
+    clear: both;
   }
   body:not(.no-literate) .content > pre {
     word-wrap: break-word;
@@ -626,7 +632,7 @@ hr {
   body:not(.no-literate) .content > h5,
   body:not(.no-literate) .content > h6 {
     float: left;
-    clear: both;
+    clear: left;
   }
 
   body:not(.no-literate) .content > pre + p,
@@ -644,7 +650,7 @@ hr {
   body:not(.no-literate) .content > pre + h6,
   body:not(.no-literate) .content > blockquote + h6,
   body:not(.no-literate) .content > p.img + h6 {
-    clear: both;
+    clear: left;
   }
 
   body:not(.no-literate) .content > p.img + ol,
@@ -661,13 +667,6 @@ hr {
     width: 45%;
     margin-left: 0;
     padding-left: 75px;
-  }
-}
-
-@media (min-width: 1340px) {
-  body:not(.no-literate) .content img {
-    width: 480px;
-    margin-right: -135px;
   }
 }
 
