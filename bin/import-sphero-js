@@ -9,11 +9,11 @@
 var Promise = require("bluebird");
 
 var exec = Promise.promisify(require("child_process").exec),
+    fs = Promise.promisifyAll(require("fs-extra")),
     path = require("path");
 
 var glob = Promise.promisify(require("glob")),
-    dox = require("dox"),
-    fs = Promise.promisifyAll(require("fs-extra"));
+    dox = require("dox");
 
 // constants
 var REPO_URL = "git@github.com:orbotix/sphero.js.git",
@@ -21,22 +21,21 @@ var REPO_URL = "git@github.com:orbotix/sphero.js.git",
     TMP_DIR = path.join(__dirname, "/.sphero");
 
 function main() {
-  var repo = removeDir().then(clone);
+  var repo = remove().then(clone).catch(console.error);
 
-  repo.catch(function(err) {
-    console.error(err);
-  });
+  var examples = repo.then(findExamples),
+      docs = repo.then(findDocs);
 
-  Promise.all([
-    // extract examples
-    repo.then(findExamples).then(addExamples),
+  var work = [
+    examples.then(addExamples),
+    docs.then(addDeviceDocs),
+    docs.then(addSpheroDocs),
+  ];
 
-    // extract device docs
-    repo.then(findDevices).then(addDevices)
-  ]).then(removeDir);
+  Promise.all(work).then(remove);
 }
 
-function removeDir() {
+function remove() {
   return fs.removeAsync(TMP_DIR);
 }
 
@@ -46,8 +45,6 @@ function clone() {
 }
 
 function findExamples() {
-  console.log("extracting examples");
-
   function extract(paths) {
     var examples = {};
 
@@ -62,107 +59,158 @@ function findExamples() {
   return glob(TMP_DIR + "/examples/**/*.js").then(extract);
 }
 
-function addExamples(examples) {
-  function decorate(code) {
-    return code
-      .replace(/^/mg, "    ")
-      .replace(/^\s+$/mg, "");
-  }
-
-  function write(name) {
-    var dest = path.join(DEST_DIR, "examples", name + ".md");
-    return function(example) { return fs.outputFileAsync(dest, example); };
-  }
-
-  var files = Object.keys(examples).map(function(name) {
-    var example = examples[name];
-    return example.then(decorate).then(write(name));
-  });
-
-  return Promise.all(files);
-}
-
-function findDevices() {
-  console.log("extracting docs");
+function findDocs() {
   function extract(paths) {
     var docs = {};
 
-    paths.forEach(function(file) {
-      var name = file.replace(TMP_DIR + "/lib/devices/", "").replace(".js", "");
-      docs[name] = fs.readFileAsync(file, "utf-8").then(function(code) {
-        return dox.parseComments(code, { raw: true, skipSingleStar: true });
+    function isPublic(block) {
+      return !block.isPrivate;
+    }
+
+    function mutate(doc) {
+      doc.params = doc.tags.filter(function(t) {
+        return t.type === "param";
       });
+
+      return doc;
+    }
+
+    function getDocs(code) {
+      var opts = { raw: true, skipSingleStar: true };
+      return dox.parseComments(code, opts).filter(isPublic).map(mutate);
+    }
+
+    paths.forEach(function(file) {
+      var name = file.replace(TMP_DIR + "/", "");
+      docs[name] = fs.readFileAsync(file, "utf-8").then(getDocs);
     });
 
     return docs;
   }
 
-  return glob(TMP_DIR + "/lib/devices/*.js").then(extract);
+  return glob(TMP_DIR + "/{index.js,lib/**/*.js}").then(extract);
 }
 
-function addDevices(docs) {
-  function generate(blocks) {
-    function isPublic(block) { return !block.isPrivate; }
+function addExamples(examples) {
+  console.log("adding examples");
 
-    function title(doc) {
-      return [
-        "### ",
-        doc.ctx.name + "(",
-        doc.params.map(function(p) {
-          return p.name;
-        }).join(", "),
-        ")"
-      ].join("");
-    }
+  var names = Object.keys(examples);
 
-    function description(doc) {
-      return doc.description.full.replace(/\<br\s*\/\>/gi, " ").trim();
-    }
-
-    function params(doc) {
-      return [
-        "**Params:**",
-        "",
-        doc.params.map(function(p) {
-          return [
-            "- `", p.name, "` (", p.types.join("|"), ") ", p.description
-          ].join("");
-        }).join("\n")
-      ].join("\n");
-    }
-
-    function code(doc) {
-      var examples = doc.tags.filter(function(t) {
-        return t.type === "example";
-      }).map(function(t) { return t.string; });
-
-      if (examples.length) {
-        return [ "```", examples.join("\n\n"), "```" ].join("\n");
-      }
-    }
-
-    return blocks.filter(isPublic).map(function(doc) {
-      doc.params = doc.tags.filter(function(t) { return t.type === "param"; });
-      return [
-        title(doc),
-        code(doc),
-        description(doc),
-        params(doc),
-      ].join("\n\n");
-    }).join("\n\n");
+  function decorate(code) {
+    return code.replace(/^/mg, "    ").replace(/^\s+$/mg, "");
   }
 
   function write(name) {
-    var dest = path.join(DEST_DIR, "devices", name + ".md");
-    return function(contents) { return fs.outputFileAsync(dest, contents); };
+    var dest = path.join(DEST_DIR, "examples", name + ".md");
+    return fs.outputFileAsync.bind(fs, dest);
   }
 
-  var files = Object.keys(docs).map(function(name) {
-    var page = docs[name];
-    return page.then(generate).then(write(name));
-  });
+  function add(name) {
+    var example = examples[name];
+    return example.then(decorate).then(write(name));
+  }
 
-  return Promise.all(files);
+  return Promise.all(
+    names.map(add)
+  );
+}
+
+function addDeviceDocs(devices) {
+  console.log("adding sphero device docs");
+
+  var names = Object.keys(devices).filter(isDevice);
+
+  function isDevice(name) {
+    return /lib\/devices\//.test(name);
+  }
+
+  function write(name) {
+    var dest = path.join(DEST_DIR, "devices", name);
+    return fs.outputFileAsync.bind(fs, dest);
+  }
+
+  function add(name) {
+    var dest = name.replace("lib/devices/", "").replace(".js", ".md");
+    return devices[name].then(generate).then(write(dest));
+  }
+
+  return Promise.all(
+    names.map(add)
+  );
+}
+
+function addSpheroDocs(files) {
+  console.log("adding sphero core docs");
+
+  var names = Object.keys(files).filter(isSphero);
+
+  function isSphero(name) {
+    return ~["index.js", "lib/sphero.js"].indexOf(name);
+  }
+
+  function write(name) {
+    var dest = path.join(DEST_DIR, "sphero.md");
+    return fs.outputFileAsync.bind(fs, dest);
+  }
+
+  function mutate(docs) {
+    // jsdoc doesn't find the correct name for the factory
+    return docs.replace("### exports(", "### sphero(");
+  }
+
+  function add(name) {
+    return files[name].then(generate).then(mutate);
+  }
+
+  function flatten(docs) {
+    return docs.join("\n\n");
+  }
+
+  return Promise.resolve(names).map(add).then(flatten).then(write);
+}
+
+function generate(docs) {
+  return docs.map(function(doc) {
+    return [
+      title(doc),
+      exampleCode(doc),
+      description(doc),
+      params(doc)
+    ].join("\n\n");
+  }).join("\n\n");
+}
+
+function title(doc) {
+  var name = doc.ctx.name,
+      parameters = doc.params.map(function(p) { return p.name; }).join(", ");
+
+  return ["### ", name, "(", parameters, ")"].join("");
+}
+
+function description(doc) {
+  return doc.description.full.replace(/\<br\s*\/\>/gi, " ").trim();
+}
+
+function params(doc) {
+  var params = doc.params.map(function(param) {
+    var name = param.name,
+        types = param.types.join("|"),
+        desc = param.description;
+
+    return [ "- `", name, "` (", types, ") ", desc ].join("");
+  }).join("\n");
+
+  return ["**Params:**", "", params].join("\n");
+}
+
+function exampleCode(doc) {
+  var tags = doc.tags.filter(function(t) {
+    return t.type === "example";
+  }).map(function(t) { return t.string; });
+
+  if (tags.length) {
+    return [ "```", tags.join("\n\n"), "```" ].join("\n");
+  }
 }
 
 main();

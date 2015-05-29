@@ -3,13 +3,15 @@
 ```
 orb.color("#00ff00", function(err, data) {
   console.log(err || "Color Changed!");
+});
 
 orb.color(0xff0000, function(err, data) {
   console.log(err || "Color Changed!");
+});
 
 orb.color({ red: 0, green: 0, blue: 255 }, function(err, data) {
   console.log(err || "Color Changed!");
-}
+});
 ```
 
 The Color command wraps Sphero's built-in setRgb command, allowing for
@@ -25,7 +27,7 @@ a greater range of possible inputs.
 ```
 orb.randomColor(function(err, data) {
   console.log(err || "Random Color!");
-}
+});
 ```
 
 The Random Color command sets Sphero to a randomly-generated color.
