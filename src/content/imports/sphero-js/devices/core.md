@@ -1,18 +1,38 @@
 ### ping(callback)
 
+```
+orb.ping(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
+
 The Ping command verifies the Sphero is awake and receiving commands.
 
 **Params:**
 
 - `callback` (Function) triggered when Sphero has been pinged
 
-```
-device.ping = function(callback) {
-  command(commands.ping, null, callback);
-};
-```
-
 ### version(callback)
+
+```
+orb.version(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  recv:", data.recv);
+    console.log("  mdl:", data.mdl);
+    console.log("  hw:", data.hw);
+    console.log("  msaVer:", data.msaVer);
+    console.log("  msaRev:", data.msaRev);
+    console.log("  bl:", data.bl);
+    console.log("  bas:", data.bas);
+    console.log("  macro:", data.macro);
+    console.log("  apiMaj:", data.apiMaj);
+    console.log("  apiMin:", data.apiMin);
+  }
+}
+```
 
 The Version command returns a batch of software and hardware information
 about Sphero.
@@ -21,13 +41,13 @@ about Sphero.
 
 - `callback` (Function) triggered with version information
 
-```
-device.version = function(callback) {
-  command(commands.version, null, callback);
-};
-```
+### controlUartTx(callback)
 
-### controlUARTTx(callback)
+```
+orb.controlUartTx(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Control UART Tx command enables or disables the CPU's UART transmit
 line so another client can configure the Bluetooth module.
@@ -36,13 +56,13 @@ line so another client can configure the Bluetooth module.
 
 - `callback` (Function) function to be triggered after write
 
-```
-device.controlUARTTx = function(callback) {
-  command(commands.controlUARTTx, null, callback);
-};
-```
-
 ### setDeviceName(name, callback)
+
+```
+orb.setDeviceName("rollingOrb", function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Device Name command assigns Sphero an internal name. This value is
 then produced as part of the Get Bluetooth Info command.
@@ -57,19 +77,21 @@ This field defaults to the Bluetooth advertising name of Sphero.
 - `name` (String) what name to give to the Sphero
 - `callback` (Function) function to be triggered when the name is set
 
-```
-device.setDeviceName = function(name, callback) {
-  var data = [];
-
-  for (var i = 0; i < name.length; ++i) {
-    data[i] = name.charCodeAt(i);
-  }
-
-  command(commands.setDeviceName, data, callback);
-};
-```
-
 ### getBluetoothInfo(callback)
+
+```
+orb.getBluetoothInfo(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  name:", data.name);
+    console.log("  btAddress:", data.btAddress);
+    console.log("  separator:", data.separator);
+    console.log("  colors:", data.colors);
+  }
+}
+```
 
 Triggers the callback with a structure containing
 
@@ -81,13 +103,13 @@ Triggers the callback with a structure containing
 
 - `callback` (Function) function to be triggered with Bluetooth info
 
-```
-device.getBluetoothInfo = function(callback) {
-  command(commands.getBtInfo, null, callback);
-};
-```
-
 ### setAutoReconnect(flag, time, callback)
+
+```
+orb.setAutoReconnect(1, 20, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Auto Reconnect command tells Sphero's BT module whether or not it
 should automatically reconnect to the previously-connected Apple mobile
@@ -99,13 +121,19 @@ device.
 - `time` (Number) how many seconds after start to enable auto reconnect
 - `callback` (Function) function to be triggered after write
 
-```
-device.setAutoReconnect = function(flag, time, callback) {
-  command(commands.setAutoReconnect, [flag, time], callback);
-};
-```
-
 ### getAutoReconnect(callback)
+
+```
+orb.getAutoReconnect(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  flag:", data.flag);
+    console.log("  time:", data.time);
+  }
+}
+```
 
 The Get Auto Reconnect command returns the Bluetooth auto reconnect values
 as defined above in the Set Auto Reconnect command.
@@ -114,13 +142,22 @@ as defined above in the Set Auto Reconnect command.
 
 - `callback` (Function) function to be triggered with reconnect data
 
-```
-device.getAutoReconnect = function(callback) {
-  command(commands.getAutoReconnect, null, callback);
-};
-```
-
 ### getPowerState(callback)
+
+```
+orb.getPowerState(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  recVer:", data.recVer);
+    console.log("  batteryState:", data.batteryState);
+    console.log("  batteryVoltage:", data.batteryVoltage);
+    console.log("  chargeCount:", data.chargeCount);
+    console.log("  secondsSinceCharge:", data.secondsSinceCharge);
+  }
+}
+```
 
 The Get Power State command returns Sphero's current power state, and some
 additional parameters:
@@ -143,13 +180,13 @@ Possible power states:
 
 - `callback` (Function) function to be triggered with power state data
 
-```
-device.getPowerState = function(callback) {
-  command(commands.getPwrState, null, callback);
-};
-```
-
 ### setPowerNotification(flag, callback)
+
+```
+orb.setPowerNotification(1, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Power Notification command enables sphero to asynchronously notify
 the user of power state periodically (or immediately, when a change occurs)
@@ -162,13 +199,13 @@ Sphero is unpaired.
 - `flag` (Number) whether or not to send notifications (0 - no, 1 - yes)
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setPowerNotification = function(flag, callback) {
-  command(commands.setPwrNotify, [flag], callback);
-};
-```
-
 ### sleep(wakeup, macro, orbBasic, callback)
+
+```
+orb.sleep(10, 0, 0, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Sleep command puts Sphero to sleep immediately.
 
@@ -180,18 +217,19 @@ sleep.
 - `orbBasic` (Number) if non-zero, Sphero will attempt to run an orbBasic program from this line number
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.sleep = function(wakeup, macro, orbBasic, callback) {
-  wakeup = utils.intToHexArray(wakeup, 2);
-  orbBasic = utils.intToHexArray(orbBasic, 2);
-
-  var data = [].concat(wakeup, macro, orbBasic);
-
-  command(commands.sleep, data, callback);
-};
-```
-
 ### getVoltageTripPoints(callback)
+
+```
+orb.getVoltageTripPoints(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  vLow:", data.vLow);
+    console.log("  vCrit:", data.vCrit);
+  }
+}
+```
 
 The Get Voltage Trip Points command returns the trip points Sphero uses to
 determine Low battery and Critical battery.
@@ -203,13 +241,13 @@ respectively are returned as 700 and 650.
 
 - `callback` (Function) function to be triggered with trip point data
 
-```
-device.getVoltageTripPoints = function(callback) {
-  command(commands.getPowerTrips, null, callback);
-};
-```
-
 ### setVoltageTripPoints(vLow, vCrit, callback)
+
+```
+orb.setVoltageTripPoints(675, 650, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Voltage Trip Points command assigns the voltage trip points for Low
 and Critical battery voltages.
@@ -220,6 +258,8 @@ adjusting these from their defaults:
 - vLow must be in the range 675-725
 - vCrit must be in the range 625-675
 
+There must be 0.25v of separation between the values.
+
 Shifting these values too low can result in very little warning before
 Sphero forces itself to sleep, depending on the battery pack. Be careful.
 
@@ -229,18 +269,13 @@ Sphero forces itself to sleep, depending on the battery pack. Be careful.
 - `vCrit` (Number) new voltage trigger for Crit battery
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setVoltageTripPoints = function(vLow, vCrit, callback) {
-  vLow = utils.intToHexArray(vLow, 2);
-  vCrit = utils.intToHexArray(vCrit, 2);
-
-  var data = [].concat(vLow, vCrit);
-
-  command(commands.setPowerTrips, data, callback);
-};
-```
-
 ### setInactivityTimeout(time, callback)
+
+```
+orb.setInactivityTimeout(120, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Inactivity Timeout command sets the timeout delay before Sphero
 goes to sleep automatically.
@@ -253,14 +288,13 @@ alter it to any value of 60 seconds or greater.
 - `time` (Number) new delay before sleeping
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setInactivityTimeout = function(time, callback) {
-  var data = utils.intToHexArray(time, 2);
-  command(commands.setInactiveTimer, data, callback);
-};
-```
-
 ### jumpToBootloader(callback)
+
+```
+orb.jumpToBootLoader(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Jump To Bootloader command requests a jump into the Bootloader to
 prepare for a firmware download.
@@ -272,13 +306,13 @@ Specification.
 
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.jumpToBootloader = function(callback) {
-  command(commands.goToBl, null, callback);
-};
-```
-
 ### runL1Diags(callback)
+
+```
+orb.runL1Diags(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Perform Level 1 Diagnostics command is a developer-level command to
 help diagnose aberrant behaviour in Sphero.
@@ -292,13 +326,34 @@ For more details, see the Sphero API documentation.
 
 - `callback` (Function) function to be triggered with diagnostic data
 
-```
-device.runL1Diags = function(callback) {
-  command(commands.runL1Diags, null, callback);
-};
-```
-
 ### runL2Diags(callback)
+
+```
+orb.runL2Diags(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  recVer:", data.recVer);
+    console.log("  rxGood:", data.rxGood);
+    console.log("  rxBadId:", data.rxBadId);
+    console.log("  rxBadDlen:", data.rxBadDlen);
+    console.log("  rxBadCID:", data.rxBadCID);
+    console.log("  rxBadCheck:", data.rxBadCheck);
+    console.log("  rxBufferOvr:", data.rxBufferOvr);
+    console.log("  txMsg:", data.txMsg);
+    console.log("  txBufferOvr:", data.txBufferOvr);
+    console.log("  lastBootReason:", data.lastBootReason);
+    console.log("  bootCounters:", data.bootCounters);
+    console.log("  chargeCount:", data.chargeCount);
+    console.log("  secondsSinceCharge:", data.secondsSinceCharge);
+    console.log("  secondsOn:", data.secondsOn);
+    console.log("  distancedRolled:", data.distancedRolled);
+    console.log("  sensorFailures:", data.sensorFailures);
+    console.log("  gyroAdjustCount:", data.gyroAdjustCount);
+  }
+}
+```
 
 The Perform Level 2 Diagnostics command is a developer-level command to
 help diagnose aberrant behaviour in Sphero.
@@ -312,35 +367,13 @@ For more details, see the Sphero API documentation.
 
 - `callback` (Function) function to be triggered with diagnostic data
 
-```
-device.runL2Diags = function(callback) {
-  command(commands.runL2Diags, null, callback);
-};
-```
-
-### clearCounters(callback)
-
-The Clear Counters command is a developer-only command to clear the various
-system counters created by the L2 diagnostics.
-
-It is denied when the Sphero is in Normal mode.
-
-**Params:**
-
-- `callback` (Function) function to be triggered when done writing
-
-```
-device.clearCounters = function(callback) {
-  command(commands.clearCounters, null, callback);
-};
-
-device._coreTimeCmd = function(cmd, time, callback) {
-  var data = utils.intToHexArray(time, 4);
-  command(cmd, data, callback);
-};
-```
-
 ### assignTime(time, callback)
+
+```
+orb.assignTime(0x00ffff00, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Assign Time command sets a specific value to Sphero's internal 32-bit
 relative time counter.
@@ -350,13 +383,20 @@ relative time counter.
 - `time` (Number) the new value to set
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.assignTime = function(time, callback) {
-  device._coreTimeCmd(commands.assignTime, time, callback);
-};
-```
-
 ### pollPacketTimes(time, callback)
+
+```
+orb.assignTime(0x00ffff, function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  t1:", data.t1);
+    console.log("  t2:", data.t2);
+    console.log("  t3:", data.t3);
+  }
+}
+```
 
 The Poll Packet Times command helps users profile the transmission and
 processing latencies in Sphero.
@@ -367,10 +407,3 @@ For more details, see the Sphero API documentation.
 
 - `time` (Number) a timestamp to use for profiling
 - `callback` (Function) function to be triggered when done writing
-
-```
-device.pollPacketTimes = function(time, callback) {
-  device._coreTimeCmd(commands.pollTimes, time, callback);
-};
-};
-```

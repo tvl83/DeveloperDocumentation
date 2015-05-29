@@ -41,6 +41,8 @@ Download and install the text editor of your choice:
   {{> collision-detection}}
 ## Color
   {{> color}}
+## Get Color
+  {{> get-color}}
 ## Conway's Game
   {{> conway}}
 ## Data Streaming

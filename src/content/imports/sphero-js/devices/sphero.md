@@ -1,5 +1,11 @@
 ### setHeading(heading, callback)
 
+```
+orb.setHeading(180, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
+
 The Set Heading command tells Sphero to adjust it's orientation, by
 commanding a new reference heading (in degrees).
 
@@ -10,14 +16,13 @@ If stabilization is enabled, Sphero will respond immediately to this.
 - `heading` (Number) Sphero's new reference heading, in degrees (0-359)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setHeading = function(heading, callback) {
-  heading = utils.intToHexArray(heading, 2);
-  command(commands.setHeading, heading, callback);
-};
-```
-
 ### setStabilization(flag, callback)
+
+```
+orb.setStabilization(1, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Stabilization command turns Sphero's internal stabilization on or
 off, depending on the flag provided.
@@ -27,14 +32,13 @@ off, depending on the flag provided.
 - `flag` (Number) stabilization setting flag (0 - off, 1 - on)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setStabilization = function(flag, callback) {
-  flag &= 0x01;
-  command(commands.setStabilization, [flag], callback);
-};
-```
-
 ### setRotationRate(rotation, callback)
+
+```
+orb.setRotationRate(180, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Rotation Rate command allows control of the rotation rate Sphero
 uses to meet new heading commands.
@@ -50,14 +54,18 @@ The provided value is in units of 0.784 degrees/sec.
 - `rotation` (Number) new rotation rate (0-255)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setRotationRate = function(rotation, callback) {
-  rotation &= 0xFF;
-  command(commands.setRotationRate, [rotation], callback);
-};
-```
-
 ### getChassisId(callback)
+
+```
+orb.getChassisId(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  chassisId:", data.chassisId);
+  }
+}
+```
 
 The Get Chassis ID command returns the 16-bit chassis ID Sphero was
 assigned at the factory.
@@ -66,13 +74,13 @@ assigned at the factory.
 
 - `callback` (Function) function to be triggered with a response
 
-```
-device.getChassisId = function(callback) {
-  command(commands.getChassisId, null, callback);
-};
-```
-
 ### setChassisId(chassisId, callback)
+
+```
+orb.setChassisId(0xFE75, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Chassis ID command assigns Sphero's chassis ID, a 16-bit value.
 
@@ -83,14 +91,20 @@ This command only works if you're at the factory.
 - `chassisId` (Number) new chassis ID
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setChassisId = function(chassisId, callback) {
-  chassisId = utils.intToHexArray(chassisId, 2);
-  command(commands.getChassisId, chassisId, callback);
-};
-```
-
 ### selfLevel(opts, callback)
+
+```
+var opts = {
+  angleLimit: 0,
+  timeout: 0, ,
+  trueTime: 0,
+  options: 0x7
+};
+
+orb.selfLevel(opts, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Self Level command controls Sphero's self-level routine.
 
@@ -102,26 +116,35 @@ angle(heading), and control system on/off.
 
 An asynchronous message is returned when the self level routine completes.
 
-For more detail on options, see the Sphero API documentation.
+For more detail on opts param, see the Sphero API documentation.
+
+opts:
+ - angleLimit: 0 for defaul, 1 - 90 to set.
+ - timeout: 0 for default, 1 - 255 to set.
+ - trueTime: 0 for default, 1 - 255 to set.
+ - options: bitmask 4bit e.g. 0xF;
+};
 
 **Params:**
 
 - `opts` (Object) self-level routine options
 - `callback` (Function) function to be triggered after writing
 
-```
-device.selfLevel = function(opts, callback) {
-  var data = [
-    opts.options,
-    opts.angleLimit,
-    opts.timeout,
-    opts.trueTime
-  ];
-  command(commands.selfLevel, data, callback);
-};
-```
-
 ### setDataStreaming(opts, callback)
+
+```
+var opts = {
+  n: 400,
+  m: 1,
+  mask1: 0x00000000,
+  mask2: 0x01800000,
+  pcnt: 0
+};
+
+orb.setDataStreaming(opts, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Data Streaming command configures Sphero's built-in support for
 asynchronously streaming certain system and sensor data.
@@ -145,26 +168,22 @@ documentation.
 - `opts` (Object) object containing streaming data options
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setDataStreaming = function(opts, callback) {
-  var n = utils.intToHexArray(opts.n, 2),
-      m = utils.intToHexArray(opts.m, 2),
-      mask1 = utils.intToHexArray(opts.mask1, 4),
-      pcnt = opts.pcnt &= 0xff,
-      mask2 = utils.intToHexArray(opts.mask2, 4);
-
-  device.ds = {
-    mask1: opts.mask1,
-    mask2: opts.mask2
-  };
-
-  var data = [].concat(n, m, mask1, pcnt, mask2);
-
-  command(commands.setDataStreaming, data, callback);
-};
-```
-
 ### configureCollisions(opts, cb)
+
+```
+var opts = {
+  meth: 0x01,
+  xt: 0x0F,
+  xs: 0x0F,
+  yt: 0x0A,
+  ys: 0x0A,
+  dead: 0x05
+};
+
+orb.configureCollisions(opts, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Configure Collisions command configures Sphero's collision detection
 with the provided parameters.
@@ -188,21 +207,20 @@ These include:
 - `opts` (Object) object containing collision configuration opts
 - `cb` (Function) function to be triggered after writing
 
-```
-device.configureCollisions = function(opts, cb) {
-  var data = [
-    opts.meth,
-    opts.xt,
-    opts.xs,
-    opts.yt,
-    opts.ys,
-    opts.dead
-  ];
-  command(commands.setCollisionDetection, data, cb);
-};
-```
-
 ### configureLocator(opts, callback)
+
+```
+var opts = {
+  flags: 0x01,
+  x: 0x0000,
+  y: 0x0000,
+  yawTare: 0x0
+};
+
+orb.configureLocator(opts, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Configure Locator command configures Sphero's streaming location data
 service.
@@ -223,20 +241,13 @@ The following options must be provided:
 - `opts` (Object) object containing locator service configuration
 - `callback` (Function) function to be triggered after writing
 
-```
-device.configureLocator = function(opts, callback) {
-  var flags = opts.flags & 0xFF,
-      x = utils.intToHexArray(opts.x, 2),
-      y = utils.intToHexArray(opts.y, 2),
-      yawTare = utils.intToHexArray(opts.yawTare, 2);
-
-  var data = [].concat(flags, x, y, yawTare);
-
-  command(commands.locator, data, callback);
-};
-```
-
 ### setAccelRange(idx, callback)
+
+```
+orb.setAccelRange(0x02, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Accelerometer Range command tells Sphero what accelerometer range
 to use.
@@ -256,14 +267,22 @@ This command takes an index for the supported range, as explained below:
 - `idx` (Number) what accelerometer range to use
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setAccelRange = function(idx, callback) {
-  idx &= idx;
-  command(commands.setAccelerometer, [idx], callback);
-};
-```
-
 ### readLocator(callback)
+
+```
+orb.readLocator(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  xpos:", data.xpos);
+    console.log("  ypos:", data.ypos);
+    console.log("  xvel:", data.xvel);
+    console.log("  yvel:", data.yvel);
+    console.log("  sog:", data.sog);
+  }
+}
+```
 
 The Read Locator command gets Sphero's current position (X,Y), component
 velocities, and speed-over-ground (SOG).
@@ -275,13 +294,13 @@ signed cm/sec, and the SOG is unsigned cm/sec.
 
 - `callback` (Function) function to be triggered with data
 
-```
-device.readLocator = function(callback) {
-  command(commands.readLocator, null, callback);
-};
-```
+### setRgbLed(opts, callback)
 
-### setRGBLed(opts, callback)
+```
+orb.setRgbLed({ red: 0, green: 0, blue: 255 }, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set RGB LED command sets the colors of Sphero's RGB LED.
 
@@ -295,19 +314,13 @@ cycles.
 - `opts` (Object) object containing RGB values for Sphero's LED
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setRGBLed = function(opts, callback) {
-  var data = [opts.red, opts.green, opts.blue, opts.flag || 0x01];
-
-  for (var i = 0; i < data.length; i++) {
-    data[i] &= 0xFF;
-  }
-
-  command(commands.setRGBLed, data, callback);
-};
-```
-
 ### setBackLed(brightness, callback)
+
+```
+orb.setbackLed(255, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Back LED command allows brightness adjustment of Sphero's tail
 light.
@@ -319,13 +332,21 @@ This value does not persist across power cycles.
 - `brightness` (Number) brightness to set to Sphero's tail light
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setBackLed = function(brightness, callback) {
-  command(commands.setBackLed, [brightness], callback);
-};
-```
+### getRgbLed(callback)
 
-### getRGBLed(callback)
+```
+orb.getRgbLed(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  color:", data.color);
+    console.log("  red:", data.red);
+    console.log("  green:", data.green);
+    console.log("  blue:", data.blue);
+  }
+}
+```
 
 The Get RGB LED command fetches the current "user LED color" value, stored
 in Sphero's configuration.
@@ -336,13 +357,13 @@ This value may or may not be what's currently displayed by Sphero's LEDs.
 
 - `callback` (Function) function to be triggered after writing
 
-```
-device.getRGBLed = function(callback) {
-  command(commands.getRGBLed, null, callback);
-};
-```
-
 ### roll(speed, heading, [state], callback)
+
+```
+orb.setbackLed(180, 0, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Roll command tells Sphero to roll along the provided vector.
 
@@ -358,24 +379,13 @@ Permissible heading values are 0 to 359 inclusive.
 - `[state]` (Number) optional state parameter
 - `callback` (Function) function to be triggered after writing
 
-```
-device.roll = function(speed, heading, state, callback) {
-  if (typeof state === "function" || typeof state === "undefined") {
-    callback = state;
-    state = 0x01;
-  }
-
-  speed &= 0xFF;
-  heading = utils.intToHexArray(heading, 2);
-  state &= 0x03;
-
-  var data = [].concat(speed, heading, state);
-
-  command(commands.roll, data, callback);
-};
-```
-
 ### boost(boost, callback)
+
+```
+orb.boost(1, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Boost command executes Sphero's boost macro.
 
@@ -386,14 +396,20 @@ It takes a 1-byte parameter, 0x01 to start boosting, or 0x00 to stop.
 - `boost` (Number) whether or not to boost (1 - yes, 0 - no)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.boost = function(boost, callback) {
-  boost &= 0x01;
-  command(commands.boost, [boost], callback);
-};
-```
-
 ### setRawMotors(opts, callback)
+
+```
+var opts = {
+  lmode: 0x01,
+  lpower: 180,
+  rmode: 0x02,
+  rpower: 180
+}
+
+orb.setRawMotors(opts, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Raw Motors command allows manual control over one or both of
 Sphero's motor output values.
@@ -416,20 +432,13 @@ Possible modes:
 - `opts` (Object) object with mode/power values (e.g. lmode, lpower)
 - `callback` (Function) function to be triggered after writing
 
-```
-device.setRawMotors = function(opts, callback) {
-  var lmode = opts.lmode & 0x07,
-      lpower = opts.lpower & 0xFF,
-      rmode = opts.rmode & 0x07,
-      rpower = opts.rpower & 0xFF;
-
-  var data = [lmode, lpower, rmode, rpower];
-
-  command(commands.setRawMotors, data, callback);
-};
-```
-
 ### setMotionTimeout(time, callback)
+
+```
+orb.setMotionTimeout(0x0FFF, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Motion Timeout command gives Sphero an ultimate timeout for the
 last motion command to keep Sphero from rolling away in the case of
@@ -442,14 +451,14 @@ This defaults to 2000ms (2 seconds) upon wakeup.
 - `time` (Number) timeout length in milliseconds
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setMotionTimeout = function(time, callback) {
-  time = utils.intToHexArray(time, 2);
-  command(commands.setMotionTimeout, time, callback);
-};
-```
-
 ### setPermOptionFlags(flags, callback)
+
+```
+// Force tail LED always on
+orb.setPermOptionFlags(0x00000008, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Permanent Option Flags command assigns Sphero's permanent option
 flags to the provided values, and writes them immediately to the config
@@ -462,14 +471,26 @@ See below for the bit definitions.
 - `flags` (Array) permanent option flags
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setPermOptionFlags = function(flags, callback) {
-  flags = utils.intToHexArray(flags, 4);
-  command(commands.setOptionsFlag, flags, callback);
-};
-```
-
 ### getPermOptionFlags(callback)
+
+```
+orb.getPermOptionFlags(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  sleepOnCharger:", data.sleepOnCharger);
+    console.log("  vectorDrive:", data.vectorDrive);
+    console.log("  selfLevelOnCharger:", data.selfLevelOnCharger);
+    console.log("  tailLedAlwaysOn:", data.tailLedAlwaysOn);
+    console.log("  motionTimeouts:", data.motionTimeouts);
+    console.log("  retailDemoOn:", data.retailDemoOn);
+    console.log("  awakeSensitivityLight:", data.awakeSensitivityLight);
+    console.log("  awakeSensitivityHeavy:", data.awakeSensitivityHeavy);
+    console.log("  gyroMaxAsyncMsg:", data.gyroMaxAsyncMsg);
+  }
+}
+```
 
 The Get Permanent Option Flags command returns Sphero's permanent option
 flags, as a bit field.
@@ -496,13 +517,14 @@ Here's possible bit fields, and their descriptions:
 
 - `callback` (Function) function triggered with option flags data
 
-```
-device.getPermOptionFlags = function(callback) {
-  command(commands.getOptionsFlag, null, callback);
-};
-```
-
 ### setTempOptionFlags(flags, callback)
+
+```
+// enable stop on disconnect behaviour
+orb.setTempOptionFlags(0x01, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Temporary Option Flags command assigns Sphero's temporary option
 flags to the provided values. These do not persist across power cycles.
@@ -514,14 +536,18 @@ See below for the bit definitions.
 - `flags` (Array) permanent option flags
 - `callback` (Function) function to be triggered when done writing
 
-```
-device.setTempOptionFlags = function(flags, callback) {
-  flags = utils.intToHexArray(flags, 4);
-  command(commands.setTempOptFlags, flags, callback);
-};
-```
-
 ### getTempOptionFlags(callback)
+
+```
+orb.getTempOptionFlags(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  stopOnDisconnect:", data.stopOnDisconnect);
+  }
+}
+```
 
 The Get Temporary Option Flags command returns Sphero's temporary option
 flags, as a bit field:
@@ -533,13 +559,13 @@ flags, as a bit field:
 
 - `callback` (Function) function triggered with option flags data
 
-```
-device.getTempOptionFlags = function(callback) {
-  command(commands.getTempOptFlags, null, callback);
-};
-```
-
 ### getConfigBlock(id, callback)
+
+```
+orb.getConfigBlock(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Get Configuration Block command retrieves one of Sphero's configuration
 blocks.
@@ -558,20 +584,13 @@ current values first
 - `id` (Number) which configuration block to fetch
 - `callback` (Function) function to be triggered after writing
 
-```
-device.getConfigBlock = function(id, callback) {
-  id &= 0xFF;
-  command(commands.getConfigBlock, [id], callback);
-};
+### setSsbModBlock(pwd, block, callback)
 
-device._setSSBBlock = function(cmd, pwd, block, callback) {
-  pwd = utils.intToHexArray(pwd, 4);
-  var data = [].concat(pwd, block);
-  command(cmd, data, callback);
-};
 ```
-
-### setSSBModBlock(pwd, block, callback)
+orb.setSsbModBlock(0x0000000F, data, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set SSB Modifier Block command allows the SSB to be patched with a new
 modifier block - including the Boost macro.
@@ -584,13 +603,13 @@ The changes take effect immediately.
 - `block` (Array) array of bytes with the data to be written
 - `callback` (Function) a function to be triggered after writing
 
-```
-device.setSSBModBlock = function(pwd, block, callback) {
-  device._setSSBBlock(commands.setSSBParams, pwd, block, callback);
-};
-```
-
 ### setDeviceMode(mode, callback)
+
+```
+orb.setDeviceMode(0x00, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Device Mode command assigns the operation mode of Sphero based on
 the supplied mode value.
@@ -604,35 +623,18 @@ the supplied mode value.
 - `mode` (Number) which mode to set Sphero to
 - `callback` (Function) function to be called after writing
 
-```
-device.setDeviceMode = function(mode, callback) {
-  mode &= 0x01;
-  command(commands.setDeviceMode, [mode], callback);
-};
-```
-
-### setConfigBlock(block, callback)
-
-The Set Config Block command accepts an exact copy of the configuration
-block, and loads it into the RAM copy of the configuration block.
-
-The RAM copy is then saved to flash.
-
-The configuration block can be obtained by using the Get Configuration
-Block command.
-
-**Params:**
-
-- `block` (Array) - An array of bytes with the data to be written
-- `callback` (Function) - To be triggered when done
-
-```
-device.setConfigBlock = function(block, callback) {
-  command(commands.setConfigBlock, block, callback);
-};
-```
-
 ### getDeviceMode(callback)
+
+```
+orb.getDeviceMode(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  mode:", data.mode);
+  }
+}
+```
 
 The Get Device Mode command gets the current device mode of Sphero.
 
@@ -645,258 +647,13 @@ Possible values:
 
 - `callback` (Function) function to be called with response
 
-```
-device.getDeviceMode = function(callback) {
-  command(commands.getDeviceMode, null, callback);
-};
-```
-
-### getSSB(callback)
-
-The Get SSB command retrieves Sphero's Soul Block.
-
-The response is simple, and then the actual block of soulular data returns
-in an asynchronous message of type 0x0D, due to it's 0x440 byte length
-
-**Params:**
-
-- `callback` (Function) function to be called with response
-
-```
-device.getSSB = function(callback) {
-  command(commands.getSSB, null, callback);
-};
-```
-
-### setSSB(pwd, block, callback)
-
-The Set SSB command sets Sphero's Soul Block.
-
-The actual payload length is 0x404 bytes, but if you use the special DLEN
-encoding of 0xff, Sphero will know what to expect.
-
-You need to supply the password in order for it to work.
-
-**Params:**
-
-- `pwd` (Number) a 32 bit (4 bytes) hexadecimal value
-- `block` (Array) array of bytes with the data to be written
-- `callback` (Function) a function to be triggered after writing
-
-```
-device.setSSB = function(pwd, block, callback) {
-  device._setSSBBlock(commands.setSSB, pwd, block, callback);
-};
-```
-
-### refillBank(type, callback)
-
-The Refill Bank command attempts to refill either the Boost bank (0x00) or
-the Shield bank (0x01) by attempting to deduct the respective refill cost
-from the current number of cores.
-
-If it succeeds, the bank is set to the maximum obtainable for that level,
-the cores are spent, and a success response is returned with the lower core
-balance.
-
-If there aren't enough cores available to spend, Sphero responds with an
-EEXEC error (0x08)
-
-**Params:**
-
-- `type` (Number) what bank to refill (0 - Boost, 1 - Shield)
-- `callback` (Function) function to be called with response
-
-```
-device.refillBank = function(type, callback) {
-  type &= 0xFF;
-  command(commands.ssbRefill, [type], callback);
-};
-```
-
-### buyConsumable(id, qty, callback)
-
-The Buy Consumable command attempts to spend cores on consumables.
-
-The consumable ID is given (0 - 7), as well as the quantity requested to
-purchase.
-
-If the purchase succeeds, the consumable count is increased, the cores are
-spent, and a success response is returned with the increased quantity and
-lower balance.
-
-If there aren't enough cores available to spend, or the purchase would
-exceed the max consumable quantity of 255, Sphero responds with an EEXEC
-error (0x08)
-
-**Params:**
-
-- `id` (Number) what consumable to buy
-- `qty` (Number) how many consumables to buy
-- `callback` (Function) function to be called with response
-
-```
-device.buyConsumable = function(id, qty, callback) {
-  id &= 0xFF;
-  qty &= 0xFF;
-  command(commands.ssbBuy, [id, qty], callback);
-};
-```
-
-### useConsumable(id, callback)
-
-The Use Consumable command attempts to use a consumable if the quantity
-remaining is non-zero.
-
-On success, the return message echoes the ID of this consumable and how
-many of them remain.
-
-If the associated macro is already running, or the quantity remaining is
-zero, this returns an EEXEC error (0x08).
-
-**Params:**
-
-- `id` (Number) what consumable to use
-- `callback` (Function) function to be called with response
-
-```
-device.useConsumable = function(id, callback) {
-  id &= 0xFF;
-  command(commands.ssbUseConsumeable, [id], callback);
-};
-```
-
-### grantCores(pw, qty, flags, callback)
-
-The Grant Cores command adds the supplied number of cores.
-
-If the first bit in the flags byte is set, the command immediately commits
-the SSB to flash. Otherwise, it does not.
-
-All other bits are reserved.
-
-If the password is not accepted, this command fails without consequence.
-
-**Params:**
-
-- `pw` (Number) 32-bit password
-- `qty` (Number) 32-bit number of cores to add
-- `flags` (Number) 8-bit flags byte
-- `callback` (Function) function to be triggered with response
-
-```
-device.grantCores = function(pw, qty, flags, callback) {
-  pw = utils.intToHexArray(pw, 4);
-  qty = utils.intToHexArray(qty, 4);
-  flags &= 0xFF;
-
-  var data = [].concat(pw, qty, flags);
-
-  command(commands.ssbGrantCores, data, callback);
-};
-
-device._xpOrLevelUp = function(cmd, pw, gen, cb) {
-  pw = utils.intToHexArray(pw, 4);
-  gen &= 0xFF;
-
-  command(cmd, [].concat(pw, gen), cb);
-};
-```
-
-### addXp(pw, qty, callback)
-
-The Grant XP command increases XP by adding the supplied number of minutes
-of drive time, and immediately commits the SSB to flash.
-
-If the password is not accepted, this command fails without consequence.
-
-**Params:**
-
-- `pw` (Number) 32-bit password
-- `qty` (Number) 8-bit number of minutes of drive time to add
-- `callback` (Function) function to be triggered with response
-
-```
-device.addXp = function(pw, qty, callback) {
-  device._xpOrLevelUp(commands.ssbAddXp, pw, qty, callback);
-};
-```
-
-### levelUpAttr(pw, id, callback)
-
-The Level Up Attribute command attempts to increase the level of the
-specified attribute by spending attribute points.
-
-The IDs are:
-
-- **0x00**: speed
-- **0x01**: boost
-- **0x02**: brightness
-- **0x03**: shield
-
-
-If successful, the SSB is committed to flash, and a response packet
-containing the attribute ID, new level, and remaining attribute points is
-returned.
-
-If there are not enough attribute points, this command returns an EEXEC
-error (0x08).
-
-If the password is not accepted, this command fails without consequence.
-
-**Params:**
-
-- `pw` (Number) 32-bit password
-- `id` (Number) which attribute to level up
-- `callback` (Function) function to be triggered with response
-
-```
-device.levelUpAttr = function(pw, id, callback) {
-  device._xpOrLevelUp(commands.ssbLevelUpAttr, pw, id, callback);
-};
-```
-
-### getPasswordSeed(callback)
-
-The Get Password Seed command returns Sphero's password seed.
-
-Protected Sphero commands require a password.
-
-Refer to the Sphero API documentation, Appendix D for more information.
-
-**Params:**
-
-- `callback` (Function) function to be triggered with response
-
-```
-device.getPasswordSeed = function(callback) {
-  command(commands.getPwSeed, null, callback);
-};
-```
-
-### enableSSBAsyncMsg(flag, callback)
-
-The Enable SSB Async Messages command turns on/off soul block related
-asynchronous messages.
-
-These include shield collision/regrowth messages, boost use/regrowth
-messages, XP growth, and level-up messages.
-
-This feature defaults to off.
-
-**Params:**
-
-- `flag` (Number) whether or not to enable async messages
-- `callback` (Function) function to be triggered after write
-
-```
-device.enableSSBAsyncMsg = function(flag, callback) {
-  flag &= 0x01;
-  command(commands.ssbEnableAsync, [flag], callback);
-};
-```
-
 ### runMacro(id, callback)
+
+```
+orb.runMacro(0x01, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Run Macro command attempts to execute the specified macro.
 
@@ -922,14 +679,13 @@ specified ID code can't be found.
 - `id` (Number) 8-bit Macro ID to run
 - `callback` (Function) function to be triggered with response
 
-```
-device.runMacro = function(id, callback) {
-  id &= 0xFF;
-  command(commands.runMacro, [id], callback);
-};
-```
-
 ### saveTempMacro(macro, callback)
+
+```
+orb.saveTempMacro(0x01, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Save Temporary Macro stores the attached macro definition into the
 temporary RAM buffer for later execution.
@@ -943,13 +699,13 @@ all macros, the longest definition that can be sent is 254 bytes.
 - `macro` (Array) array of bytes with the data to be written
 - `callback` (Function) function to be triggered with response
 
-```
-device.saveTempMacro = function(macro, callback) {
-  command(commands.saveTempMacro, macro, callback);
-};
-```
-
 ### saveMacro(macro, callback)
+
+```
+orb.saveMacro(0x01, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 Save macro
 
@@ -968,13 +724,13 @@ As with all macros, the longest definition that can be sent is 254 bytes.
 - `macro` (Array) array of bytes with the data to be written
 - `callback` (Function) function to be triggered with response
 
-```
-device.saveMacro = function(macro, callback) {
-  command(commands.saveMacro, macro, callback);
-};
-```
-
 ### reInitMacroExec(callback)
+
+```
+orb.reInitMacroExec(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Reinit Macro Executive command terminates any running macro, and
 reinitializes the macro system.
@@ -985,13 +741,19 @@ The table of any persistent user macros is cleared.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.reInitMacroExec = function(callback) {
-  command(commands.initMacroExecutive, null, callback);
-};
-```
-
 ### abortMacro(callback)
+
+```
+orb.abortMacro(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  id:", data.id);
+    console.log("  cmdNum:", data.cmdNum);
+  }
+}
+```
 
 The Abort Macro command aborts any executing macro, and returns both it's
 ID code and the command number currently in progress.
@@ -1005,13 +767,19 @@ of 0xFFFF as the CmdNum indicates the macro was unkillable.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.abortMacro = function(callback) {
-  command(commands.abortMacro, null, callback);
-};
-```
-
 ### getMacroStatus(callback)
+
+```
+orb.getMacroStatus(function(err, data) {
+  if (err) {
+    console.log("error: ", err);
+  } else {
+    console.log("data:");
+    console.log("  idCode:", data.idCode);
+    console.log("  cmdNum:", data.cmdNum);
+  }
+}
+```
 
 The Get Macro Status command returns the ID code and command number of the
 currently executing macro.
@@ -1023,13 +791,13 @@ command number is left over from the previous macro.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.getMacroStatus = function(callback) {
-  command(commands.macroStatus, null, callback);
-};
-```
-
 ### setMacroParam(index, val1, val2, callback)
+
+```
+orb.setMacroParam(0x02, 0xF0, 0x00, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Set Macro Parameter command allows system globals that influence
 certain macro commands to be selectively altered from outside of the macro
@@ -1054,17 +822,13 @@ For more details, please refer to the Sphero Macro document.
 - `val2` (Number) value 2 to set
 - `callback` (Function) function to be triggered with response
 
-```
-device.setMacroParam = function(index, val1, val2, callback) {
-  command(
-    commands.setMacroParam,
-    utils.argsToHexArray(index, val1, val2),
-    callback
-  );
-};
-```
-
 ### appendMacroChunk(chunk, callback)
+
+```
+orb.appendMacroChunk(, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Append Macro Chunk project stores the attached macro definition into
 the temporary RAM buffer for later execution.
@@ -1085,16 +849,16 @@ certain the larger buffer is completely initialized.
 
 **Params:**
 
-- `chunk` (Array) macro chunk to write
+- `chunk` (Array) of bytes to append for macro execution
 - `callback` (Function) function to be triggered with response
 
-```
-device.appendMacroChunk = function(chunk, callback) {
-  command(commands.appendTempMacroChunk, chunk, callback);
-};
-```
-
 ### eraseOrbBasicStorage(area, callback)
+
+```
+orb.eraseOrbBasicStorage(0x00, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Erase orbBasic Storage command erases any existing program in the
 specified storage area.
@@ -1107,14 +871,13 @@ storage area.
 - `area` (Number) which area to erase
 - `callback` (Function) function to be triggered with response
 
-```
-device.eraseOrbBasicStorage = function(area, callback) {
-  area &= 0xFF;
-  command(commands.eraseOBStorage, [area], callback);
-};
-```
-
 ### appendOrbBasicFragment(area, code, callback)
+
+```
+orb.appendOrbBasicFragment(0x00, OrbBasicCode, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Append orbBasic Fragment command appends a patch of orbBasic code to
 existing ones in the specified storage area (0x00 for RAM, 0x01 for
@@ -1135,15 +898,13 @@ storage area is full.
 - `code` (String) orbBasic code to append
 - `callback` (Function) function to be triggered with response
 
-```
-device.appendOrbBasicFragment = function(area, code, callback) {
-  area &= 0xFF;
-  var data = [].concat(area, code);
-  command(commands.appendOBFragment, data, callback);
-};
-```
-
 ### executeOrbBasicProgram(area, slMSB, slLSB, callback)
+
+```
+orb.executeOrbBasicProgram(0x00, 0x00, 0x00, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Execute orbBasic Program command attempts to run a program in the
 specified storage area, beginning at the specified line number.
@@ -1157,17 +918,13 @@ This command will fail if there is already an orbBasic program running.
 - `slLSB` (Number) start line
 - `callback` (Function) function to be triggered with response
 
-```
-device.executeOrbBasicProgram = function(area, slMSB, slLSB, callback) {
-  command(
-    commands.execOBProgram,
-    utils.argsToHexArray(area, slMSB, slLSB),
-    callback
-  );
-};
-```
-
 ### abortOrbBasicProgram(callback)
+
+```
+orb.abortOrbBasicProgram(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Abort orbBasic Program command aborts execution of any currently
 running orbBasic program.
@@ -1176,13 +933,13 @@ running orbBasic program.
 
 - `callback` (Function) function to be triggered with response
 
-```
-device.abortOrbBasicProgram = function(callback) {
-  command(commands.abortOBProgram, null, callback);
-};
-```
-
 ### submitValueToInput(val, callback)
+
+```
+orb.submitValuetoInput(0x0000FFFF, function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Submit value To Input command takes the place of the typical user
 console in orbBasic and allows a user to answer an input request.
@@ -1197,14 +954,13 @@ Refer to the orbBasic language document for further information.
 - `val` (Number) value to respond with
 - `callback` (Function) function to be triggered with response
 
-```
-device.submitValueToInput = function(val, callback) {
-  val = utils.intToHexArray(val, 4);
-  command(commands.answerInput, val, callback);
-};
-```
-
 ### commitToFlash(callback)
+
+```
+orb.commitToFlash(function(err, data) {
+  console.log(err || "data: " + data);
+}
+```
 
 The Commit To Flash command copies the current orbBasic RAM program to
 persistent flash storage.
@@ -1214,14 +970,3 @@ It will fail if a program is currently executing out of flash.
 **Params:**
 
 - `callback` (Function) function to be triggered with response
-
-```
-device.commitToFlash = function(callback) {
-  command(commands.commitToFlash, null, callback);
-};
-
-device._commitToFlashAlias = function(callback) {
-  command(commands.commitToFlashAlias, null, callback);
-};
-};
-```
