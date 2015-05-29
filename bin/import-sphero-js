@@ -145,9 +145,9 @@ function addDevices(docs) {
       doc.params = doc.tags.filter(function(t) { return t.type === "param"; });
       return [
         title(doc),
+        code(doc),
         description(doc),
         params(doc),
-        code(doc)
       ].join("\n\n");
     }).join("\n\n");
   }
