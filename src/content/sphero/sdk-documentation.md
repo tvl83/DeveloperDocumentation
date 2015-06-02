@@ -1,9 +1,12 @@
 ---
-word: Mobile SDK
-title: Mobile SDK
+word: SDK Documentation
+title: SDK Documentation
 order: 2
 ---
-# Mobile SDK
+# SDK Documentation
+
+# Robot Concepts
+  {{>robot-concepts}}
 
 # Objective-C
   {{>obj-c}}
