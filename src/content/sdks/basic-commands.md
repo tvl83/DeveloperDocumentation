@@ -1,7 +1,7 @@
 ---
 title: Basic Commands
+order: 4
 section: SDK Documentation
-order: 3
 ---
 
 ## Basic Commands

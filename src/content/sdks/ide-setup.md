@@ -1,7 +1,7 @@
 ---
 title: IDE & Project Setup
-section: SDK Documentation
 order: 1
+section: SDK Documentation
 ---
 
 ## IDE Setup

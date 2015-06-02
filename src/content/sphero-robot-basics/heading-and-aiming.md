@@ -1,5 +1,5 @@
 ---
-title: Sphero Robot Basics
+title: Heading and Aiming
+order: 3
 section: Sphero Robot Basics
-order: 0
 ---

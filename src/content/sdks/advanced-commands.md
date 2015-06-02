@@ -1,7 +1,7 @@
 ---
 title: Advanced Commands
+order: 5
 section: SDK Documentation
-order: 4
 ---
 
 ## Code Examples

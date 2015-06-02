@@ -1,7 +1,7 @@
 ---
 title: Connection Management
-section: SDK Documentation
 order: 2
+section: SDK Documentation
 ---
 
 ## Connecting to Robot

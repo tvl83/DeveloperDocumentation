@@ -44,11 +44,10 @@ date: <%= new Date() %>
         <div id="docs">
           <header class="large-12 columns navigation always-show">
             <div class="left-side">
-              <a href="https://www.sphero.com"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
+              <a href="http://www.gosphero.com"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
             </div>
             <div class="right-side">
               <div class="edit-button">
-                <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{platform}}/{{basename}}.md" class="button">Edit this page</a>
               </div>
               <div class="home-button">
                 <div class="ion-ios7-cart-outline"></div>
@@ -60,38 +59,71 @@ date: <%= new Date() %>
             <div class="menubar">
               <div class="menu section" role="flatdoc-menu">
                 <ul>
-                  <li><a href="/sphero-robot-basics" class="level-0">Sphero Robot Basics</a></li>
-                  <li><a href="/sprk-edu" class="level-0">SPRK - EDU</a></li>
-                  <li><a href="/sdk" class="level-0">SDK</a></li>
-                  <li><a href="/api-reference" class="level-0">API Reference</a></li>
-                </ul>
-              </div>
-              <div class="menu section" role="flatdoc-menu">
-                <ul id="toc">
-                  {{#withSort pages "data.order"}}
-                    {{#is data.section "Sphero Robot Basics"}}
-                    <li><a href="/sphero-robot-basics/{{basename}}">{{data.title}}</a></li>
-                    {{/is}}
-                  {{/withSort}}
-                  {{#withSort pages "data.order"}}
-                    {{#is data.section "SPRK - EDU"}}
-                    <li><a href="/sprk-edu/{{basename}}">{{data.title}}</a></li>
-                    {{/is}}
-                  {{/withSort}}
-                  {{#withSort pages "data.order"}}
-                    {{#is data.section "SDK Documentation"}}
-                    <li><a href="/sdk/{{basename}}">{{data.title}}</a></li>
-                    {{/is}}
-                  {{/withSort}}
-                  {{#withSort pages "data.order"}}
-                    {{#is data.section "API Reference"}}
-                    <li><a href="/api-reference/{{basename}}">{{data.title}}</a></li>
-                    {{/is}}
-                  {{/withSort}}
+                  <li class="level-0">Sphero Robot Basics</li>
+                    {{#withSort pages "data.order"}}
+                      <ul>
+                        {{#is data.section "Sphero Robot Basics"}}
+                        <li class="level-1"><a href="/sphero-robot-basics/{{basename}}">{{data.title}}</a></li>
+                          {{#if data.subsections.length}}
+                            <ul>
+                              {{#each data.subsections}}
+                                <li class="level-2"><a href="/sphero-robot-basics/{{../basename}}">{{.}}</a></li>
+                              {{/each}}
+                            </ul>
+                          {{/if}}
+                        {{/is}}
+                      </ul>
+                    {{/withSort}}
+                  <li class="level-0">SPRK - EDU</li>
+                    {{#withSort pages "data.order"}}
+                      <ul>
+                        {{#is data.section "SPRK - EDU"}}
+                        <li class="level-1"><a href="/sprk-edu/{{basename}}">{{data.title}}</a></li>
+                          {{#if data.subsections.length}}
+                            <ul>
+                              {{#each data.subsections}}
+                              <li class="level-2"><a href="/sprk-edu/{{../basename}}">{{.}}</a></li>
+                              {{/each}}
+                            </ul>
+                          {{/if}}
+                        {{/is}}
+                      </ul>
+                    {{/withSort}}
+                  <li class="level-0">SDK</li>
+                    {{#withSort pages "data.order"}}
+                      <ul>
+                        {{#is data.section "SDK Documentation"}}
+                          <li class="level-1"><a href="/sdks/{{basename}}">{{data.title}}</a></li>
+                          {{#if data.subsections.length}}
+                            <ul>
+                              {{#each data.subsections}}
+                                <li class="level-2"><a href="/sdks/{{../basename}}">{{.}}</a></li>
+                              {{/each}}
+                            </ul>
+                          {{/if}}
+                        {{/is}}
+                      </ul>
+                    {{/withSort}}
+                  <li class="level-0">API Reference</li>
+                    {{#withSort pages "data.order"}}
+                      <ul>
+                        {{#is data.section "API Reference"}}
+                        <li class="level-1"><a href="/api-reference/{{basename}}">{{data.title}}</a></li>
+                          {{#if data.subsections.length}}
+                            <ul>
+                              {{#each data.subsections}}
+                                <li class="level-2"><a href="/api-reference/{{../basename}}">{{.}}</a></li>
+                              {{/each}}
+                            </ul>
+                          {{/if}}
+                        {{/is}}
+                      </ul>
+                    {{/withSort}}
                 </ul>
               </div>
             </div>
             <div role="flatdoc-content" class="content" id="content">
+              <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{section}}/{{basename}}.md" class="button">Edit this page</a>
               {{#markdown}}
               {{> body}}
               {{/markdown}}

@@ -18,6 +18,7 @@ module.exports = (grunt) ->
         assets: '<%= config.dist %>/assets'
         expand: true
         ext: '.html'
+        helpers: 'handlebars-helper-slugify'
         layoutdir: '<%= config.src %>/layouts'
         layout: 'docs.hbs'
         partials: [
@@ -42,9 +43,9 @@ module.exports = (grunt) ->
           },
           {
             expand: true,
-            cwd: '<%= config.content %>/sdk'
+            cwd: '<%= config.content %>/sdks'
             src: ['*.html', '*.md']
-            dest: '<%= config.dist %>/sdk'
+            dest: '<%= config.dist %>/sdks'
           },
           {
             expand: true,
