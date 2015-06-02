@@ -16,68 +16,47 @@ module.exports = (grunt) ->
       # general options and defaults
       options:
         assets: '<%= config.dist %>/assets'
+        expand: true
+        ext: '.html'
         layoutdir: '<%= config.src %>/layouts'
-        layout: 'default.hbs'
+        layout: 'docs.hbs'
+        partials: [
+          'src/content/partials/*.html',
+          'src/content/partials/sdk-documentation/*.md',
+          'src/content/imports/sphero-js/**/*.md'
+        ]
         plugins: [
           'assemble-contrib-permalinks',
-          'plugins/verbose/verbose.js',
-          'plugins/toc/toc.js'
+          'plugins/verbose/verbose.js'
         ]
         permalinks:
           structure: ':basename/index:ext'
-        toc:
-          id: 'toc'
 
-      # build static pages
-      static:
-        options:
-          ext: '.html'
-          layout: 'static.hbs'
-          partials: ['src/content/partials/*.html']
-
+      docs:
         files: [
           {
-            expand: true
-            cwd: '<%= config.content %>'
-            src: ['*.html']
-            dest: '<%= config.dist %>'
-          }
-        ]
-
-      # build Sphero docs
-      sphero_docs:
-        options:
-          platform: 'sphero'
-          ext: '.html'
-          layout: 'docs.hbs'
-          partials: [
-            'src/content/partials/*.html',
-            'src/content/partials/sdk-documentation/*.md',
-            'src/content/imports/sphero-js/**/*.md'
-          ]
-
-        files: [
-          {
-            expand: true
-            cwd: '<%= config.content %>/sphero'
+            expand: true,
+            cwd: '<%= config.content %>/api-reference'
             src: ['*.html', '*.md']
-            dest: '<%= config.dist %>/sphero'
-          }
-        ]
-
-      # build Ollie docs
-      ollie_docs:
-        options:
-          platform: 'ollie'
-          ext: '.html'
-          layout: 'docs.hbs'
-
-        files: [
+            dest: '<%= config.dist %>/api-reference'
+          },
           {
-            expand: true
-            cwd: '<%= config.content %>/ollie'
+            expand: true,
+            cwd: '<%= config.content %>/sdk'
             src: ['*.html', '*.md']
-            dest: '<%= config.dist %>/ollie'
+            dest: '<%= config.dist %>/sdk'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.content %>/sphero-robot-basics'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/sphero-robot-basics'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.content %>/sprk-edu'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/sprk-edu'
           }
         ]
 

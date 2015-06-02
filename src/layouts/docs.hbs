@@ -44,9 +44,7 @@ date: <%= new Date() %>
         <div id="docs">
           <header class="large-12 columns navigation always-show">
             <div class="left-side">
-              <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
-              <a class="{{#compare platform "===" "sphero"}}active{{/compare}}" href="/sphero/start">Sphero</a>
-              <!--<a class="{{#compare platform "===" "ollie"}}active{{/compare}}" href="/ollie/start">Ollie</a>-->
+              <a href="https://www.sphero.com"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
             </div>
             <div class="right-side">
               <div class="edit-button">
@@ -56,23 +54,40 @@ date: <%= new Date() %>
                 <div class="ion-ios7-cart-outline"></div>
                 <a href="http://store.gosphero.com">Shop</a>
               </div>
-              <div class="home-button">
-                <div class="ion-arrow-left-c"></div>
-                <a href="http://gosphero.com">gosphero.com</a>
-              </div>
             </div>
           </header>
           <div class="content-root" data-spy="scroll" data-target="#toc">
             <div class="menubar">
               <div class="menu section" role="flatdoc-menu">
                 <ul>
-                  {{#withSort pages "data.order"}}
-                  <li><a href="/{{../platform}}/{{basename}}" class="level-0 {{#compare basename "===" ../basename}}active{{/compare}}">{{data.title}}</a></li>
-                  {{/withSort}}
+                  <li><a href="/sphero-robot-basics" class="level-0">Sphero Robot Basics</a></li>
+                  <li><a href="/sprk-edu" class="level-0">SPRK - EDU</a></li>
+                  <li><a href="/sdk" class="level-0">SDK</a></li>
+                  <li><a href="/api-reference" class="level-0">API Reference</a></li>
                 </ul>
               </div>
               <div class="menu section" role="flatdoc-menu">
                 <ul id="toc">
+                  {{#withSort pages "data.order"}}
+                    {{#is data.section "Sphero Robot Basics"}}
+                    <li><a href="/sphero-robot-basics/{{basename}}">{{data.title}}</a></li>
+                    {{/is}}
+                  {{/withSort}}
+                  {{#withSort pages "data.order"}}
+                    {{#is data.section "SPRK - EDU"}}
+                    <li><a href="/sprk-edu/{{basename}}">{{data.title}}</a></li>
+                    {{/is}}
+                  {{/withSort}}
+                  {{#withSort pages "data.order"}}
+                    {{#is data.section "SDK Documentation"}}
+                    <li><a href="/sdk/{{basename}}">{{data.title}}</a></li>
+                    {{/is}}
+                  {{/withSort}}
+                  {{#withSort pages "data.order"}}
+                    {{#is data.section "API Reference"}}
+                    <li><a href="/api-reference/{{basename}}">{{data.title}}</a></li>
+                    {{/is}}
+                  {{/withSort}}
                 </ul>
               </div>
             </div>
