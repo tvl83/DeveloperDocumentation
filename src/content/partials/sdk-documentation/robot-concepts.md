@@ -1,12 +1,4 @@
----
-title: Overview
-order: 0
-section: SDK Documentation
-subsections:
-  - Languages
-  - Sensors
-  - Outputs
----
+## Developing for Sphero Robots
 
 ## Overview
 Sphero Robots support three programming languages on every Robot that provide some basic autonomous functions. The easiest to learn and is used by our SPRK education program is Macros, followed by OrbBasic, and finally the latest and most powerful, OVAL.  These languages all provide semi-autonomous functionality for fast changing colors or other feedback that would be limited to the 12 commands per second limit when communicating with a host device.
