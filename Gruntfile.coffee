@@ -37,6 +37,12 @@ module.exports = (grunt) ->
       docs:
         files: [
           {
+            expand: true
+            cwd: '<%= config.content %>'
+            src: ['*.html']
+            dest: '<%= config.dist %>'
+          },
+          {
             expand: true,
             cwd: '<%= config.content %>/api-reference'
             src: ['*.html', '*.md']
