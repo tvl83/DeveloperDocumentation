@@ -104,15 +104,15 @@ date: <%= new Date() %>
                       </ul>
                     {{/withSort}}
 
-                    <li class="level-0">Community SDKs</li>
+                    <li class="level-0">Community APIs</li>
                     {{#withSort pages "data.order"}}
                       <ul>
-                        {{#is data.section "Community Docs"}}
-                          <li class="level-1"><a href="/community-sdk/{{basename}}">{{data.title}}</a></li>
+                        {{#is data.section "Community APIs"}}
+                          <li class="level-1"><a href="/community-apis/{{basename}}">{{data.title}}</a></li>
                           {{#if data.subsections.length}}
 {{!--                             <ul>
                               {{#each data.subsections}}
-                                <li class="level-2"><a href="/sdk-documentation/{{../basename}}">{{.}}</a></li>
+                                <li class="level-2"><a href="/community-apis/{{../basename}}">{{.}}</a></li>
                               {{/each}}
                             </ul>
  --}}                          {{/if}}

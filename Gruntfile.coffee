@@ -49,6 +49,12 @@ module.exports = (grunt) ->
           },
           {
             expand: true,
+            cwd: '<%= config.content %>/community-apis'
+            src: ['*.html', '*.md']
+            dest: '<%= config.dist %>/community-apis'
+          },
+          {
+            expand: true,
             cwd: '<%= config.content %>/sdk-documentation'
             src: ['*.html', '*.md']
             dest: '<%= config.dist %>/sdk-documentation'
