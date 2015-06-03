@@ -4,8 +4,6 @@ order: 1
 section: SPRK - EDU
 ---
 
-# Macros
-
 ## Introduction
 
 Beginning in August 2011, firmware builds of the Sphero Main Application contained a facility to execute macros, which are sequences of commands that perform actions locally on Sphero without additional client interaction.

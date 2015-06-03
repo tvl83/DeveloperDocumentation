@@ -4,7 +4,6 @@ order: 2
 section: SPRK - EDU
 ---
 
-# OrbBasic
 
 ## Introduction
 

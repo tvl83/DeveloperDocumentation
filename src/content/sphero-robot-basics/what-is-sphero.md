@@ -4,9 +4,6 @@ order: 1
 section: Sphero Robot Basics
 ---
 
-## What is Sphero?
-
-
 Sphero is a kind of spherical robot toy designed by *Sphero* (the company). It is a white orb wrapped in polycarbonate plastic, capable of rolling around, changing colors, running programs, and being controlled by a smartphone or tablet.  Much like Sphero, Ollie and other robots developed by *Sphero* use the same methods for communicating and navigating, so programs developed for one robot will typically work on all *Sphero* robots. 
 
 * **Rolling** - Sphero robots can roll at a given speed and heading for a given amount of time.

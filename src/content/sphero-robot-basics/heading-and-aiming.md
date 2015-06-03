@@ -3,7 +3,7 @@ title: Heading and Aiming
 order: 3
 section: Sphero Robot Basics
 ---
-## Heading and Aiming
+
 
 One of the things that makes Sphero robots so unique is that its heading is relative to the user, not relative to the robot.
 This makes it much easier to get Sphero robots moving in the direction you want.  Note in the diagram below that zero degrees is directly away from the user while 180 degress is toward the user.

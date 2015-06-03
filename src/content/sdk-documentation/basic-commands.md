@@ -5,6 +5,53 @@ section: SDK Documentation
 ---
 
 ## Basic Commands
+Robots objects in all supported Sphero SDKs have a sendCommand function.  This function abstracts the creation of the binary packet to be sent, queues the packet, and marshals it throught the Bluetooth Stack.
+
+```objective-c
+@property (strong, nonatomic) id<RKRobotBase> robot; // set this upon connection
+// OR USE
+@property (strong, nonatomic) RKConvenienceRobot *robot; //
+```
+
+
+### Aim & Setting Heading
+As described in **ADD LINK to Aim/Heading** your application will need to be able to Aim the robot before allowing your user to attempt to navigate.
+
+##### UI Aim Component
+
+##### Custom Aiming
+To implement a custom aim component, the following commands will need to be used.
+1. Drive with zero velocity 	
+2. Set Heading
+
+```objective-c
+// update this 
+// set heading
+```
+
+```java
+```
+
+
+
+
+
+
+### Driving
+Driving forward
+```objective-c
+[_robot sendCommand:[RKRollCommand commandWithHeading:0 andVelocity:];
+```
+Stopping
+```objective-c
+[_robot sendCommand:[RKRollCommand commandWithStop]];
+```
+
+### Changing Color
+```objective-c
+
+```
+
 
 ### Convenience Robot Function
 
