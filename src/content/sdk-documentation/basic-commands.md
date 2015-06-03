@@ -12,6 +12,18 @@ Robots objects in all supported Sphero SDKs have a sendCommand function.  This f
 @property (strong, nonatomic) RKConvenienceRobot *robot; //
 ```
 
+```swift
+// swift
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
 
 ### Aim & Setting Heading
 As described in **ADD LINK to Aim/Heading** your application will need to be able to Aim the robot before allowing your user to attempt to navigate.
@@ -20,21 +32,25 @@ As described in **ADD LINK to Aim/Heading** your application will need to be abl
 
 ##### Custom Aiming
 To implement a custom aim component, the following commands will need to be used.
-1. Drive with zero velocity 	
+1. Drive with zero velocity
 2. Set Heading
 
 ```objective-c
-// update this 
+// update this
 // set heading
 ```
 
-```java
+```swift
+// swift
 ```
 
+```java
+// java
+```
 
-
-
-
+```javascript
+// js
+```
 
 ### Driving
 Driving forward
@@ -51,12 +67,24 @@ Stopping
 
 ```
 
+```swift
+// swift
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
 
 ### Convenience Robot Function
 
 The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot setLEDWithRed:(float)redVal Green:(float)greenVal Blue:(float)blueVal`. We can set the RGB LED with this method. The valid values here are 0.0f to 1.0f.
 
-```
+```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume this is set when the robot connects
 
 {...}
@@ -73,11 +101,23 @@ The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot setLED
 }
 ```
 
+```swift
+// swift
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
 ### Convenience Robot Send Command
 
 The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot sendCommand:(RKDeviceCommand *)command]`. We can make a `RKRGBLEDOutputCommand` and send it with this method.
 
-```
+```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume this is set when the robot connects
 
 {...}
@@ -98,11 +138,23 @@ The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot sendCo
 }
 ```
 
+```swift
+// swift
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
 ### Robot Send Command
 
 The `id<RKRobotBase>` object (the one we get from the `- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n` method or by using `- [RKConvenienceRobot robot]`) contains the method `- [id<RKRobotBase> sendCommand:(RKDeviceCommand *)command]`. We can make an `RKRGBLEDOutputCommand` and send it with this method.
 
-```
+```objective-c
 @property (strong, nonatomic) id<RKRobotBase> robot; // Assume this is set when the robot connects
 
 {...}
@@ -121,5 +173,17 @@ The `id<RKRobotBase>` object (the one we get from the `- (void)handleRobotStateC
 
 	[self performSelector:@selector(blink:) withObject:!lit afterDelay:0.5];
 }
+```
+
+```swift
+// swift
+```
+
+```java
+// java
+```
+
+```javascript
+// js
 ```
 
