@@ -4,7 +4,6 @@ order: 4
 section: SDK Documentation
 ---
 
-## Basic Commands
 Robots objects in all supported Sphero SDKs have a sendCommand function.  This function abstracts the creation of the binary packet to be sent, queues the packet, and marshals it throught the Bluetooth Stack.
 
 ```objective-c
