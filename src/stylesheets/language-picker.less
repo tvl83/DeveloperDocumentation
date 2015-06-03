@@ -1,8 +1,52 @@
-.language-picker {
+body .content > ul.language-picker {
+  list-style: none;
+  width: auto;
+  height: auto;
+  position: relative;
+  top: -30px;
+  padding: 0;
+  float: right;
+  background-color: black;
+  min-height: 50px;
+
+  li {
+    list-style: none;
+    &:before {
+      display: none;
+    }
+  }
 }
 
-.language a {
-  &.active {
-    color: darkblue;
+.language {
+  display: inline;
+  height: 50px;
+
+  .button {
+    min-width: 140px;
+    text-align: center;
+    border-radius: 0;
+    margin-right: 0;
+    min-height: 50px;
+
+    &:first-child {
+      padding-top: 11px;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: lightblue;
+      border-color: lightblue;
+    }
+
+    &.active {
+      background-color: @sphero-blue;
+      border-color: @sphero-blue;
+
+      &:hover {
+        background-color: @sphero-blue;
+        border-color: @sphero-blue;
+      }
+    }
   }
 }

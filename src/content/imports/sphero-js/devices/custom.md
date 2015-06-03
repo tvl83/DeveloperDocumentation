@@ -281,12 +281,11 @@ orb.stopOnDisconnect(function(err, data) {
 });
 ```
 
-Starts streaming of motor back EMF data
-
-It uses sphero's data streaming command. User needs to listen
-for the `dataStreaming` or `motorsBackEmf` event to get the data.
+The Stop On Disconnect command sends a flag to Sphero. This flag tells
+Sphero whether or not it should automatically stop when it detects
+that it's disconnected.
 
 **Params:**
 
-- `[remove=false]` (Boolean) triggered on complete
+- `[remove=false]` (Boolean) whether or not to stop on disconnect
 - `callback` (Function) triggered on complete
