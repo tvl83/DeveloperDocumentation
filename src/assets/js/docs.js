@@ -91,3 +91,31 @@ $(document).ready(function(){
     }
   });
 });
+
+// Handle langauge switching
+$(function() {
+  function toggleLanguage(language) {
+    $('pre .language-' + language).parent().css('display', 'block');
+    $('pre code').not('.language-' + language).parent().css('display', 'none');
+  }
+
+  function toggleLink(node) {
+    $('li.language a').removeClass('active');
+    $(node).addClass('active');
+  }
+
+  // Set the default language selection to objective-c
+  if ($('.language-picker').length > 0) {
+    var link = $('li.language a[href="#objective-c"]');
+    toggleLink(link);
+    toggleLanguage('objective-c');
+  }
+
+  $('li.language a').on('click', function(e) {
+    e.preventDefault();
+    var language = $(this).data('language');
+    toggleLink(this);
+    toggleLanguage(language);
+  });
+});
+

@@ -10,7 +10,7 @@ section: SDK Documentation
 
 Implement the method `- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n` to be able to handle robot state change events.
 
-```
+```objective-c
 - (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n {
     switch(n.type) {
         case RKRobotConnecting:
@@ -25,12 +25,64 @@ Implement the method `- (void)handleRobotStateChangeNotification:(RKRobotChanged
 }
 ```
 
+```swift
+func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
+    switch (notification.type) {
+    case .Connecting:
+        break
+    case .Online:
+        break
+    case .Disconnected:
+        break
+    default:
+    }
+}
+```
+
+```java
+@Override
+public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+    switch (type) {
+        case Connecting:
+            break;
+        case FailedConnect:
+            break;
+        case Online:
+            break;
+        case Disconnected:
+            break;
+    }
+}
+```
+
+```javascript
+// changedState
+```
+
 ### Register with the Discovery Agent
 
 Register with the `RKRobotDiscoveryAgent` to get robot state events
 
-```
+```objective-c
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
+```
+
+```swift
+func appDidBecomeActive(note: NSNotification) {
+    RKRobotDiscoveryAgent.startDiscovery()
+}
+```
+
+```java
+// Bluetooth Classic (Sphero)
+DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
+
+// Bluetooth LE (Ollie)
+DiscoveryAgentLE.getInstance().addRobotStateChangeListener(this);
+```
+
+```javascript
+// DiscoveryAgent
 ```
 
 ### Start Discovery
@@ -38,10 +90,28 @@ Register with the `RKRobotDiscoveryAgent` to get robot state events
 All that you have to do now is start discovery with the `+ [RKRobotDiscoveryAgent startDiscovery]` method.
 *Note: Due to limitation in the Apple Bluetooth stack, you cannot start discovery in `- [UIViewController viewDidLoad]`
 
-```
+```objective-c
 - (void)appDidBecomeActive:(NSNotification *)n {
   [RKRobotDiscoveryAgent startDiscovery];
 }
+```
+
+```swift
+```
+
+```java
+@Override
+protected void onStart() {
+    super.onStart();
+    // Bluetooth Classic (Sphero)
+    DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
+    // Bluetooth LE (Ollie)
+    DiscoveryAgentLE.getInstance().startDiscovery();
+}
+```
+
+```javascript
+// onStart
 ```
 
  - When you are close enough, the robot will send the connecting and then connected message to your `- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n` method. When you receive the connected message, you are now connected to a robot!
@@ -54,7 +124,7 @@ All that you have to do now is start discovery with the `+ [RKRobotDiscoveryAgen
 
 When robot connects, you will get an object with the type `id<RKRobotBase>`. This class encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
 
-```
+```objective-c
 
 @property (strong, nonatomic) RKConvenienceRobot *robot;
 
@@ -81,6 +151,63 @@ When robot connects, you will get an object with the type `id<RKRobotBase>`. Thi
 }
 ```
 
+```swift
+var robot: RKConvenienceRobot!
+
+{...}
+
+func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
+    let noteRobot = notification.robot
+
+    switch (notification.type) {
+    case .Connecting:
+        break
+    case .Online:
+        if (noteRobot.isKindOfClass(RKRobotLE)) {
+          self.robot = RKOllie(robot: noteRobot)
+        } else if (noteRobot.isKindOfClass(RKRobotClassic)) {
+          self.robot = RKSphero(robot: noteRobot)
+        }
+        break
+    case .Disconnected:
+        break
+    default:
+    }
+}
+```
+
+```java
+private ConvenienceRobot _robot;
+
+{...}
+
+@Override
+public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+    switch (type) {
+        case Connecting:
+            break;
+        case FailedConnect:
+            break;
+        case Online:
+            // Bluetooth Classic (Sphero)
+            if (robot instanceof RobotClassic) {
+                _robot = new Sphero(robot);
+            }
+            // Bluetooth LE (Ollie)
+            if (robot instanceof RobotLE) {
+                _robot = new Ollie(robot);
+            }
+            break;
+        case Disconnected:
+            break;
+    }
+}
+```
+
+```javascript
+// changedState
+```
+
 ### Disconnecting a Robot
 
 When you are done with the robot, it is important to disconnect it so that the next application can use it. There are two methods to accomplish this:
@@ -89,7 +216,7 @@ When you are done with the robot, it is important to disconnect it so that the n
 
 If you have an `RKConvenienceRobot`, disconnection is accomplished by calling the method `- [RKConvenienceRobot disconnect]` and the robot will take care of the rest for you.
 
-```
+```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume that this is set when the robot connects
 
 {...}
@@ -99,11 +226,37 @@ If you have an `RKConvenienceRobot`, disconnection is accomplished by calling th
 }
 ```
 
+```swift
+var robot: RKConvenienceRobot!  // Assume that this is set when the robot connects
+
+{...}
+
+func disconnectRobot() {
+  self.robot.disconnet()
+}
+```
+
+```java
+private ConvenienceRobot _robot; // Assume that this is set when the robot connects
+
+{...}
+
+@Override
+public void onStop() {
+    super.onStop();
+    _robot.disconnect();
+}
+```
+
+```javascript
+// onStop
+```
+
 #### Robot Method
 
 If you have a `id<RKRobotBase>`, disconnection is a bit more manual. `RKRobotLE` objects need to have `- [RKRobotLE sleep]` called on them as to avoid leaving the processor awake while the robot is not connected. Disconnection will be automatic from the sleep. `RKRobotClassic` objects can just have `- [RKRobotClassic disconnect]` called on them.
 
-```
+```objective-c
 @property (strong, nonatomic) id<RKRobotBase> robot; // Assume this is set when the robot connects
 
 {...}
@@ -116,5 +269,40 @@ If you have a `id<RKRobotBase>`, disconnection is a bit more manual. `RKRobotLE`
         [_robot disconnect];
     }
 }
+```
+
+```swift
+var robot: RKRobotBase! // Assume this is set when the robot connects
+
+{...}
+
+func disconnectRobot() {
+  if (robot.isKindOfClass(RKRobotLE)) {
+    robot.sleep()
+  } else if (robot.isKindOfClass(RKRobotClass)) {
+    robot.disconnect()
+  }
+}
+```
+
+```java
+private Robot _robot;
+
+{...}
+
+@Override
+public void onStop() {
+    super.onStop();
+    if (_robot instanceof RobotLE) {
+        _robot.sleep();
+    }
+    else if (_robot instanceof RobotClassic) {
+        _robot.disconnect();
+    }
+}
+```
+
+```javascript
+// onStop
 ```
 

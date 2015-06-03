@@ -47,8 +47,6 @@ date: <%= new Date() %>
               <a href="http://www.gosphero.com"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
             </div>
             <div class="right-side">
-              <div class="edit-button">
-              </div>
               <div class="home-button">
                 <div class="ion-ios7-cart-outline"></div>
                 <a href="http://store.gosphero.com">Shop</a>
@@ -123,11 +121,18 @@ date: <%= new Date() %>
               </div>
             </div>
             <div role="flatdoc-content" class="content" id="content">
+              {{#is section "SDK Documentation"}}
+                <ul class="language-picker">
+                  <li class="language"><a href="#objective-c" data-language="objective-c">Objective-C</a></li>
+                  <li class="language"><a href="#swift" data-language="swift">Swift</a></li>
+                  <li class="language"><a href="#java" data-language="java">Java</a></li>
+                  <li class="language"><a href="#js" data-language="javascript">JavaScript</a></li>
+                </ul>
+              {{/is}}
               <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{section}}/{{basename}}.md" class="button">Edit this page</a>
               {{#markdown}}
               {{> body}}
               {{/markdown}}
-              <div class="code-samples"></div>
             </div>
           </div>
         </div>

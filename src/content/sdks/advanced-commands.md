@@ -26,7 +26,7 @@ If your Sphero is paired with your phone, you'll be able to control it with the 
 The `ButtonDriverViewController` imports dependencies, and defines required
 properties.
 
-```
+```objective-c
 #import "ButtonDriveViewController.h"
 #import <RobotKit/RobotKit.h>
 
@@ -36,9 +36,18 @@ properties.
 @property (strong, nonatomic) RKConvenienceRobot* robot;
 ```
 
+```swift
+```
+
+```java
+```
+
+```javascript
+```
+
 When the app receives the `appDidBecomeActive` event, it tells RobotKit to start looking for a Sphero.
 
-```
+```objective-c
 -(void)appDidBecomeActive:(NSNotification*)notification {
   [RKRobotDiscoveryAgent startDiscovery];
 }
@@ -46,13 +55,13 @@ When the app receives the `appDidBecomeActive` event, it tells RobotKit to start
 
 The RobotKit discovery agent is then told to add an observer to trigger event when a robot's state changes.
 
-```
+```objective-c
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
 ```
 
 Then, inside the handler, specific actions are defined for different possible robot states.
 
-```
+```objective-c
 -(void) handleRobotStateChangeNotification:(RKRobotChangedStateNotification *) n{
   switch(n.type){
     case RKRobotConnecting:
@@ -73,7 +82,7 @@ Then, inside the handler, specific actions are defined for different possible ro
 
 Two methods then tell the robot to drive or stop the Sphero when buttons are pressed.
 
-```
+```objective-c
 -(IBAction)twoSeventyPressed:(id)sender {
   [_robot driveWithHeading:270.0 andVelocity:0.5];
 }
@@ -85,7 +94,7 @@ Two methods then tell the robot to drive or stop the Sphero when buttons are pre
 
 Finally, when the app is closed, it will stop looking for new robots.
 
-```
+```objective-c
 -(void)appWillResignActive:(NSNotification*)notification {
   [RKRobotDiscoveryAgent stopDiscovery];
   [_robot disconnect];

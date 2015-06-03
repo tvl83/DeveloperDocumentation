@@ -18,29 +18,6 @@
     }
   }
 
-  /*
-   * Sidebar stick.
-   */
-
-  $(function() {
-    var $sidebar = $('.menubar');
-    var elTop;
-
-    $window
-      .on('resize.sidestick', function() {
-        elTop = $sidebar.offset().top;
-        if($window.scrollTop() < elTop) {
-          $window.trigger('scroll.sidestick');
-        }
-
-      })
-      .on('scroll.sidestick', function() {
-        var scrollY = $window.scrollTop();
-        $sidebar.toggleClass('fixed', (scrollY >= elTop));
-      })
-      .trigger('resize.sidestick');
-  });
-
 })(jQuery);
 
 /*! fillsize (c) 2012, Rico Sta. Cruz. MIT License.
