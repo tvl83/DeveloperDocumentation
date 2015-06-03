@@ -129,7 +129,9 @@ date: <%= new Date() %>
                   <li class="language"><a href="#js" data-language="javascript" class="button">JavaScript</a></li>
                 </ul>
               {{/is}}
-              <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{section}}/{{basename}}.md" class="button">Edit this page</a>
+              <h1>{{title}}
+              <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/" class="edit-link"><span class="ion-edit"></span></a>
+              </h1>
               {{#markdown}}
               {{> body}}
               {{/markdown}}

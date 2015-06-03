@@ -120,7 +120,6 @@ h1#legacy-v1-sdk {
   position: relative;
 }
 .content {
-  padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 40px;
   padding-right: 40px;
@@ -184,6 +183,13 @@ body.big-h3 .content h3:before {
   top: -35px;
   left: -40px;
   width: 100%;
+}
+.content > h1:first-of-type {
+  padding-top: 0;
+
+  &:before {
+    display: none;
+  }
 }
 @media (max-width: 768px) {
   .content h1,
@@ -381,7 +387,7 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   body:not(.no-literate) .content > h2,
   body:not(.no-literate) .content > h3,
   body:not(.no-literate) .content > h4 {
-    clear: right;
+    clear: none;
   }
   body:not(.no-literate) .content > pre,
   body:not(.no-literate) .content > blockquote {
@@ -667,4 +673,21 @@ div.hidden {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   background-color: #00adef;
+}
+
+.edit-link {
+  color: black;
+  opacity: 0.2;
+  font-size: 20px;
+  padding-left: 10px;
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+    opacity: 1.0;
+  }
+
+  span {
+    vertical-align: text-top;
+  }
 }
