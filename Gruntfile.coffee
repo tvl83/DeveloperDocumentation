@@ -16,9 +16,10 @@ module.exports = (grunt) ->
       # general options and defaults
       options:
         assets: '<%= config.dist %>/assets'
+        data: '<%= config.src %>/content/*.json'
         expand: true
         ext: '.html'
-        helpers: 'handlebars-helper-slugify'
+        helpers: ['./src/helpers/*.js']
         layoutdir: '<%= config.src %>/layouts'
         layout: 'docs.hbs'
         partials: [
@@ -43,9 +44,9 @@ module.exports = (grunt) ->
           },
           {
             expand: true,
-            cwd: '<%= config.content %>/sdks'
+            cwd: '<%= config.content %>/sdk-documentation'
             src: ['*.html', '*.md']
-            dest: '<%= config.dist %>/sdks'
+            dest: '<%= config.dist %>/sdk-documentation'
           },
           {
             expand: true,

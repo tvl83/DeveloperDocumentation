@@ -7,11 +7,11 @@ section: SPRK - EDU
 ### Overview
 Oval is a subset of the computer language C with a few extra features to support streaming and asynchronous communication. It provides 32-bit floating point and signed integer types but does not include pointers, structs, or unions
 ### The Ellipsis
-Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the Oval Virtual Machine (OVM) must end with: 
+Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the Oval Virtual Machine (OVM) must end with:
 
-``` 
-... 
-```	
+```
+...
+```
 In order to actually turn off the Oval Virtual Machine (OVM) use the statement
 
 ```
@@ -22,7 +22,7 @@ end;
 #### Supported Types
 In order to keep the type system simple, there are no pointer types, structs, or unions in Oval. The type system currently supports these two primitive types (both are 32-bit).  Addresses of variables and functions are expressed as integers.
 
-``` 
+```
 float
 int
 ```
@@ -36,7 +36,7 @@ false = !true // any bit pattern that is not zero
 #### Variable Declaration and Assignment
 A variable declared outside of any function is global.  It can be accessed from the stream or from any function defined afterward.
 
-``` 
+```
 float radius;
 int myVariable_2 = 2; // <-- What a stupid variable name
 ...
@@ -135,11 +135,11 @@ void doSomething(float arg, int otherArg) {
     int someLocalVariable;
     // statements...
 }
- 
+
 float addFloats(float x, float y) {
     return x + y; // Don't write pointless code.
 }
- 
+
 int get2() {
     return 2; // This isn't Java.
 }
@@ -153,9 +153,9 @@ In order to write a complete C program you must supply a "main" function. Oval d
 float decr(float x) {
     return x - 1;
 }
- 
+
 float counter = 100;
- 
+
 while (counter) {
     // statements...
     counter = decr(counter);

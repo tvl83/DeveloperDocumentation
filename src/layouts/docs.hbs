@@ -91,11 +91,11 @@ date: <%= new Date() %>
                     {{#withSort pages "data.order"}}
                       <ul>
                         {{#is data.section "SDK Documentation"}}
-                          <li class="level-1"><a href="/sdks/{{basename}}">{{data.title}}</a></li>
+                          <li class="level-1"><a href="/sdk-documentation/{{basename}}">{{data.title}}</a></li>
                           {{#if data.subsections.length}}
                             <ul>
                               {{#each data.subsections}}
-                                <li class="level-2"><a href="/sdks/{{../basename}}">{{.}}</a></li>
+                                <li class="level-2"><a href="/sdk-documentation/{{../basename}}">{{.}}</a></li>
                               {{/each}}
                             </ul>
                           {{/if}}
@@ -130,7 +130,7 @@ date: <%= new Date() %>
                 </ul>
               {{/is}}
               <h1>{{title}}
-              <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/" class="edit-link"><span class="ion-edit"></span></a>
+                <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{slugify section}}/{{slugify title}}" class="edit-link"><span class="ion-edit"></span></a>
               </h1>
               {{#markdown}}
               {{> body}}
