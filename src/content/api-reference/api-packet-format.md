@@ -7,8 +7,6 @@ subsections:
   - Parsing Async Packets
 ---
 
-# API Packets
-
 ## Packet Structures
 
 ### Client Command Packets
