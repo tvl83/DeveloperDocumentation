@@ -120,11 +120,10 @@ h1#legacy-v1-sdk {
   position: relative;
 }
 .content {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
   padding-left: 40px;
   padding-right: 40px;
   zoom: 1;
-  max-width: 700px;
 }
 .content:before,
 .content:after {
@@ -185,7 +184,7 @@ body.big-h3 .content h3:before {
   width: 100%;
 }
 .content > h1:first-of-type {
-  padding-top: 0;
+  margin-top: 0.75em;
 
   &:before {
     display: none;
@@ -376,10 +375,6 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   body:not(.no-literate) .content > h6,
   body:not(.no-literate) .content > pre,
   body:not(.no-literate) .content > blockquote {
-    width: 65%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     padding-right: 40px;
     padding-left: 40px;
   }
@@ -391,10 +386,7 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   }
   body:not(.no-literate) .content > pre,
   body:not(.no-literate) .content > blockquote {
-    width: 55%;
     padding: 10px 40px 0;
-    float: right;
-    clear: right;
   }
   // Adj. clearing of certain elements in MobileSDK: Convenience Robot section
   body:not(.no-literate) .content > #ios + pre,
@@ -422,19 +414,6 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   body:not(.no-literate) .content > blockquote + h5,
   body:not(.no-literate) .content > pre + h6,
   body:not(.no-literate) .content > blockquote + h6 {
-    clear: both;
-  }
-  body:not(.no-literate) .content > p,
-  body:not(.no-literate) .content > ul,
-  body:not(.no-literate) .content > ol,
-  body:not(.no-literate) .content > h4,
-  body:not(.no-literate) .content > h5,
-  body:not(.no-literate) .content > h6 {
-    float: left;
-    width: 45%;
-    margin-bottom: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
     clear: both;
   }
   body:not(.no-literate) .content > h4,
@@ -583,7 +562,6 @@ hr {
 }
 
 @media (min-width: 1180px) {
-
   hr {
     display: block;
     clear: both;
@@ -618,16 +596,6 @@ hr {
     color: #000;
     z-index: 1;
     position: relative;
-  }
-
-  body:not(.no-literate) .content > p,
-  body:not(.no-literate) .content > ul,
-  body:not(.no-literate) .content > ol,
-  body:not(.no-literate) .content > h4,
-  body:not(.no-literate) .content > h5,
-  body:not(.no-literate) .content > h6 {
-    float: left;
-    clear: left;
   }
 
   body:not(.no-literate) .content > pre + p,

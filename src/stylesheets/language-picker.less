@@ -4,9 +4,10 @@ body .content > ul.language-picker {
   height: auto;
   position: relative;
   padding: 0;
-  float: right;
+  float: left;
   background-color: black;
   min-height: 33px;
+  margin-left: 0;
 
   li {
     list-style: none;
@@ -16,8 +17,11 @@ body .content > ul.language-picker {
   }
 }
 
-@media (max-width: 1180px) {
-  top: 0;
+
+@media (min-width: 480px) {
+  body .content > ul.language-picker {
+    float: right;
+  }
 }
 
 .language {
@@ -25,7 +29,7 @@ body .content > ul.language-picker {
   height: 33px;
 
   .button {
-    min-width: 90px;
+    min-width: 70px;
     text-align: center;
     border-radius: 0;
     margin-right: 0;
@@ -49,5 +53,11 @@ body .content > ul.language-picker {
         background-color: @sphero-blue;
       }
     }
+  }
+}
+
+@media (min-width: 1180px) {
+  .button {
+    min-width: 90px;
   }
 }
