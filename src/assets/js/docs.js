@@ -95,8 +95,12 @@ $(document).ready(function(){
 // Handle langauge switching
 $(function() {
   function toggleLanguage(language) {
+    // Only show code blocks for this language
     $('pre .language-' + language).parent().css('display', 'block');
     $('pre code').not('.language-' + language).parent().css('display', 'none');
+    // Show divs with .language-only.{language-name}, hide other .language-only divs
+    $('.language-only').not('.' + language).css('display', 'none');
+    $('.language-only.' + language).css('display', 'block');
   }
 
   function toggleLink(node) {

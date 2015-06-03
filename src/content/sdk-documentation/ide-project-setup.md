@@ -2,6 +2,9 @@
 title: IDE & Project Setup
 order: 1
 section: SDK Documentation
+subsections:
+  - IDE Setup
+  - Project Setup
 ---
 
 ## IDE Setup
