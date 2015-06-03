@@ -16,8 +16,8 @@ For simplicity, only 90 degree increments are shown in the diagram but you can s
 
 ## Aim Your Sphero
 
-Each time a Sphero robot is turned on, it needs to be "aimed".
-This means setting the direction that Sphero will treat as a heading of 0 degrees. Aiming is accomplished via Sphero's small blue "tail light".  Sphero's tail light is inside the robot where Ollie's is located around the USB charge plug.
+Each time a Sphero robot is turned on, it needs to be "aimed".  
+This means setting the direction that Sphero will treat as a heading of 0 degrees.  Aiming is accomplished via Sphero's small blue "tail light".  Sphero's tail light is inside the robot where Ollie's is located around the USB charge plug.
 
 ![tail light](http://i.imgur.com/HY7KNKS.jpg)
 

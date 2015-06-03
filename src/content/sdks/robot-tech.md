@@ -21,7 +21,7 @@ OrbBasic is a text-based programming language that is easy to experiment with vi
 Oval is a subset of the computer language C with a few extra features to support streaming and asynchronous communication. It provides 32-bit floating point and signed integer types but does not include pointers, structs, or unions.  Oval gives the developer direct access to sensor data, and control system parameters.  (LINK)
 
 ### Convenience Robot
-The Official SDKs have a Convenience Robot class which encapsulates many of the common functions and commands that a developer might need as well as easy access to data streaming.
+The Official SDKs have a Convenience Robot class which encapsulates many of the common functions and commands that a developer might want as well as easy access to sensor streaming.
 
 ### API & SDK Commands
 API Commands are a set of commands that are generated on a host (mobile) device and transmitted via Bluetooth to the robot for execution.  By definition there is some latency from the time the command is generated and sent and hence why the onboard robot language interpreters are so important.  Also, due to bandwidth constraints the robot is limited to accepting about 12 commands per second via Bluetooth.  The Objective-C, Swift, and Android SDKs abstract the API Commands into SDK Commands and hide the actual protocol for ease of development.
