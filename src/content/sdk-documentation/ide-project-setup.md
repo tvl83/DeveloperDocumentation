@@ -1,21 +1,25 @@
 ---
 title: IDE & Project Setup
-order: 1
+order: 10
 section: SDK Documentation
-subsections:
-  - IDE Setup
-  - Project Setup
 ---
 
 ## IDE Setup
+<div class="java language-only">
+*Note: The Sphero Android SDK works with Android 3.1+ and Java Compiler Level 6.0(1.6)+
+*Note: The Ollie Android SDK works with Android 4.3+ and Java Compiler Level 6.0(1.6)+
+</div>
 
+<div class="objective-c swift language-only">
 *Note: The Robot SDK works with iOS 7.0+*
-
+{{#markdown}}
 ### Installing Xcode
 
 Before you begin to develop applications that interface with robots on iOS, you will need to install Xcode. As of writing this, there are no other supported IDEs for iOS development.
 
  - Install [Xcode](https://macappsto.re/us/Bk9QD.m)
+{{/markdown}}
+</div>
 
 ### Installing the Robot SDK
 

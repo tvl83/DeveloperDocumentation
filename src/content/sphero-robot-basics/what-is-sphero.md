@@ -7,7 +7,8 @@ section: Sphero Robot Basics
 Sphero is a spherical robot toy designed by *Sphero* (the company). It is a white orb wrapped in polycarbonate plastic, capable of rolling around, changing colors, running programs, and being controlled by a smartphone or tablet.  Much like Sphero, Ollie and other robots developed by *Sphero* use the same methods for communicating and navigating, so programs developed for one robot will typically work on all *Sphero* robots.
 
 * **Rolling** - Sphero robots can roll at a given speed and heading for a given amount of time.
-* **Colors** - Sphero robots can light up in any color.*
+* **Colors** - Sphero robots can light up in any color.
+* **Sensors** - Sphero robot's internal sensors include an IMU and Locator
 * **Bluetooth** - Sphero robots connect to devices such an iPads, iPhones, and Android phones and tablets through Bluetooth.
 * **Robot Languages** - Sphero robots support three 'onboard' programming languages.  Programs written in these languages are 'run' on the robot.
   * [Macros](/sprk-edu/macros/) - proprietary Macro language
@@ -17,3 +18,4 @@ Sphero is a spherical robot toy designed by *Sphero* (the company). It is a whit
 
 
 For more information, watch the [Sphero Guided Tour](https://www.youtube.com/watch?v=uHvZWcqjxrs)
+or get more [Robot Tech Info](/sphero-robot-basics/robot-tech)
