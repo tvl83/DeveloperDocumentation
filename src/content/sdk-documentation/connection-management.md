@@ -4,13 +4,36 @@ order: 2
 section: SDK Documentation
 ---
 
-## Connecting to Robot
+Also see [Connecting A Robot](/sphero-robot-basics/connecting-a-robot) for the end-user connection experience.
 
-### Implement the Listener
+### Overview
+The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** concept.  In order to connect, simply register for *robot connection state change* notifications and start Discovery.
 
-<p class="objective-c language-only">
+### Register for Connection State Changes
+##### Register with the Discovery Agent
+```objective-c
+[[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
+```
+
+```swift
+func appDidBecomeActive(note: NSNotification) {
+    RKRobotDiscoveryAgent.startDiscovery()
+}
+```
+
+```java
+// Bluetooth Classic (Sphero)
+DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
+
+// Bluetooth LE (Ollie)
+DiscoveryAgentLE.getInstance().addRobotStateChangeListener(this);
+```
+
+##### Handle the Connection State Change
+
+<!-- <p class="objective-c language-only">
   Implement the method `- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n` to be able to handle robot state change events.
-</p>
+</p> -->
 
 ```objective-c
 - (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n {
@@ -59,32 +82,6 @@ public void changedState(Robot robot, RobotChangedStateNotificationType type) {
 
 ```javascript
 // changedState
-```
-
-### Register with the Discovery Agent
-
-Register with the `RKRobotDiscoveryAgent` to get robot state events
-
-```objective-c
-[[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
-```
-
-```swift
-func appDidBecomeActive(note: NSNotification) {
-    RKRobotDiscoveryAgent.startDiscovery()
-}
-```
-
-```java
-// Bluetooth Classic (Sphero)
-DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
-
-// Bluetooth LE (Ollie)
-DiscoveryAgentLE.getInstance().addRobotStateChangeListener(this);
-```
-
-```javascript
-// DiscoveryAgent
 ```
 
 ### Start Discovery
