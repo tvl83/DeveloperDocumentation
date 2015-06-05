@@ -3,7 +3,6 @@
 - Android Studio requires JDK 1.7 even though the Robot SDK supports down to 1.6
 - The Sphero Android SDK works with Android 3.1+ (API level 12) and Java Compiler Level 6.0(1.6)+
 - The Ollie Android SDK works with Android 4.3+ (API level 18) and Java Compiler Level 6.0(1.6)+
-
 - RobotLibrary SDK applications *will not work in the emulator* due to the dependency on Bluetooth
 
 #### 1. Install [Android Studio](http://developer.android.com/sdk/index.html) + [JDK 1.7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
