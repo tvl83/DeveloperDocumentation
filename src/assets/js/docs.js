@@ -123,3 +123,8 @@ $(function() {
   });
 });
 
+// Ensure side navigation is always visible and footer is always at bottom
+(function($) {
+  var windowHeight = $(document).height();
+  $('#docs, .menubar').css("height", windowHeight - 189);
+})(jQuery)
