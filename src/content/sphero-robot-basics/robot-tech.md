@@ -35,7 +35,7 @@ Ollie and our future Bluetooth 4.0 robots give access to Signal Quality which ca
 
 ##Languages
 ### Macros
-The easiest way to develop Macros is via a mobile visual development tool called MacroLab.  MacroLab is available for [Apple](https://itunes.apple.com/us/app/sphero-macrolab/id519917219?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.orbotix.macrolab&hl=en). (LINK to SPRK EDU MACROLAB)  Macros excel at fast color changes, fades, and other semi-autonomous functions that would normally be limited by bluetooth bandwidth.
+The easiest way to develop Macros is via a mobile visual development tool called MacroLab.  MacroLab is available for [Apple](https://itunes.apple.com/us/app/sphero-macrolab/id519917219?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.orbotix.macrolab&hl=en).  Macros excel at fast color changes, fades, and other semi-autonomous functions that would normally be limited by bluetooth bandwidth.
 
 ### OrbBasic
 OrbBasic is a text-based programming language that is easy to experiment with via the OrbBasic App available in the [Apple](https://itunes.apple.com/us/app/orbbasic-for-sphero/id647306205?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.orbotix.orbbasic&hl=en) App Stores.  OrbBasic, like Macros, are a resource that provides for autonomous behavior and provides programmable conditionals that Macros don't support.
