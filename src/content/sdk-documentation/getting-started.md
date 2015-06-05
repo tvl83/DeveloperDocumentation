@@ -14,7 +14,6 @@ Build Apps for Sphero, Ollie and future *Sphero* robots very quickly using the i
 <!-- todo use include / partial but still allow editing of said include -->
 
 <div class="objective-c swift language-only">
-
 {{#markdown}}
 There are two ways to get started with the RobotKit SDK, simply exploring samples in the [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) or by integrating the RobotKit SDK into your own project.
 
@@ -61,7 +60,6 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 
 - [Connection Management](/sdk-documentation/connection-management)	
 - [Basic Commands](/sdk-documentation/basic-commands)
-
 {{/markdown}}
 </div>
 
@@ -102,8 +100,7 @@ Before you begin to develop applications that interface with robots on Android, 
 
 - [Connection Management](/sdk-documentation/connection-management)	
 - [Basic Commands](/sdk-documentation/basic-commands)
-	
-{{/markdown}}
+{{/markdown}}	
 </div>
 
 
