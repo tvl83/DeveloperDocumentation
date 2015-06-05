@@ -1,3 +1,5 @@
+Edit this section <a href="https://github.com/orbotix/DeveloperDocumentation/edit/10-rework-partial-structure/src/content/{{slugify section}}/partials/objective-c/{{slugify title}}-objective-c.md" class="edit-link"><span class="ion-edit"></span></a>
+
 There are two ways to get started with the RobotKit SDK, simply exploring samples in the [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) or by integrating the RobotKit SDK into your own project.  The steps below are for integrating into your own project.
 
 #### iOS Prerequisites
