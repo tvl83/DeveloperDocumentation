@@ -39,7 +39,7 @@ h1#legacy-v1-sdk {
 .content h3,
 .content h4,
 .content h5,
-.content h6 
+.content h6
 {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
@@ -297,6 +297,38 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   border-radius: 2px;
   overflow: auto;
 }
+@media (max-width: 1180px) {
+  .content pre > code {
+    background: @monokai-gray;
+    border: solid 1px #e7eaee;
+    border-top: solid 1px #dbdde2;
+    border-left: solid 1px #e2e5e9;
+    display: block;
+    padding: 10px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    overflow: auto;
+  }
+  .content pre > code {
+    -webkit-overflow-scrolling: touch;
+  }
+  .content pre > code::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+  .content pre > code::-webkit-scrollbar-thumb {
+    background: #ddd;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    border: solid 4px #f3f6fb;
+  }
+  .content pre > code:hover::-webkit-scrollbar-thumb {
+    background: #999;
+    -webkit-box-shadow: inset 2px 2px 3px rgba(0,0,0,0.2);
+    box-shadow: inset 2px 2px 3px rgba(0,0,0,0.2);
+  }
+}
+
 .content pre > code {
   -webkit-overflow-scrolling: touch;
 }
@@ -379,6 +411,10 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   body:not(.no-literate) .content > h6,
   body:not(.no-literate) .content > pre,
   body:not(.no-literate) .content > blockquote {
+    width: 45%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     padding-right: 40px;
     padding-left: 40px;
   }
@@ -386,11 +422,14 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   body:not(.no-literate) .content > h2,
   body:not(.no-literate) .content > h3,
   body:not(.no-literate) .content > h4 {
-    clear: none;
+    clear: right;
   }
   body:not(.no-literate) .content > pre,
   body:not(.no-literate) .content > blockquote {
+    width: 55%;
     padding: 10px 40px 0;
+    float: right;
+    clear: right;
   }
   // Adj. clearing of certain elements in MobileSDK: Convenience Robot section
   body:not(.no-literate) .content > #ios + pre,
@@ -418,6 +457,19 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   body:not(.no-literate) .content > blockquote + h5,
   body:not(.no-literate) .content > pre + h6,
   body:not(.no-literate) .content > blockquote + h6 {
+    clear: both;
+  }
+  body:not(.no-literate) .content > p,
+  body:not(.no-literate) .content > ul,
+  body:not(.no-literate) .content > ol,
+  body:not(.no-literate) .content > h4,
+  body:not(.no-literate) .content > h5,
+  body:not(.no-literate) .content > h6 {
+    float: left;
+    width: 45%;
+    margin-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
     clear: both;
   }
   body:not(.no-literate) .content > h4,
@@ -586,16 +638,28 @@ hr {
   body:not(.no-literate) .content p.img {
     padding: 0 40px;
     margin-top: 10px;
+    float: right;
+    width: 55%;
     clear: left;
   }
-
   body:not(.no-literate) .content table {
+    width: 45%;
     margin: 20px 45px;
+    float: right;
+    clear: right;
     color: #000;
     z-index: 1;
     position: relative;
   }
-
+  body:not(.no-literate) .content > p,
+  body:not(.no-literate) .content > ul,
+  body:not(.no-literate) .content > ol,
+  body:not(.no-literate) .content > h4,
+  body:not(.no-literate) .content > h5,
+  body:not(.no-literate) .content > h6 {
+    float: left;
+    clear: left;
+  }
   body:not(.no-literate) .content > pre + p,
   body:not(.no-literate) .content > blockquote + p,
   body:not(.no-literate) .content > pre + ul,
