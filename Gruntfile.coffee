@@ -24,6 +24,7 @@ module.exports = (grunt) ->
         layout: 'docs.hbs'
         partials: [
           'src/content/partials/*.html',
+          'src/content/sdk-documentation/partials/**/*.md',
           'src/content/imports/sphero-js/**/*.md'
         ]
         plugins: [
