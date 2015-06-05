@@ -22,11 +22,12 @@ func appDidBecomeActive(note: NSNotification) {
 ```
 
 ```java
-// Bluetooth Classic (Sphero)
-DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
+RobotDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateListener() {
+    @Override
+    public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
 
-// Bluetooth LE (Ollie)
-DiscoveryAgentLE.getInstance().addRobotStateChangeListener(this);
+    }
+}); 
 ```
 
 ##### Handle the Connection State Change
@@ -66,7 +67,7 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
 
 ```java
 @Override
-public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
     switch (type) {
         case Connecting:
             break;
@@ -102,10 +103,8 @@ All that you have to do now is start discovery with the `+ [RKRobotDiscoveryAgen
 @Override
 protected void onStart() {
     super.onStart();
-    // Bluetooth Classic (Sphero)
-    DiscoveryAgentClassic.getInstance().addRobotStateChangeListener(this);
-    // Bluetooth LE (Ollie)
-    DiscoveryAgentLE.getInstance().startDiscovery();
+    // This line assumes that this object is a Context
+    RobotDiscoveryAgent.getInstacne().startDiscovery(this);
 }
 ```
 
@@ -181,24 +180,18 @@ private ConvenienceRobot _robot;
 {...}
 
 @Override
-public void changedState(Robot robot, RobotChangedStateNotificationType type) {
+public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
     switch (type) {
-        case Connecting:
-            break;
-        case FailedConnect:
-            break;
         case Online:
-            // Bluetooth Classic (Sphero)
-            if (robot instanceof RobotClassic) {
-                _robot = new Sphero(robot);
-            }
-            // Bluetooth LE (Ollie)
-            if (robot instanceof RobotLE) {
-                _robot = new Ollie(robot);
-            }
-            break;
-        case Disconnected:
-            break;
+        // Bluetooth Classic (Sphero)
+        if (robot instanceof RobotClassic) {
+            _robot = new Sphero(robot);
+        }
+        // Bluetooth LE (Ollie)
+        if (robot instanceof RobotLE) {
+            _robot = new Ollie(robot);
+        }
+        break;
     }
 }
 ```
