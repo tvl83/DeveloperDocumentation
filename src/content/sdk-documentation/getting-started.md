@@ -30,18 +30,28 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)
 
 #### 3. Add RobotKit SDK to your Xcode Project
-- Add Frameworks
-	- Navigate to your [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) download
-	- Drag and drop the framework into the project. Ensure the option **Copy files if needed** is checked before clicking **Add**
+
 - Set Deployment Target to **7.0** in the **General** tab
-- Set Background Capabilities
-	- Open **Capabilities** tab
-	- Enable **Background Modes** and check **Uses Bluetooth LE accessories** 
-	- note: this setting allows Robots to sleep + disconnect while the app is closing
+
+- Add RobotKit Framework
+	- Navigate to your [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) download
+	- Drag and drop the RobotKit framework into the project. 
+	- Ensure the option **Copy files if needed** is checked before clicking **Add**
+
+- Set Capabilities
+	- **Background Modes**
+		- Open **Capabilities** tab
+		- Enable **Background Modes** and check **Uses Bluetooth LE accessories** 
+		- note: this setting allows Robots to sleep + disconnect while the app is closing
+	- **Wireless Accessory Configuration**
+		- Enable ** Wireless Accessory Configuration
+		- Add ```com.orbotix.robotprotocol``` as **Supported external accessory protocols**
+
 - Update Build Settings
 	- Open **Build Settings** tab
 	- Search for **"Other Linker Flags"**
-	- Add ```-ObjC -lstdc++ -all_load```
+	- Add ```-ObjC -all_load -lstdc++```
+
 - Build Project
 	- Change the device target from iOS Simulator to iOS Device (or the name of the connected iOS device)
 	- Press the play button or CMD+B
