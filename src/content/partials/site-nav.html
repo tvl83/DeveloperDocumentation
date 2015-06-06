@@ -7,7 +7,7 @@
             {{#if data.subsections.length}}
               <ul>
                 {{#each data.subsections}}
-                  <li class="level-2"><a href="/sphero-robot-basics/{{../basename}}">{{.}}</a></li>
+                  <li class="level-2"><a href="#{{../basename}}-{{slugify .}}">{{.}}</a></li>
                 {{/each}}
               </ul>
             {{/if}}
