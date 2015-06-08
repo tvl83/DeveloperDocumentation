@@ -132,9 +132,19 @@ $(function() {
     });
   }
 
+
   function toggleLink(node) {
     $('li.language a').removeClass('active');
     $(node).addClass('active');
+  }
+
+  function setupSubsectionEditHighlighting() {
+    $('.subsection-edit-link').mouseenter(function() {
+      $(this).parents('.language-only').addClass('editable');;
+    })
+    .mouseleave(function() {
+      $(this).parents('.language-only').removeClass('editable');
+    });;
   }
 
   // Set the default language selection to objective-c
@@ -150,5 +160,7 @@ $(function() {
     toggleLink(this);
     toggleLanguage(language);
   });
+
+  setupSubsectionEditHighlighting();
 });
 
