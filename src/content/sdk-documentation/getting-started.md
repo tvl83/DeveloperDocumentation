@@ -8,12 +8,14 @@ Build Apps for Sphero, Ollie and future *Sphero* robots very quickly using the i
 
 <div class="objective-c swift language-only" markdown="1">
 {{#markdown}}
+{{>edit-link}}
 {{>getting-started-objective-c}}
 {{/markdown}}
 </div>
 
 <div class="java language-only" markdown="1">
 {{#markdown}}
+{{>edit-link}}
 {{>getting-started-java}}
 {{/markdown}}
 </div>
