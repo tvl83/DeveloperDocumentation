@@ -4,8 +4,9 @@ order: 0
 section: SDK Documentation
 ---
 
-Build Apps for Sphero, Ollie and future *Sphero* robots very quickly using the iOS, OSX, Android, and Unity Sphero Robot SDKs.  iOS & Android are available for download below while the OSX and Unity SDKs are made available on request.  Numerous 3rd party SDKs exist as well and are made available in the [Community APIS](/javascript-sdk) section by their developers.
+Build Apps for {{>sphero-icon}}Sphero, {{>ollie-icon}}Ollie and future *Sphero* robots very quickly using the iOS, OSX, Android, and Unity Sphero Robot SDKs.  iOS & Android are available for download below while the OSX and Unity SDKs are made available on request.  Numerous 3rd party SDKs exist as well and are made available in the [Community APIS](/javascript-sdk) section by their developers.
 
+<!-- use the subsection edit link for this subsection -->
 <div class="objective-c swift language-only" markdown="1">
 {{#markdown}}
 {{>edit-link}}
@@ -13,6 +14,7 @@ Build Apps for Sphero, Ollie and future *Sphero* robots very quickly using the i
 {{/markdown}}
 </div>
 
+<!-- use the subsection edit link for this subsection -->
 <div class="java language-only" markdown="1">
 {{#markdown}}
 {{>edit-link}}

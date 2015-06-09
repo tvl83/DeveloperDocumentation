@@ -6,7 +6,7 @@ subsections:
   - Connect Your Sphero
   - Connect Your Ollie
 ---
-## Connect Your Sphero
+## {{>sphero-icon}} Connect Your Sphero
 
 Pick up Sphero from its charging station, and tap it twice on the logo to wake it up.
 You may have to tap it hard.
@@ -26,6 +26,6 @@ Once successfully connected, it will say “Connected”.
 
 * [Video on how to connect sphero to iPhone](https://www.youtube.com/watch?v=I4TKvZOhKCY)
 
-## Connect Your Ollie
+##  {{>ollie-icon}} Connect Your Ollie
 
 Ollie and other future Bluetooth 4.0 Robots connect via proximity detection.  Simply touch your mobile device to Ollie and the two will be connected.
