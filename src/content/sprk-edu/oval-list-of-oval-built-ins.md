@@ -1,11 +1,14 @@
 ---
-title: Oval - List of Oval Built-ins
+title: Oval - Reference
 order: 8
 section: SPRK - EDU
+subsections:
+ - Properties
+ - Async Callbacks
+ - Functions
+ - Error Codes
 ---
 
-## Description
-A list of all of the current built-in properties, asynchronous callbacks, and functions of the robot.
 ## Properties
 A built-in "property" acts like a globally defined variable in the robot with optionally defined getters and setters.<br>
 *If you invoke a getter that does not exist you will get OVM error [ERR_READ_FROM_WRITE_ONLY](/sprk-edu/oval-ovm-runtime-error-codes#ERR_READ_FROM_WRITE_ONLY).*<br>
@@ -97,3 +100,5 @@ There are build in functions in the robot to execute some sort of functionality.
 | void | configureScheduler | int schedulerId, float delay, float startTime, int callbackFuncitonPointer | Allows for you to configure a timer that will regularly invoke a function. See Asynchronous Communication With Oval for more information as to how this works. |
 | void | invokeAPI | int varargs... | "Allows you to invoke an API command using the Oval system. You need to specify the device id, command id, and data for the command in the parameters." |
 | void | getRgbLedUsingPalette | float hot, float alt, float cold, float palette, float shouldInvertHeat, int pColorVectorOut | Gets the value of the current RGB LED within the context of the current color palette and places the value in the pColorVectorOut parameter. |
+
+## Runtime Error Codes
