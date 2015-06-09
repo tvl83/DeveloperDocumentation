@@ -3,13 +3,16 @@ title: Oval - Reference
 order: 8
 section: SPRK - EDU
 subsections:
+ - Keywords
  - Properties
  - Async Callbacks
  - Functions
  - Error Codes
 ---
 
-## Properties
+## Keywords
+
+## Robot Properties
 A built-in "property" acts like a globally defined variable in the robot with optionally defined getters and setters.<br>
 *If you invoke a getter that does not exist you will get OVM error [ERR_READ_FROM_WRITE_ONLY](/sprk-edu/oval-ovm-runtime-error-codes#ERR_READ_FROM_WRITE_ONLY).*<br>
 *If you invoke a setter that does not exist you will get OVM error [ERR_WRITE_TO_READ_ONLY](/sprk-edu/oval-ovm-runtime-error-codes#ERR_WRITE_TO_READ_ONLY).*

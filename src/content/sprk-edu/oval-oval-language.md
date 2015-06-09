@@ -1,5 +1,5 @@
 ---
-title: Oval - Oval Language
+title: Oval - Language
 order: 4
 section: SPRK - EDU
 ---
