@@ -1,5 +1,5 @@
 ---
-title: Oval - Concepts
+title: Oval - Control Flow
 order: 7
 section: SPRK - EDU
 subsections:
@@ -9,7 +9,6 @@ subsections:
 ---
 
 
-## Control Flow
 ### Keyword 'yield'
 #### Motivating Example
 #### How it works
