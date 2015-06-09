@@ -7,7 +7,7 @@ section: SDK Documentation
 Also see [Connecting A Robot](/sphero-robot-basics/connecting-a-robot) for the end-user connection experience.
 
 ### Overview
-The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** concept.  In order to connect, simply register for *robot connection state change* notifications and start Discovery.
+The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** concept.  In order to connect, simply register for *robot connection state change* notifications and start Discovery.  If your App is specific to one robot, use the specific DiscoveryAgent to the protocol.  
 
 ### Import Sphero Robot SDK
 
@@ -19,9 +19,11 @@ The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** co
 ### Register for Connection State Changes
 
 ```objective-c
+// All Robots
 [[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self 
                                         selector:@selector(handleRobotStateChangeNotification:)];
 ```
+
 
 ```swift
 func appDidBecomeActive(note: NSNotification) {
