@@ -1,5 +1,5 @@
 ---
-title: Oval (Coming Soon)
+title: Oval - Oval Language
 order: 4
 section: SPRK - EDU
 ---
@@ -7,12 +7,12 @@ section: SPRK - EDU
 ### Overview
 Oval is a subset of the computer language C with a few extra features to support streaming and asynchronous communication. It provides 32-bit floating point and signed integer types but does not include pointers, structs, or unions
 ### The Ellipsis
-Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the Oval Virtual Machine (OVM) must end with:
+Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the [Oval Virtual Machine ([OVM](/sprk-edu/oval-oval-virtual-machine))](/sprk-edu/oval-oval-virtual-machine) must end with:
 
 ```
 ...
 ```
-In order to actually turn off the Oval Virtual Machine (OVM) use the statement
+In order to actually turn off the [Oval Virtual Machine ([OVM](/sprk-edu/oval-oval-virtual-machine))](/sprk-edu/oval-oval-virtual-machine) use the statement
 
 ```
 end;
@@ -54,7 +54,7 @@ Numbers with decimal places are treated as 32 bit floats, numbers without are tr
 #### Arithmetic Operators
 There are the usual arithmetic operators from C ``` + - * / ```
 Whether they represent the integer or float varieties is dependent on the types of the operands. If both arguments are integers, then the integer operation is performed. If at least one of the arguments is a float, any integer arguments are cast to float and the floating point operation is performed.
-Oval also offers floating point exponentiation as the carrot operator (Implemented as the C function powf()) ```^```
+Oval also offers floating point exponentiation as the carrot operator ```^``` which maps to the C function ```powf()```
 Oval directly supports trigonometry and logarithms in the form of built-in functions ``` cos sin tan atan2 ln ```
 
 These functions take floats as parameters and return floats
@@ -125,7 +125,7 @@ while (expression) {
 Per usual, "else if" and "else" are optional. Note that there is no for loop. This may be implemented in a later version.
 
 #### Library and Stream Code
-Code arrives in the OVM in the stream. When a function is sent to the stream, the OVM reads the function declaration, copies it to the library, and recompresses it. Subsequent calls to the declared function executes from the library.
+Code arrives in the [OVM](/sprk-edu/oval-oval-virtual-machine) in the stream. When a function is sent to the stream, the [OVM](/sprk-edu/oval-oval-virtual-machine) reads the function declaration, copies it to the library, and recompresses it. Subsequent calls to the declared function executes from the library.
 
 ##### Functions
 Oval allows you to define functions with arguments, return values, and local variables.
@@ -163,12 +163,13 @@ while (counter) {
 ...
 ```
 
-The OVM will save the function, initialize, the variable, and then execute the while loop (which calls the function). In this case, the ellipses is included because it indicates the end of a submission to the OVM. This allows us to send more code that later references that same function.
+The [OVM](/sprk-edu/oval-oval-virtual-machine) will save the function, initialize, the variable, and then execute the while loop (which calls the function). In this case, the ellipses is included because it indicates the end of a submission to the [OVM](/sprk-edu/oval-oval-virtual-machine). This allows us to send more code that later references that same function.
 
 ```
 int finalCount = decr(counter);
 ...
 ```
-##### TODO
-For interfacing with the Robot from Oval see: Interfacing With the Robot
-For more advanced Oval information see: Advanced Oval Concepts
+
+For interfacing with the Robot from Oval see: [Interfacing With the Robot](/sprk-edu/oval-interfacing-with-the-robot)
+
+For more advanced Oval information see: [Advanced Oval Concepts](/sprk-edu/oval-advanced-oval-concepts)
