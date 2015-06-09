@@ -1,10 +1,10 @@
 ---
-title: Oval (Coming Soon)
+title: Oval
 order: 4
 section: SPRK - EDU
 ---
 
-### Overview
+### {{>ollie-icon}} Overview
 Oval is a subset of the computer language C with a few extra features to support streaming and asynchronous communication. It provides 32-bit floating point and signed integer types but does not include pointers, structs, or unions
 ### The Ellipsis
 Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the Oval Virtual Machine (OVM) must end with:
