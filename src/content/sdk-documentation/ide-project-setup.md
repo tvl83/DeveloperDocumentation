@@ -1,37 +1,12 @@
 ---
-title: IDE & Project Setup
+title: Sample Code
 order: 10
 section: SDK Documentation
 ---
 
-## IDE Setup
-<div class="java language-only">
-*Note: The Sphero Android SDK works with Android 3.1+ and Java Compiler Level 6.0(1.6)+
-*Note: The Ollie Android SDK works with Android 4.3+ and Java Compiler Level 6.0(1.6)+
-</div>
-
-<div class="objective-c swift language-only">
-*Note: The Robot SDK works with iOS 7.0+*
+<div class="objective-c swift language-only" markdown="1">
 {{#markdown}}
-### Installing Xcode
-
-Before you begin to develop applications that interface with robots on iOS, you will need to install Xcode. As of writing this, there are no other supported IDEs for iOS development.
-
- - Install [Xcode](https://macappsto.re/us/Bk9QD.m)
-{{/markdown}}
-</div>
-
-### Installing the Robot SDK
-
- - Download the latest version of the [Robot SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master)
-
-**You can always keep up to date by watching our [GitHub Repository](https://github.com/orbotix/Sphero-iOS-SDK)**
-
-## Project Setup
-
-### Importing the Sample Project
-
-#### Open the Sample Project
+#### Open a Sample Project
 
  - Open Xcode
  - Select the "**Open another project**" option on the main menu
@@ -46,25 +21,5 @@ Before you begin to develop applications that interface with robots on iOS, you 
 
  *Note: Robot applications will not work in the emulator due to the dependency on Bluetooth*
 
-### Create a New Project in Xcode
-
-#### Making a new project
-
- - Create a new iOS application as normal
- - Move on to the next step
-
-#### Integrating the Robot SDK Into Your Project
-
- - Open your project
- - Navigate in Finder to the **RobotKit.framework**
- - Drag and drop the framework into the project. Ensure the option **Copy files if needed** is checked before clicking **Add**
- - In the project navigator, click the name of your project to open the project options
- - Open the **General** tab
- - Change the **Deployment Target** to "7.0"
- - Open the **Capabilities** tab
- - Enable **Background Modes** and check **Uses Bluetooth LE accessories** this is to allow the robot to disconnect while the app is backgrounding
- - Open the **Build Settings** tab
- - Use the search bar to find "Other Linker Flags"
- - Add the linker flags "-ObjC" and "-lstdc++"
-
-You are now ready to use the Robot SDK!
+{{/markdown}}
+</div>
