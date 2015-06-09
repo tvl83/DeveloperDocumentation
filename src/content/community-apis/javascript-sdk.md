@@ -1,5 +1,5 @@
 ---
-title: JavaScript SDK
+title: JavaScript API
 order: 1
 section: Community APIs
 ---
