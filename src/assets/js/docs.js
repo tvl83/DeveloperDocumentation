@@ -94,18 +94,57 @@ $(document).ready(function(){
 
 // Handle langauge switching
 $(function() {
+  var LANGUAGES = ['objective-c', 'swift', 'java', 'unity'];
+
   function toggleLanguage(language) {
-    // Only show code blocks for this language
+    showCodeBlocksForLanguage(language);
+    hideCodeBlocksNotOfLanguage(language);
+    changeEditLinkUrls(language);
+  }
+
+  function showCodeBlocksForLanguage(language) {
     $('pre .language-' + language).parent().css('display', 'block');
     $('pre code').not('.language-' + language).parent().css('display', 'none');
-    // Show divs with .language-only.{language-name}, hide other .language-only divs
+  }
+
+  // Show divs with .language-only.{language-name}, hide other .language-only divs
+  function hideCodeBlocksNotOfLanguage(language) {
     $('.language-only').not('.' + language).css('display', 'none');
     $('.language-only.' + language).css('display', 'block');
   }
 
+  // Change this language's github edit links to correct language
+  function changeEditLinkUrls(language) {
+    var links = $('.language-only.' + language + ' .edit-link');
+    links.each(function(i, linkNode) {
+      var url = $(linkNode).attr('href');
+      var correctedUrl;
+      var oldLanguage;
+      for (var i = 0; i < LANGUAGES.length; i++) {
+        if (url.indexOf(LANGUAGES[i]) !== -1) {
+          oldLanguage = new RegExp(LANGUAGES[i], 'g');
+        }
+      }
+      if (!!oldLanguage) {
+        correctedUrl = url.replace(oldLanguage, language);
+        $(linkNode).attr('href', correctedUrl);
+      }
+    });
+  }
+
+
   function toggleLink(node) {
     $('li.language a').removeClass('active');
     $(node).addClass('active');
+  }
+
+  function setupSubsectionEditHighlighting() {
+    $('.subsection-edit-link').mouseenter(function() {
+      $(this).parents('.language-only').addClass('editable');;
+    })
+    .mouseleave(function() {
+      $(this).parents('.language-only').removeClass('editable');
+    });;
   }
 
   // Set the default language selection to objective-c
@@ -121,5 +160,12 @@ $(function() {
     toggleLink(this);
     toggleLanguage(language);
   });
+
+  setupSubsectionEditHighlighting();
 });
 
+// Ensure side navigation is always visible and footer is always at bottom
+(function($) {
+  var windowHeight = $(document).height();
+  $('#docs, .menubar').css("height", windowHeight - 189);
+})(jQuery)

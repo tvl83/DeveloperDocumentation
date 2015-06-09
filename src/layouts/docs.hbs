@@ -37,7 +37,7 @@ date: <%= new Date() %>
     <meta content="Documentation for Sphero" name="description">
 
   </head>
-  <body role="flatdoc">
+  <body role="flatdoc" class="no-literate">
     <div id="site-wrapper">
       <div id="site-canvas">
         {{> mobile-nav}}
@@ -60,87 +60,7 @@ date: <%= new Date() %>
           <div class="content-root" data-spy="scroll" data-target="#toc">
             <div class="menubar">
               <div class="menu section" role="flatdoc-menu">
-                <ul>
-                  <li class="level-0">Sphero Robot Basics</li>
-                    {{#withSort pages "data.order"}}
-                      <ul>
-                        {{#is data.section "Sphero Robot Basics"}}
-                        <li class="level-1"><a href="/sphero-robot-basics/{{basename}}">{{data.title}}</a></li>
-                          {{#if data.subsections.length}}
-                            <ul>
-                              {{#each data.subsections}}
-                                <li class="level-2"><a href="/sphero-robot-basics/{{../basename}}">{{.}}</a></li>
-                              {{/each}}
-                            </ul>
-                          {{/if}}
-                        {{/is}}
-                      </ul>
-                    {{/withSort}}
-                  <li class="level-0">SPRK - EDU</li>
-                    {{#withSort pages "data.order"}}
-                      <ul>
-                        {{#is data.section "SPRK - EDU"}}
-                        <li class="level-1"><a href="/sprk-edu/{{basename}}">{{data.title}}</a></li>
-                          {{#if data.subsections.length}}
-                            <ul>
-                              {{#each data.subsections}}
-                              <li class="level-2"><a href="/sprk-edu/{{../basename}}">{{.}}</a></li>
-                              {{/each}}
-                            </ul>
-                          {{/if}}
-                        {{/is}}
-                      </ul>
-                    {{/withSort}}
-
-                  <li class="level-0">Official SDKs</li>
-                    {{#withSort pages "data.order"}}
-                      <ul>
-                        {{#is data.section "SDK Documentation"}}
-                          <li class="level-1"><a href="/sdk-documentation/{{basename}}">{{data.title}}</a></li>
-                          {{#if data.subsections.length}}
-                            <ul>
-                              {{#each data.subsections}}
-                                <li class="level-2"><a href="/sdk-documentation/{{../basename}}">{{.}}</a></li>
-                              {{/each}}
-                            </ul>
-                          {{/if}}
-                        {{/is}}
-                      </ul>
-                    {{/withSort}}
-
-                    <li class="level-0">Community APIs</li>
-                    {{#withSort pages "data.order"}}
-                      <ul>
-                        {{#is data.section "Community APIs"}}
-                          <li class="level-1"><a href="/community-apis/{{basename}}">{{data.title}}</a></li>
-                          {{#if data.subsections.length}}
-{{!--                             <ul>
-                              {{#each data.subsections}}
-                                <li class="level-2"><a href="/community-apis/{{../basename}}">{{.}}</a></li>
-                              {{/each}}
-                            </ul>
- --}}                          {{/if}}
-                        {{/is}}
-                      </ul>
-                    {{/withSort}}
-
-
-                  <li class="level-0">API Reference</li>
-                    {{#withSort pages "data.order"}}
-                      <ul>
-                        {{#is data.section "API Reference"}}
-                        <li class="level-1"><a href="/api-reference/{{basename}}">{{data.title}}</a></li>
-                          {{#if data.subsections.length}}
-                            <ul>
-                              {{#each data.subsections}}
-                                <li class="level-2"><a href="/api-reference/{{../basename}}">{{.}}</a></li>
-                              {{/each}}
-                            </ul>
-                          {{/if}}
-                        {{/is}}
-                      </ul>
-                    {{/withSort}}
-                </ul>
+                {{> site-nav}}
               </div>
             </div>
             <div role="flatdoc-content" class="content" id="content">
@@ -148,7 +68,7 @@ date: <%= new Date() %>
                 <ul class="language-picker">
                   <li class="language"><a href="#objective-c" data-language="objective-c" class="button">Objective-C</a></li>
                   <li class="language"><a href="#swift" data-language="swift" class="button">Swift</a></li>
-                  <li class="language"><a href="#java" data-language="java" class="button">Java</a></li>
+                  <li class="language"><a href="#java" data-language="java" class="button">Android</a></li>
                   <li class="language"><a href="#js" data-language="unity" class="button">Unity</a></li>
                 </ul>
               {{/is}}

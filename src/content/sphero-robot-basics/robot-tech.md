@@ -2,11 +2,6 @@
 title: Robot Tech
 order: 4
 section: Sphero Robot Basics
-subsections:
-  - Outputs
-  - Sensors
-  - Languages
-  - Protocol
 ---
 
 Sphero Robots support three programming languages on every Robot that can provide some basic autonomous functions. The easiest to learn and is used by our SPRK education program is Macros, followed by OrbBasic, and finally the latest and most powerful, OVAL.  These languages all provide autonomous functionality for fast changing colors or other feedback that would normally be limited to the 12 commands per second limit when communicating with a host device.
@@ -14,8 +9,10 @@ Sphero Robots support three programming languages on every Robot that can provid
 ## Outputs
 
 ### Control System & Motors
+Sphero robots have a complex stabilization and control system that provides an easy way to move the robot using 'roll' commands, yet provides direct access to the internal motors by bypassing teh control system.
 
 ### Lights
+Sphero robots have two LEDs, a main RGB Led and a blue tail-light that are independently accessible via the API and SDKs.
 
 ## Sensors
 Sensor data is available via the sensor streaming API/SDK Commands.  Sensors include a very accurate IMU, Collision Detection algorithm, and Locator.  Also, the radio Signal Quality (proximity) is available via the SDKs.
@@ -30,17 +27,17 @@ Every Sphero robot contains a complex collision detection algorithm.  Since this
 Sphero Locator is a feature that provides real-time 2D position and velocity information about the robot.  Much like IMU data, Locator data is available via the Streaming protocol in the SDKs.  (LINK)
 
 
-### Signal Quality
+### Signal Quality {{>ollie-icon}}
 Ollie and our future Bluetooth 4.0 robots give access to Signal Quality which can be used to detect gross proximity to the host device.  Sphero, the robot, does not support Signal Quality.
 
 ##Languages
 ### Macros
-The easiest way to develop Macros is via a mobile visual development tool called MacroLab.  MacroLab is available for [Apple](https://itunes.apple.com/us/app/sphero-macrolab/id519917219?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.orbotix.macrolab&hl=en). (LINK to SPRK EDU MACROLAB)  Macros excel at fast color changes, fades, and other semi-autonomous functions that would normally be limited by bluetooth bandwidth.
+The easiest way to develop Macros is via a mobile visual development tool called MacroLab.  MacroLab is available for [Apple](https://itunes.apple.com/us/app/sphero-macrolab/id519917219?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.orbotix.macrolab&hl=en).  Macros excel at fast color changes, fades, and other semi-autonomous functions that would normally be limited by bluetooth bandwidth.
 
-### OrbBasic
+### OrbBasic {{>sphero-icon}}
 OrbBasic is a text-based programming language that is easy to experiment with via the OrbBasic App available in the [Apple](https://itunes.apple.com/us/app/orbbasic-for-sphero/id647306205?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.orbotix.orbbasic&hl=en) App Stores.  OrbBasic, like Macros, are a resource that provides for autonomous behavior and provides programmable conditionals that Macros don't support.
 
-### Oval - coming soon
+### Oval {{>ollie-icon}}
 Oval is a subset of the computer language C with a few extra features to support streaming and asynchronous communication. It provides 32-bit floating point and signed integer types but does not include pointers, structs, or unions.  Oval gives the developer direct access to sensor data, and control system parameters.  (LINK)
 
 ##Protocol

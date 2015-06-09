@@ -7,13 +7,23 @@ section: SDK Documentation
 Also see [Connecting A Robot](/sphero-robot-basics/connecting-a-robot) for the end-user connection experience.
 
 ### Overview
-The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** concept.  In order to connect, simply register for *robot connection state change* notifications and start Discovery.
+The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** concept.  In order to connect, simply register for *robot connection state change* notifications and start Discovery.  If your App is specific to one robot, use the specific DiscoveryAgent to the protocol.  
+
+### Import Sphero Robot SDK
+
+```objective-c
+#import <RobotKit/RobotKit.h>
+#import <RobotUIKit/RobotUIKit.h> // optional UI classes
+```
 
 ### Register for Connection State Changes
-##### Register with the Discovery Agent
+
 ```objective-c
-[[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
+// All Robots
+[[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self 
+                                        selector:@selector(handleRobotStateChangeNotification:)];
 ```
+
 
 ```swift
 func appDidBecomeActive(note: NSNotification) {
@@ -39,9 +49,7 @@ RobotDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateList
 ```objective-c
 - (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n {
     switch(n.type) {
-        case RKRobotConnecting:
-            break;
-        case RKRobotOnline:
+        case RKRobotOnline: // robot is online and ready for commands
             break;
         case RKRobotDisconnected:
             break;
@@ -54,8 +62,6 @@ RobotDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateList
 ```swift
 func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
     switch (notification.type) {
-    case .Connecting:
-        break
     case .Online:
         break
     case .Disconnected:
@@ -87,9 +93,6 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
 
 ### Start Discovery
 
-All that you have to do now is start discovery with the `+ [RKRobotDiscoveryAgent startDiscovery]` method.
-*Note: Due to limitation in the Apple Bluetooth stack, you cannot start discovery in `- [UIViewController viewDidLoad]`
-
 ```objective-c
 - (void)appDidBecomeActive:(NSNotification *)n {
   [RKRobotDiscoveryAgent startDiscovery];
@@ -97,6 +100,7 @@ All that you have to do now is start discovery with the `+ [RKRobotDiscoveryAgen
 ```
 
 ```swift
+// TODO
 ```
 
 ```java
@@ -118,36 +122,43 @@ protected void onStart() {
 
  *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
 
-### Caching a Convenience Robot
+### Caching a Robot
 
+<div class="objective-c language-only">
+{{#markdown}}
 When robot connects, you will get an object with the type `id<RKRobotBase>`. This class encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
+{{/markdown}}
+</div>
 
 ```objective-c
+// AppDelegate.h
+#import <RobotKit/RobotKit.h>
 
-@property (strong, nonatomic) RKConvenienceRobot *robot;
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-{...}
+@property (strong, nonatomic) UIWindow* window;
+@property (strong, nonatomic) id<RKRobotBase> robot;
 
-- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n {
-    switch(n.type) {
-        case RKRobotConnecting:
-            break;
+@end
+
+```
+
+```objective-c
+// AppDelegate.mm
+-(void) handleRobotStateChange:(RKRobotChangedStateNotification *) n{
+    switch(n.type){
         case RKRobotOnline:
-            // Bluetooth Classic (Sphero)
-            if ([n.robot isKindOfClass:[RKRobotClassic class]]) {
-                self.robot = [[RKSphero alloc] initWithRobot:n.robot]
-            }
-            else if ([n.robot isKindOfClass:[RKRobotLE class]) {
-                self.robot = [[RKOllie alloc] initWithRobot:n.robot];
-            }
+            _robot = n.robot;
             break;
         case RKRobotDisconnected:
-            break;
-        case RKRobotFailedConnect:
             break;
     }
 }
 ```
+
+<span class="swift language-only">
+SWIFT GOES HERE
+</span>
 
 ```swift
 var robot: RKConvenienceRobot!
@@ -206,8 +217,11 @@ When you are done with the robot, it is important to disconnect it so that the n
 
 #### Convenience Robot Method
 
+<span class="objective-c language-only">
+{{#markdown}}
 If you have an `RKConvenienceRobot`, disconnection is accomplished by calling the method `- [RKConvenienceRobot disconnect]` and the robot will take care of the rest for you.
-
+{{/markdown}}
+</span>
 ```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume that this is set when the robot connects
 
@@ -217,6 +231,8 @@ If you have an `RKConvenienceRobot`, disconnection is accomplished by calling th
     [_robot disconnect];
 }
 ```
+
+
 
 ```swift
 var robot: RKConvenienceRobot!  // Assume that this is set when the robot connects
