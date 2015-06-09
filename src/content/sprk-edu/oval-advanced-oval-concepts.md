@@ -4,18 +4,20 @@ order: 7
 section: SPRK - EDU
 subsections:
  - Yield
- - Atomic Execution
+ - Atomic
  - Wait
 ---
 
-## Yield
-### Motivating Example
-### How it works
-### Rules
-### Breaking Infinite Loops
-### Start & Stop Multiple Yield Functions
 
-## Atomic Execution
+## Control Flow
+### Keyword 'yield'
+#### Motivating Example
+#### How it works
+#### Rules
+#### Breaking Infinite Loops
+#### Start & Stop Multiple Yield Functions
+
+
 An Oval programmer has no direct control over how much CPU time is given to the OVM. As a result, some seemingly innocuous tasks can behave strangely. Suppose you set the LED to white using the ```setBrightness``` function defined in Yield.  This function sets the red, green, and blue LEDs one at a time. If these instructions do not happen in rapid succession it is possible that the user will be able to briefly see saturated red or yellow before all the assignments are complete. This could happen if the OVM's time slice ends in the middle of the call to ```setBrightness```.
 ### Keyword 'atomic'
 
