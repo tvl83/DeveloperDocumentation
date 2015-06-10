@@ -9,6 +9,7 @@ subsections:
  - Inline Assembly
  - Addressing
  - Forward Declaration
+ - Asynchronous Callbacks
 ---
 
 
@@ -495,5 +496,65 @@ Keep in mind, there is nothing magical about forward declaration. If you forward
 ```
 declare void f();
 f(); // Runtime error
+...
+```
+
+
+### Asynchronous Callbacks
+**You'll want to take a look at Addressing before going through this section if you have not dealt with function addresses and how to get them.**<br><br>
+In the Inline Assembly section we saw how to invoke functions from their addresses. Some platform-specific functionality uses function addresses directly. The following properties hold function addresses as values.
+ - ```OnCollision```
+ - ```OnGyroMax```
+ - ```OnDisconnect```
+ - ```OnConnect```
+ - ```OnFreeFall```
+ - ```OnLanding```
+
+In this example we define two functions ```fall()``` and ```land()``` and hook them up as callbacks.
+```
+void fall() {
+    setRgbLed(255, 0, 0);
+}
+ 
+void land() {
+    setRgbLed(0, 255, 0);
+}
+ 
+OnFreeFall = &fall;
+OnLanding = &land;
+...
+```
+```OnFreeFall``` and ```OnLanding``` are platform-specific properties that store integer addresses of functions that are to be called when the robot enters free fall or lands. the robot will turn red when it is in the air, and green when it lands again.<br>
+Callbacks assigned in this way are invoked asynchronously. When free fall is detected (for instance) the provided function pointer is invoked by appending the invocation to the code stream just as if it came in from the radio. The most important consequence of this fact is: **if a library function is in control of execution then it must yield in order for asynchronous events to occur!**
+
+
+#### Configuring a Scheduler
+In addition to all of the asynchronous callback properties, the function ```configureScheduler()``` lets you specify a function to be called at regular intervals. In the following example we create a function that toggles the lights on and off, then we use ```configureScheduler()``` to invoke that function once a second.
+```
+int toggle = false;
+ 
+void toggleLights() {
+    if (toggle) {
+        setRgbLed(255, 255, 255);
+    }
+    else {
+        setRgbLed(0, 0, 0);
+    }
+    toggle = not toggle;
+}
+ 
+// args: scheduler id, delay (seconds), start time, function pointer
+configureScheduler(3, 1, currentRobotTime, &toggleLights);
+...
+```
+In the final line you see scheduler id 3 is now configured to invoke ```toggleLights()``` every second starting now.
+
+
+#### Disabling a Set Callback
+To disable a callback, set the function pointer to -1. For configured schedulers, you should also set the time parameters to zero.
+```
+OnFreeFall = -1; // Disable free fall
+OnLanding = -1; // Disable landing
+configureScheduler(3, 0, 0, -1); // Stop periodic execution on a scheduler
 ...
 ```
