@@ -313,3 +313,114 @@ void {
 }
 ...
 ```
+
+
+### Addressing
+Discuessed in Oval Language is the ```&``` operator. The ```@``` operator is similar. It also pricdes addresses / ids of variables and functions but treats local variables a little differently. Be warned, the compiler wll not force you to use those addresses properly.
+
+
+#### Types of Addresses
+There are three types of addresses:
+1. Global variable addresses (integer offsets into the runtime stack)
+2. Local variable addresses (integer offsets into the current stack frame pointer)
+3. Function addresses (integer indices in the procedure jump table)
+
+<br>Depending on the type of object different op codes will be necessary to make use of the address / id. For example:
+```
+void {
+    push 7
+    push @globalVariable
+    popto // globalVariable = 7;
+ 
+    push 8
+    push @localVariable
+    poploc // localVariable = 8;
+     
+    push 9
+    push @myFunction
+    call // myFunction(9);
+}
+...
+```
+
+
+#### Passing By Reference
+Using addresses directly allows one to pass arguments by reference. For instance:
+```
+void setTo2(int pVar) {
+    void {
+        push 2
+        @pVar
+        pushloc
+        popto
+    }
+}
+ 
+int x;
+setTo2(@x); // x = 2;
+...
+```
+This code will set the value of ```x``` to 2. However it doesn't work in all circumstances.
+```
+void f() {
+    int y;
+    setTo2(@y); // Very dangerous!
+}
+...
+```
+The difference between these two applications is that in the first, we're passing a global variable by reference and in the second we're passing a local variable. The problem is that ```@y``` is a local address (i.e. relative to the stack pointer, not to the beginning of the stack). However, in the definition of ```setTo2()``` the assemble instruction popto expects a global (absolute) address. The end result is that popto writes a 2 somewhere in the stack, most likely not at the location of ```y```.<br>
+The OVM provides the op code ```ltog```, which casts a relative address to a global one. The following code fixes the previous example:
+```
+void f() {
+    int y;
+    setTo2( int {
+        push @y
+        ltog
+    }); // Convert @y from local to global first
+}
+...
+```
+You can also use this idea to get the current stack frame.
+```
+int getStackFramePointer() {
+    return int {
+        push 0
+        ltog
+    };
+}
+...
+```
+
+
+#### The ```&``` operator
+In order to automate / simplify the pass by reference process, Oval provides the ```&``` operator (analogous to the same operator in C) which produces global addresses from identifiers. For global variables and functions ```&``` behaves exactly the same as ```@```. But, for local variables ```&``` generates an absolute address (the compiler inserts an ```ltog``` for you) whereas ```@``` produces a local address. When applied to a function name the ```@``` operator agrees with the ```&``` operator.
+```
+int x; // &x == @x
+ 
+void f() {
+    int y; // &y == int { push @y ltog }
+}
+...
+```
+Using ```&``` instead of ```@``` allows us to pass variables by reference without caring if they are local or global:
+```
+int x;
+setTo2(&x); // This works...
+ 
+void f() {
+    int y;
+    setTo2(&y); // ...so does this.
+}
+...
+```
+When applied to a function name the @ operator agrees with the & operator.
+```
+void f() {
+    // I do stuff!
+}
+ 
+int same = @f == &f; // same is true!
+...
+
+```
+**Note: Since ```&``` does not represent a single op code or literal it is not available to inline assembly.**
