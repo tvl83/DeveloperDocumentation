@@ -424,3 +424,74 @@ int same = @f == &f; // same is true!
 
 ```
 **Note: Since ```&``` does not represent a single op code or literal it is not available to inline assembly.**
+
+
+### Forward Declaration of Functions
+Occasionally one might want to write two functions that refer to one another. More generally, you might want to compile two different Oval files each calling functions in the other. For instance:
+```
+// File 1
+void f() { 
+    if (someCondition) { 
+        g(); 
+    } 
+}
+...
+```
+```
+// File 2
+void g() {
+    if (someOtherCondition) {
+        f();
+    }
+}
+...
+```
+Unfortunately this code generates a compiler error. If the compiler reads file 1 first, it does not know about the function ```g()```. If the compiler reads file 2 first, it does not know about ```f()```.
+
+
+#### Using Forward Declaration
+Forward declaration allows us to get around this problem. By modifying file 1, we can tell it about the existence of ```g()```.
+```
+// File 1
+declare void g();
+void f() {
+    if (someCondition) {
+        g();
+    }
+}
+...
+```
+A function declaration looks just like a function definition except:
+1. It begins with the ```declare``` keyword
+2. Instead of having a boty it ends with a semicolon
+
+This line promises the compiler that (eventually) the function ```g()``` will be defined, that it will take no arguments, and will return nothing. This is enough information to properly compile file 1 and allows ```f()``` to call ```g()``` in file 2.<br>
+Of course, if we compile file 2 first we still run into trouble. Let's fix both files.
+```
+// File 1
+declare void g();
+void f() { 
+    if (someCondition) { 
+        g(); 
+    } 
+}
+...
+```
+```
+// File 2
+declare void f();
+void g() {
+    if (someOtherCondition) {
+        f();
+    }
+}
+...
+```
+Now it does not matter if you load file 1 or file 2 first. They both properly refer to one another. Note that this has nothing to do with "files". Even within a single file you will run into trouble with mutually recursive function definitions.
+<br><br>
+Keep in mind, there is nothing magical about forward declaration. If you forward declare a function and call it without ever supplying a definition the OVM will halt with a runtime error. For instance the following code will compile successfully but fail at runtime.
+```
+declare void f();
+f(); // Runtime error
+...
+```
