@@ -185,3 +185,10 @@ The op codes used by the OVM to perform operations as well as their Inline Assem
 | OP_RIGHT_SHIFT          | rshift           | 0x30 (48)       | Pop the value to shift, pop the amount to shift by, shift the value right by the amount to shift by, and push the result. |
 | OP_BITWISE_NOT          | bitnot           | 0x31 (49)       | Pop one value, perform bitwise not on the value, and push the result. |
 
+## Comparison Codes
+Values returned from performing a comparison operation in Inline Assembly
+| Value | Meaning                                            |
+|-------|----------------------------------------------------|
+| 1     | The first pushed value is greater than the second. |
+| 0     | The two values are equal.                          |
+| -1    | The first pushed value is less than the second.    |
