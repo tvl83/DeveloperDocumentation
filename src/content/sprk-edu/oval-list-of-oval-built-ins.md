@@ -129,5 +129,59 @@ The error codes that you may encounter when executing Oval code. These are sent 
 | ERR_UNBOUND_PROC_END         | 0x11 (17) | The OVM received the procedure end op code without first receiving a procedure start op code.                                                                                                            |
 | ERR_CODE_STREAM_OVER_RELEASE | 0x12 (18) | Attempted to release code for garbage collection when that code was already free for collection. This occurs by using the release op code without a corresponding retain op code.                        |
 
+## OVM Op Codes
+The op codes used by the OVM to perform operations as well as their Inline Assemby equivalents.
 
+| Name                    | Assembly Literal | Op Code Literal | Description |
+|-------------------------|------------------|-----------------|-------------|
+| OP_PUSH_LIT             | push             | 0x00 (0)        | Push the next literal in the code. |
+| OP_POP_TO               | popto            | 0x01 (1)        | Pop the destination address, pop the value to store, and then store the value in the memory at the address. |
+| OP_CAST_INT_TO_FLOAT    | itof             | 0x02 (2)        | Pop one value, cast it to a float, and push the result. |
+| OP_PUSH_FROM            | pushfrom         | 0x03 (3)        | Pop the memory address, then push the value from that address. |
+| OP_CALL                 | call             | 0x04 (4)        | Pop the jump id and attempt to jump to it. |
+| OP_PUSH_LOCAL           | pushloc          | 0x05 (5)        | Pop the local (relative to the frame pointer) address from the stack, then push the value from that address. |
+| OP_POP_LOCAL            | poploc           | 0x06 (6)        | Pop the local (relative to the frame pointer) destination address, pop the value to store, and then store the value in the memory at the address. |
+| OP_MULTIPLY_FLOAT       | mulf             | 0x07 (7)        | Pop two values, multiply them as float values, and push the result. |
+| OP_ADD_FLOAT            | addf             | 0x08 (8)        | Pop two values, add them as float values, and push the result. |
+| OP_SUBTRACT_FLOAT       | subf             | 0x09 (9)        | Pop two values, subtract them as float values, and push the result. |
+| OP_RELJUMP              | jump             | 0x0A (10)       | Pop the relative jump value, and jump that many instructions relative to the current instruction pointer. |
+| OP_RELJUMP_IF           | jumpif           | 0x0B (11)       | Pop the boolean condition, pop the address to jump to, jump to address if the boolean condition is false. |
+| OP_RETURN               | return           | 0x0C (12)       | Return from the current execution. |
+| OP_COMPARE_FLOAT        | compf            | 0x0D (13)       | Pop two values, compare them, then push a Comparison Code indicating the result. |
+| OP_DIVIDE_FLOAT         | divf             | 0x0E (14)       | Pop two values, divide them, then push the result. |
+| OP_POW_FLOAT            | powf             | 0x0F (15)       | Pop two values, exponentiate them, then push the result. |
+| OP_COS_FLOAT            | cos              | 0x10 (16)       | Pop one value, take the cosine of it, then push the result. |
+| OP_SIN_FLOAT            | sin              | 0x11 (17)       | Pop one value, take the sine of it, then push the result. |
+| OP_TAN_FLOAT            | tan              | 0x12 (18)       | Pop one value, take the tangent of it, then push the result. |
+| OP_ATAN2_FLOAT          | atan2            | 0x13 (19)       | Pop one value, take the ATan2 of it, then push the result. |
+| OP_LN_FLOAT             | ln               | 0x14 (20)       | Pop one value, take the natural log of it, then push the result. |
+| OP_ADD_INT              | addi             | 0x15 (21)       | Pop two values, add them together as int values, then push the result. |
+| OP_SUBTRACT_INT         | subi             | 0x16 (22)       | Pop two values, subtract them as int values, then push the result. |
+| OP_MULTIPLY_INT         | muli             | 0x17 (23)       | Pop two values, multiply them as int values, then push the result. |
+| OP_DIVIDE_INT           | divi             | 0x18 (24)       | Pop two values, divide them as int values, then push the result. |
+| OP_COMPARE_INT          | compi            | 0x19 (25)       | Pop two values, compare them, then push a Comparison Code indicating the result. |
+| OP_LOGICAL_NOT          | not              | 0x1A (26)       | Pop one value, then if the value is bitwise zero, push 1.0f, otherwise push 0.0f. |
+| OP_LOGICAL_AND          | and              | 0x1B (27)       | Pop two values, performs the logical and operation treating the values as booleans, and pushes the result as 1.0f or 0.0f. |
+| OP_LOGICAL_OR           | or               | 0x1C (28)       | Pop two values, performs the logical or operation treating the values as booleans, and pushes the result as 1.0f or 0.0f. |
+| OP_CAST_FLOAT_TO_INT    | ftoi             | 0x1D (29)       | Pop one value, cast from float to int, and push the result. |
+| OP_YIELD                | yield            | 0x1E (30)       | Yield to the streaming buffer, or back to a function from the buffer. See Yield and Yielding Functions for more information. |
+| OP_WAIT                 | wait             | 0x1F (31)       | Relinquish the oval time slice. See Atomic Execution and Wait for more information. |
+| OP_RETAIN               | retain           | 0x20 (32)       | Notify the stream to not garbage collect the streamed code until an OP_RELEASE is reached. |
+| OP_RELEASE              | release          | 0x21 (33)       | Notify the stream to garbage collect the stream up to the op code. |
+| OP_ALLOCATE             | alloc            | 0x22 (34)       | Pop one value and move the stack pointer that many words ahead. |
+| OP_PROC                 | proc             | 0x23 (35)       | Denotes the start of a procedure definition. |
+| OP_PROC_END             | procend          | 0x24 (36)       | Denotes the end of a procedure definition. Saves the block behind it into the library to be called later. |
+| OP_ATOMIC               | atomic           | 0x25 (37)       | Denotes the start of an atomic operation block. See Atomic Execution and Wait for more information. |
+| OP_ATOMIC_END           | atomicend        | 0x26 (38)       | Denotes the end of an atomic operation block. See Atomic Execution and Wait for more information. |
+| OP_FAIL                 |                  | 0x27 (39)       | Used as a testing op code that indicates a failure in the OVM operation. A user should never see this op code. |
+| OP_END                  | end              | 0x28 (40)       | Indicates the end of the code has been reached. This will pause the execution of the OVM. |
+| OP_BAD                  |                  | 0x29 (41)       | Blank op codes are translated to this op code during interpretation. This tells the OVM to send ERR_BAD_OP_CALLED. A user should never see this op code. |
+| OP_CAST_LOCAL_TO_GLOBAL | ltog             | 0x2A (42)       | Pop one value off of the stack as an address, add the address of the current stack pointer, push the result. |
+| OP_COMPRESSED_PROC      | cproc            | 0x2B (43)       | Denotes the start of a compressed procedure. |
+| OP_INCLUSIVE_OR         | bitor            | 0x2C (44)       | Pop two values from the stack, perform bitwise inclusive or on the values, and push the result. |
+| OP_EXCLUSIVE_OR         | bitxor           | 0x2D (45)       | Pop two values from the stack, perform bitwise exclusive or on the values, and push the result. |
+| OP_AND                  | bitand           | 0x2E (46)       | Pop two values from the stack, perform bitwise and on the values, and push the result. |
+| OP_LEFT_SHIFT           | lshift           | 0x2F (47)       | Pop the value to shift, pop the amount to shift by, shift the value by the amount to shift by, and push the result.<br><br>Note: This shift performs sign extension on the value. |
+| OP_RIGHT_SHIFT          | rshift           | 0x30 (48)       | Pop the value to shift, pop the amount to shift by, shift the value right by the amount to shift by, and push the result. |
+| OP_BITWISE_NOT          | bitnot           | 0x31 (49)       | Pop one value, perform bitwise not on the value, and push the result. |
 
