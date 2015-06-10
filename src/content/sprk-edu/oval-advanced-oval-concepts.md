@@ -7,6 +7,8 @@ subsections:
  - Atomic Execution
  - Wait
  - Inline Assembly
+ - Addressing
+ - Forward Declaration
 ---
 
 
