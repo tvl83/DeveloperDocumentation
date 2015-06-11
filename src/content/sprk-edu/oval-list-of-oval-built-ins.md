@@ -187,6 +187,7 @@ The op codes used by the OVM to perform operations as well as their Inline Assem
 
 ## Comparison Codes
 Values returned from performing a comparison operation in Inline Assembly
+
 | Value | Meaning                                            |
 |-------|----------------------------------------------------|
 | 1     | The first pushed value is greater than the second. |
