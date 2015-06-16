@@ -2,9 +2,6 @@
 title: Connecting A Robot
 order: 2
 section: Sphero Robot Basics
-subsections:
-  - Connect Your Sphero
-  - Connect Your Ollie
 ---
 ## {{>sphero-icon}} Connect Your Sphero
 
