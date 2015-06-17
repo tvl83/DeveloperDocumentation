@@ -22,7 +22,16 @@ For all snippets, assume a field id defined in the current class for the Conveni
 ```
 
 ```swift
+var robot: RKConvenienceRobot!
 
+{...}
+func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
+    switch(notification.type) {
+        case .Online:
+            robot = RKConvenienceRobot(robot: notification.robot)
+            break
+    }
+}
 
 ```
 
@@ -36,7 +45,7 @@ _robot = [RKConvenienceRobot convenienceWithRobot:robotBase];
 ```
 
 ```swift
-
+robot = RKConvenienceRobot(robot: notification.robot)
 ```
 
 ```java
@@ -63,7 +72,16 @@ Sphero robots contain powerful analysis functions to filter accelerometer data i
 ```
 
 ```swift
+{...}
+robot.enableCollisions(true)
+{...}
 
+// from the RKResponseObserver protocol
+func handleAsyncMessage(message: RKAsyncMessage, robot: RKRobotBase) {
+    if (message is RKCollisionDetectedAsyncData) {
+        // Collision Occured
+    }
+}
 ```
 
 ```java
@@ -114,8 +132,23 @@ Response observers are how you are able to react to responses from the Robot in 
 ```
 
 ```swift
-
-
+class MyObserver: NSObject, RKResponseObserver {
+    var robot: RKConvenienceRobot
+    
+    init(robot: RKConvenienceRobot) {
+        self.robot = robot
+        super.init()
+        robot.addResponseObserver(self)
+    }
+    
+    deinit {
+        robot.removeResponseObserver(self)
+    }
+    
+    func handleResponse(response: RKDeviceResponse!, forRobot robot: RKRobotBase!) {
+        // Do somethign with the response here
+    }
+}
 ```
 
 ```java
@@ -227,7 +260,15 @@ This method controlls collision detection on the Robot. The parameter enable con
 ```
 
 ```swift
+// Enables collions
+robot.enableCollisions(true)
 
+// Listens for the collisions, provided the class is registered for responses
+func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) {
+    if (message is RKCollisionDetectedAsyncData) {
+        // Collision Detected!
+    }
+}
 ```
 
 ```java
@@ -264,14 +305,26 @@ Enables location data to be streamed from the Robot. The parameter `enable contr
 ```
 
 ```swift
+// Enables the locator
+robot.enableLocator(true)
 
+// Listens for the locator updates
+func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) {
+        if (message is RKDeviceSensorsAsyncData) {
+            let sensorsAsyncData = message as! RKDeviceSensorsAsyncData
+            let sensorsData = sensorsAsyncData.dataFrames.last as? RKDeviceSensorsData
+            if let locatorData = sensorsData?.locatorData {
+                // Do something with the locator data
+            }
+        }
+    }
 ```
 
 ```java
-// Enables collisions
+// Enables the locator
 _robot.enableLocator(true);
 
-// Listens for the collisions, provided the class is registered for responses
+// Listens for the locator updates, provided the class is registered for responses
 @Override
 public void handleAsyncMessage(final AsyncMessage asyncMessage, final Robot robot) {
     if (asyncMessage instanceof DeviceSensorAsyncMessage) {
@@ -309,7 +362,19 @@ RKSetDataStreamingMask mask = RKDataStreamingMaskAccelerometerFilteredAll | RKDa
 ```
 
 ```swift
+// Enables the sensors, expecting accelerometer and attitude streaming
+let mask: RKDataStreamingMask = .AccelerometerFilteredAll | .IMUAnglesFilteredAll
+robot.enableSensors(mask, atStreamingRate: RKStreamingRate.DataStreamingRate10)
 
+// Listens for the locator updates
+func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) {
+    if (message is RKDeviceSensorsAsyncData) {
+        let sensorsAsyncData = message as! RKDeviceSensorsAsyncData
+        if let sensorsData = sensorsAsyncData.dataFrames.last as? RKDeviceSensorsData {
+            // Do something with the sensor data
+        }
+    }
+}
 ```
 
 ```java
