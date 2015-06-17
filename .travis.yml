@@ -1,11 +1,11 @@
-script:
-- npm install
-- grunt build
+script: 
+  - npm install
+  - grunt build
 deploy:
-  provider: heroku
+  provider: divshot
+  environment:
+    master: production
+    staging: staging
+  skip_cleanup: true
   api_key:
-    secure: ij1vtQN4vCqMiX2l3wzustnSIC//BErYPea/ojp63LTCiJWFvYg9j+otfAxVvtJgdgXfrFQbBMKY3SJjzoAsjhHBxn2/Bek3SU1ciSuvj9MaC/egvtBzyDhrMxbUwClsoYOgp8rj2YG3Tg3eGReCfi0nW3qpvsGVEigLc34ioMc=
-  app: sphero-docs
-  on:
-    repo: orbotix/DeveloperDocumentation
-    branch: master
+    secure: ZuSTe6BxH1jTviyQ7+xvskV21OgjS9vMbVHpE8b5epSlaCQv521qIlC52zz22SapTPRAz8gX7l0LEcZ5p8e3izLWNWnTXo9co89YVvlqexWb8bZEtpACXHX9GVuzp/8KDBNOJybGmV9ZUQ2J9AKU8mE31f9elZEcnrGrapIqet0=
