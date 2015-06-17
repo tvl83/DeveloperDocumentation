@@ -1,5 +1,5 @@
 ---
-title: Connection Management
+title: Connections
 order: 2
 section: SDK Documentation
 ---
@@ -16,6 +16,12 @@ The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** co
 #import <RobotUIKit/RobotUIKit.h> // optional UI classes
 ```
 
+```java
+import com.orbotix.le.DiscoveryAgentLE;
+import com.orbotix.le.RobotLE;
+import com.orbotix.common.RobotChangedStateListener;
+```
+
 ### Register for Connection State Changes
 
 ```objective-c
@@ -29,6 +35,7 @@ RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "han
 ```
 
 ```java
+// or use 'this' and implement RobotChangedStateListener
 RobotDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateListener() {
     @Override
     public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
@@ -74,10 +81,6 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
 @Override
 public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
     switch (type) {
-        case Connecting:
-            break;
-        case FailedConnect:
-            break;
         case Online:
             break;
         case Disconnected:
@@ -91,6 +94,7 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
 ```
 
 ### Start Discovery
+*Warning: Discovering devices uses substantial resources. Do not leave discovery running when you are not about to connect to a robot.*
 
 ```objective-c
 - (void)appDidBecomeActive:(NSNotification *)n {
@@ -109,20 +113,14 @@ func appDidBecomeActive(n: NSNotification) {
 protected void onStart() {
     super.onStart();
     // This line assumes that this object is a Context
-    RobotDiscoveryAgent.getInstacne().startDiscovery(this);
+    RobotDiscoveryAgent.getInstance().startDiscovery(this);
 }
 ```
 
-```javascript
-// onStart
+```unity
+// todo
 ```
-
- - When you are close enough, the robot will send the connecting and then connected message to your `handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification)` method. When you receive the connected message, you are now connected to a robot!
-
- *Note: Discovery in most cases will stop automatically after connecting to one robot. If you have changed the max connected robots value via the `RKRobotDiscoveryAgent.sharedAgent().maxConnectedRobots` property, you will manually need to stop discovery using `RKRobotDiscoveryAgent.stopDiscovery()`.*
-
- *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
-
+ 
 ### Caching a Robot
 
 <div class="objective-c language-only">
@@ -216,13 +214,20 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
 
 When you are done with the robot, it is important to disconnect it so that the next application can use it. There are two methods to accomplish this:
 
+The easiest way to disconnect any of the Sphero Robots is to 'sleep' the robot.  There is a ```sleep``` function on both the convenience robot object and on the robot base object.
+
+```objective-c
+[_robot sleep];  // sleeps and disconnects a robot.
+```
+
 #### Convenience Robot Method
 
-<span class="objective-c language-only">
+<div class="objective-c language-only">
 {{#markdown}}
-If you have an `RKConvenienceRobot`, disconnection is accomplished by calling the method `- [RKConvenienceRobot disconnect]` and the robot will take care of the rest for you.
+If a `RKConvenienceRobot` is available, disconnection is accomplished by calling the method `- [RKConvenienceRobot disconnect]` and the robot will take care of the rest for you.
 {{/markdown}}
-</span>
+</div>
+
 ```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume that this is set when the robot connects
 
