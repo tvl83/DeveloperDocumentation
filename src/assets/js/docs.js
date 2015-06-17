@@ -97,24 +97,29 @@ $(function() {
   var LANGUAGES = ['objective-c', 'swift', 'java', 'unity'];
 
   function toggleLanguage(language) {
-    showCodeBlocksForLanguage(language);
-    hideCodeBlocksNotOfLanguage(language);
-    changeEditLinkUrls(language);
+    localStorage.setItem("docs-language", language);
+    showCodeBlocksForLanguage();
+    hideCodeBlocksNotOfLanguage();
+    changeEditLinkUrls();
   }
 
-  function showCodeBlocksForLanguage(language) {
+  function showCodeBlocksForLanguage() {
+    var language = localStorage.getItem("docs-language");
     $('pre .language-' + language).parent().css('display', 'block');
     $('pre code').not('.language-' + language).parent().css('display', 'none');
   }
 
   // Show divs with .language-only.{language-name}, hide other .language-only divs
-  function hideCodeBlocksNotOfLanguage(language) {
+  function hideCodeBlocksNotOfLanguage() {
+    var language = localStorage.getItem("docs-language");
     $('.language-only').not('.' + language).css('display', 'none');
     $('.language-only.' + language).css('display', 'block');
   }
 
   // Change this language's github edit links to correct language
-  function changeEditLinkUrls(language) {
+  function changeEditLinkUrls() {
+    var language = localStorage.getItem("docs-language");
+
     var links = $('.language-only.' + language + ' .edit-link');
     links.each(function(i, linkNode) {
       var url = $(linkNode).attr('href');
@@ -149,9 +154,11 @@ $(function() {
 
   // Set the default language selection to objective-c
   if ($('.language-picker').length > 0) {
-    var link = $('li.language a[href="#objective-c"]');
+    var language = localStorage.getItem("docs-language");
+    if(language === null){ language = 'objective-c'}
+    var link = $('li.language a[href="#' + language +'"]');
     toggleLink(link);
-    toggleLanguage('objective-c');
+    toggleLanguage(language);
   }
 
   $('li.language a').on('click', function(e) {
@@ -164,8 +171,3 @@ $(function() {
   setupSubsectionEditHighlighting();
 });
 
-// Ensure side navigation is always visible and footer is always at bottom
-(function($) {
-  var windowHeight = $(document).height();
-  $('#docs, .menubar').css("height", windowHeight - 189);
-})(jQuery)
