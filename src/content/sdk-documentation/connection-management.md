@@ -25,9 +25,7 @@ The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** co
 
 
 ```swift
-func appDidBecomeActive(note: NSNotification) {
-    RKRobotDiscoveryAgent.startDiscovery()
-}
+RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "handleRobotStateChangeNotification:")
 ```
 
 ```java
@@ -61,11 +59,13 @@ RobotDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateList
 ```swift
 func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
     switch (notification.type) {
-    case .Online:
-        break
-    case .Disconnected:
-        break
-    default:
+        case .Online:
+            break
+        case .Disconnected:
+            break
+        case .FailedConnect:
+            break
+        default:
     }
 }
 ```
@@ -99,7 +99,9 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
 ```
 
 ```swift
-// TODO
+func appDidBecomeActive(n: NSNotification) {
+    RKRobotDiscoveryAgent.startDiscovery()
+}
 ```
 
 ```java
@@ -115,9 +117,9 @@ protected void onStart() {
 // onStart
 ```
 
- - When you are close enough, the robot will send the connecting and then connected message to your `- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n` method. When you receive the connected message, you are now connected to a robot!
+ - When you are close enough, the robot will send the connecting and then connected message to your `handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification)` method. When you receive the connected message, you are now connected to a robot!
 
- *Note: Discovery in most cases will stop automatically after connecting to one robot. If you have changed the max connected robots value via `+ [RKRobotDiscoveryAgent setMaxConnectedRobots:(int)maxConnectedRobots]` method, you will manually need to stop discovery using `+ [RKRobotDiscoveryAgent stopDiscovery]`.*
+ *Note: Discovery in most cases will stop automatically after connecting to one robot. If you have changed the max connected robots value via the `RKRobotDiscoveryAgent.sharedAgent().maxConnectedRobots` property, you will manually need to stop discovery using `RKRobotDiscoveryAgent.stopDiscovery()`.*
 
  *Warning: Discovering devices takes a *lot* of resources on the Bluetooth antenna. Do not leave discovery running when you are not about to connect to a robot.*
 
