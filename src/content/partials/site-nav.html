@@ -14,21 +14,23 @@
           {{/is}}
       {{/withSort}}
     </ul>
+  
   <li class="level-0">Robot Languages</li>
     <ul>
       {{#withSort pages "data.order"}}
         {{#is data.section "SPRK - EDU"}}
-          <li class="level-1"><a href="/sprk-edu/{{basename}}">{{data.title}}</a></li>
+          <li class="level-1"><a href="/robot-languages/{{basename}}">{{data.title}}</a></li>
             {{#if data.subsections.length}}
               <ul>
                 {{#each data.subsections}}
-                <li class="level-2"><a href="/sprk-edu/{{../basename}}">{{.}}</a></li>
+                <li class="level-2"><a href="/robot-languages/{{../basename}}">{{.}}</a></li>
                 {{/each}}
               </ul>
             {{/if}}
         {{/is}}
       {{/withSort}}
     </ul>
+  
   <li class="level-0">Official SDKs</li>
     <ul>
       {{#withSort pages "data.order"}}
@@ -44,6 +46,7 @@
         {{/is}}
       {{/withSort}}
     </ul>
+    
     <li class="level-0">Community APIs</li>
       <ul>
       {{#withSort pages "data.order"}}

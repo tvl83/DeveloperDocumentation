@@ -68,9 +68,9 @@ module.exports = (grunt) ->
           },
           {
             expand: true,
-            cwd: '<%= config.content %>/sprk-edu'
+            cwd: '<%= config.content %>/robot-languages'
             src: ['*.html', '*.md']
-            dest: '<%= config.dist %>/sprk-edu'
+            dest: '<%= config.dist %>/robot-languages'
           }
         ]
 

@@ -1,15 +1,7 @@
 ---
-title: Oval - Advanced Oval Concepts
+title: Oval - Advanced
 order: 7
 section: SPRK - EDU
-subsections:
- - Yield and Yielding Functions
- - Atomic Execution
- - Wait
- - Inline Assembly
- - Addressing
- - Forward Declaration
- - Asynchronous Callbacks
 ---
 
 
