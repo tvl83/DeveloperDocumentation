@@ -31,9 +31,7 @@ import com.orbotix.common.RobotChangedStateListener;
 
 
 ```swift
-func appDidBecomeActive(note: NSNotification) {
-    RKRobotDiscoveryAgent.startDiscovery()
-}
+RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "handleRobotStateChangeNotification:")
 ```
 
 ```java
@@ -68,11 +66,13 @@ RobotDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateList
 ```swift
 func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
     switch (notification.type) {
-    case .Online:
-        break
-    case .Disconnected:
-        break
-    default:
+        case .Online:
+            break
+        case .Disconnected:
+            break
+        case .FailedConnect:
+            break
+        default:
     }
 }
 ```
@@ -103,7 +103,9 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
 ```
 
 ```swift
-// TODO
+func appDidBecomeActive(n: NSNotification) {
+    RKRobotDiscoveryAgent.startDiscovery()
+}
 ```
 
 ```java
@@ -123,7 +125,7 @@ protected void onStart() {
 
 <div class="objective-c language-only">
 {{#markdown}}
-When robot connects, you will get an object with the type `id<RKRobotBase>`. This class encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
+When robot connects, you will get an object with the type `id<RKRobotBase>`. This protocol encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
 {{/markdown}}
 </div>
 
@@ -154,7 +156,9 @@ When robot connects, you will get an object with the type `id<RKRobotBase>`. Thi
 ```
 
 <span class="swift language-only">
-SWIFT GOES HERE
+{{#markdown}}
+When robot connects, you will get an object with the type `RKRobotBase`. This protocol encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
+{{/markdown}}
 </span>
 
 ```swift
@@ -163,21 +167,13 @@ var robot: RKConvenienceRobot!
 {...}
 
 func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotification) {
-    let noteRobot = notification.robot
-
     switch (notification.type) {
-    case .Connecting:
-        break
-    case .Online:
-        if (noteRobot.isKindOfClass(RKRobotLE)) {
-          self.robot = RKOllie(robot: noteRobot)
-        } else if (noteRobot.isKindOfClass(RKRobotClassic)) {
-          self.robot = RKSphero(robot: noteRobot)
-        }
-        break
-    case .Disconnected:
-        break
-    default:
+        case .Online:
+            robot = RKConvenienceRobot(robot: notification.robot)
+            break
+        case .Disconnected:
+            break
+        default:
     }
 }
 ```
@@ -218,6 +214,10 @@ The easiest way to disconnect any of the Sphero Robots is to 'sleep' the robot. 
 [_robot sleep];  // sleeps and disconnects a robot.
 ```
 
+```swift
+robot.sleep() // sleeps and disconnects a robot.
+```
+
 #### Convenience Robot Method
 
 <div class="objective-c language-only">
@@ -244,7 +244,7 @@ var robot: RKConvenienceRobot!  // Assume that this is set when the robot connec
 {...}
 
 func disconnectRobot() {
-  self.robot.disconnet()
+    robot.disconnet()
 }
 ```
 
@@ -266,7 +266,11 @@ public void onStop() {
 
 #### Robot Method
 
+<div class="objective-c language-only">
+{{#markdown}}
 If you have a `id<RKRobotBase>`, disconnection is a bit more manual. `RKRobotLE` objects need to have `- [RKRobotLE sleep]` called on them as to avoid leaving the processor awake while the robot is not connected. Disconnection will be automatic from the sleep. `RKRobotClassic` objects can just have `- [RKRobotClassic disconnect]` called on them.
+{{/markdown}}
+</div>
 
 ```objective-c
 @property (strong, nonatomic) id<RKRobotBase> robot; // Assume this is set when the robot connects
@@ -283,17 +287,23 @@ If you have a `id<RKRobotBase>`, disconnection is a bit more manual. `RKRobotLE`
 }
 ```
 
+<div class="swift language-only">
+{{#markdown}}
+If you have a `RKRobotBase`, disconnection is a bit more manual. `RKRobotLE` objects need to have `sleep()` called on them as to avoid leaving the processor awake while the robot is not connected. Disconnection will be automatic from the sleep. `RKRobotClassic` objects can just have `disconnect()` called on them.
+{{/markdown}}
+</div>
+
 ```swift
 var robot: RKRobotBase! // Assume this is set when the robot connects
 
 {...}
 
 func disconnectRobot() {
-  if (robot.isKindOfClass(RKRobotLE)) {
-    robot.sleep()
-  } else if (robot.isKindOfClass(RKRobotClass)) {
-    robot.disconnect()
-  }
+    if (robot.isKindOfClass(RKRobotLE)) {
+        robot.sleep()
+    } else if (robot.isKindOfClass(RKRobotClass)) {
+        robot.disconnect()
+    }
 }
 ```
 
