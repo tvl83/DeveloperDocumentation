@@ -4,12 +4,13 @@ order: 4
 section: SDK Documentation
 ---
 
-Robots objects in all supported Sphero SDKs have a sendCommand function.  This function abstracts the creation of the binary packet to be sent, queues the packet, and marshals it throught the Bluetooth Stack.
+Robots objects in all supported Sphero SDKs have a sendCommand function.  This function abstracts the creation of the binary packet to be sent, queues the packet, and marshals it through the Bluetooth Stack.  
+Note that both robotBase and robot contain the ```sendCommand:(RKDeviceCommand*)``` selector.
 
 ```objective-c
 @property (strong, nonatomic) id<RKRobotBase> robot; // set this upon connection
 // OR USE
-@property (strong, nonatomic) RKConvenienceRobot *robot; //
+@property (strong, nonatomic) RKConvenienceRobot *robot;
 ```
 
 ```swift
@@ -55,16 +56,41 @@ To implement a custom aim component, the following commands will need to be used
 ### Driving
 Driving forward
 ```objective-c
-[_robot sendCommand:[RKRollCommand commandWithHeading:0 andVelocity:];
+[_robot sendCommand:[RKRollCommand commandWithHeading:0 andVelocity:1.0];
 ```
+
+```swift
+// Swift
+```
+
+```java
+// Java
+```
+
+```unity
+```
+
 Stopping
 ```objective-c
 [_robot sendCommand:[RKRollCommand commandWithStop]];
 ```
 
-### Changing Color
-```objective-c
+```swift
+// Swift
+```
 
+```java
+// Java
+```
+
+```unity
+// Unity
+```
+
+### Changing Color
+Set white at 50% brightness 
+```objective-c
+[_robot sendCommand:[RKRGBLEDOutputCommand commandWithRed:.5 green:.5 blue:.5]];
 ```
 
 ```swift
@@ -72,11 +98,11 @@ Stopping
 ```
 
 ```java
-// java
+// Java
 ```
 
-```javascript
-// js
+```unity
+// unity
 ```
 
 

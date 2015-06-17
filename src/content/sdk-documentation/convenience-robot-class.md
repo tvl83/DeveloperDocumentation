@@ -4,12 +4,21 @@ order: 3
 section: SDK Documentation
 ---
 
-The Official SDKs have a Convenience Robot class which encapsulates many of the common functions and commands that a developer might want as well as easy access to sensor streaming.
+The Official SDKs have a Convenience Robot class which encapsulates many of the common functions and commands that a developer might want as well as convenient access to sensor data, driving, color changes, and aiming.
 
-For all snippets, assume a field id defined in the current class for the Convenience Robot.
+For all snippets, assume a field id defined in the current class for the Convenience Robot and is populated during the handling of the Online event.
 
 ```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot;
+
+{...}
+- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n {
+    switch(n.type) {
+        case RKRobotOnline: // robot is online and ready for commands
+        	_robot = [RKConvenienceRobot convenienceWithRobot:n.robot];
+            break;
+    }
+}
 ```
 
 ```swift
@@ -21,47 +30,57 @@ For all snippets, assume a field id defined in the current class for the Conveni
 private ConvenienceRobot _robot;
 ```
 
-### Constructors
+### Constructor
 ```objective-c
-@property (strong, nonatomic) id<RKRobotBase> robotBase; // Assume this is set when the robot connects
-
-{...}
-
-// Init
-self.robot = [[RKConvenienceRobot alloc] initWithRobot:_robotBase];
-
-// Class initializer
-self.robot = [RKConvenienceRobot convenienceWithRobot:_robotBase];
+_robot = [RKConvenienceRobot convenienceWithRobot:robotBase];
 ```
 
 ```swift
 
+```
+
+```java
+_robot = new ConvenienceRobot(robotBase);
+```
+### Properties
+#### Sensor Control
+Sensor Control is a subsystem of the Robot that controlls things like data streaming, collisions, locator etc.
+
+#### Collisions
+Sphero robots contain powerful analysis functions to filter accelerometer data in order to detect collisions. 
+```objective-c
+{...}
+	[_robot enableCollisions:YES];
+{...}
+
+// from the RKResponseObserver protocol
+-(void) handleAsyncMessage:(RKAsyncMessage*) message forRobot:(id<RKRobotBase>) robot{
+	if([message isKindOf:[RKCollisionDetectedAsyncData class]]){
+		// Collision Occured
+	}
+}
+
+```
+
+```swift
 
 ```
 
 ```java
-private Robot _robotBase; // Assume this is set when the robot connects
 
-{...}
-
-_robot = new ConvenienceRobot(robotBase);
 ```
-### Properties
-#### Robot
-Each Convenience Robot implementation has the Robot base that is given to you when the Robot connects.
-#### Sensor Control
-Sensor Control is a subsystem of the Robot that controlls things like data streaming, collisions, locator etc.
-#### Last Versioning
-The last versioning of the Robot.
 
-*Warning: This value will be null if you have not queried the versioning yet!*
+```unity
+
+```
 
 ### Methods
 #### Commands and Responses
 ##### Send Command
-This method is for sending commands of any type to the underlying Robot object. You would use this when you want to use a bit of functionality that is not included in the Convenience Robot.
+This method is for sending commands of any type to the underlying Robot object. You would use this when you want to use more advanced functionality that is not included in the Convenience Robot.
 
 ##### Add / Remove Response Observer
+Response observers provide access to 
 Response observers are how you are able to react to responses from the Robot in your Application. To register a response observer, you need to implement the appropriate interface, then use the add method. Similarly, to remove a response observer, you use the remove method.
 
 *Note: In iOS, all of the protocol methods are optional.*
