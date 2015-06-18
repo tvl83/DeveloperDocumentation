@@ -15,7 +15,7 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Add Frameworks
 	- Navigate to your [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) download
 	- Drag and drop the framework into the project. Ensure the option **Copy files if needed** is checked before clicking **Add**
-- Set Deployment Target to **7.0** in the **General** tab
+- Set Deployment Target to **7.0+** in the **General** tab
 - Set Background Capabilities
 	- Open **Capabilities** tab
 	- Enable **Background Modes** and check **Uses Bluetooth LE accessories**
@@ -26,14 +26,14 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 	- Add ```-ObjC -lstdc++```
 - Generate bridging header
 	- The automatic method:
-		- Add new Objective-C file (File > New > File). Select ```Objective-C File```
-		- When prompted to create the bridging header select "Yes"
+		- Add new Objective-C file (File > New > File). Select **Objective-C File**
+		- When prompted to create the bridging header select **Yes**
 		- Add ```#import <RobotKit/RobotKit.h>``` to the header
 	- The manual method: (If you declined the prompt once before this is your only option)
-		- Create a new header file (File > New > File). Select ```Header File```
-		- Name the header YourProjectName-Bridging-Header.h
-		- Open the project Build Settings and navigate to the ```Swift Compiler – Code Generation``` section
-		- Add the path to your newly created header next to ```Objective-C Bridging Header```
+		- Create a new header file (File > New > File). Select **Header File**
+		- Name the header **YourProjectName-Bridging-Header.h**
+		- Open the project Build Settings and navigate to the **Swift Compiler – Code Generation** section
+		- Add the path to your newly created header next to **Objective-C Bridging Header**
 		-  Add ```#import <RobotKit/RobotKit.h>``` to the header
 - Build Project
 	- Change the device target from iOS Simulator to iOS Device (or the name of the connected iOS device)
