@@ -9,3 +9,6 @@ deploy:
   on:
     repo: orbotix/DeveloperDocumentation
     branch: master
+notifications:
+  slack:
+    secure: by4ipeVSzSbjnru6v0CxyneWNHX1WmpgCXfpMhJXeIu6CV1fxRTwpUWmxCYxC/CLSsagg4at+JGlXgOQEZP25jPPREZuRa/tLsh6D5+/cqCduqVJrfNn6sDwnyhL9BcK1UpEKxzj/O8Dx7JVV4w8BjtVKDolOlXcNPVzFgExqH4=
