@@ -23,7 +23,18 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Update Build Settings
 	- Open **Build Settings** tab
 	- Search for **"Other Linker Flags"**
-	- Add ```-ObjC -lstdc++ -all_load```
+	- Add ```-ObjC -lstdc++```
+- Generate bridging header
+	- The automatic method:
+		- Add new Objective-C file (File > New > File). Select ```Objective-C File```
+		- When prompted to create the bridging header select "Yes"
+		- Add ```#import <RobotKit/RobotKit.h>``` to the header
+	- The manual method: (If you declined the prompt once before this is your only option)
+		- Create a new header file (File > New > File). Select ```Header File```
+		- Name the header YourProjectName-Bridging-Header.h
+		- Open the project Build Settings and navigate to the ```Swift Compiler – Code Generation``` section
+		- Add the path to your newly created header next to ```Objective-C Bridging Header```
+		-  Add ```#import <RobotKit/RobotKit.h>``` to the header
 - Build Project
 	- Change the device target from iOS Simulator to iOS Device (or the name of the connected iOS device)
 	- Press the play button or CMD+B
