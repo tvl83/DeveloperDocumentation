@@ -16,8 +16,14 @@ The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** co
 #import <RobotUIKit/RobotUIKit.h> // optional UI classes
 ```
 
+<div class="swift language-only">
+{{#markdown}}
+This should be in your bridging header. If you don't have a bridging header see [Getting Started](/sdk-documentation/getting-started)
+{{/markdown}}
+</div>
+
 ```swift
-// Coming Soon
+#import <RobotKit/RobotKit.h>
 ```
 
 
