@@ -16,6 +16,11 @@ The Sphero Robot SDKs all connect to robots using the same **DiscoveryAgent** co
 #import <RobotUIKit/RobotUIKit.h> // optional UI classes
 ```
 
+```swift
+// Coming Soon
+```
+
+
 ```java
 import com.orbotix.le.DiscoveryAgentLE;
 import com.orbotix.le.RobotLE;
@@ -324,7 +329,7 @@ public void onStop() {
 }
 ```
 
-```javascript
-// onStop
+```unity
+// Coming soon
 ```
 
