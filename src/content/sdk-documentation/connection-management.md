@@ -249,7 +249,7 @@ var robot: RKConvenienceRobot!  // Assume that this is set when the robot connec
 {...}
 
 func disconnectRobot() {
-    robot.disconnet()
+    robot.disconnect()
 }
 ```
 
