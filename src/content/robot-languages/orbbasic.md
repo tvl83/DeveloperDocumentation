@@ -7,28 +7,11 @@ section: SPRK - EDU
 
 ## Introduction
 
-Back in April 2011 when I was laying out the memory map of Sphero, co-founder Adam Wilson asked me to set aside some sort of "overlay area" in which temporary routines could be dynamically dropped in for execution.
-I considered various options and weighed their risk against implementation in a sealed robot.
-Eventually I pulled out my old copy of Microsoft Basic Decoded book to take a look at how Bill Gates had written his BASIC language on the 8-bit TRS-80.
-
-After a weekend of review and a lot of coffee, I settled on using Adam Dunkel's source code for Basic and bolted it into Sphero.
-It worked!
-I mothballed the project until the remainder of the Sphero firmware was well underway and stable, then in February 2012 I began reworking the Basic code into what I call orbBasic, a stand-alone Basic interpreter suitable for Sphero.
-
-I fixed a number of inherent bugs, extended the language greatly by adding new intrinsic variables, operators and verbs while optimizing the tokenizer, verb dispatcher and adding a line number cache.
-
-orbBasic, like the macro executive, is another powerful resource that Sphero provides for autonomous behavior and integration with smart phone applications.
+OrbBasic, like the macro executive, is another powerful resource that Sphero provides for autonomous behavior and integration with smart phone applications.
 It runs as another thread in the main system in parallel with driving and macros.
 
 With execution rates of well over 3000 lines/second and support for both a helper program (resident in RAM) and a permanent one (resident in Flash), orbBasic adds an entirely new dimension to gaming and apps.
 It is the ultimate helper app.
-
-This document covers the first generation interpreter and its minor revisions.
-Although I refer to tokens, the program stream itself is not tokenized and still resides as ASCII in the execution area.
-If the demand for orbBasic takes off and we need more power – or to store longer programs – then I will implement a second generation interpreter that operates on a tokenized stream: Level II orbBasic.
-My guess is this would more than double the execution speed from 9,000 lines/sec to 18,000.
-
-March 16, 2012 Boulder, CO
 
 ## Program Format
 
