@@ -1,8 +1,73 @@
-<ul class="nav nav-pils nav-stacked">
-  <li><a href="/getting-started" class="level-0" id="Getting-Started">getting started</a></li>
-  <li><a href="/convenience-robot" class="level-0" id="Convenience-Robot">convenience robot</a></li>
-  <li><a href="/macrolab" class="level-0" id="MacroLab">macrolab</a></li>
-  <li><a href="/orbbasic" class="level-0" id="OrbBasic">orbbasic</a></li>
-  <li><a href="/reference" class="level-0" id="Reference">reference</a></li>
-  <li><a href="/showcase" class="level-0" id="Showcase">showcase</a></li>
+<ul>
+  <li class="level-0">Sphero Robot Basics</li>
+    <ul>
+      {{#withSort pages "data.order"}}
+          {{#is data.section "Sphero Robot Basics"}}
+          <li class="level-1"><a href="/sphero-robot-basics/{{basename}}">{{data.title}}</a></li>
+            {{#if data.subsections.length}}
+              <ul>
+                {{#each data.subsections}}
+                  <li class="level-2"><a href="#{{../basename}}-{{slugify .}}">{{.}}</a></li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/is}}
+      {{/withSort}}
+    </ul>
+  
+  <li class="level-0">Robot Languages</li>
+    <ul>
+      {{#withSort pages "data.order"}}
+        {{#is data.section "SPRK - EDU"}}
+          <li class="level-1"><a href="/robot-languages/{{basename}}">{{data.title}}</a></li>
+            {{#if data.subsections.length}}
+              <ul>
+                {{#each data.subsections}}
+                <li class="level-2"><a href="/robot-languages/{{../basename}}">{{.}}</a></li>
+                {{/each}}
+              </ul>
+            {{/if}}
+        {{/is}}
+      {{/withSort}}
+    </ul>
+  
+  <li class="level-0">Official SDKs</li>
+    <ul>
+      {{#withSort pages "data.order"}}
+        {{#is data.section "SDK Documentation"}}
+          <li class="level-1"><a href="/sdk-documentation/{{basename}}">{{data.title}}</a></li>
+          {{#if data.subsections.length}}
+            <ul>
+              {{#each data.subsections}}
+                <li class="level-2"><a href="/sdk-documentation/{{../basename}}">{{.}}</a></li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        {{/is}}
+      {{/withSort}}
+    </ul>
+    
+    <li class="level-0">Community APIs</li>
+      <ul>
+      {{#withSort pages "data.order"}}
+        {{#is data.section "Community APIs"}}
+          <li class="level-1"><a href="/community-apis/{{basename}}">{{data.title}}</a></li>
+        {{/is}}
+      {{/withSort}}
+    </ul>
+  <li class="level-0">API Reference</li>
+    <ul>
+      {{#withSort pages "data.order"}}
+        {{#is data.section "API Reference"}}
+        <li class="level-1"><a href="/api-reference/{{basename}}">{{data.title}}</a></li>
+          {{#if data.subsections.length}}
+            <ul>
+              {{#each data.subsections}}
+                <li class="level-2"><a href="/api-reference/{{../basename}}">{{.}}</a></li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        {{/is}}
+      {{/withSort}}
+    </ul>
 </ul>
