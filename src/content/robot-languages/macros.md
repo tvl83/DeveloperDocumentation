@@ -6,20 +6,13 @@ section: SPRK - EDU
 
 ## Introduction
 
-Beginning in August 2011, firmware builds of the Sphero Main Application contained a facility to execute macros, which are sequences of commands that perform actions locally on Sphero without additional client interaction.
-This system was intended as a way to automate and accurately reproduce actions and behaviors, with both high and low client interaction.
-
 The Sphero macro system consists of the Executive which interprets the commands and performs the actions and the macros themselves which are linear sequences – more or less a "to-do" list.
-The Sphero macro system was never intended to be able to evaluate equations or make decisions, as those features are better supported in orbBasic.
+The Sphero macro system was never intended to be able to evaluate equations or make decisions, as those features are better supported in orbBasic or Oval.
 However they were expected to be called from orbBasic and to run in parallel as rote sequencing is a poor use of a full-blown programming language.
-As it is, I think you'll find macros to be a very powerful feature for games, apps and testing.
-
-This document covers the format and behavior of the First Generation Executive (versioned as 2-4).
-I learned a lot from building this and seeing how our smartphone programmers used it, so major deficiencies and upgrades will be reflected in the next generation product.
 
 ## Macro Format
 
-Ultimately a macro is a linear string of bytes that is processed from beginning to end.
+A macro is a linear string of bytes that is processed from beginning to end.
 There is no concept of jumping around in a macro (though the commands goto and gosub are implemented between macros).
 Symbols in all caps like MAC_END replace the underlying numerical codes that the Executive uses.
 
