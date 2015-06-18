@@ -14,7 +14,9 @@ Note that both robotBase and robot contain the ```sendCommand:(RKDeviceCommand*)
 ```
 
 ```swift
-// swift
+var robot: RKRobotBase
+// OR USE
+var robot: RKConvenienceRobot
 ```
 
 ```java
@@ -42,7 +44,8 @@ To implement a custom aim component, the following commands will need to be used
 ```
 
 ```swift
-// swift
+robot.driveWithHeading(180, andVelocity: 0)
+robot.setZeroHeading()
 ```
 
 ```java
@@ -60,7 +63,7 @@ Driving forward
 ```
 
 ```swift
-// Swift
+robot.sendCommand(RKRollCommand(heading: 0, velocity: 1.0))
 ```
 
 ```java
@@ -68,15 +71,16 @@ Driving forward
 ```
 
 ```unity
+// Unity
 ```
 
 Stopping
 ```objective-c
-[_robot sendCommand:[RKRollCommand commandWithStop]];
+[_robot sendCommand:[RKRollCommand commandWithStopAtHeading:0]];
 ```
 
 ```swift
-// Swift
+RKRollCommand.commandWithStopAtHeading(0)
 ```
 
 ```java
@@ -94,7 +98,7 @@ Set white at 50% brightness
 ```
 
 ```swift
-// swift
+robot.sendCommand(RKRGBLEDOutputCommand(red: 0.5, green: 0.5, blue: 0.5))
 ```
 
 ```java
@@ -108,7 +112,11 @@ Set white at 50% brightness
 
 ### Convenience Robot Function
 
+<div class="objective-c language-only">
+{{#markdown}}
 The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot setLEDWithRed:(float)redVal Green:(float)greenVal Blue:(float)blueVal`. We can set the RGB LED with this method. The valid values here are 0.0f to 1.0f.
+{{/markdown}}
+</div>
 
 ```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume this is set when the robot connects
@@ -127,8 +135,29 @@ The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot setLED
 }
 ```
 
+<div class="swift language-only">
+{{#markdown}}
+The `RKConvenienceRobot` class contains the method `setLEDWithRed(redVal: Float, green: Float, blue: Float)`. We can set the RGB LED with this method. The valid values here are 0.0 to 1.0.
+{{/markdown}}
+</div>
+
 ```swift
-// swift
+var robot: RKConvenienceRobot
+
+{...}
+
+func blink(lit: Bool) {
+    if (lit) {
+        robot.setLEDWithRed(0.0, green: 0.0, blue: 0.0)
+    } else {
+        robot.setLEDWithRed(0.0, green: 0.0, blue: 1.0)
+    }
+    
+    var delay = Int64(0.5 * Float(NSEC_PER_SEC))
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
+        self.blink(!lit);
+    })
+}
 ```
 
 ```java
@@ -141,7 +170,11 @@ The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot setLED
 
 ### Convenience Robot Send Command
 
+<div class="objective-c language-only">
+{{#markdown}}
 The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot sendCommand:(RKDeviceCommand *)command]`. We can make a `RKRGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
 
 ```objective-c
 @property (strong, nonatomic) RKConvenienceRobot *robot; // Assume this is set when the robot connects
@@ -164,8 +197,29 @@ The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot sendCo
 }
 ```
 
+<div class="swift language-only">
+{{#markdown}}
+The `RKConvenienceRobot` class contains the method `sendCommand(commad: RKDeviceCommand)`. We can make a `RKRGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
+
 ```swift
-// swift
+var robot: RKConvenienceRobot
+
+{...}
+
+func blink(lit: Bool) {
+    if (lit) {
+        robot.sendCommand(RKRGBLEDOutputCommand(red: 0.0, green: 0.0, blue: 0.0))
+    } else {
+        robot.sendCommand(RKRGBLEDOutputCommand(red: 0.0, green: 0.0, blue: 1.0))
+    }
+    
+    var delay = Int64(0.5 * Float(NSEC_PER_SEC))
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
+        self.blink(!lit);
+    })
+}
 ```
 
 ```java
@@ -178,7 +232,11 @@ The `RKConvenienceRobot` class contains the method `- [RKConvenienceRobot sendCo
 
 ### Robot Send Command
 
+<div class="objective-c language-only">
+{{#markdown}}
 The `id<RKRobotBase>` object (the one we get from the `- (void)handleRobotStateChangeNotification:(RKRobotChangedStateNotification *)n` method or by using `- [RKConvenienceRobot robot]`) contains the method `- [id<RKRobotBase> sendCommand:(RKDeviceCommand *)command]`. We can make an `RKRGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
 
 ```objective-c
 @property (strong, nonatomic) id<RKRobotBase> robot; // Assume this is set when the robot connects
@@ -201,8 +259,30 @@ The `id<RKRobotBase>` object (the one we get from the `- (void)handleRobotStateC
 }
 ```
 
+<div class="swift language-only">
+{{#markdown}}
+The `RKRobotBase` object (the one we get from the `handleRobotStateChangeNotification(n: RKRobotChangedStateNotification)` method or by using the `robot` property) contains the method `sendCommand(command: RKDeviceCommand)`. We can make an `RKRGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
+
+
 ```swift
-// swift
+var robot: RKRobotBase
+
+{...}
+
+func blink(lit: Bool) {
+    if (lit) {
+        robot.sendCommand(RKRGBLEDOutputCommand(red: 0.0, green: 0.0, blue: 0.0))
+    } else {
+        robot.sendCommand(RKRGBLEDOutputCommand(red: 0.0, green: 0.0, blue: 1.0))
+    }
+    
+    var delay = Int64(0.5 * Float(NSEC_PER_SEC))
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
+        self.blink(!lit);
+    })
+}
 ```
 
 ```java
