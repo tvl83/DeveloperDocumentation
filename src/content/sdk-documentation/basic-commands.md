@@ -5,33 +5,14 @@ section: SDK Documentation
 ---
 
 Robots objects in all supported Sphero SDKs have a sendCommand function.  This function abstracts the creation of the binary packet to be sent, queues the packet, and marshals it through the Bluetooth Stack.  
-Note that both robotBase and robot contain the ```sendCommand:(RKDeviceCommand*)``` selector.
 
-```objective-c
-@property (strong, nonatomic) id<RKRobotBase> robot; // set this upon connection
-// OR USE
-@property (strong, nonatomic) RKConvenienceRobot *robot;
-```
-
-```swift
-var robot: RKRobotBase
-// OR USE
-var robot: RKConvenienceRobot
-```
-
-```java
-// java
-```
-
-```javascript
-// js
-```
-
+All examples assume a valid robot connection and class variable.  See [Connections](/sdk-documentation/connection-management)
 
 ### Aim & Setting Heading
-As described in **ADD LINK to Aim/Heading** your application will need to be able to Aim the robot before allowing your user to attempt to navigate.
+As described in [Heading & Aiming](/sphero-robot-basics/heading-and-aiming) an application will need to be able to Aim the robot before allowing your user to attempt to navigate.
 
 ##### UI Aim Component
+
 
 ##### Custom Aiming
 To implement a custom aim component, the following commands will need to be used.
@@ -67,7 +48,7 @@ robot.sendCommand(RKRollCommand(heading: 0, velocity: 1.0))
 ```
 
 ```java
-// Java
+_robot.sendCommand(new RollCommand(h, v * v, RollCommand.State.GO));
 ```
 
 ```unity
@@ -84,7 +65,7 @@ RKRollCommand.commandWithStopAtHeading(0)
 ```
 
 ```java
-// Java
+_robot.sendCommand(new RollCommand(RollCommand.getCurrentHeading(), 0.0f, RollCommand.State.STOP));
 ```
 
 ```unity
@@ -95,6 +76,7 @@ RKRollCommand.commandWithStopAtHeading(0)
 Set white at 50% brightness 
 ```objective-c
 [_robot sendCommand:[RKRGBLEDOutputCommand commandWithRed:.5 green:.5 blue:.5]];
+// The valid color values here are 0.0f to 1.0f.
 ```
 
 ```swift
@@ -102,7 +84,7 @@ robot.sendCommand(RKRGBLEDOutputCommand(red: 0.5, green: 0.5, blue: 0.5))
 ```
 
 ```java
-// Java
+robot.sendCommand(RGBLEDOutputCOmmand(.5, .5, .5));
 ```
 
 ```unity
@@ -161,11 +143,11 @@ func blink(lit: Bool) {
 ```
 
 ```java
-// java
+// coming soon
 ```
 
-```javascript
-// js
+```unity
+// coming soon
 ```
 
 ### Convenience Robot Send Command
