@@ -24,6 +24,9 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 	- Open **Build Settings** tab
 	- Search for **"Other Linker Flags"**
 	- Add ```-ObjC -lstdc++```
+- Update Info.plist
+	- Add **UISupportedExternalAccessoryProtocols** key
+	- Add **com.orbotix.robotprotocol** entry
 - Generate bridging header
 	- The automatic method:
 		- Add new Objective-C file (File > New > File). Select **Objective-C File**
