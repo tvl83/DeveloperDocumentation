@@ -1,0 +1,68 @@
+body .content > ul.language-picker {
+  list-style: none;
+  width: auto;
+  height: auto;
+  position: relative;
+  padding: 0;
+  float: left;
+  background-color: black;
+  min-height: 33px;
+  margin-left: 0;
+
+  li {
+    list-style: none;
+    &:before {
+      display: none;
+    }
+  }
+}
+
+
+@media (min-width: 480px) {
+  body .content > ul.language-picker {
+    float: right;
+  }
+}
+
+.language {
+  display: inline;
+  height: 33px;
+
+  .button {
+    min-width: 70px;
+    text-align: center;
+    border-radius: 0;
+    margin-right: 0;
+    min-height: 33px;
+    background-color: black;
+    border: none;
+    padding: 0 10px;
+
+    &:first-child {
+      padding-top: 6px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.active {
+      background-color: @sphero-blue;
+
+      &:hover {
+        background-color: @sphero-blue;
+      }
+    }
+  }
+}
+
+@media (min-width: 1180px) {
+  .button {
+    min-width: 90px;
+  }
+}
+
+.language-only.editable {
+  outline: 1px solid #bbb;
+  outline-offset: 5px;
+}

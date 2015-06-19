@@ -37,50 +37,47 @@ date: <%= new Date() %>
     <meta content="Documentation for Sphero" name="description">
 
   </head>
-  <body role="flatdoc">
+  <body role="flatdoc" class="no-literate">
     <div id="site-wrapper">
       <div id="site-canvas">
         {{> mobile-nav}}
         <div id="docs">
           <header class="large-12 columns navigation always-show">
             <div class="left-side">
-              <a href="/"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
-              <a class="{{#compare platform "===" "sphero"}}active{{/compare}}" href="/sphero/start">Sphero</a>
-              <!--<a class="{{#compare platform "===" "ollie"}}active{{/compare}}" href="/ollie/start">Ollie</a>-->
+              <a href="http://www.sphero.com"><img src="{{assets}}/images/spheromark.png" id="logo"></a>
             </div>
             <div class="right-side">
-              <div class="edit-button">
-                <a href="https://github.com/orbotix/DeveloperDocumentation/edit/master/src/content/{{platform}}/{{basename}}.md" class="button">Edit this page</a>
-              </div>
               <div class="home-button">
                 <div class="ion-ios7-cart-outline"></div>
                 <a href="http://store.gosphero.com">Shop</a>
               </div>
               <div class="home-button">
                 <div class="ion-arrow-left-c"></div>
-                <a href="http://gosphero.com">gosphero.com</a>
+                <a href="http://www.sphero.com">sphero.com</a>
               </div>
             </div>
           </header>
           <div class="content-root" data-spy="scroll" data-target="#toc">
             <div class="menubar">
               <div class="menu section" role="flatdoc-menu">
-                <ul>
-                  {{#withSort pages "data.order"}}
-                  <li><a href="/{{../platform}}/{{basename}}" class="level-0 {{#compare basename "===" ../basename}}active{{/compare}}">{{data.title}}</a></li>
-                  {{/withSort}}
-                </ul>
-              </div>
-              <div class="menu section" role="flatdoc-menu">
-                <ul id="toc">
-                </ul>
+                {{> site-nav}}
               </div>
             </div>
             <div role="flatdoc-content" class="content" id="content">
+              {{#is section "SDK Documentation"}}
+                <ul class="language-picker">
+                  <li class="language"><a href="#objective-c" data-language="objective-c" class="button">Objective-C</a></li>
+                  <li class="language"><a href="#swift" data-language="swift" class="button">Swift</a></li>
+                  <li class="language"><a href="#java" data-language="java" class="button">Android</a></li>
+                  <li class="language"><a href="#js" data-language="unity" class="button">Unity</a></li>
+                </ul>
+              {{/is}}
+              <h1>{{title}}
+                <a href="https://github.com/orbotix/DeveloperDocumentation/edit/develop/src/content/{{slugify section}}/{{slugify title}}.md" class="edit-link"><span class="ion-edit"></span></a>
+              </h1>
               {{#markdown}}
               {{> body}}
               {{/markdown}}
-              <div class="code-samples"></div>
             </div>
           </div>
         </div>

@@ -1,24 +1,140 @@
-/* ========================
-//#google-prettify-monokai-theme
-//#Version: 0.2
-//#Author: RaphaelDDL
-//#Github: https://github.com/RaphaelDDL/google-prettify-monokai-theme/
-//#MIT LICENSE
-//#https://github.com/RaphaelDDL/compass-generic-config/blob/master/LICENSE
-//For use with Google Code Prettify, HTML Syntax only
-//======================== */
+/* Tomorrow Theme */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+/* Some edits made */
+.prettyprint {
+  background: white;
+  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
 
-pre .str, code .str { color: #e6db5a; } /* string */
-pre .kwd, code .kwd { color: #66d9ef; } /* keyword */
-pre .com, code .com { color: #75715e; font-style: italic; } /* comment */
-pre .typ, code .typ { color: #66d9ef; } /* type */
-pre .lit, code .lit { color: #ae81ff; } /* literal */
-pre .pun, code .pun { color: #fff; } /* punctuation */
-pre .pln, code .pln { color: #fff; } /* plaintext */
-pre .tag, code .tag { color: #f92672; } /* html/xml tag */
-pre .atn, code .atn { color: #a6e22a; } /* html/xml attribute name */
-pre .atv, code .atv { color: #e6db74; } /* html/xml attribute value */
-pre .dec, code .dec { color: #ae81ff; } /* decimal */
+.pln {
+  color: #4d4d4c;
+}
+
+@media screen {
+  code,
+  pre {
+    .str {
+      color: #718c00;
+    }
+
+    .kwd {
+      color: #8959a8;
+    }
+
+    .com {
+      color: #8e908c;
+    }
+
+    .typ {
+      color: #4271ae;
+    }
+
+    .lit {
+      color: #f5871f;
+    }
+
+    .pun {
+      color: #4d4d4c;
+    }
+
+    .opn {
+      color: #4d4d4c;
+    }
+
+    .clo {
+      color: #4d4d4c;
+    }
+
+    .tag {
+      color: #c82829;
+    }
+
+    .atn {
+      color: #f5871f;
+    }
+
+    .atv {
+      color: #3e999f;
+    }
+
+    .dec {
+      color: #f5871f;
+    }
+
+    .var {
+      color: #c82829;
+    }
+
+    .fun {
+      color: #4271ae;
+    }
+
+    // Addition
+    .pln {
+      color: #000;
+    }
+  }
+}
+@media print, projection {
+  code,
+  pre {
+    .str {
+      color: #006600;
+    }
+
+    .kwd {
+      color: #006;
+      font-weight: bold;
+    }
+
+    .com {
+      color: #600;
+      font-style: italic;
+    }
+
+    .typ {
+      color: #404;
+      font-weight: bold;
+    }
+
+    .lit {
+      color: #004444;
+    }
+
+    .pun, .opn, .clo {
+      color: #444400;
+    }
+
+    .tag {
+      color: #006;
+      font-weight: bold;
+    }
+
+    .atn {
+      color: #440044;
+    }
+
+    .atv {
+      color: #006600;
+    }
+
+    // Addition
+    .pln {
+      color: #000;
+    }
+  }
+}
+
+/* Everything below this line is a custom addition */
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .content pre {
   background: none;
@@ -26,7 +142,7 @@ pre .dec, code .dec { color: #ae81ff; } /* decimal */
 }
 
 pre.prettyprint, code.prettyprint {
-	background-color: @monokai-gray;
+	background-color: #fff;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-o-border-radius: 8px;

@@ -1,67 +1,56 @@
 ---
-word: JavaScript SDK
-title: JavaScript SDK
-order: 3
+title: JavaScript API
+order: 1
+section: Community APIs
 ---
-# JavaScript SDK
-
-# Sphero.js
-
 ## IDE Setup
 Download and install the text editor of your choice:
 
-### Sublime Text
   - [Sublime Text](http://www.sublimetext.com/)
-
-### Atom
   - [Atom](https://atom.io/)
-
-### TextMate
   - [TextMate](https://macromates.com/)
-
-### Visual Studio Code
   - [Visual Studio Code](https://code.visualstudio.com/)
 
-# Core Sphero Commands
+## Core Sphero Commands
   {{> core}}
 
-# Sphero Commands
+## Sphero Commands
   {{> sphero}}
 
-# Custom Commands
+## Custom Commands
   {{> custom}}
 
-# Examples
+## Examples
 
-## Bluetooth Info
+### Bluetooth Info
   {{> bluetooth-info}}
-## Calibration
+### Calibration
   {{> calibration}}
-## Collision Detection
+### Collision Detection
   {{> collision-detection}}
-## Color
+### Color
   {{> color}}
-## Get Color
+### Get Color
   {{> get-color}}
-## Conway's Game
+### Conway's Game
   {{> conway}}
-## Data Streaming
+### Data Streaming
   {{> data-streaming}}
-## Keyboard
+### Keyboard
   {{> roll}}
-## Roll
+### Roll
   {{> roll}}
-## Shakeometer
+### Shakeometer
   {{> shakeometer}}
-## Stream Accel-one
+### Stream Accel-one
   {{> stream-accel-one}}
-## Stream Accelerometer
+### Stream Accelerometer
   {{> stream-accelerometer}}
-## Stream Gyroscope
+### Stream Gyroscope
   {{> stream-gyroscope}}
-## Stream IMU-Angles
+### Stream IMU-Angles
   {{> stream-imu-angles}}
-## Stream Odometer
+### Stream Odometer
   {{> stream-imu-angles}}
-## Stream Velocity
+### Stream Velocity
   {{> stream-velocity}}
