@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": false,
   "scripts": {
-    "start": "grunt server",
+    "postinstall": "grunt build",
+    "start": "node app.js",
     "test": "grunt test"
   },
   "dependencies": {
