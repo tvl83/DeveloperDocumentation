@@ -4,100 +4,97 @@ order: 5
 section: SDK Documentation
 ---
 
-## Code Examples
+### Advanced Sensors
 
-### Button Driver Sample Application
-
-* Download the [ButtonDrive Sample app](https://github.com/orbotix/Sphero-iOS-SDK/tree/Beta/samples/ButtonDrive)
-
-### Run the Application
-
-Open the `ButtonDrive.xcodeproj` Xcode project.
-
-Once it's open, drag `RobotKit.framework` into your project's framework folder.
-
-If it isn't already, change the Deployment Target to 7.0.
-
-Click **Run** to build and run the application.
-If your Sphero is paired with your phone, you'll be able to control it with the on-screen d-pad buttons.
-
-### How It Works
-
-The `ButtonDriverViewController` imports dependencies, and defines required
-properties.
+#### Motion (IMU)
 
 ```objective-c
-#import "ButtonDriveViewController.h"
-#import <RobotKit/RobotKit.h>
-
-@interface ButtonDriveViewController()
-
-@property (strong, nonatomic) RUICalibrateGestureHandler *calibrateHandler;
-@property (strong, nonatomic) RKConvenienceRobot* robot;
+// Coming Soon
 ```
 
 ```swift
+// Coming Soon
 ```
 
 ```java
+// Coming Soon
 ```
 
-```javascript
+```unity
+// Coming Soon
 ```
 
-When the app receives the `appDidBecomeActive` event, it tells RobotKit to start looking for a Sphero.
-
+#### Locator 
 ```objective-c
--(void)appDidBecomeActive:(NSNotification*)notification {
-  [RKRobotDiscoveryAgent startDiscovery];
-}
+// Coming Soon
 ```
 
-The RobotKit discovery agent is then told to add an observer to trigger event when a robot's state changes.
+```swift
+// Coming Soon
+```
 
+```java
+// Coming Soon
+```
+
+```unity
+// Coming Soon
+```
+
+
+#### Collisions
 ```objective-c
-[[RKRobotDiscoveryAgent sharedAgent] addNotificationObserver:self selector:@selector(handleRobotStateChangeNotification:)];
+// Coming Soon
 ```
 
-Then, inside the handler, specific actions are defined for different possible robot states.
+```swift
+// Coming Soon
+```
 
+```java
+// Coming Soon
+```
+
+```unity
+// Coming Soon
+```
+
+
+### Advanced Language
+
+#### Oval
 ```objective-c
--(void) handleRobotStateChangeNotification:(RKRobotChangedStateNotification *) n{
-  switch(n.type){
-    case RKRobotConnecting:
-      break;
-    case RKRobotConnected:
-      _robot = [[RKConvenienceRobot alloc] initWithRobot:n.robot ];
-      [_calibrateHandler setRobot:n.robot];
-      break;
-    case RKRobotFailedConnect:
-      break;
-    case RKRobotDisconnected:
-      _robot = nil;
-      [_calibrateHandler setRobot:nil];
-      break;
-  }
-}
+// Coming Soon
 ```
 
-Two methods then tell the robot to drive or stop the Sphero when buttons are pressed.
+```swift
+// Coming Soon
+```
 
+```java
+// Coming Soon
+```
+
+```unity
+// Coming Soon
+```
+
+
+#### Macros
 ```objective-c
--(IBAction)twoSeventyPressed:(id)sender {
-  [_robot driveWithHeading:270.0 andVelocity:0.5];
-}
-
--(IBAction)stopPressed:(id)sender {
-  [_robot stop];
-}
+// Coming Soon
 ```
 
-Finally, when the app is closed, it will stop looking for new robots.
-
-```objective-c
--(void)appWillResignActive:(NSNotification*)notification {
-  [RKRobotDiscoveryAgent stopDiscovery];
-  [_robot disconnect];
-}
+```swift
+// Coming Soon
 ```
+
+```java
+// Coming Soon
+```
+
+```unity
+// Coming Soon
+```
+
 
