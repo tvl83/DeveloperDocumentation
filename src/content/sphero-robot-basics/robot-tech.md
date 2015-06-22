@@ -4,7 +4,7 @@ order: 4
 section: Sphero Robot Basics
 ---
 
-Sphero Robots support three programming languages on every Robot that can provide some basic autonomous functions. The easiest to learn and is used by our SPRK education program is Macros, followed by OrbBasic, and finally the latest and most powerful, OVAL.  These languages all provide autonomous functionality for fast changing colors or other feedback that would normally be limited to the 12 commands per second limit when communicating with a host device.
+Sphero Robots support three programming languages on every Robot that can provide some basic autonomous functions. The easiest to learn and is used by our education program is Macros, followed by OrbBasic, and finally the latest and most powerful, OVAL.  These languages all provide autonomous functionality for fast changing colors or other feedback that would normally be limited to the 12 commands per second limit when communicating with a host device.
 
 ## Outputs
 

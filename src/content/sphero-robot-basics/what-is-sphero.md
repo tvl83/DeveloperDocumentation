@@ -11,9 +11,9 @@ Sphero is a spherical robot toy designed by *Sphero* (the company). It is a whit
 * **Sensors** - Sphero robot's internal sensors include an IMU and Locator
 * **Bluetooth** - Sphero robots connect to devices such an iPads, iPhones, and Android phones and tablets through Bluetooth.
 * **Robot Languages** - Sphero robots support three 'onboard' programming languages.  Programs written in these languages are 'run' on the robot.
-  * [Macros](/sprk-edu/macros/) - proprietary Macro language
-  * [OrbBasic](/sprk-edu/orbbasic/) - Basic interpreter
-  * [Oval](/sprk-edu/oval-coming-soon) - streaming C based language
+  * [Macros](/robot-languages/macros/) - proprietary Macro language
+  * [OrbBasic](/robot-languages/orbbasic/) - Basic interpreter
+  * [Oval](/robot-languages/oval-coming-soon) - streaming C based language
 
 
 
