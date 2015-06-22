@@ -1,18 +1,18 @@
 ---
 title: Oval - Language
 order: 4
-section: SPRK - EDU
+section: Robot Languages
 ---
 
 ### Overview
 Oval is a subset of the computer language C with a few extra features to support streaming and asynchronous communication. It provides 32-bit floating point and signed integer types but does not include pointers, structs, or unions
 ### The Ellipsis
-Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the [Oval Virtual Machine ([OVM](/sprk-edu/oval-oval-virtual-machine))](/sprk-edu/oval-oval-virtual-machine) must end with:
+Since Oval programs are intended to be streamed, they never really "end". Every Oval fragment to be compiled and sent to the [Oval Virtual Machine ([OVM](/robot-languages/oval-oval-virtual-machine))](/robot-languages/oval-oval-virtual-machine) must end with:
 
 ```
 ...
 ```
-In order to actually turn off the [Oval Virtual Machine ([OVM](/sprk-edu/oval-oval-virtual-machine))](/sprk-edu/oval-oval-virtual-machine) use the statement
+In order to actually turn off the [Oval Virtual Machine ([OVM](/robot-languages/oval-oval-virtual-machine))](/robot-languages/oval-oval-virtual-machine) use the statement
 
 ```
 end;
@@ -125,7 +125,7 @@ while (expression) {
 Per usual, "else if" and "else" are optional. Note that there is no for loop. This may be implemented in a later version.
 
 #### Library and Stream Code
-Code arrives in the [OVM](/sprk-edu/oval-oval-virtual-machine) in the stream. When a function is sent to the stream, the [OVM](/sprk-edu/oval-oval-virtual-machine) reads the function declaration, copies it to the library, and recompresses it. Subsequent calls to the declared function executes from the library.
+Code arrives in the [OVM](/robot-languages/oval-oval-virtual-machine) in the stream. When a function is sent to the stream, the [OVM](/robot-languages/oval-oval-virtual-machine) reads the function declaration, copies it to the library, and recompresses it. Subsequent calls to the declared function executes from the library.
 
 ##### Functions
 Oval allows you to define functions with arguments, return values, and local variables.
@@ -163,13 +163,13 @@ while (counter) {
 ...
 ```
 
-The [OVM](/sprk-edu/oval-oval-virtual-machine) will save the function, initialize, the variable, and then execute the while loop (which calls the function). In this case, the ellipses is included because it indicates the end of a submission to the [OVM](/sprk-edu/oval-oval-virtual-machine). This allows us to send more code that later references that same function.
+The [OVM](/robot-languages/oval-oval-virtual-machine) will save the function, initialize, the variable, and then execute the while loop (which calls the function). In this case, the ellipses is included because it indicates the end of a submission to the [OVM](/robot-languages/oval-oval-virtual-machine). This allows us to send more code that later references that same function.
 
 ```
 int finalCount = decr(counter);
 ...
 ```
 
-For interfacing with the Robot from Oval see: [Interfacing With the Robot](/sprk-edu/oval-interfacing-with-the-robot)
+For interfacing with the Robot from Oval see: [Interfacing With the Robot](/robot-languages/oval-interfacing-with-the-robot)
 
-For more advanced Oval information see: [Advanced Oval Concepts](/sprk-edu/oval-advanced-oval-concepts)
+For more advanced Oval information see: [Advanced Oval Concepts](/robot-languages/oval-advanced-oval-concepts)

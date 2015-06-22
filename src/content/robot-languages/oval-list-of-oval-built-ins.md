@@ -1,7 +1,7 @@
 ---
 title: Oval - Reference
 order: 8
-section: SPRK - EDU
+section: Robot Languages
 subsections:
  - Keywords
  - Properties
