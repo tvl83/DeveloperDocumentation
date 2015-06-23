@@ -58,9 +58,9 @@ Sensor Control is a subsystem of the Robot that controlls things like data strea
 #### Collisions
 Sphero robots contain powerful analysis functions to filter accelerometer data in order to detect collisions. 
 ```objective-c
-{...}
+{...
 	[_robot enableCollisions:YES];
-{...}
+...}
 
 // from the RKResponseObserver protocol
 -(void) handleAsyncMessage:(RKAsyncMessage*) message forRobot:(id<RKRobotBase>) robot{
@@ -72,9 +72,9 @@ Sphero robots contain powerful analysis functions to filter accelerometer data i
 ```
 
 ```swift
-{...}
+{...
 robot.enableCollisions(true)
-{...}
+...}
 
 // from the RKResponseObserver protocol
 func handleAsyncMessage(message: RKAsyncMessage, robot: RKRobotBase) {
