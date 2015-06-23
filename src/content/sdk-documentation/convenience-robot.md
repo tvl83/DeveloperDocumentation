@@ -244,7 +244,7 @@ Sets the brightness of the blue back LED or tail light of the Robot. This LED is
 These methods simplify controlling the various sensor systems on robots.
 
 ##### Enable Collisions
-This method controlls collision detection on the Robot. The parameter enable controls whether the system is on. The Robot will provide an asynchronous notification when a collision was detected.
+This method controls collision detection on the Robot. The parameter enable controls whether the system is on. The Robot will provide an asynchronous notification when a collision was detected.
 
 *Note: You must implement a response observer and listen for asynchronous notifications to get collision notifications.*
 ```objective-c
