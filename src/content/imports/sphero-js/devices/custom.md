@@ -289,3 +289,18 @@ that it's disconnected.
 
 - `[remove=false]` (Boolean) whether or not to stop on disconnect
 - `callback` (Function) triggered on complete
+
+### stop(callback)
+
+```
+sphero.stop(function(err, data) {
+  console.log(err || "data" + data);
+});
+```
+
+Stops sphero the optimal way by setting flag 'go' to 0
+and speed to a very low value.
+
+**Params:**
+
+- `callback` (Function) triggered on complete
