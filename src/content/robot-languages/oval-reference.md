@@ -2,12 +2,6 @@
 title: Oval - Reference
 order: 8
 section: Robot Languages
-subsections:
- - Keywords
- - Properties
- - Async Callbacks
- - Functions
- - Error Codes
 ---
 
 ## Keywords
