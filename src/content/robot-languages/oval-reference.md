@@ -12,19 +12,49 @@ A built-in "property" acts like a globally defined variable in the robot with op
 *If you invoke a setter that does not exist you will get OVM error ERR_WRITE_TO_READ_ONLY.*
 
 | Name                                          | Type  | Getter | Setter | Min Value | Max Value | Units     | Description |
-|-----------------------------------------------|-------|--------|--------|-----------|-----------|-----------|-------------|                                                                                                                                                	
+|-----------------------------------------------|-------|--------|--------|-----------|-----------|-----------|-------------|                                                                   
+| backLed                                       | float | y      | y      |  0.0      |  256.0    | (no unit) | Brightness of back LED light. |
 | redLed                                        | float | n      | y      | 0.0       | 256.0     | (no unit) | Sets the value of the red component of the RGB LED |
 | greenLed                                      | float | n      | y      | 0.0       | 256.0     | (no unit) | Sets the value of the green component of the RGB LED |
 | blueLed                                       | float | n      | y      | 0.0       | 256.0.0   | (no unit) | Sets the value of the blue component of the RGB LED. |
+| leftMotorPwm                                  | float | y      | y      | -4095.0   | 4095.0    | (no unit) | Get or set the pwm of the left motor. |
+| rightMotorPwm                                 | float | y      | y      | -4095.0   | 4095.0    | (no unit) | Get or set the pwm of the right motor. |
+| controlSystemIsOn                             | int   | y      | y      | 0         | 1         | bool      | Returns 1 if the control system is on, 0 if it is not. |
+| controlSystemIsInverted                       | int   | y      | y      | 0         | 1         | bool      | Drive upside down. (Ollie Only) |
+| nextRandomInt                                 | int   | y      | y      | -2^31     | 2^31 - 1  | (no unit) | Get next pseudo-random int. Set random number seed. |
+| nextRandomFloat                               | float | y      | y      |  0.0      | 1.0       | (no unit) | Get next pseudo-random float. Set random number seed. |
+
+## Sensor Properties
+| Name                                          | Type  | Getter | Setter | Min Value | Max Value | Units     | Description |
+|-----------------------------------------------|-------|--------|--------|-----------|-----------|-----------|-------------|
+| locatorPositionX                              | float | y      | y      | any       | any       | meters    | X coordinate of current position on floor. |
+| locatorPositionY                              | float | y      | y      | any       | any       | meters    | Y coordinate of current position on floor. |
+| locatorVelocityX                              | float | y      | y      | any       | any       | m/s       | Current X velocity. |
+| locatorVelocityY                              | float | y      | y      | any       | any       | m/s       | Current Y velocity. |
 | imuPitchAngle                                 | float | y      | n      | -180.0    | 180.0     | degrees   | Gets the value of the pitch angle from the IMU. |
 | imuRollAngle                                  | float | y      | n      | -90.0     | 90.0      | degrees   | Gets the value of the roll angle from the IMU. |
 | imuYawAngle                                   | float | y      | n      | -180.0    | 180.0     | degrees   | Gets the value of the yaw angle from the IMU. |
-| controlSystemIsOn                             | int   | y      | y      | 0         | 1         | bool      | Returns 1 if the control system is on, 0 if it is not. |
-| leftMotorPwm                                  | float | y      | y      | -4095.0   | 4095.0    | (no unit) | Get or set the pwm of the left motor. |
-| rightMotorPwm                                 | float | y      | y      | -4095.0   | 4095.0    | (no unit) | Get or set the pwm of the right motor. |
+| gyroSensorPitch                               | float | y      | n      | any       | any       | deg/s     | Rotation rate around pitch axis. |
+| gyroSensorRoll                                | float | y      | n      | any       | any       | deg/s     | Rotation rate around roll axis. |
+| gyroSensorYaw                                 | float | y      | n      | any       | any       | deg/s     | Rotation rate around yaw axis. |
+| wheelSlipRate                                 | float | y      | n      | 0.0       | any       | (no unit) | Estimate of how much wheels are slipping. |
+| lastCollisionTime                             | float | y      | n      | any       | any       | seconds   | Time of last collision (see OnCollision and currentRobotTime). |
+| accelSensorXRight                             | float | y      | n      | -8.0      | 8.0       | Gs        | Accelerometer reading on X axis. |
+| accelSensorYForward                           | float | y      | n      | -8.0      | 8.0       | Gs        | Accelerometer reading on Y axis. |
+| accelSensorZUp                                | float | y      | n      | -8.0      | 8.0       | Gs        | Accelerometer reading on Z axis. |
 | verticalAcceleration                          | float | y      | n      | -8.0      | 8.0       | Gs        | Gets the current vertical acceleration. Note: Should be ~1G when stationary.** |
-| controlSystemTargetYaw                        | float | y      | y      | any       | any       | degrees   | Get or set the target yaw for the control system. This will have no effect if the control system is off.<br><br>**Note: in a different coordinate systesm than imuYawAngle (see controlSystemTargetImuYaw).** |
-| controlSystemTargetSpeed                      | float | y      | y      | any       | any       | m/s       | Get or set the target speed for the control system. This will have no effect if the control system is off.<br><br>**Note: It is possible to send a speed that is not achievable by the robot.** |
+| freeFallMaxG                                  | float | y      | y      | any       | any       | Gs        | Total acceleration must be less than this to count as free fall (see OnFreeFall).<br>**Note: It is possible to set a max value higher than can be read by the hardware. Ensure that the set value is realistic and falls within accelerometer ranges.**|
+| freeFallMinDuration                           | float | y      | y      | any       | any       | seconds   | Total acceleration must be small for at least this time to count as free fall (see OnFreeFall).<br>**Note: If you send a negative value, the value will be interpreted as an unsigned integer and saved.**|
+| landingMinG                                   | float | y      | y      | -8.0      | 8.0       | Gs        | More total acceleration than this counts as landing (see OnLanding). |
+
+## Advanced Control System Properties
+| Name                                          | Type  | Getter | Setter | Min Value | Max Value | Units     | Description |
+|-----------------------------------------------|-------|--------|--------|-----------|-----------|-----------|-------------|                                                                   
+| controlSystemTargetImuYaw                     | float | y      | y      | -180.0    | 180.0     | degrees   | Target yaw for control system in same coordinate system as imuYawAngle. controlSystemTargetImuYaw = imuYawAngle does not rotate the robot. |
+| supercontrollerTargetPitchOverride            | float | y      | y      | any       | any       | degrees   | Desired pitch angle in lieu of speed controller (see shouldOverrideSupercontrollerTargetPitch).
+| shouldOverrideSupercontrollerTargetPitch      | int   | y      | y      | 0         | 1         | bool      | When true disable speed controller and use supercontrollerPitchOverride as target pitch. |
+| controlSystemTargetYaw                        | float | y      | y      | any       | any       | degrees   | Get or set the target yaw for the control system. This will have no effect if the control system is off.<br>**Note: in a different coordinate systesm than imuYawAngle (see controlSystemTargetImuYaw).** |
+| controlSystemTargetSpeed                      | float | y      | y      | any       | any       | m/s       | Get or set the target speed for the control system. This will have no effect if the control system is off.<br>**Note: It is possible to send a speed that is not achievable by the robot.** |
 | currentRobotTime                              | float | y      | y      | any       | any       | seconds   | Get or set the robot time.<br><br>**Note: If you send a negative value, the value will be interpreted as an unsigned integer and saved.** |
 | controlSystemPitchPGain                       | float | y      | y      | any       | any       | (no unit) | Proportional gain of pitch controller.<br><br>**WARNING: Changing this value can break the way your robot to drives. Ensure that you back up the value before changing it.** |
 | controlSystemPitchIGain                       | float | y      | y      | any       | any       | (no unit) | Integral gain of pitch controller.<br><br>**WARNING: Changing this value can break the way your robot to drives. Ensure that you back up the value before changing it.** |
@@ -37,28 +67,6 @@ A built-in "property" acts like a globally defined variable in the robot with op
 | controlSystemMinRotationRate                  | float | y      | y      | any       | any       | deg/s     | The minimum rotation rate that the control system is able to use.<br><br>**WARNING: Changing this value can break the way your robot to drives. Ensure that you back up the value before changing it.** |
 | controlSystemMaxRotationRate                  | float | y      | y      | any       | any       | deg/s     | The maximum rotation rate that the control system is able to use.<br><br>**WARNING: Changing this value can break the way your robot to drives. Ensure that you back up the value before changing it.** |
 | controlSystemMaxYawErrorWhileDrivingFullSpeed | float | y      | y      | any       | any       | degrees   | <br><br>**WARNING: Changing this value can break the way your robot to drives. Ensure that you back up the value before changing it.** |
-| gyroSensorPitch                               | float | y      | n      | any       | any       | deg/s     | Rotation rate around pitch axis. |
-| gyroSensorRoll                                | float | y      | n      | any       | any       | deg/s     | Rotation rate around roll axis. |
-| gyroSensorYaw                                 | float | y      | n      | any       | any       | deg/s     | Rotation rate around yaw axis. |
-| wheelSlipRate                                 | float | y      | n      | 0.0       | any       | (no unit) | Estimate of how much wheels are slipping. |
-| controlSystemIsInverted                       | int   | y      | y      | 0         | 1         | bool      | Drive upside down. |
-| backLed                                       | float | y      | y      |  0.0      |  256.0    | (no unit) | Brightness of back LED light. |
-| shouldOverrideSupercontrollerTargetPitch      | int   | y      | y      | 0         | 1         | bool      | When true disable speed controller and use supercontrollerPitchOverride as target pitch. |
-| supercontrollerTargetPitchOverride            | float | y      | y      | any       | any       | degrees   | Desired pitch angle in lieu of speed controller (see shouldOverrideSupercontrollerTargetPitch). |
-| locatorPositionX                              | float | y      | y      | any       | any       | meters    | X coordinate of current position on floor. |
-| locatorPositionY                              | float | y      | y      | any       | any       | meters    | Y coordinate of current position on floor. |
-| locatorVelocityX                              | float | y      | y      | any       | any       | m/s       | Current X velocity. |
-| locatorVelocityY                              | float | y      | y      | any       | any       | m/s       | Current Y velocity. |
-| lastCollisionTime                             | float | y      | n      | any       | any       | seconds   | Time of last collision (see OnCollision and currentRobotTime). |
-| nextRandomInt                                 | int   | y      | y      | -2^31     | 2^31 - 1  | (no unit) | Get next pseudo-random int. Set random number seed. |
-| nextRandomFloat                               | float | y      | y      |  0.0      | 1.0       | (no unit) | Get next pseudo-random float. Set random number seed. |
-| accelSensorXRight                             | float | y      | n      | -8.0      | 8.0       | Gs        | Accelerometer reading on X axis. |
-| accelSensorYForward                           | float | y      | n      | -8.0      | 8.0       | Gs        | Accelerometer reading on Y axis. |
-| accelSensorZUp                                | float | y      | n      | -8.0      | 8.0       | Gs        | Accelerometer reading on Z axis. |
-| freeFallMaxG                                  | float | y      | y      | any       | any       | Gs        | Total acceleration must be less than this to count as free fall (see OnFreeFall).<br><br>**Note: It is possible to set a max value higher than can be read by the hardware. Ensure that the set value is realistic and falls within accelerometer ranges.**|
-| freeFallMinDuration                           | float | y      | y      | any       | any       | seconds   | Total acceleration must be small for at least this time to count as free fall (see OnFreeFall).<br><br>**Note: If you send a negative value, the value will be interpreted as an unsigned integer and saved.**|
-| landingMinG                                   | float | y      | y      | -8.0      | 8.0       | Gs        | More total acceleration than this counts as landing (see OnLanding). |
-| controlSystemTargetImuYaw                     | float | y      | y      | -180.0    | 180.0     | degrees   | Target yaw for control system in same coordinate system as imuYawAngle. controlSystemTargetImuYaw = imuYawAngle does not rotate the robot. |
 
 ## Asynchronous Callbacks
 An "asynchronous callback" is a registered function that will be invoked when a certain condition is met. To use a callback you must create a function, then register it on the callback using the address of the function.
