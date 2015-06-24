@@ -65,15 +65,15 @@ section: SDK Documentation
 #### Oval
 ***Note: For Oval language documentation visit [Oval Language](/robot-languages/oval-language)***
 
+#####Initializing Oval
+
 <div class="objective-c language-only">
 Interaction with Oval is facilitated by the ```RKOvalControl``` class.  ```RKOvalControl``` is initialized with a ```id<RKRobotBase>``` and allows you to send individual Oval programs or an array of programs.
 </div>
 
 <div class="swift language-only">
 Interaction with Oval is facilitated by the ```RKOvalControl``` class.  ```RKOvalControl``` is initialized with a ```RKRobotBase``` and allows you to send individual Oval programs or an array of programs.
-</div><br />
-
-#####Initializing Oval
+</div>
 
 Create a ```RKOvalControl``` instance and reset the OVM.  This ensures that the OVM on the Robot and the Oval compiler are in sync.
 ```objective-c
@@ -82,7 +82,8 @@ self.ovalControl = [[RKOvalControl alloc] initWithRobot:notification.robot deleg
 ```
 
 ```swift
-// Coming Soon
+self.ovalControl = RKOvalControl(robot: notification.robot, delegate: self)
+self.ovalControl.resetOvmAndLibrary(true)
 ```
 
 ```java
@@ -101,7 +102,10 @@ NSString *ovalProgram = [NSString stringWithContentsOfFile:filePath encoding:NSU
 ```
 
 ```swift
-// Coming Soon
+let source = NSString(contentsOfFile: NSBundle.mainBundle().pathForResource("Sample", ofType: "oval")!, encoding: NSUTF8StringEncoding, error: nil)
+if let unwrappedSource = source {
+    self.ovalControl.sendOvalPrograms([unwrappedSource])
+}
 ```
 
 ```java
@@ -114,7 +118,15 @@ NSString *ovalProgram = [NSString stringWithContentsOfFile:filePath encoding:NSU
 
 #####Streaming Oval
 
+<div class="objective-c language-only">
 When streaming Oval you have 2 options: ```-[RKOvalControl sendOvalString:(NSString *)ovalString]``` or ```-[RKOvalControl sendOvalString:(NSString *)ovalString allowQueue:(BOOL)allowQueue]``` Setting ```allowQueue``` to ```YES``` gurantees that your update will be sent to the robot (assuming the robot remains connected).  Setting ```allowQueue``` to ```NO``` does not allow the update to be queued.  This is useful when sending large amounts of data quickly but every update does not need to be executed on the robot (i.e. streaming heading and speed as you move a joystick around the screen). 
+</div>
+
+<div class="swift language-only">
+When streaming Oval you have 2 options: ```ovalControl.sendOvalString(program: String!)``` or ```ovalControl.sendOvalString(program: String!, allowQueue: Bool)``` Setting ```allowQueue``` to ```true``` gurantees that your update will be sent to the robot (assuming the robot remains connected).  Setting ```allowQueue``` to ```false``` does not allow the update to be queued.  This is useful when sending large amounts of data quickly but every update does not need to be executed on the robot (i.e. streaming heading and speed as you move a joystick around the screen). 
+</div>
+
+
 ```objective-c
 [_ovalControl sendOvalString:[NSString stringWithFormat:@"speed = %@;...",_lightSpeed.text]]; //allowQueue is YES by default
 -OR-
@@ -122,7 +134,9 @@ When streaming Oval you have 2 options: ```-[RKOvalControl sendOvalString:(NSStr
 ```
 
 ```swift
-// Coming Soon
+self.ovalControl.sendOvalString("speed = \(lightSpeed.text);...")
+-OR-
+self.ovalControl.sendOvalString("speed = \(lightSpeed.text);...", allowQueue: false)
 ```
 
 ```java
