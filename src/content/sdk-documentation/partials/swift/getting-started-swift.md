@@ -23,7 +23,7 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Update Build Settings
 	- Open **Build Settings** tab
 	- Search for **"Other Linker Flags"**
-	- Add ```-ObjC -lstdc++```
+	- Add ```-ObjC -lc++```
 - Update Info.plist
 	- Add **UISupportedExternalAccessoryProtocols** key
 	- Add **com.orbotix.robotprotocol** entry
