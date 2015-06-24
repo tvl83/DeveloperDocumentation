@@ -23,7 +23,7 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Update Build Settings
 	- Open **Build Settings** tab
 	- Search for **"Other Linker Flags"**
-	- Add ```-ObjC -lstdc++ -all_load```
+	- Add ```-ObjC -lc++```
 - Build Project
 	- Change the device target from iOS Simulator to iOS Device (or the name of the connected iOS device)
 	- Press the play button or CMD+B
