@@ -15,9 +15,11 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Add Frameworks
 	- Navigate to your [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) download
 	- Drag and drop the following frameworks into the project (Note: Ensure the option **Copy files if needed** is checked before clicking **Add**):
-		- RobotKit.framework
-		- RobotUIKit.framework
-		- RobotUIKit.bundle
+		- Required 	
+			- RobotKit.framework
+		- Optional		
+			- RobotUIKit.framework
+			- RobotUIKit.bundle
 - Set Deployment Target to **7.0** in the **General** tab
 - Set Background Capabilities
 	- Open **Capabilities** tab
