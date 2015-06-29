@@ -4,8 +4,6 @@ order: 8
 section: Robot Languages
 ---
 
-## Keywords
-
 ## Robot Properties
 A built-in "property" acts like a globally defined variable in the robot with optionally defined getters and setters.<br>
 *If you invoke a getter that does not exist you will get OVM error ERR_READ_FROM_WRITE_ONLY.*<br>

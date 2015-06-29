@@ -16,7 +16,7 @@ Both ```RKRobotBase``` and ```RKConvenienceRobot``` classes contain ```addRespon
 Both ```RKRobotBase``` and ```RKConvenienceRobot``` types contain ```addResponseObserver(observer: RKResponseObserver!)``` and ```removeResponseObserver(observer: RKResponseObserver!)``` methods to register a custom ```RKResponseObserver``` implementation to handle responses and async messages.
 </div>
 
-### Register for robot output
+### Register for robot responses
 <div class = "swift objective-c language-only">
 Register for responses with the ```RKResponseObserver``` protocol.  
 All ```handle...``` selectors are optional and will only be fired if implemented.
