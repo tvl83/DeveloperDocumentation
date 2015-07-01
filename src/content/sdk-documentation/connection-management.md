@@ -48,12 +48,12 @@ RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "han
 ```java
 // DualStackDiscoveryAgent can be replaced with DiscoveryAgentClassic if you are only supporting Sphero
 // or DiscoveryAgentLE if you are only supporting Ollie
-DualStackDiscoveryAgent.getInstance().addDiscoveryListener(new RobotChangedStateListener() {
+DualStackDiscoveryAgent.getInstance().addRobotStateListenernew( RobotChangedStateListener() {
     @Override
-    public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
+    public void handleRobotChangedState( Robot robot, RobotChangedStateNotificationType robotChangedStateNotificationType ) {
 
     }
-}); 
+});
 ```
 
 ##### Handle the Connection State Change
