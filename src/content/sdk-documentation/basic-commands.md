@@ -20,8 +20,8 @@ To implement a custom aim component, the following commands will need to be used
 2. Set Heading
 
 ```objective-c
-// update this
-// set heading
+[_robot driveWithHeading:180 andVelocity:0];
+[_robot setZeroHeading];
 ```
 
 ```swift
