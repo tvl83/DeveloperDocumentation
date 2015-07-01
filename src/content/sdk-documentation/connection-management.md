@@ -50,7 +50,7 @@ RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "han
 // or DiscoveryAgentLE if you are only supporting Ollie
 DualStackDiscoveryAgent.getInstance().addRobotStateListenernew( RobotChangedStateListener() {
     @Override
-    public void handleRobotChangedState( Robot robot, RobotChangedStateNotificationType robotChangedStateNotificationType ) {
+    public void handleRobotChangedState( Robot robot, RobotChangedStateNotificationType type ) {
 
     }
 });
@@ -125,7 +125,11 @@ func appDidBecomeActive(n: NSNotification) {
 protected void onStart() {
     super.onStart();
     // This line assumes that this object is a Context
-    RobotDiscoveryAgent.getInstance().startDiscovery(this);
+    try {
+        DualStackDiscoveryAgent.getInstance().startDiscovery(this);
+    } catch( DiscoveryException e ) {
+        //handle exception
+    }
 }
 ```
 
@@ -167,11 +171,11 @@ When robot connects, you will get an object with the type `id<RKRobotBase>`. Thi
 }
 ```
 
-<span class="swift language-only">
+<div class="swift language-only">
 {{#markdown}}
 When robot connects, you will get an object with the type `RKRobotBase`. This protocol encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `RKConvenienceRobot` object when we receive the connected notification. The classes `RKOllie` and `RKSphero` provide even more functionality specific to each of the robots and are subclasses of `RKConvenienceRobot`.
 {{/markdown}}
-</span>
+</div>
 
 ```swift
 var robot: RKConvenienceRobot!
@@ -189,6 +193,12 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
     }
 }
 ```
+
+<div class="java language-only">
+{{#markdown}}
+When robot connects, you will get an object with the type `RobotBase`. This protocol encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `ConvenienceRobot` object when we receive the connected notification. The classes `Ollie` and `Sphero` provide even more functionality specific to each of the robots and are subclasses of `ConvenienceRobot`.
+{{/markdown}}
+</div>
 
 ```java
 private ConvenienceRobot _robot;
