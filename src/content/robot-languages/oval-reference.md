@@ -11,10 +11,10 @@ A built-in "property" acts like a globally defined variable in the robot with op
 
 | Name                                          | Type  | Getter | Setter | Min Value | Max Value | Units     | Description |
 |-----------------------------------------------|-------|--------|--------|-----------|-----------|-----------|-------------|                                                                   
-| backLed                                       | float | y      | y      |  0.0      |  256.0    | (no unit) | Brightness of back LED light. |
-| redLed                                        | float | n      | y      | 0.0       | 256.0     | (no unit) | Sets the value of the red component of the RGB LED |
-| greenLed                                      | float | n      | y      | 0.0       | 256.0     | (no unit) | Sets the value of the green component of the RGB LED |
-| blueLed                                       | float | n      | y      | 0.0       | 256.0.0   | (no unit) | Sets the value of the blue component of the RGB LED. |
+| backLed                                       | float | n      | y      |  0.0      |  255.0    | (no unit) | Brightness of back LED light. |
+| redLed                                        | float | n      | y      | 0.0       | 255.0     | (no unit) | Sets the value of the red component of the RGB LED |
+| greenLed                                      | float | n      | y      | 0.0       | 255.0     | (no unit) | Sets the value of the green component of the RGB LED |
+| blueLed                                       | float | n      | y      | 0.0       | 255.0   | (no unit) | Sets the value of the blue component of the RGB LED. |
 | leftMotorPwm                                  | float | y      | y      | -4095.0   | 4095.0    | (no unit) | Get or set the pwm of the left motor. |
 | rightMotorPwm                                 | float | y      | y      | -4095.0   | 4095.0    | (no unit) | Get or set the pwm of the right motor. |
 | controlSystemIsOn                             | int   | y      | y      | 0         | 1         | bool      | Returns 1 if the control system is on, 0 if it is not. |
@@ -51,7 +51,7 @@ A built-in "property" acts like a globally defined variable in the robot with op
 | controlSystemTargetImuYaw                     | float | y      | y      | -180.0    | 180.0     | degrees   | Target yaw for control system in same coordinate system as imuYawAngle. controlSystemTargetImuYaw = imuYawAngle does not rotate the robot. |
 | supercontrollerTargetPitchOverride            | float | y      | y      | any       | any       | degrees   | Desired pitch angle in lieu of speed controller (see shouldOverrideSupercontrollerTargetPitch).
 | shouldOverrideSupercontrollerTargetPitch      | int   | y      | y      | 0         | 1         | bool      | When true disable speed controller and use supercontrollerPitchOverride as target pitch. |
-| controlSystemTargetYaw                        | float | y      | y      | any       | any       | degrees   | Get or set the target yaw for the control system. This will have no effect if the control system is off.<br>**Note: in a different coordinate systesm than imuYawAngle (see controlSystemTargetImuYaw).** |
+| controlSystemTargetYaw                        | float | y      | y      | any       | any       | degrees   | Get or set the target yaw for the control system. This will have no effect if the control system is off.<br>**Note: in a different coordinate system than imuYawAngle (see controlSystemTargetImuYaw).** |
 | controlSystemTargetSpeed                      | float | y      | y      | any       | any       | m/s       | Get or set the target speed for the control system. This will have no effect if the control system is off.<br>**Note: It is possible to send a speed that is not achievable by the robot.** |
 | currentRobotTime                              | float | y      | y      | any       | any       | seconds   | Get or set the robot time.<br><br>**Note: If you send a negative value, the value will be interpreted as an unsigned integer and saved.** |
 | controlSystemPitchPGain                       | float | y      | y      | any       | any       | (no unit) | Proportional gain of pitch controller.<br><br>**WARNING: Changing this value can break the way your robot to drives. Ensure that you back up the value before changing it.** |
