@@ -347,13 +347,13 @@ private Robot mRobot;
 
 @Override
 public void onStop() {
-    super.onStop();
     if (mRobot instanceof RobotLE) {
         mRobot.sleep();
     }
     else if (mRobot instanceof RobotClassic) {
         mRobot.disconnect();
     }
+    super.onStop();
 }
 ```
 

@@ -36,7 +36,17 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
 ```
 
 ```java
-private ConvenienceRobot _robot;
+DualStackDiscoveryAgent.getInstance().addRobotStateListener(new RobotChangedStateListener() {
+    @Override
+    public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
+        switch (type) {
+            case Online: {
+                mRobot = new ConvenienceRobot( robot );
+                break;
+            }
+        }
+    }
+});
 ```
 
 ### Constructor
@@ -49,7 +59,7 @@ robot = RKConvenienceRobot(robot: notification.robot)
 ```
 
 ```java
-_robot = new ConvenienceRobot(robotBase);
+mRobot = new ConvenienceRobot( robot );
 ```
 ### Properties
 #### Sensor Control
@@ -85,7 +95,16 @@ func handleAsyncMessage(message: RKAsyncMessage, robot: RKRobotBase) {
 ```
 
 ```java
-
+mRobot.enableCollisions( true );
+mRobot.addResponseListener(new ResponseListener() {
+    @Override
+    public void handleAsyncMessage(AsyncMessage asyncMessage, Robot robot) {
+        if( asyncMessage instanceof CollisionDetectedAsyncData ) {
+            //Collision occurred.
+        }
+    }
+    ...
+});
 ```
 
 ```unity
