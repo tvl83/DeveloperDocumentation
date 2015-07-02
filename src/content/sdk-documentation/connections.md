@@ -46,8 +46,6 @@ RKRobotDiscoveryAgent.sharedAgent().addNotificationObserver(self, selector: "han
 ```
 
 ```java
-// DualStackDiscoveryAgent can be replaced with DiscoveryAgentClassic if you are only supporting Sphero
-// or DiscoveryAgentLE if you are only supporting Ollie
 DualStackDiscoveryAgent.getInstance().addRobotStateListenernew( RobotChangedStateListener() {
     @Override
     public void handleRobotChangedState( Robot robot, RobotChangedStateNotificationType type ) {
@@ -55,6 +53,12 @@ DualStackDiscoveryAgent.getInstance().addRobotStateListenernew( RobotChangedStat
     }
 });
 ```
+
+<div class="java language-only">
+{{#markdown}}
+Note that **DualStackDiscoveryAgent** supports both Bluetooth Classic and Bluetooth LE. **DiscoveryAgentClassic** can be used if your app only needs to support `Sphero`, or **DiscoveryAgentLE** if your application only needs to support `Ollie`.
+{{/markdown}}
+</div>
 
 ##### Handle the Connection State Change
 
@@ -196,12 +200,12 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
 
 <div class="java language-only">
 {{#markdown}}
-When robot connects, you will get an object with the type `RobotBase`. This protocol encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `ConvenienceRobot` object when we receive the connected notification. The classes `Ollie` and `Sphero` provide even more functionality specific to each of the robots and are subclasses of `ConvenienceRobot`.
+When robot connects, you will get an object with the type `Robot`. This protocol encompasses the basics of a Bluetooth robot, but does not do much robot-specific functionality. To get some neat built-in functionality, we will create a `ConvenienceRobot` object when we receive the connected notification. The classes `Ollie` and `Sphero` provide even more functionality specific to each of the robots and are subclasses of `ConvenienceRobot`.
 {{/markdown}}
 </div>
 
 ```java
-private ConvenienceRobot _robot;
+private ConvenienceRobot mRobot;
 
 {...}
 
@@ -211,11 +215,11 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
         case Online:
         // Bluetooth Classic (Sphero)
         if (robot instanceof RobotClassic) {
-            _robot = new Sphero(robot);
+            mRobot = new Sphero(robot);
         }
         // Bluetooth LE (Ollie)
         if (robot instanceof RobotLE) {
-            _robot = new Ollie(robot);
+            mRobot = new Ollie(robot);
         }
         break;
     }
@@ -271,14 +275,15 @@ func disconnectRobot() {
 ```
 
 ```java
-private ConvenienceRobot _robot; // Assume that this is set when the robot connects
+private ConvenienceRobot mRobot; // Assume that this is set when the robot connects
 
 {...}
 
 @Override
-public void onStop() {
+protected void onStop() {
+    if( mRobot != null )
+        mRobot.disconnect();
     super.onStop();
-    _robot.disconnect();
 }
 ```
 
@@ -329,19 +334,25 @@ func disconnectRobot() {
 }
 ```
 
+<div class="java language-only">
+{{#markdown}}
+If you have a `Robot`, disconnection is a bit more manual. `RobotLE` objects need to have `sleep()` called on them as to avoid leaving the processor awake while the robot is not connected. Disconnection will be automatic from the sleep. `RobotClassic` objects can just have `disconnect()` called on them.
+{{/markdown}}
+</div>
+
 ```java
-private Robot _robot;
+private Robot mRobot;
 
 {...}
 
 @Override
 public void onStop() {
     super.onStop();
-    if (_robot instanceof RobotLE) {
-        _robot.sleep();
+    if (mRobot instanceof RobotLE) {
+        mRobot.sleep();
     }
-    else if (_robot instanceof RobotClassic) {
-        _robot.disconnect();
+    else if (mRobot instanceof RobotClassic) {
+        mRobot.disconnect();
     }
 }
 ```
