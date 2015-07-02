@@ -103,6 +103,7 @@ Bitwise operators act on integers and are mostly similar to the C counterparts. 
 &  // Bitwise AND
 *| // Bitwise XOR (this is the one that is different from C)
 << // Bitwise Left shift (sign extension)
+>> // Bitwise Right shift
 ```
 #### Flow Control
 Oval includes these flow control statements
@@ -163,7 +164,7 @@ while (counter) {
 ...
 ```
 
-The [OVM](/robot-languages/oval-oval-virtual-machine) will save the function, initialize, the variable, and then execute the while loop (which calls the function). In this case, the ellipses is included because it indicates the end of a submission to the [OVM](/robot-languages/oval-oval-virtual-machine). This allows us to send more code that later references that same function.
+The [OVM](/robot-languages/oval-oval-virtual-machine) will save the function, initialize the variable, and then execute the while loop (which calls the function). In this case, the ellipses is included because it indicates the end of a submission to the [OVM](/robot-languages/oval-oval-virtual-machine). This allows us to send more code that later references that same function.
 
 ```
 int finalCount = decr(counter);

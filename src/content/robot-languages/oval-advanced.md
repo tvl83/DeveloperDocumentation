@@ -26,13 +26,13 @@ void lightShow(float speed) {
 lightShow(0.25);
 ... 
 ```
-The robot's lights will gradually wave from dark to light over and over again. One problem with this implementation is lightShow never returns. The OVM us spending all of its time in an infinite loop, which means if you send more code to the stream it won't be executed. For instance, if you wanted to make the robot drive...
+The robot's lights will gradually wave from dark to light over and over again. One problem with this implementation is lightShow never returns. The OVM is spending all of its time in an infinite loop, which means if you send more code to the stream it won't be executed. For instance, if you wanted to make the robot drive...
 ```
 controlSystemTargetYaw = 56;
 controlSystemTargetSpeed = 200;
 ...
 ```
-... nothing would happen. To fix this problem without resetting the OVM the only option is to make lightShow return, but then you would have to call it repeatedly to keep the light show going. This is inefficient bandwidth-wise and doesn't really work anyway because of latency.
+... nothing would happen. To fix this problem without resetting the OVM the only option is to make ```lightShow``` return, but then you would have to call it repeatedly to keep the light show going. This is inefficient bandwidth-wise and doesn't really work anyway because of latency.
 
 
 #### Keyword ```yield```
@@ -49,7 +49,7 @@ yield lightShow(float speed) {
 }
 ...
 ```
-A function can only use ```yield``` if it declares its return type as ```yield```. We call sucha a function a *yielding function*. As a "return type" ```yield``` is the same as ```void```. But, it is important for the programmer to distinguish between functions that might yield and functions which do not. For that reason, when calling a yielding function you must precede the call with the keyword ```yield```.
+A function can only use ```yield``` if it declares its return type as ```yield```. We call such a function a *yielding function*. As a "return type" ```yield``` is the same as ```void```. It is important for the programmer to distinguish between functions that might yield and functions which do not. For that reason, when calling a yielding function you must precede the call with the keyword ```yield```.
 ```
 yield lightShow(0.25);
 ...
@@ -60,12 +60,12 @@ controlSystemTargetYaw = 56;
 controlSystemTargetSpeed = 200;
 ...
 ```
-as soon as the [OVM](/sprk-edu/oval-oval-virtual-machine) hits the ```yield;``` statement, it stops executing ```lightShow``` and skips to the two assignment statements we just added to the strea. It then executes them (causing the robot to drive off in some direction) and then returns to ```lightshow``` and its endless ```while``` loop.
+as soon as the [OVM](/sprk-edu/oval-oval-virtual-machine) hits the ```yield;``` statement, it stops executing ```lightShow``` and skips to the two assignment statements we just added to the stream. It then executes them (causing the robot to drive off in some direction) and then returns to ```lightshow``` and its endless ```while``` loop.
 
 #### What ```yield``` Does in the Virtual Machine
 1. Remember where it was in the process of executing the library function.
 2. Starts executing stream code after the initial function call.
-3. When it runs into the end of the stream it return to immediately after the ```yield``` statement and continues executing the function as if nothing happened.
+3. When it runs into the end of the stream it returns to the instruction immediately after the ```yield``` statement and continues executing the function as if nothing happened.
 4. All of the stream code that was executed during the yield operation is garbage collected.
 
 
@@ -78,7 +78,7 @@ as soon as the [OVM](/sprk-edu/oval-oval-virtual-machine) hits the ```yield;``` 
 
 
 #### Using ```yield``` to Return From Infinite Loops
-Let's go back to our example. It still leaves something to be desired. Although ```yield gets aroung the fact that the infinite loop ties up the OVM, ```lightShow``` still doens't return. You can send all the stream code you want and ```lightShow``` may yield but never truly exit. Let's try again.
+Let's go back to our example. It still leaves something to be desired. Although ```yield``` gets around the fact that the infinite loop ties up the OVM, ```lightShow``` still doens't return. You can send all the stream code you want and ```lightShow``` may yield but never truly exit. Let's try again.
 ```
 float speed = 0.25;
 int continueLightShow = true;
@@ -117,13 +117,13 @@ This is quite a bit better than our original ```lightShow```. Still, we can get 
 yield lightShow();
 ...
 ```
-But now we want to stop ```lightShow``` and start ```motorBoar```. The first instince is to do this:
+But now we want to stop ```lightShow``` and start ```motorBoat```. The first instince is to do this:
 ```
 continueLightShow = false;
 yield motorBoat();
 ...
 ```
-This actually causes an error. When ```lightShow``` executes its ```yield``` statement it jumps to the stream and executes all the code there. First it sets the flag to turn off ```lightShow```. It also calls ```motorBoar```. Remember from the rules that you cannot call a yielding function while yielding.<br><br>
+This actually causes an error. When ```lightShow``` executes its ```yield``` statement it jumps to the stream and executes all the code there. First it sets the flag to turn off ```lightShow```. It also calls ```motorBoat```. Remember from the rules that you cannot call a yielding function while yielding.<br><br>
 What we really want is to tell ```lightShow``` to quit by setting the flag and then somehow "return from the yield" to allow ```lightShow``` to return. Then we are free to call ```motorBoat```. Oval allows you to do this by using yield in the stream.
 ```
 continueLightShow = false;
@@ -173,7 +173,7 @@ yield delay(float duration) {
 
 
 ### Inline Assembly
-Oval supports inline OVM Assembly. Specif the type of the assembly expression (```void```, ```int```, or ```float```) and the wrap the assembly code in braces. For instance:
+Oval supports inline OVM Assembly. Specify the type of the assembly expression (```void```, ```int```, or ```float```) and wrap the assembly code in braces.
 ```
 int var;
 void {
@@ -232,7 +232,7 @@ var = fancyFunction();
 
 
 #### Returning Values From Assembly Blocks
-In the previous case, the assembly expression has no value: it is a statement, not an expression. This is why it is labeled ```void```. When you put assembly code into a ```void``` block, you're promising the compiler that you won't leave anything on the stack. If you say:
+In the previous case, the assembly expression has no value: it is a statement, not an expression. This is why it is labeled ```void```. When you put assembly code into a ```void``` block you're promising the compiler that you won't leave anything on the stack. If you say:
 ```
 void {
     push 1 // DON'T DO THIS! HONESTY IS ALL WE HAVE!
@@ -311,7 +311,7 @@ void {
 
 
 ### Addressing
-Discuessed in Oval Language is the ```&``` operator. The ```@``` operator is similar. It also pricdes addresses / ids of variables and functions but treats local variables a little differently. Be warned, the compiler wll not force you to use those addresses properly.
+Discuessed in Oval Language is the ```&``` operator. The ```@``` operator is similar. It also produces addresses / ids of variables and functions but treats local variables a little differently. Be warned, the compiler wll not force you to use those addresses properly.
 
 
 #### Types of Addresses
@@ -363,8 +363,8 @@ void f() {
 }
 ...
 ```
-The difference between these two applications is that in the first, we're passing a global variable by reference and in the second we're passing a local variable. The problem is that ```@y``` is a local address (i.e. relative to the stack pointer, not to the beginning of the stack). However, in the definition of ```setTo2()``` the assemble instruction popto expects a global (absolute) address. The end result is that popto writes a 2 somewhere in the stack, most likely not at the location of ```y```.<br>
-The OVM provides the op code ```ltog```, which casts a relative address to a global one. The following code fixes the previous example:
+The difference between these two applications is that in the first, we're passing a global variable by reference and in the second we're passing a local variable. The problem is that ```@y``` is a local address (i.e. relative to the stack pointer, not to the beginning of the stack). However, in the definition of ```setTo2()``` the assembly instruction ```popto``` expects a global (absolute) address. The end result is that popto writes a 2 somewhere in the stack, most likely not at the location of ```y```.<br>
+The OVM provides the op code ```ltog```, which casts a relative address to a global address. The following code fixes the previous example:
 ```
 void f() {
     int y;
@@ -408,7 +408,7 @@ void f() {
 }
 ...
 ```
-When applied to a function name the @ operator agrees with the & operator.
+When applied to a function name the ```@``` operator agrees with the ```&``` operator.
 ```
 void f() {
     // I do stuff!
@@ -516,7 +516,7 @@ OnFreeFall = &fall;
 OnLanding = &land;
 ...
 ```
-```OnFreeFall``` and ```OnLanding``` are platform-specific properties that store integer addresses of functions that are to be called when the robot enters free fall or lands. the robot will turn red when it is in the air, and green when it lands again.<br>
+```OnFreeFall``` and ```OnLanding``` are platform-specific properties that store integer addresses of functions that are to be called when the robot enters free fall or lands. The robot will turn red when it is in the air, and green when it lands again.<br>
 Callbacks assigned in this way are invoked asynchronously. When free fall is detected (for instance) the provided function pointer is invoked by appending the invocation to the code stream just as if it came in from the radio. The most important consequence of this fact is: **if a library function is in control of execution then it must yield in order for asynchronous events to occur!**
 
 

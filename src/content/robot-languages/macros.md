@@ -40,7 +40,7 @@ Since there is no provision to delete any single macro from the heap the only re
 
 ### The Temporary Macro
 
-This is a quick and dirty way for a client to execute a macro as it's stored in a RAM buffer and sending it also implies that you want to immediately run it.
+This is a quick and dirty way for a client to execute a macro as it's stored in a RAM buffer. Sending it also implies that you want to immediately run it.
 You don't need to kill the temporary macro if you send another one, the system handles that seamlessly for you.
 This permits lengthy behaviors to be sent as a temporary macro and then to be repurposed on the fly by sending a new temporary macro to replace it on the fly.
 
@@ -58,8 +58,7 @@ If there still isn't enough room, an error code is returned which essentially me
 Stream macros use the same RAM buffer as the temporary macro so executing one terminates the other.
 Every chunk of a stream macro that is sent is automatically terminated with a MACSTREAMPAUSE command in case a new chunk doesn't arrive before the macro ends.
 When a stream macro is active, the MACEND command is ignored; send it if you wish.
-You can terminate a stream macro with the special MACSTREAM_END command.
-Or you can kill it.
+You can terminate a stream macro with the special MACSTREAM_END command or you can kill it.
 
 The byte format of a stream macro is exactly the same as all of the rest ID byte, flag(s), commands, and optionally an end.
 The flags in chunks 2..N are ignored however.

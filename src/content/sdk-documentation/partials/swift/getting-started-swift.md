@@ -14,7 +14,12 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 #### 3. Add RobotKit SDK to your Xcode Project
 - Add Frameworks
 	- Navigate to your [RobotKit SDK](https://github.com/orbotix/Sphero-iOS-SDK/zipball/master) download
-	- Drag and drop the framework into the project. Ensure the option **Copy files if needed** is checked before clicking **Add**
+	- Drag and drop the following frameworks into the project (Note: Ensure the option **Copy files if needed** is checked before clicking **Add**):
+		- Required 	
+			- RobotKit.framework
+		- Optional		
+			- RobotUIKit.framework
+			- RobotUIKit.bundle
 - Set Deployment Target to **7.0+** in the **General** tab
 - Set Background Capabilities
 	- Open **Capabilities** tab
@@ -23,7 +28,7 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 - Update Build Settings
 	- Open **Build Settings** tab
 	- Search for **"Other Linker Flags"**
-	- Add ```-ObjC -lstdc++```
+	- Add ```-ObjC -lc++```
 - Update Info.plist
 	- Add **UISupportedExternalAccessoryProtocols** key
 	- Add **com.orbotix.robotprotocol** entry
