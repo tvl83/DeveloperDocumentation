@@ -150,6 +150,10 @@ The `ConvenienceRobot` class contains the method `setLED( float red, float green
 </div>
 
 ```java
+private ConvenienceRobot mRobot;
+
+{...}
+
 private void blink( final boolean lit ) {
     if( lit ) {
         mRobot.setLed( 0.0f, 0.0f, 0.0f );
@@ -224,8 +228,31 @@ func blink(lit: Bool) {
 }
 ```
 
+<div class="java language-only">
+{{#markdown}}
+The `ConvenienceRobot` class contains the method `sendCommand( DeviceCommand command )`. We can make a `RGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
+
 ```java
-// java
+private ConvenienceRobot mRobot;
+
+{...}
+
+private void blink( final boolean lit ) {
+    if( lit ) {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 0.0f ) );
+    } else {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 1.0f ) );
+    }
+
+    final Handler handler = new Handler();
+    handler.postDelayed( new Runnable() {
+        public void run() {
+            blink( !lit );
+        }
+    }, 2000 );
+}
 ```
 
 ```javascript
@@ -287,8 +314,31 @@ func blink(lit: Bool) {
 }
 ```
 
+<div class="java language-only">
+{{#markdown}}
+The `Robot` object (the one we can get from the `handleRobotChangedState` method) contains the method `sendCommand( DeviceCommand command)`. We can make an `RGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
+
 ```java
-// java
+private Robot mRobot;
+
+{...}
+
+private void blink( final boolean lit ) {
+    if( lit ) {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 0.0f ) );
+    } else {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 1.0f ) );
+    }
+
+    final Handler handler = new Handler();
+    handler.postDelayed( new Runnable() {
+        public void run() {
+            blink( !lit );
+        }
+    }, 2000 );
+}
 ```
 
 ```javascript
