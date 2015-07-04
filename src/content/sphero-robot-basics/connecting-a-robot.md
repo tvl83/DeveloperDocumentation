@@ -25,4 +25,4 @@ Once successfully connected, it will say “Connected”.
 
 ##  {{>ollie-icon}} Connect Your Ollie
 
-Ollie and other future Bluetooth 4.0 Robots connect via proximity detection.  Simply touch your mobile device to Ollie and the two will be connected.
+Ollie and other future Bluetooth 4.0 Robots connect via proximity detection.  While in a compatible App, simply touch your mobile device to Ollie and the two will be connected.
