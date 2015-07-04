@@ -37,7 +37,8 @@ robot.setZeroHeading()
 ```
 
 ```java
-// coming soon
+mRobot.drive( 180, 0 );
+mRobot.setZeroHeading();
 ```
 
 
@@ -52,7 +53,8 @@ robot.sendCommand(RKRollCommand(heading: 0, velocity: 1.0))
 ```
 
 ```java
-_robot.sendCommand(new RollCommand(h, v * v, RollCommand.State.GO));
+// Here h is the heading in degrees and v is a value between 0.0f and 1.0f
+mRobot.sendCommand( new RollCommand( h, v, RollCommand.State.GO ) );
 ```
 
 ```unity
@@ -69,7 +71,7 @@ RKRollCommand.commandWithStopAtHeading(0)
 ```
 
 ```java
-_robot.sendCommand(new RollCommand(RollCommand.getCurrentHeading(), 0.0f, RollCommand.State.STOP));
+mRobot.sendCommand(new RollCommand(RollCommand.getCurrentHeading(), 0.0f, RollCommand.State.STOP));
 ```
 
 ```unity
@@ -88,7 +90,7 @@ robot.sendCommand(RKRGBLEDOutputCommand(red: 0.5, green: 0.5, blue: 0.5))
 ```
 
 ```java
-robot.sendCommand(RGBLEDOutputCOmmand(.5, .5, .5));
+mRobot.sendCommand( new RGBLEDOutputCommand( 0.5f, 0.5f, 0.5f ) );
 ```
 
 ```unity
@@ -145,9 +147,31 @@ func blink(lit: Bool) {
     })
 }
 ```
+<div class="java language-only">
+{{#markdown}}
+The `ConvenienceRobot` class contains the method `setLED( float red, float green, float blue )`. We can set the RGB LED with this method. The valid values here are 0.0 to 1.0.
+{{/markdown}}
+</div>
 
 ```java
-// coming soon
+private ConvenienceRobot mRobot;
+
+{...}
+
+private void blink( final boolean lit ) {
+    if( lit ) {
+        mRobot.setLed( 0.0f, 0.0f, 0.0f );
+    } else {
+        mRobot.setLed( 0.0f, 0.0f, 1.0f );
+    }
+
+    final Handler handler = new Handler();
+    handler.postDelayed( new Runnable() {
+        public void run() {
+            blink( !lit );
+        }
+    }, 2000 );
+}
 ```
 
 ```unity
@@ -207,9 +231,32 @@ func blink(lit: Bool) {
     })
 }
 ```
+<div class="java language-only">
+
+{{#markdown}}
+The `ConvenienceRobot` class contains the method `sendCommand( DeviceCommand command )`. We can make a `RGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
 
 ```java
-// java
+private ConvenienceRobot mRobot;
+
+{...}
+
+private void blink( final boolean lit ) {
+    if( lit ) {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 0.0f ) );
+    } else {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 1.0f ) );
+    }
+
+    final Handler handler = new Handler();
+    handler.postDelayed( new Runnable() {
+        public void run() {
+            blink( !lit );
+        }
+    }, 2000 );
+}
 ```
 
 ```javascript
@@ -270,9 +317,32 @@ func blink(lit: Bool) {
     })
 }
 ```
+<div class="java language-only">
+
+{{#markdown}}
+The `Robot` object (the one we can get from the `handleRobotChangedState` method) contains the method `sendCommand( DeviceCommand command)`. We can make an `RGBLEDOutputCommand` and send it with this method.
+{{/markdown}}
+</div>
 
 ```java
-// java
+private Robot mRobot;
+
+{...}
+
+private void blink( final boolean lit ) {
+    if( lit ) {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 0.0f ) );
+    } else {
+        mRobot.sendCommand( new RGBLEDOutputCommand( 0.0f, 0.0f, 1.0f ) );
+    }
+
+    final Handler handler = new Handler();
+    handler.postDelayed( new Runnable() {
+        public void run() {
+            blink( !lit );
+        }
+    }, 2000 );
+}
 ```
 
 ```javascript

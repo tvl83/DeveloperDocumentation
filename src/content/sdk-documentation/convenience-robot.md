@@ -36,7 +36,17 @@ func handleRobotStateChangeNotification(notification: RKRobotChangedStateNotific
 ```
 
 ```java
-private ConvenienceRobot _robot;
+DualStackDiscoveryAgent.getInstance().addRobotStateListener(new RobotChangedStateListener() {
+    @Override
+    public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
+        switch (type) {
+            case Online: {
+                mRobot = new ConvenienceRobot( robot );
+                break;
+            }
+        }
+    }
+});
 ```
 
 ### Constructor
@@ -49,7 +59,7 @@ robot = RKConvenienceRobot(robot: notification.robot)
 ```
 
 ```java
-_robot = new ConvenienceRobot(robotBase);
+mRobot = new ConvenienceRobot( robot );
 ```
 ### Properties
 #### Sensor Control
@@ -85,7 +95,16 @@ func handleAsyncMessage(message: RKAsyncMessage, robot: RKRobotBase) {
 ```
 
 ```java
-
+mRobot.enableCollisions( true );
+mRobot.addResponseListener(new ResponseListener() {
+    @Override
+    public void handleAsyncMessage(AsyncMessage asyncMessage, Robot robot) {
+        if( asyncMessage instanceof CollisionDetectedAsyncData ) {
+            //Collision occurred.
+        }
+    }
+    ...
+});
 ```
 
 ```unity
@@ -153,16 +172,16 @@ class MyObserver: NSObject, RKResponseObserver {
 
 ```java
 public class MyResponseListener implements ResponseListener {
-    private ConvenienceRobot _robot;
+    private ConvenienceRobot mRobot;
 
     public MyResponseListener(ConvenienceRobot robot) {
-        _robot = robot;
-        _robot.addResponseListener(this);
+        mRobot = robot;
+        mRobot.addResponseListener(this);
     }
 
     public void cleanup() {
-        _robot.removeResponseListener(this);
-        _robot = null;
+        mRobot.removeResponseListener(this);
+        mRobot = null;
     }
 
     @Override
@@ -273,7 +292,7 @@ func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) 
 
 ```java
 // Enables collisions
-_robot.enableCollisions(true);
+mRobot.enableCollisions(true);
 
 // Listens for the collisions, provided the class is registered for responses
 @Override
@@ -322,7 +341,7 @@ func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) 
 
 ```java
 // Enables the locator
-_robot.enableLocator(true);
+mRobot.enableLocator(true);
 
 // Listens for the locator updates, provided the class is registered for responses
 @Override
@@ -380,7 +399,7 @@ func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) 
 ```java
 // Enables collisions
 long mask = SensorFlag.ACCELEROMETER_NORMALIZED.longValue() | SensorFlag.ATTITUDE.longValue();
-_robot.enableSensors(mask, SensorControl.StreamingRate.STREAMING_RATE10);
+mRobot.enableSensors(mask, SensorControl.StreamingRate.STREAMING_RATE10);
 
 // Listens for the collisions, provided the class is registered for responses
 @Override
