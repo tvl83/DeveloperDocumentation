@@ -16,12 +16,19 @@ As described in [Heading & Aiming](/sphero-robot-basics/heading-and-aiming) an a
 
 ##### Custom Aiming
 To implement a custom aim component, the following commands will need to be used.
-1. Drive with zero velocity
+1. Turn on Back (Aim) LED
+2. Rotate with zero velocity
 2. Set Heading
 
 ```objective-c
-// update this
-// set heading
+// turn on the blue taillight
+[_robot sendCommand:[RKBackLEDOutputCommand commandWithBrightness:1.0]];
+...
+// rotate the robot
+[_robot sendCommand:[RKRollCommand commandWithHeading:0 andVelocity:0.0];
+...
+// when user is done aiming - set the heading
+[_robot sendCommand:[RKSetHeadingCommand command]];
 ```
 
 ```swift
@@ -30,12 +37,9 @@ robot.setZeroHeading()
 ```
 
 ```java
-// java
+// coming soon
 ```
 
-```javascript
-// js
-```
 
 ### Driving
 Driving forward
