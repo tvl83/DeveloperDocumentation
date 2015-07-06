@@ -52,7 +52,16 @@ section: SDK Documentation
 ```
 
 ```java
-// Coming Soon
+mRobot.enableCollisions( true );
+mRobot.addResponseListener(new ResponseListener() {
+    @Override
+    public void handleAsyncMessage(AsyncMessage asyncMessage, Robot robot) {
+        if( asyncMessage instanceof CollisionDetectedAsyncData ) {
+            //Collision occurred.
+        }
+    }
+    ...
+});
 ```
 
 ```unity
@@ -68,14 +77,23 @@ section: SDK Documentation
 #####Initializing Oval
 
 <div class="objective-c language-only">
-Interaction with Oval is facilitated by the ```RKOvalControl``` class.  ```RKOvalControl``` is initialized with a ```id<RKRobotBase>``` and allows you to send individual Oval programs or an array of programs.
+Interaction with Oval is facilitated by the ```RKOvalControl``` class.  ```RKOvalControl``` is initialized with a ```id<RKRobotBase>``` and allows you to send individual Oval programs or an array of programs.<br /><br />
+
+Create a ```RKOvalControl``` instance and reset the OVM.  This ensures that the OVM on the Robot and the Oval compiler are in sync.
 </div>
 
 <div class="swift language-only">
-Interaction with Oval is facilitated by the ```RKOvalControl``` class.  ```RKOvalControl``` is initialized with a ```RKRobotBase``` and allows you to send individual Oval programs or an array of programs.
-</div>
+Interaction with Oval is facilitated by the ```RKOvalControl``` class.  ```RKOvalControl``` is initialized with a ```RKRobotBase``` and allows you to send individual Oval programs or an array of programs.<br /><br />
 
 Create a ```RKOvalControl``` instance and reset the OVM.  This ensures that the OVM on the Robot and the Oval compiler are in sync.
+</div>
+
+<div class="java language-only">
+Interaction with Oval is facilitated by the ```OvalControl``` class.  ```OvalControl``` is initialized with a ```Robot``` and allows you to send individual Oval programs or an array of programs.<br /><br />
+
+When you create an ```OvalControl``` instance, you will need to reset the OVM.  This ensures that the OVM on the Robot and the Oval compiler are in sync.
+</div>
+
 ```objective-c
 self.ovalControl = [[RKOvalControl alloc] initWithRobot:notification.robot delegate:self];
 [self.ovalControl resetOvmAndLibrary:YES];
@@ -87,7 +105,38 @@ self.ovalControl.resetOvmAndLibrary(true)
 ```
 
 ```java
-// Coming Soon
+OvalControl control = new OvalControl(robot, new OvalControl.OvalControlListener() {
+    @Override
+    public void onProgramFailedToSend(OvalControl control, String message) {
+
+    }
+
+    @Override
+    public void onProgramSentSuccessfully(OvalControl control) {
+
+    }
+
+    @Override
+    public void onOvmReset(OvalControl control) {
+    }
+
+    @Override
+    public void onOvalNotificationReceived(OvalControl control, OvalDeviceBroadcast notification) {
+
+    }
+
+    @Override
+    public void onOvmRuntimeErrorReceived(OvalControl control, OvalErrorBroadcast notification) {
+
+    }
+
+    @Override
+    public void onOvalQueueEmptied(OvalControl control) {
+
+    }
+});
+
+control.resetOvm(true);
 ```
 
 ```unity
@@ -109,7 +158,9 @@ if let unwrappedSource = source {
 ```
 
 ```java
-// Coming Soon
+//getProgramStringsArrayFromFiles() represents your own program creating an array of strings from locally stored files
+String[] programs = getProgramStringsArrayFromFiles();
+control.sendOvalPrograms( programs );
 ```
 
 ```unity
@@ -126,7 +177,6 @@ When streaming Oval you have 2 options: ```-[RKOvalControl sendOvalString:(NSStr
 When streaming Oval you have 2 options: ```ovalControl.sendOvalString(program: String!)``` or ```ovalControl.sendOvalString(program: String!, allowQueue: Bool)``` Setting ```allowQueue``` to ```true``` gurantees that your update will be sent to the robot (assuming the robot remains connected).  Setting ```allowQueue``` to ```false``` does not allow the update to be queued.  This is useful when sending large amounts of data quickly but every update does not need to be executed on the robot (i.e. streaming heading and speed as you move a joystick around the screen). 
 </div>
 
-
 ```objective-c
 [_ovalControl sendOvalString:[NSString stringWithFormat:@"speed = %@;...",_lightSpeed.text]]; //allowQueue is YES by default
 -OR-
@@ -140,7 +190,7 @@ self.ovalControl.sendOvalString("speed = \(lightSpeed.text);...", allowQueue: fa
 ```
 
 ```java
-// Coming Soon
+control.sendOval( "leftMotorPwm = 2000;rightMotorPwm = -2000;redLed=255;..." );
 ```
 
 ```unity
