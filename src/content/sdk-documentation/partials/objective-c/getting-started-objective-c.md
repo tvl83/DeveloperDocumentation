@@ -39,5 +39,5 @@ There are two ways to get started with the RobotKit SDK, simply exploring sample
 
 #### 4. Integrate Connection and Commands
 
-- [Connection Management](/sdk-documentation/connection-management)
+- [Connection Management](/sdk-documentation/connections)
 - [Basic Commands](/sdk-documentation/basic-commands)
