@@ -41,21 +41,6 @@ about Sphero.
 
 - `callback` (Function) triggered with version information
 
-### controlUartTx(callback)
-
-```
-orb.controlUartTx(function(err, data) {
-  console.log(err || "data: " + data);
-}
-```
-
-The Control UART Tx command enables or disables the CPU's UART transmit
-line so another client can configure the Bluetooth module.
-
-**Params:**
-
-- `callback` (Function) function to be triggered after write
-
 ### setDeviceName(name, callback)
 
 ```
@@ -241,33 +226,6 @@ respectively are returned as 700 and 650.
 
 - `callback` (Function) function to be triggered with trip point data
 
-### setVoltageTripPoints(vLow, vCrit, callback)
-
-```
-orb.setVoltageTripPoints(675, 650, function(err, data) {
-  console.log(err || "data: " + data);
-}
-```
-
-The Set Voltage Trip Points command assigns the voltage trip points for Low
-and Critical battery voltages.
-
-Values are specified in 100ths of a volt, and there are limitations on
-adjusting these from their defaults:
-
-- vLow must be in the range 675-725
-- vCrit must be in the range 625-675
-
-There must be 0.25v of separation between the values.
-
-Shifting these values too low can result in very little warning before
-Sphero forces itself to sleep, depending on the battery pack. Be careful.
-
-**Params:**
-
-- `vLow` (Number) new voltage trigger for Low battery
-- `vCrit` (Number) new voltage trigger for Crit battery
-- `callback` (Function) function to be triggered when done writing
 
 ### setInactivityTimeout(time, callback)
 
@@ -288,23 +246,6 @@ alter it to any value of 60 seconds or greater.
 - `time` (Number) new delay before sleeping
 - `callback` (Function) function to be triggered when done writing
 
-### jumpToBootloader(callback)
-
-```
-orb.jumpToBootLoader(function(err, data) {
-  console.log(err || "data: " + data);
-}
-```
-
-The Jump To Bootloader command requests a jump into the Bootloader to
-prepare for a firmware download.
-
-All commands after this one must comply with the Bootloader Protocol
-Specification.
-
-**Params:**
-
-- `callback` (Function) function to be triggered when done writing
 
 ### runL1Diags(callback)
 

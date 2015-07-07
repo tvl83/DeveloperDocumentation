@@ -74,23 +74,6 @@ assigned at the factory.
 
 - `callback` (Function) function to be triggered with a response
 
-### setChassisId(chassisId, callback)
-
-```
-orb.setChassisId(0xFE75, function(err, data) {
-  console.log(err || "data: " + data);
-}
-```
-
-The Set Chassis ID command assigns Sphero's chassis ID, a 16-bit value.
-
-This command only works if you're at the factory.
-
-**Params:**
-
-- `chassisId` (Number) new chassis ID
-- `callback` (Function) function to be triggered after writing
-
 ### selfLevel(opts, callback)
 
 ```
@@ -584,44 +567,6 @@ current values first
 - `id` (Number) which configuration block to fetch
 - `callback` (Function) function to be triggered after writing
 
-### setSsbModBlock(pwd, block, callback)
-
-```
-orb.setSsbModBlock(0x0000000F, data, function(err, data) {
-  console.log(err || "data: " + data);
-}
-```
-
-The Set SSB Modifier Block command allows the SSB to be patched with a new
-modifier block - including the Boost macro.
-
-The changes take effect immediately.
-
-**Params:**
-
-- `pwd` (Number) a 32 bit (4 bytes) hexadecimal value
-- `block` (Array) array of bytes with the data to be written
-- `callback` (Function) a function to be triggered after writing
-
-### setDeviceMode(mode, callback)
-
-```
-orb.setDeviceMode(0x00, function(err, data) {
-  console.log(err || "data: " + data);
-}
-```
-
-The Set Device Mode command assigns the operation mode of Sphero based on
-the supplied mode value.
-
-- **0x00**: Normal mode
-- **0x01**: User Hack mode. Enables ASCII shell commands, refer to the
-  associated document for details.
-
-**Params:**
-
-- `mode` (Number) which mode to set Sphero to
-- `callback` (Function) function to be called after writing
 
 ### getDeviceMode(callback)
 
