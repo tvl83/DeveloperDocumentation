@@ -31,7 +31,7 @@ robot.addResponseObserver(self)
 ```
 
 ```java
-        _robot.addResponseListener(new ResponseListener() {
+        mRobot.addResponseListener(new ResponseListener() {
             public void handleResponse(DeviceResponse response, Robot robot) {
                 
             }
@@ -82,10 +82,10 @@ Below handles a response from a ```GetOdometerCommand```.
 </div>
 ```java
 public void handleResponse(DeviceResponse response, Robot robot) {
-	if(response instanceof GetOdometerResponse){
-		GetOdometerResponse* ror = (GetOdometerResponse) response;
-
-	}
+	if( response instanceof GetOdometerResponse ) {
+        GetOdometerResponse odometerResponse = (GetOdometerResponse) response;
+        int lifetimeDistanceRolled = odometerResponse.getDistanceInCentimeters();
+    }
 }
 
 ```
@@ -131,7 +131,7 @@ robot.sendCommand(RKConfigureCollisionDetectionCommand(forMethod: .Method3, xThr
 ```
 
 ```java
-// Coming Soon - enable collision detection
+mRobot.enableCollisions( true );
 ```
 
 ```unity
@@ -156,7 +156,12 @@ func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) 
 ```
 
 ```java
-// Coming Soon - handle Collisions
+@Override
+public void handleAsyncMessage( AsyncMessage asyncMessage, Robot robot ) {
+    if( asyncMessage instanceof CollisionDetectedAsyncData ) {
+        //Collision occurred.
+    }
+}
 ```
 
 ```unity

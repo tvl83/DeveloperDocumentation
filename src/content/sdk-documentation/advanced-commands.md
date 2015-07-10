@@ -17,7 +17,27 @@ section: SDK Documentation
 ```
 
 ```java
-// Coming Soon
+private ConvenienceRobot mRobot;
+...
+long sensorFlag = SensorFlag.ACCELEROMETER_NORMALIZED.longValue() | SensorFlag.GYRO_NORMALIZED.longValue();
+
+mRobot.enableSensors( sensorFlag, SensorControl.StreamingRate.STREAMING_RATE10 );
+
+mRobot.addResponseListener(new ResponseListener() {
+...
+    @Override
+    public void handleAsyncMessage(AsyncMessage asyncMessage, Robot robot) {
+        if (asyncMessage instanceof DeviceSensorAsyncMessage) {
+            double accelerometerX = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getAccelerometerData().getFilteredAcceleration().x;
+            double accelerometerY = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getAccelerometerData().getFilteredAcceleration().y;
+            double accelerometerZ = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getAccelerometerData().getFilteredAcceleration().z;
+
+            double gyroX = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getGyroData().getRotationRateFiltered().x;
+            double gyroY = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getGyroData().getRotationRateFiltered().y;
+            double gyroZ = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getGyroData().getRotationRateFiltered().z;
+        }
+    }
+});
 ```
 
 ```unity
