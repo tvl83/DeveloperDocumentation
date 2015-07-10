@@ -34,7 +34,22 @@ section: SDK Documentation
 ```
 
 ```java
-// Coming Soon
+private ConvenienceRobot mRobot;
+...
+long sensorFlag = SensorFlag.VELOCITY.longValue() | SensorFlag.LOCATOR.longValue();
+mRobot.enableSensors( sensorFlag, SensorControl.StreamingRate.STREAMING_RATE10 );
+mRobot.addResponseListener(new ResponseListener() {
+...
+    @Override
+    public void handleAsyncMessage(AsyncMessage asyncMessage, Robot robot) {
+        if (asyncMessage instanceof DeviceSensorAsyncMessage) {
+            float positionX = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getLocatorData().getPositionX();
+            float positionY = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getLocatorData().getPositionY();
+            float velocityX = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getLocatorData().getVelocity().x;
+            float velocityY = ((DeviceSensorAsyncMessage) asyncMessage).getAsyncData().get(0).getLocatorData().getVelocity().y;
+        }
+    }
+});
 ```
 
 ```unity
@@ -207,7 +222,35 @@ control.sendOval( "leftMotorPwm = 2000;rightMotorPwm = -2000;redLed=255;..." );
 ```
 
 ```java
-// Coming Soon
+private ConvenienceRobot mRobot;
+...
+MacroObject macro = new MacroObject();
+
+//Repeat five times
+macro.addCommand( new LoopStart( 5 ) );
+
+//Fade to cyan over 5 seconds
+macro.addCommand( new Fade( 0, 255, 255, 5000 ) );
+//Set a delay so that the next command isn't processed until the previous one is done
+macro.addCommand( new Delay( 5000 ) );
+
+//Fade to magenta over 5 seconds
+macro.addCommand( new Fade( 255, 0, 255, 5000 ) );
+//Set a delay so that the next command isn't processed until the previous one is done
+macro.addCommand( new Delay( 5000 ) );
+
+//Fade to yellow over 5 seconds
+macro.addCommand( new Fade( 255, 255, 0, 5000 ) );
+//Set a delay so that the next command isn't processed until the previous one is done
+macro.addCommand( new Delay( 5000 ) );
+
+//End the current loop and go back to LoopStart if more iterations expected
+macro.addCommand( new LoopEnd() );
+
+//Send the macro to the robot and play
+macro.setMode( MacroObject.MacroObjectMode.Normal );
+macro.setRobot( mRobot.getRobot() );
+macro.playMacro();
 ```
 
 ```unity
