@@ -16,8 +16,6 @@ RKDataStreamingMask mask =  RKDataStreamingMaskAccelerometerFilteredAll |
 
 //Enable sensors with that mask and add a streaming rate
 [_robot enableSensors:mask atStreamingRate:10];
-[_robot addResponseObserver:self];
-
 ...
 
 - (void)handleAsyncMessage:(RKAsyncMessage *)message forRobot:(id<RKRobotBase>)robot {
@@ -79,7 +77,24 @@ mRobot.addResponseListener(new ResponseListener() {
 
 #### Locator 
 ```objective-c
-// Coming Soon
+[self startLocatorStreaming];
+
+...
+
+- (void)handleAsyncMessage:(RKAsyncMessage *)message forRobot:(id<RKRobotBase>)robot {
+    if ([message isKindOfClass:[RKDeviceSensorsAsyncData class]]) {
+        
+        // Grab specific sensor data objects from the main sensor object
+        RKDeviceSensorsAsyncData *sensorsAsyncData = (RKDeviceSensorsAsyncData *)message;
+        RKDeviceSensorsData *sensorsData = [sensorsAsyncData.dataFrames lastObject];
+        RKLocatorData *locatorData = sensorsData.locatorData;
+        
+        float locatorPositionX = locatorData.position.x;
+        float locatorPositionY = locatorData.position.y;
+        float locatorVelocityX = locatorData.velocity.x;
+        float locatorVelocityY = locatorData.velocity.y;
+    }
+}
 ```
 
 ```swift
@@ -112,7 +127,28 @@ mRobot.addResponseListener(new ResponseListener() {
 
 #### Collisions
 ```objective-c
-// Coming Soon
+[_robot sendCommand:[[RKConfigureCollisionDetectionCommand alloc]
+    initForMethod:RKCollisionDetectionMethod3
+    xThreshold:50 xSpeedThreshold:30 yThreshold:200 ySpeedThreshold:0 postTimeDeadZone:.2]];
+
+...
+- (void)handleAsyncMessage:(RKAsyncMessage *)message forRobot:(id<RKRobotBase>)robot {
+    if( [message isKindOfClass:[RKCollisionDetectedAsyncData class]]) {
+        RKCollisionDetectedAsyncData *collisionAsyncData = (RKCollisionDetectedAsyncData *) message;
+    
+        float impactAccelX = [collisionAsyncData impactAcceleration].x;
+        float impactAccelY = [collisionAsyncData impactAcceleration].y;
+        float impactAccelZ = [collisionAsyncData impactAcceleration].z;
+        
+        float impactAxisX = [collisionAsyncData impactAxis].x;
+        float impactAxisY = [collisionAsyncData impactAxis].y;
+        
+        float impactPowerX = [collisionAsyncData impactPower].x;
+        float impactPowerY = [collisionAsyncData impactPower].y;
+        
+        float impactSpeed = [collisionAsyncData impactSpeed];
+    }
+}
 ```
 
 ```swift
@@ -267,7 +303,27 @@ control.sendOval( "leftMotorPwm = 2000;rightMotorPwm = -2000;redLed=255;..." );
 
 #### Macros
 ```objective-c
-// Coming Soon
+//Create a new macro object to send to Sphero
+RKMacroObject *macro = [RKMacroObject new];
+//Sets loop from slider value
+[macro addCommand:[RKMCLoopFor commandWithRepeats:_robotLoop]];
+//Fade color to Blue
+[macro addCommand:[RKMCSlew commandWithRed:0.0 green:0.0 blue:1.0 delay:_robotDelay]];
+//Add delay to allow Fade to complete before playing next fade
+[macro addCommand:[RKMCDelay commandWithDelay:_robotDelay]];
+//Fade color to Red
+[macro addCommand:[RKMCSlew commandWithRed:1.0 green:0.0 blue:0.0 delay:_robotDelay]];
+//Add delay to allow Fade to complete before playing next fade
+[macro addCommand:[RKMCDelay commandWithDelay:_robotDelay]];
+//Fade color to Green
+[macro addCommand:[RKMCSlew commandWithRed:0.0 green:1.0 blue:0.0 delay:_robotDelay]];
+//Add delay to allow Fade to complete before playing next fade
+[macro addCommand:[RKMCDelay commandWithDelay:_robotDelay]];
+//Loop End
+[macro addCommand:[RKMCLoopEnd command]];
+//Send full command dowm to Sphero to play
+RKMacroPlayer *player = [[RKMacroPlayer alloc] initWithRobot:_robot.robot];
+[player play:macro];
 ```
 
 ```swift
