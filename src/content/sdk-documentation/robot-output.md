@@ -63,7 +63,7 @@ Below handles a response from a ```RKReadOdometerCommand```.
 	// handle syncronous responses from 'get' command requests
 	if([response isKindOfClass:[RKReadOdometerResponse class]]){
 		RKReadOdometerResponse* ror = (RKReadOdometerResponse*) response;
-		uint32_t distance = ror.distanceInMeters;
+		uint32_t distance = ror.distanceInCentimeters;
 	}
 }
 ```
@@ -71,7 +71,7 @@ Below handles a response from a ```RKReadOdometerCommand```.
 ```swift
 func handleResponse(response: RKDeviceResponse!, forRobot robot: RKRobotBase!) {
     if let ror = response as? RKReadOdometerResponse {
-        let distance = ror.distanceInMeters
+        let distance = ror.distanceInCentimeters
     }
 }
 
