@@ -9,7 +9,40 @@ section: SDK Documentation
 #### Motion (IMU)
 
 ```objective-c
-// Coming Soon
+//Create a mask for the sensors you are interested in
+RKDataStreamingMask mask =  RKDataStreamingMaskAccelerometerFilteredAll |
+                            RKDataStreamingMaskIMUAnglesFilteredAll     |
+                            RKDataStreamingMaskGyroFilteredAll;
+
+//Enable sensors with that mask and add a streaming rate
+[_robot enableSensors:mask atStreamingRate:10];
+[_robot addResponseObserver:self];
+
+...
+
+- (void)handleAsyncMessage:(RKAsyncMessage *)message forRobot:(id<RKRobotBase>)robot {
+    if ([message isKindOfClass:[RKDeviceSensorsAsyncData class]]) {
+        
+        // Received sensor data, so display it to the user.
+        RKDeviceSensorsAsyncData *sensorsAsyncData = (RKDeviceSensorsAsyncData *)message;
+        RKDeviceSensorsData *sensorsData = [sensorsAsyncData.dataFrames lastObject];
+
+        RKAccelerometerData *accelerometerData = sensorsData.accelerometerData;
+        RKAttitudeData *attitudeData = sensorsData.attitudeData;
+        RKGyroData *gyroData = sensorsData.gyroData;
+        
+        float accelX = accelerometerData.acceleration.x;
+        float accelY = accelerometerData.acceleration.y;
+        float accelZ = accelerometerData.acceleration.z;
+        float roll = attitudeData.roll;
+        float yaw = attitudeData.yaw;
+        float pitch = attitudeData.pitch;
+        int16_t gyroX = gyroData.rotationRate.x;
+        int16_t gyroY = gyroData.rotationRate.y;
+        int16_t gyroZ = gyroData.rotationRate.z;
+    }
+}
+
 ```
 
 ```swift
