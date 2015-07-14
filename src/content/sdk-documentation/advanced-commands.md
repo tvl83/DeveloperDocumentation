@@ -44,7 +44,36 @@ RKDataStreamingMask mask =  RKDataStreamingMaskAccelerometerFilteredAll |
 ```
 
 ```swift
-// Coming Soon
+conveniencerobot.addResponseObserver( self );
+conveniencerobot.enableStablilization( false );
+//Create a mask for the sensors you are interested in
+let mask = RKDataStreamingMask.AccelerometerFilteredAll | RKDataStreamingMask.IMUAnglesFilteredAll | RKDataStreamingMask.GyroFilteredAll;
+self.robot.enableSensors(mask, atStreamingRate: RKStreamingRate.DataStreamingRate10 );
+...
+
+func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) {
+    if let sensorMessage = message as? RKDeviceSensorsAsyncData {
+        
+        let sensorData = sensorMessage.dataFrames.last as? RKDeviceSensorsData;
+        
+        let acceleration = sensorData?.accelerometerData.acceleration;
+        let attitude = sensorData?.attitudeData;
+        let gyro = sensorData?.gyroData;
+        
+        let accelX = acceleration?.x;
+        let accelY = acceleration?.y;
+        let accelZ = acceleration?.z;
+        
+        let roll = attitude?.roll;
+        let yaw = attitude?.yaw;
+        let pitch = attitude?.pitch;
+        
+        let gyroX = gyro?.rotationRate.x;
+        let gyroY = gyro?.rotationRate.y;
+        let gyroZ = gyro?.rotationRate.z;
+        
+    }
+}
 ```
 
 ```java
@@ -98,7 +127,24 @@ mRobot.addResponseListener(new ResponseListener() {
 ```
 
 ```swift
-// Coming Soon
+conveniencerobot.enableLocator( true );
+...
+
+func handleAsyncMessage(message: RKAsyncMessage!, forRobot robot: RKRobotBase!) {
+    if let sensorMessage = message as? RKDeviceSensorsAsyncData {
+        
+        let sensorData = sensorMessage.dataFrames.last as? RKDeviceSensorsData;
+        
+        let locator = sensorData?.locatorData;
+        
+        let locatorPositionX = locator?.position.x;
+        let locatorPositionY = locator?.position.y;
+        let locatorVelocityX = locator?.velocity.x;
+        let locatorVelocityY = locator?.velocity.y;
+        
+    }
+}
+
 ```
 
 ```java
@@ -305,7 +351,6 @@ control.sendOval( "leftMotorPwm = 2000;rightMotorPwm = -2000;redLed=255;..." );
 ```objective-c
 //Create a new macro object to send to Sphero
 RKMacroObject *macro = [RKMacroObject new];
-//Sets loop from slider value
 [macro addCommand:[RKMCLoopFor commandWithRepeats:_robotLoop]];
 //Fade color to Blue
 [macro addCommand:[RKMCSlew commandWithRed:0.0 green:0.0 blue:1.0 delay:_robotDelay]];
@@ -327,7 +372,32 @@ RKMacroPlayer *player = [[RKMacroPlayer alloc] initWithRobot:_robot.robot];
 ```
 
 ```swift
-// Coming Soon
+//Create a new macro object to send to Sphero
+let macro = RKMacroObject();
+
+let delay: Int32 = 2000;
+let loopCount: UInt8 = 10;
+
+macro.addCommand(RKMCLoopFor.commandWithRepeats(loopCount));
+//Fade color to Blue
+macro.addCommand(RKMCSlew.commandWithRed(0.0, green: 0.0, blue: 1.0, delay: delay));
+//Add delay to allow Fade to complete before playing next fade
+macro.addCommand(RKMCDelay.commandWithDelay(delay));
+//Fade color to Red
+macro.addCommand(RKMCSlew.commandWithRed(1.0, green: 0.0, blue: 0.0, delay: delay));
+//Add delay to allow Fade to complete before playing next fade
+macro.addCommand(RKMCDelay.commandWithDelay(delay));
+//Fade color to Green
+macro.addCommand(RKMCSlew.commandWithRed(0.0, green: 1.0, blue: 0.0, delay: delay))
+//Add delay to allow Fade to complete before playing next fade
+macro.addCommand(RKMCDelay.commandWithDelay(delay));
+//Loop end
+macro.addCommand(RKMCLoopEnd.command());
+
+//Create macro player
+let player = RKMacroPlayer(robot: conveniencerobot.robot);
+//Send full command dowm to Sphero to play
+player.play(macro);
 ```
 
 ```java
