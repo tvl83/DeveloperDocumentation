@@ -23,3 +23,22 @@ section: SDK Documentation
 
 {{/markdown}}
 </div>
+
+<div class="java language-only" markdown="1">
+{{#markdown}}
+#### Open a Sample Project
+
+ - Open Android Studio
+ - Select the "**Open an existing Android Studio project**" option from the main menu
+ - Navigate to the "**Samples**" directory that was unzipped when you downloaded the Robot SDK
+ - Select the folder containing the sample project you want to open and click "**Choose**"
+
+#### Build the project
+
+ - Ensure that the required jar files from the SDK are in "**project/libs/**"
+ - Click on the "**run**" button or **CTRL+R (Mac)** or **CTRL+F10 (Windows)**
+
+ *Note: Robot applications will not work in the emulator due to the dependency on Bluetooth*
+
+{{/markdown}}
+</div>
