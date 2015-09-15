@@ -14,4 +14,4 @@ redLed = 255;
 ...
 ```
 
-To see all the Oval built-ins see: [List of Oval Built-ins](/robot-languages/oval-list-of-oval-built-ins)
+To see all the Oval built-ins see: [List of Oval Built-ins](/robot-languages/oval-reference)
