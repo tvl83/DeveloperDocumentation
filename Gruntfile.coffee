@@ -191,4 +191,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'archive', ['compress', 'rename']
   grunt.registerTask 'deploy', ['build', 'archive']
   grunt.registerTask 'test', ['coffeelint']
-  grunt.registerTask 'heroku', ['deploy']
+  grunt.registerTask 'heroku:production', ['deploy']
