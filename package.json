@@ -1,10 +1,9 @@
 {
   "name": "sphero-docs",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "private": false,
   "scripts": {
-    "postinstall": "grunt build",
-    "start": "node app.js",
+    "start": "grunt server",
     "test": "grunt test"
   },
   "dependencies": {
