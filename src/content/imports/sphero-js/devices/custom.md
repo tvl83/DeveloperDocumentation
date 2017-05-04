@@ -1,4 +1,4 @@
-### color(color, callback)
+### color(color, [luminance], callback)
 
 ```
 orb.color("#00ff00", function(err, data) {
@@ -20,6 +20,7 @@ a greater range of possible inputs.
 **Params:**
 
 - `color` (Number|String|Object) what color to change Sphero to
+- `[luminance]` (string) - percentage of luminance to apply to RGB color
 - `callback` (Function) function to be triggered with response
 
 ### randomColor(callback)
@@ -58,7 +59,7 @@ Passes the color of the sphero Rgb LED to the callback (err, data)
 
 - `callback` (Function) function to be triggered with response
 
-### detectCollisions(callback)
+### detectCollisions(opts, callback)
 
 ```
 orb.detectCollisions();
@@ -79,6 +80,30 @@ orb.on("collision", function(data) {
 The Detect Collisions command sets up Sphero's collision detection system,
 and automatically parses asynchronous packets to re-emit collision events
 to 'collision' event listeners.
+
+**Params:**
+
+- `opts` (Object) device
+- `callback` (Function) (err, data) to be triggered with response
+
+### detectFreefall(callback)
+
+```
+orb.detectFreefall();
+
+orb.on("freefall", function(data) {
+  console.log("freefall:");
+  console.log("  value:", data.value);
+});
+orb.on("landing", function(data) {
+  console.log("landing:");
+  console.log("  value:", data.value);
+});
+```
+
+The Detect Freefall command sets up Sphero's freefall detection system,
+and automatically listens to data events to emit freefall/landing events
+to 'freefall' or 'landing' event listeners.
 
 **Params:**
 
@@ -110,7 +135,20 @@ orb.finishCalibration();
 ```
 
 The Finish Calibration command ends Sphero's calibration mode, by setting
-the new heading as current, turning off the back LED, and re-enabling
+the new heading as current, and re-enabling normal defaults
+
+**Params:**
+
+- `callback` (Function) function to be triggered with response
+
+### setDefaultSettings(callback)
+
+```
+orb.setDefaultSettings();
+```
+
+The setDefaultSettings command sets Sphero's settings back to sensible
+defaults, such as turning off the back LED, and re-enabling
 stabilization.
 
 **Params:**
