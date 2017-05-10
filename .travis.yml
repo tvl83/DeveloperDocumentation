@@ -4,11 +4,8 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: ij1vtQN4vCqMiX2l3wzustnSIC//BErYPea/ojp63LTCiJWFvYg9j+otfAxVvtJgdgXfrFQbBMKY3SJjzoAsjhHBxn2/Bek3SU1ciSuvj9MaC/egvtBzyDhrMxbUwClsoYOgp8rj2YG3Tg3eGReCfi0nW3qpvsGVEigLc34ioMc=
-  app: sphero-docs
+    secure: WgPtxi7RguB5LfFaFDYPcOi5HPdNvavFxGd3GkfP+BYkAGYjMLQCREY//JeNJyo7sP5ZxE4fnFX7YXbnxY2Sw1dGitYCRZnzfNFUTYRY8Lm3fjWTPHDXghner8myqNl0aiN7iK3W3FmrYtYKDM5B0ngYpupT2CXQoFceYE4eoBCDrO72RRzAIUhXaTNta+TMoBO5G5skKtCyDl/tjOHbbpEIdOVB+taMQjJ6m4NIkN+fog6BxsO1vx+GRhRkVObnC7VvUoDWbXCIclUvXYqnHYtAhjY8FGmrSm6Uo0+IirTst2VxixSXBH20BnE2HwFvTUUT7a81hlshbvRWB/8MgBHkcioOhvhNQErUKTh4qoMP1wRDORDyZirE347ZaykXi72kXasfZlR35rpDydq3j9EIHegGGN/0myEM4JJyT9TeVohTn7JPnIM3csNaq49oMFekHq9odMPDZhJBsn8OX9CgaxXeA/K4WzhqWkZ5W6C3pt6YPdhCA4JcLq88jXVEJR9HwZPRCSDcTeTOq9TqP3b7OSrl3F+kZbgixD97bcB6A2Uv3dPTIvmXehwQ3eWNYT5U6mon0DZdL4ulke8gCCmnJeEPyCcv+n3OO7kDRUN4dI3gcHm/qTVZnLw1ahLZ1biSL5gvMB4sLuJ+L9atI+Nr1jgHusKFAuWi+UmPpkQ=
+  app: sphero-developer-docs
   on:
     repo: orbotix/DeveloperDocumentation
     branch: master
-notifications:
-  slack:
-    secure: by4ipeVSzSbjnru6v0CxyneWNHX1WmpgCXfpMhJXeIu6CV1fxRTwpUWmxCYxC/CLSsagg4at+JGlXgOQEZP25jPPREZuRa/tLsh6D5+/cqCduqVJrfNn6sDwnyhL9BcK1UpEKxzj/O8Dx7JVV4w8BjtVKDolOlXcNPVzFgExqH4=
