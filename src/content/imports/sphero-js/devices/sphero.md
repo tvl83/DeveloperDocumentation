@@ -3,7 +3,7 @@
 ```
 orb.setHeading(180, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Heading command tells Sphero to adjust it's orientation, by
@@ -21,7 +21,7 @@ If stabilization is enabled, Sphero will respond immediately to this.
 ```
 orb.setStabilization(1, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Stabilization command turns Sphero's internal stabilization on or
@@ -37,7 +37,7 @@ off, depending on the flag provided.
 ```
 orb.setRotationRate(180, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Rotation Rate command allows control of the rotation rate Sphero
@@ -64,7 +64,7 @@ orb.getChassisId(function(err, data) {
     console.log("data:");
     console.log("  chassisId:", data.chassisId);
   }
-}
+});
 ```
 
 The Get Chassis ID command returns the 16-bit chassis ID Sphero was
@@ -79,7 +79,7 @@ assigned at the factory.
 ```
 orb.setChassisId(0xFE75, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Chassis ID command assigns Sphero's chassis ID, a 16-bit value.
@@ -103,7 +103,7 @@ var opts = {
 
 orb.selfLevel(opts, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Self Level command controls Sphero's self-level routine.
@@ -143,7 +143,7 @@ var opts = {
 
 orb.setDataStreaming(opts, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Data Streaming command configures Sphero's built-in support for
@@ -182,7 +182,7 @@ var opts = {
 
 orb.configureCollisions(opts, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Configure Collisions command configures Sphero's collision detection
@@ -219,7 +219,7 @@ var opts = {
 
 orb.configureLocator(opts, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Configure Locator command configures Sphero's streaming location data
@@ -246,7 +246,7 @@ The following options must be provided:
 ```
 orb.setAccelRange(0x02, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Accelerometer Range command tells Sphero what accelerometer range
@@ -281,7 +281,7 @@ orb.readLocator(function(err, data) {
     console.log("  yvel:", data.yvel);
     console.log("  sog:", data.sog);
   }
-}
+});
 ```
 
 The Read Locator command gets Sphero's current position (X,Y), component
@@ -299,7 +299,7 @@ signed cm/sec, and the SOG is unsigned cm/sec.
 ```
 orb.setRgbLed({ red: 0, green: 0, blue: 255 }, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set RGB LED command sets the colors of Sphero's RGB LED.
@@ -319,7 +319,7 @@ cycles.
 ```
 orb.setbackLed(255, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Back LED command allows brightness adjustment of Sphero's tail
@@ -345,7 +345,7 @@ orb.getRgbLed(function(err, data) {
     console.log("  green:", data.green);
     console.log("  blue:", data.blue);
   }
-}
+});
 ```
 
 The Get RGB LED command fetches the current "user LED color" value, stored
@@ -362,7 +362,7 @@ This value may or may not be what's currently displayed by Sphero's LEDs.
 ```
 orb.roll(100, 0, function() {
   console.log("rolling...");
-}
+});
 ```
 
 The Roll command tells Sphero to roll along the provided vector.
@@ -384,7 +384,7 @@ Permissible heading values are 0 to 359 inclusive.
 ```
 orb.boost(1, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Boost command executes Sphero's boost macro.
@@ -408,7 +408,7 @@ var opts = {
 
 orb.setRawMotors(opts, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Raw Motors command allows manual control over one or both of
@@ -437,7 +437,7 @@ Possible modes:
 ```
 orb.setMotionTimeout(0x0FFF, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Motion Timeout command gives Sphero an ultimate timeout for the
@@ -457,7 +457,7 @@ This defaults to 2000ms (2 seconds) upon wakeup.
 // Force tail LED always on
 orb.setPermOptionFlags(0x00000008, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Permanent Option Flags command assigns Sphero's permanent option
@@ -489,7 +489,7 @@ orb.getPermOptionFlags(function(err, data) {
     console.log("  awakeSensitivityHeavy:", data.awakeSensitivityHeavy);
     console.log("  gyroMaxAsyncMsg:", data.gyroMaxAsyncMsg);
   }
-}
+});
 ```
 
 The Get Permanent Option Flags command returns Sphero's permanent option
@@ -523,7 +523,7 @@ Here's possible bit fields, and their descriptions:
 // enable stop on disconnect behaviour
 orb.setTempOptionFlags(0x01, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Temporary Option Flags command assigns Sphero's temporary option
@@ -546,7 +546,7 @@ orb.getTempOptionFlags(function(err, data) {
     console.log("data:");
     console.log("  stopOnDisconnect:", data.stopOnDisconnect);
   }
-}
+});
 ```
 
 The Get Temporary Option Flags command returns Sphero's temporary option
@@ -564,7 +564,7 @@ flags, as a bit field:
 ```
 orb.getConfigBlock(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Get Configuration Block command retrieves one of Sphero's configuration
@@ -589,7 +589,7 @@ current values first
 ```
 orb.setSsbModBlock(0x0000000F, data, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set SSB Modifier Block command allows the SSB to be patched with a new
@@ -608,7 +608,7 @@ The changes take effect immediately.
 ```
 orb.setDeviceMode(0x00, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Device Mode command assigns the operation mode of Sphero based on
@@ -633,7 +633,7 @@ orb.getDeviceMode(function(err, data) {
     console.log("data:");
     console.log("  mode:", data.mode);
   }
-}
+});
 ```
 
 The Get Device Mode command gets the current device mode of Sphero.
@@ -652,7 +652,7 @@ Possible values:
 ```
 orb.runMacro(0x01, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Run Macro command attempts to execute the specified macro.
@@ -684,7 +684,7 @@ specified ID code can't be found.
 ```
 orb.saveTempMacro(0x01, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Save Temporary Macro stores the attached macro definition into the
@@ -704,7 +704,7 @@ all macros, the longest definition that can be sent is 254 bytes.
 ```
 orb.saveMacro(0x01, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 Save macro
@@ -729,7 +729,7 @@ As with all macros, the longest definition that can be sent is 254 bytes.
 ```
 orb.reInitMacroExec(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Reinit Macro Executive command terminates any running macro, and
@@ -752,7 +752,7 @@ orb.abortMacro(function(err, data) {
     console.log("  id:", data.id);
     console.log("  cmdNum:", data.cmdNum);
   }
-}
+});
 ```
 
 The Abort Macro command aborts any executing macro, and returns both it's
@@ -778,7 +778,7 @@ orb.getMacroStatus(function(err, data) {
     console.log("  idCode:", data.idCode);
     console.log("  cmdNum:", data.cmdNum);
   }
-}
+});
 ```
 
 The Get Macro Status command returns the ID code and command number of the
@@ -796,7 +796,7 @@ command number is left over from the previous macro.
 ```
 orb.setMacroParam(0x02, 0xF0, 0x00, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Macro Parameter command allows system globals that influence
@@ -827,7 +827,7 @@ For more details, please refer to the Sphero Macro document.
 ```
 orb.appendMacroChunk(, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Append Macro Chunk project stores the attached macro definition into
@@ -857,7 +857,7 @@ certain the larger buffer is completely initialized.
 ```
 orb.eraseOrbBasicStorage(0x00, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Erase orbBasic Storage command erases any existing program in the
@@ -876,7 +876,7 @@ storage area.
 ```
 orb.appendOrbBasicFragment(0x00, OrbBasicCode, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Append orbBasic Fragment command appends a patch of orbBasic code to
@@ -903,7 +903,7 @@ storage area is full.
 ```
 orb.executeOrbBasicProgram(0x00, 0x00, 0x00, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Execute orbBasic Program command attempts to run a program in the
@@ -923,7 +923,7 @@ This command will fail if there is already an orbBasic program running.
 ```
 orb.abortOrbBasicProgram(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Abort orbBasic Program command aborts execution of any currently
@@ -938,7 +938,7 @@ running orbBasic program.
 ```
 orb.submitValuetoInput(0x0000FFFF, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Submit value To Input command takes the place of the typical user
@@ -959,7 +959,7 @@ Refer to the orbBasic language document for further information.
 ```
 orb.commitToFlash(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Commit To Flash command copies the current orbBasic RAM program to
