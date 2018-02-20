@@ -3,7 +3,7 @@
 ```
 orb.ping(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Ping command verifies the Sphero is awake and receiving commands.
@@ -31,7 +31,7 @@ orb.version(function(err, data) {
     console.log("  apiMaj:", data.apiMaj);
     console.log("  apiMin:", data.apiMin);
   }
-}
+});
 ```
 
 The Version command returns a batch of software and hardware information
@@ -46,7 +46,7 @@ about Sphero.
 ```
 orb.controlUartTx(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Control UART Tx command enables or disables the CPU's UART transmit
@@ -61,7 +61,7 @@ line so another client can configure the Bluetooth module.
 ```
 orb.setDeviceName("rollingOrb", function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Device Name command assigns Sphero an internal name. This value is
@@ -90,7 +90,7 @@ orb.getBluetoothInfo(function(err, data) {
     console.log("  separator:", data.separator);
     console.log("  colors:", data.colors);
   }
-}
+});
 ```
 
 Triggers the callback with a structure containing
@@ -108,7 +108,7 @@ Triggers the callback with a structure containing
 ```
 orb.setAutoReconnect(1, 20, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Auto Reconnect command tells Sphero's BT module whether or not it
@@ -132,7 +132,7 @@ orb.getAutoReconnect(function(err, data) {
     console.log("  flag:", data.flag);
     console.log("  time:", data.time);
   }
-}
+});
 ```
 
 The Get Auto Reconnect command returns the Bluetooth auto reconnect values
@@ -156,7 +156,7 @@ orb.getPowerState(function(err, data) {
     console.log("  chargeCount:", data.chargeCount);
     console.log("  secondsSinceCharge:", data.secondsSinceCharge);
   }
-}
+});
 ```
 
 The Get Power State command returns Sphero's current power state, and some
@@ -185,7 +185,7 @@ Possible power states:
 ```
 orb.setPowerNotification(1, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Power Notification command enables sphero to asynchronously notify
@@ -204,7 +204,7 @@ Sphero is unpaired.
 ```
 orb.sleep(10, 0, 0, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Sleep command puts Sphero to sleep immediately.
@@ -228,7 +228,7 @@ orb.getVoltageTripPoints(function(err, data) {
     console.log("  vLow:", data.vLow);
     console.log("  vCrit:", data.vCrit);
   }
-}
+});
 ```
 
 The Get Voltage Trip Points command returns the trip points Sphero uses to
@@ -246,7 +246,7 @@ respectively are returned as 700 and 650.
 ```
 orb.setVoltageTripPoints(675, 650, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Voltage Trip Points command assigns the voltage trip points for Low
@@ -274,7 +274,7 @@ Sphero forces itself to sleep, depending on the battery pack. Be careful.
 ```
 orb.setInactivityTimeout(120, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Set Inactivity Timeout command sets the timeout delay before Sphero
@@ -293,7 +293,7 @@ alter it to any value of 60 seconds or greater.
 ```
 orb.jumpToBootLoader(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Jump To Bootloader command requests a jump into the Bootloader to
@@ -311,7 +311,7 @@ Specification.
 ```
 orb.runL1Diags(function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Perform Level 1 Diagnostics command is a developer-level command to
@@ -352,7 +352,7 @@ orb.runL2Diags(function(err, data) {
     console.log("  sensorFailures:", data.sensorFailures);
     console.log("  gyroAdjustCount:", data.gyroAdjustCount);
   }
-}
+});
 ```
 
 The Perform Level 2 Diagnostics command is a developer-level command to
@@ -372,7 +372,7 @@ For more details, see the Sphero API documentation.
 ```
 orb.assignTime(0x00ffff00, function(err, data) {
   console.log(err || "data: " + data);
-}
+});
 ```
 
 The Assign Time command sets a specific value to Sphero's internal 32-bit
@@ -395,7 +395,7 @@ orb.assignTime(0x00ffff, function(err, data) {
     console.log("  t2:", data.t2);
     console.log("  t3:", data.t3);
   }
-}
+});
 ```
 
 The Poll Packet Times command helps users profile the transmission and
